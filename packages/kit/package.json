@@ -1,0 +1,96 @@
+{
+  "name": "@netnetcapital/kit",
+  "version": "0.1.0",
+  "description": "The NetNet Cabinet Kit: add a game token, a store, payments and a mandatory earn mechanism to any browser game on Robinhood Chain. Runtime library, CLI (add, init, doctor) and an MCP server, written for AI coding agents first.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./react": {
+      "types": "./dist/react.d.ts",
+      "default": "./dist/react.js"
+    },
+    "./config": {
+      "types": "./dist/config.d.ts",
+      "default": "./dist/config.js"
+    },
+    "./abi": {
+      "types": "./dist/abi.d.ts",
+      "default": "./dist/abi.js"
+    },
+    "./llms.txt": "./llms.txt",
+    "./llms-full.txt": "./llms-full.txt",
+    "./netnet.config.schema.json": "./netnet.config.schema.json"
+  },
+  "bin": {
+    "kit": "./dist/cli/index.js",
+    "kit-mcp": "./dist/mcp/bin.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "llms.txt",
+    "llms-full.txt",
+    "netnet.config.schema.json"
+  ],
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/netnetdev/net-forge.git",
+    "directory": "packages/kit"
+  },
+  "homepage": "https://github.com/netnetdev/net-forge/tree/main/packages/kit#readme",
+  "keywords": [
+    "robinhood-chain",
+    "netnet",
+    "game",
+    "game-token",
+    "web3-games",
+    "mcp",
+    "llms-txt",
+    "viem"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.test.json && tsc -p examples/plain-canvas/tsconfig.json",
+    "test": "vitest run",
+    "example": "VITE_NETNET_KIT_MOCK=1 vite --config examples/plain-canvas/vite.config.ts",
+    "prepublishOnly": "node scripts/check-registry.mjs && pnpm build"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.29.0",
+    "viem": "2.55.2",
+    "zod": "3.25.76"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/node": "22.20.1",
+    "@types/react": "19.2.17",
+    "react": "19.2.7",
+    "typescript": "5.8.3",
+    "vite": "6.4.3",
+    "vitest": "3.2.7"
+  },
+  "bugs": {
+    "url": "https://github.com/netnetdev/net-forge/issues"
+  }
+}

@@ -1,0 +1,30 @@
+@netnetcapital/engine
+Copyright (c) 2026 NetNet Capital Management
+
+This package depends on, or takes patterns from, the following works.
+No source was copied from copyleft (GPL/AGPL) projects. The demo uses
+only generated primitives; no third-party art, models, sounds or fonts.
+
+Dependencies (unmodified, via npm)
+- three.js 0.186.1 (https://github.com/mrdoob/three.js), MIT. Includes the
+  GLTFLoader, KTX2Loader and meshopt decoder addons it ships.
+- meshoptimizer decoder (bundled with three.js addons), MIT, Arseny Kapoulkine.
+- Basis Universal transcoder (bundled with three.js addons), Apache-2.0, Binomial LLC.
+- nipplejs 1.0.4 (https://github.com/yoannmoinet/nipplejs), MIT.
+- zod 4.4.3 (https://github.com/colinhacks/zod), MIT.
+- @colyseus/sdk 0.18.5 (https://github.com/colyseus/colyseus), MIT, Endel Dreyer.
+  Used by src/net/room-client.ts.
+- @netnetcapital/engine-sim (this repository); see its NOTICE for bitECS
+  (MPL-2.0) and Rapier (Apache-2.0).
+
+Patterns
+- src/net (moved from apps/rooms): client prediction and server
+  reconciliation after Gabriel Gambetta's articles; snapshot interpolation
+  and delta compression after Valve's Source networking write-ups, Glenn
+  Fiedler's snapshot compression articles and the Quake 3 model (GPL,
+  ideas only, no code); clock sync for one-input-per-tick play after the
+  Overwatch GDC netcode talk (idea only).
+- Render interpolation between fixed ticks after Glenn Fiedler, "Fix Your
+  Timestep!"; idea only.
+- Writing instance matrices directly into InstancedMesh.instanceMatrix
+  follows the three.js instancing examples (MIT).

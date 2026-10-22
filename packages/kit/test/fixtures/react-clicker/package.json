@@ -1,0 +1,8 @@
+{
+  "name": "react-clicker",
+  "private": true,
+  "type": "module",
+  "scripts": { "dev": "vite" },
+  "dependencies": { "react": "19.2.7", "react-dom": "19.2.7" },
+  "devDependencies": { "vite": "6.4.3", "typescript": "5.8.3" }
+}

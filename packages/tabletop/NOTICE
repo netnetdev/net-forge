@@ -1,0 +1,6 @@
+@netnetcapital/tabletop
+Copyright (c) 2026 NetNet Capital Management
+
+Dependencies (unmodified, via npm)
+- three.js 0.186.1 (https://github.com/mrdoob/three.js), MIT.
+- @netnetcapital/engine and @netnetcapital/asset-library (this repository); see their NOTICE files.

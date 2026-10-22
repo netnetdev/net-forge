@@ -1,0 +1,11 @@
+LICENSE PENDING
+
+The art in library/ is third-party work released under CC0 1.0 (public
+domain dedication); see NOTICE for every pack and CC0-1.0.txt for the legal
+code. CC0 lets anyone copy, modify and redistribute it, commercially or not.
+
+Copyright (c) 2026 NetNet Capital Management for the selection, the
+optimization and the index. TODO(human): choose the license for that part
+(CC0 like the art, MIT, or the license picked for the engine packages, Q155)
+and replace this file and the "license" field in package.json. Publishing is
+blocked while this file says LICENSE PENDING.

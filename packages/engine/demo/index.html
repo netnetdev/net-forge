@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Engine Arena</title>
+    <style>
+      :root { color-scheme: dark; }
+      html, body { margin: 0; height: 100%; background: #0b0d12; overflow: hidden; }
+      #game { position: fixed; inset: 0; }
+      #hud {
+        position: fixed; top: 8px; left: 8px; z-index: 5; pointer-events: none;
+        font: 12px/1.45 ui-monospace, SFMono-Regular, Menlo, monospace; color: #d7e0f0;
+        background: rgba(8, 10, 16, 0.72); border: 1px solid #2a3245; border-radius: 4px;
+        padding: 6px 9px; white-space: pre; font-variant-numeric: tabular-nums;
+      }
+      #help {
+        position: fixed; bottom: 8px; left: 8px; z-index: 5; pointer-events: none;
+        font: 12px system-ui, sans-serif; color: #8f9bb3;
+      }
+      #err { position: fixed; inset: 0; display: none; place-items: center; color: #f6b; font: 14px system-ui; padding: 16px; }
+    </style>
+  </head>
+  <body>
+    <div id="game"></div>
+    <div id="hud">starting</div>
+    <div id="help">Click to look. WASD move, Shift sprint, Space jump, click or F to pulse.</div>
+    <div id="err"></div>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

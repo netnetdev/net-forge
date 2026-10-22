@@ -1,0 +1,164 @@
+# VOLTYARD: the arena shooter template (NetNet game runtime, Template 2)
+
+> A twin-stick arena shooter for up to 16 players, with bots filling empty
+> seats. Rounds last a few minutes; the top of the board takes the round.
+> You change the game by editing src/game.ts only. The template already has
+> loadouts, aiming, projectiles, lag-compensated beams, death and respawn,
+> heal drops, rounds, a scoreboard, bots, netcode, rendering, touch and
+> gamepad controls, earn and the store. Do not write renderers, netcode,
+> physics or bot AI.
+
+## Files
+
+- src/game.ts: THE GAME. Declarations against @netnetcapital/engine:
+  game(), prefab(), weapon(), upgrade(), system(), earn.rule(), store.sku().
+- src/names.json: the title and every label players read (weapons,
+  upgrades, earn rules, store items).
+- Everything else is template machinery.
+
+## Rules the build enforces
+
+- game({ template: "arena", style: "lowpoly" }) with players.loadout (1 to 4
+  declared weapons), an arena { halfSize, pillars, spawns } and a round.
+- Arena weapons are kind "blaster", "beam" or "nova" (never bolt or orbit).
+- Asset ids look like "style.lowpoly.mini_male_f", never URLs or paths, and must be in the asset library.
+- game({ style }) is the art style the creator picked: lowpoly, toon, ps1, pixel, voxel or handdrawn. Keep it. The template draws everything in it, and a "style.lowpoly.<name>" id draws as that style's own model of the same name when the style has one.
+- Ids are lower_snake_case. Every game declares at least one earn.rule and one earn.stake (the buy-in run).
+- Pillars fit on the floor; spawns sit 1 m inside the floor and 1 m clear of pillars.
+- 4 players plus seat bots must all score kills, and an earn rule must fire,
+  in a 4-minute playtest. A round should end within about 4 minutes.
+
+## Units
+
+Seconds, metres, metres per second, hit points (players have 100).
+Tick rate 60 Hz (shooters). Yaw 0 aims up the screen (-z).
+
+## The loop
+
+Players spawn at a spawn point no opponent can see and at least 12 m from
+all of them (a floor point when no declared spawn qualifies), with 2 s of
+protection on joining, on respawn and at each new round (firing ends it). They move with one stick or WASD, aim with the
+other or the mouse, hold fire, and pick weapons with 1 2 3 (or cycle).
+A killed player drops players.drop (a heal cell), waits players.respawn
+seconds and comes back. A round ends after round.seconds, or when someone
+reaches round.frags kills; the end screen shows the board, then a new round.
+
+## Common changes
+
+### Tune a weapon
+weapon("arc_rifle", { kind: "blaster", damage: 12, cooldown: 0.15, range: 26, speed: 44 });
+blaster: count projectiles fanned over spread degrees at speed m/s for range m.
+beam: an instant hit to range m (pillars stop it); the server rewinds what
+the shooter saw (lag compensation), so keep cooldown at 0.8 s or more.
+nova: hits every opponent within range m (a short-range blast).
+
+### Add a weapon to the loadout
+weapon("ion_cannon", { kind: "blaster", damage: 40, cooldown: 1.2, range: 30, speed: 22, pierce: 2 });
+players.loadout: ["arc_rifle", "scatter_coil", "rail_lance", "ion_cannon"] (at most 4; slot 4 is reached by cycling).
+Add its label to names.json weapons.
+
+### Change the yard
+arena: { halfSize: 26, pillars: [[x, z, radius], ...], spawns: [[x, z], ...] }.
+Smaller halfSize and more pillars make closer fights. Keep spawns spread out.
+
+### Change round length or the kill target
+round: { seconds: 180, frags: 25 }. 120 to 300 seconds plays well.
+
+### More or fewer bots
+players.bots: 6 fills a room up to 6 players with bots (0 turns them off).
+Bots never earn, and killing a bot pays no earn rule (it still scores and
+shows in the kill feed). players.max caps humans in one room. Bots go easy on a
+person with a poor record and sharpen as they win, ease off once they
+lead the best person (they never stop shooting), and never take the round
+(only a person reaches round.frags; the end screen names the best person).
+
+### Faster respawn, bigger heals
+players.respawn: 2; prefab("volt_cell", { ..., kind: "pickup", value: 50 }).
+
+### Add an earn rule
+earn.rule("first_blood", { when: "opponent.killed", n: 1, pay: 2, oncePer: "run" });
+Events: opponent.killed (credits the killer), player.died (credits the one
+who died), round.top (the top fragger when a round ends), round.finished
+(everyone present at the end), run.won, and anything you emit(). A run is a
+round. Each rule pays once per round per player, in coins; the room server
+is the referee; bots never earn. Bot kills never pay: opponent.killed for a
+bot's death, and anything a system emits while handling it (a streak that a
+bot kill completes), score but count toward no earn rule. round.top pays
+only when another person was in the round, never for topping a board of
+bots. Alone with bots a player earns nothing from kills or the board.
+
+### The buy-in run (required)
+earn.stake({ min: 10, max: 100, multiple: 2 });
+Every game declares one, on one top-level line; a game without it does not
+build. A player stakes coins at the start of a run (the Kit spends them as
+coins.spend(amount, "stake"), then the client calls conn.stake()). The room
+fixes the stake when the next run starts. A staked run pays its normal earn
+plus a share of stake x multiple: the share is the part of the run's most
+earn the player makes. What it does not win back stays in the reward pool.
+multiple is 1 to 2. "stake" is reserved: never a SKU or meta upgrade id.
+
+### PvP pot (optional, arena only)
+earn.pot({ entry: 20, recycle: 0.05 });
+Each entrant pays the entry (coins.spend(entry, "pot"), then conn.pot()) and
+joins the next round's pot. At the round's end the pot, less the recycle
+share that stays in the reward pool, is split by the earn each entrant made.
+A round where no entrant earned recycles the whole pot. "pot" is reserved.
+
+### Losable gear (optional)
+store.sku("plating_kit", { coins: 120, grants: { gear: "plating", loseBelow: 0.25 } });
+Gear is owned in the player's profile and sells for coins only. It brings one
+level of its declared upgrade into every staked run, and is lost when that run
+makes less than loseBelow of its most earn. Its coins stay in the reward pool.
+
+### Track something with a system
+system("streaks", ({ on, emit }) => {
+  const streak = new Map<number, number>();
+  on("opponent.killed", (ids) => { for (const id of ids) { const n = (streak.get(id) ?? 0) + 1; streak.set(id, n); if (n === 5) emit("streak.five", [id]); } });
+  on("player.died", (ids) => { for (const id of ids) streak.set(id, 0); });
+});
+emit(event, ids) credits those players; emit(event) credits everyone present.
+players() gives each player's id, position, health, alive, kills, deaths, bot.
+
+### Coins: earn and the store
+
+Every game has coins: 1 coin = 1 of the game's own token, and players see
+them under the token's own name, symbol and logo (never "coins" or "tokens"
+as a label). Earn rules pay coins (pay is whole coins). The recommended
+coin model (the default) sells in-round consumables and looks, never
+permanent stat power:
+
+store.sku("plating", { coins: 40 });                                  // one level of the "plating" upgrade for the round
+store.sku("skin_neon", { coins: 300, grants: { cosmetic: 1 } });      // a finish, owned for good (saved in the player's profile)
+
+A store item named after a declared upgrade(...) is a round upgrade: the
+room grants one level of it when a player pays. Keep the five SKUs the
+client is wired to (plating, servo, capacitor, skin_neon, skin_chrome) at
+their prices, with the finishes' grants (neon 1, chrome 2). "Cosmetics only":
+economy({ store: "cosmetics" }). Permanent upgrades are opt-in:
+economy({ metaUpgrades: true }) and metaUpgrade(...), capped by the engine
+at +15% a stat and +30% in all (see GAME-DESIGN.md). Price against what a round pays (the four rules here pay up
+to 51): an upgrade under a round, a finish a few rounds. Before the game
+launches coins are play money; the Kit switches by itself.
+
+### Change who the players are (the asset library)
+players.prefab is a real CC0 character by id; each player is drawn in their
+colour holding a blaster, and plays its walk, run and shoot animations.
+players: { prefab: "style.lowpoly.soldier", ... } or a dressed original:
+players: { prefab: "style.lowpoly.blocky_g", appearance: { tint: "#16e0ff", parts: ["antenna"] }, ... }
+appearance: { tint: "#rrggbb", accent: "#rrggbb", scale: 0.4 to 3, parts: up to 4 }.
+The heal cell is prefab("volt_cell", { model: "style.lowpoly.cell_heal", ... });
+any pickup model works (style.lowpoly.gem_pink, style.lowpoly.coin, style.lowpoly.burger).
+
+## Systems API
+
+every(seconds, n => ...), after(seconds, fn), onTick(fn), spawn(prefab, [x,y,z]),
+spawnRing(prefab, { count, radius, around? }), alive(prefab?), players(),
+emit(event, ids?), on(event, ids => ...), end("won" | "lost"), random(),
+tick(), time(). Enemies are optional in the arena: a declared enemy prefab
+spawned by a system chases the nearest player and can be shot.
+
+## Test
+
+engine.test.run({ ticks: 60 * 240, bots: 4, assert: [...] }) plays the game
+on the server sim with 4 players plus seat bots and reports kills, deaths,
+rounds (runs.won), topScore, scorers, earned by rule, softlock and ms per tick.

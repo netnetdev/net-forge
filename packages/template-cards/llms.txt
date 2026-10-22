@@ -1,0 +1,94 @@
+# INKWRIT: the card battler template (NetNet game runtime, board genre)
+
+> A one-against-one card battler. Two scribes duel at a desk: heroes with
+> health, ink (mana) that rises each turn, a hand drawn from a shuffled
+> deck, inked creatures on the board, spells. A run is a gauntlet of
+> duels; after each one, every player drafts one of three cards into
+> their deck. Alone, an AI scribe of the gauntlet takes the other seat.
+> You change the game by editing src/game.ts only. The template already has
+> the duel, turns and the turn timer, the shuffle (on the server), hidden
+> hands, guards, rush, the draft, the AI, netcode, rendering, touch,
+> earn and the store. Do not write renderers, netcode or AI.
+
+## Files
+
+- src/game.ts: THE GAME. Declarations against @netnetcapital/engine:
+  game(), cardTable(), card(), upgrade(), earn.rule(), earn.stake(), store.sku().
+- src/names.json: the title and every label players read. Cards go in
+  "weapons" ({ name, line }), plus upgrades, earn rules and store items.
+- Everything else is template machinery.
+
+## Rules the build enforces
+
+- game({ template: "cards", style, places, players: { prefab, max } }), players.max at most 2.
+- Exactly one cardTable(...); 4 to 40 card(...)s. The starter deck (8 to 30
+  cards) names declared cards, holds at least one unit and cards costing 2
+  or less. ai is 1 to 12 tiers { health, smart }.
+- A unit has health 1 or more; a spell has an effect.
+- Effects: kind "damage", "heal", "draw" or "buff"; target "enemy" (the
+  player picks an enemy unit or the hero), "enemy_hero", "all_enemies",
+  "own_hero", "own_unit" (the player picks one of theirs) or "all_own".
+- Upgrades read four stats only: maxHealth (hero health), might (+attack on
+  the buyer's units), haste (+ink in the first turn), amount (+cards in
+  the first hand).
+- No weapon(...). Asset ids look like "style.lowpoly.frog"; keep game({ style }).
+- 2 playtest players must decide duels and fire an earn rule within 4 minutes.
+
+## Units
+
+Health and attack in points, cost in ink (0 to 10), seconds for timers.
+Tick rate 30 Hz.
+
+## The loop
+
+A duel: a coin decides who goes first; the second player draws one extra
+card. Each turn: +1 ink (up to manaMax), draw a card (an empty deck hurts
+more each time), play cards, attack with ready units (a unit is ready the
+turn after it lands, or at once with rush; guard units must be attacked
+first), end the turn (or the timer ends it). A hero at 0 loses; turnCap
+turns is a draw. After each duel but the last, a draft: one of three.
+
+## Common changes
+
+### A new card
+card("mirror_moth", { model: "style.lowpoly.jelly_flyer", kind: "unit", cost: 3, attack: 2, health: 2, effect: { kind: "damage", amount: 1, target: "all_enemies" } });
+Add its label to names.json weapons. The draft offers every card unless cardTable pool lists some.
+
+### Tune the table
+cardTable({ health: 25, duels: 5, turnSeconds: 40, ... }). Lower health
+makes faster duels; more duels make longer runs.
+
+### Harder or easier AI
+ai: [{ health: 14, smart: 0.3 }, ...]: duel n against the AI uses tier n;
+raise health and smart for a harder gauntlet.
+
+### Earn rules
+earn.rule("ink_master", { when: "ai.beaten", n: 3, pay: 15, oncePer: "run" });
+Events: duel.won (a duel won against a person; never against the AI, never
+a forfeit), ai.beaten (a gauntlet AI scribe beaten; a forfeit pays
+nothing), run.won (more duels won than lost in the run). Each rule pays
+once per run per player, in coins; the room server is the referee; the AI
+scribe never earns.
+
+### The buy-in run (required)
+earn.stake({ min: 10, max: 100, multiple: 2 }); one top-level line. "stake" is reserved.
+
+### Coins: earn and the store
+store.sku("thick_vellum", { coins: 40 });                            // one level of the upgrade for the run
+store.sku("skin_gold_leaf", { coins: 500, grants: { cosmetic: 2 } }); // a finish for your quill, owned for good
+store.sku("bound_folio", { coins: 120, grants: { gear: "thick_vellum", loseBelow: 0.25 } }); // losable gear
+Keep the SKUs the client is wired to (thick_vellum, sharp_nib, quick_ink,
+spare_page, skin_vermilion, skin_gold_leaf, bound_folio) at their prices.
+
+## Hidden information
+
+Decks are shuffled on the room server and their order never leaves it; a
+hand and a draft offer are sent only to their owner. Nothing in game.ts
+can change that.
+
+## Test
+
+engine.test.run({ ticks: 30 * 240, bots: 2 }) plays duels between two
+players (bots: 1 plays one person against the AI) and reports duels won
+(kills) and lost (deaths), the duel reached (wave), runs, earned by rule,
+softlock, ms per tick and the genre's checks under rules.checks.

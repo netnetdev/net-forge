@@ -1,0 +1,4539 @@
+{
+ "style": "voxel",
+ "dimension": "3d",
+ "palette": [
+  "#2b2b3a",
+  "#3f4b3b",
+  "#4f7a3a",
+  "#79a948",
+  "#b6d36b",
+  "#6b4a32",
+  "#9a6b43",
+  "#c99a62",
+  "#7f8a96",
+  "#b9c2c9",
+  "#f1efe4",
+  "#e8b04a",
+  "#e0603a",
+  "#b43a4a",
+  "#5aa8d8",
+  "#8a5cc8"
+ ],
+ "assets": [
+  {
+   "id": "style.voxel.mini_male_a",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "voxelize": "style.lowpoly.mini_male_a",
+    "res": 22
+   },
+   "height": 1.5,
+   "line": "voxel small cartoon townsperson (male, outfit a)",
+   "tags": [
+    "person",
+    "human",
+    "hero",
+    "character",
+    "townsperson",
+    "man",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.mini_male_b",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "voxelize": "style.lowpoly.mini_male_b",
+    "res": 22
+   },
+   "height": 1.5,
+   "line": "voxel small cartoon townsperson (male, outfit b)",
+   "tags": [
+    "person",
+    "human",
+    "hero",
+    "character",
+    "townsperson",
+    "man",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.mini_male_c",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "voxelize": "style.lowpoly.mini_male_c",
+    "res": 22
+   },
+   "height": 1.5,
+   "line": "voxel small cartoon townsperson (male, outfit c)",
+   "tags": [
+    "person",
+    "human",
+    "hero",
+    "character",
+    "townsperson",
+    "man",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.mini_male_d",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "voxelize": "style.lowpoly.mini_male_d",
+    "res": 22
+   },
+   "height": 1.5,
+   "line": "voxel small cartoon townsperson (male, outfit d)",
+   "tags": [
+    "person",
+    "human",
+    "hero",
+    "character",
+    "townsperson",
+    "man",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.mini_male_e",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "voxelize": "style.lowpoly.mini_male_e",
+    "res": 22
+   },
+   "height": 1.5,
+   "line": "voxel small cartoon townsperson (male, outfit e)",
+   "tags": [
+    "person",
+    "human",
+    "hero",
+    "character",
+    "townsperson",
+    "man",
+    "voxel"
+   ],
+   "aliases": [
+    "style.voxel.bruiser"
+   ]
+  },
+  {
+   "id": "style.voxel.mini_male_f",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "voxelize": "style.lowpoly.mini_male_f",
+    "res": 22
+   },
+   "height": 1.5,
+   "line": "voxel small cartoon townsperson (male, outfit f)",
+   "tags": [
+    "person",
+    "human",
+    "hero",
+    "character",
+    "townsperson",
+    "man",
+    "voxel"
+   ],
+   "aliases": [
+    "style.voxel.wirejack"
+   ]
+  },
+  {
+   "id": "style.voxel.mini_female_a",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "voxelize": "style.lowpoly.mini_female_a",
+    "res": 22
+   },
+   "height": 1.5,
+   "line": "voxel small cartoon townsperson (female, outfit a)",
+   "tags": [
+    "person",
+    "human",
+    "hero",
+    "character",
+    "townsperson",
+    "woman",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.mini_female_b",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "voxelize": "style.lowpoly.mini_female_b",
+    "res": 22
+   },
+   "height": 1.5,
+   "line": "voxel small cartoon townsperson (female, outfit b)",
+   "tags": [
+    "person",
+    "human",
+    "hero",
+    "character",
+    "townsperson",
+    "woman",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.mini_female_c",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "voxelize": "style.lowpoly.mini_female_c",
+    "res": 22
+   },
+   "height": 1.5,
+   "line": "voxel small cartoon townsperson (female, outfit c)",
+   "tags": [
+    "person",
+    "human",
+    "hero",
+    "character",
+    "townsperson",
+    "woman",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.mini_female_d",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "voxelize": "style.lowpoly.mini_female_d",
+    "res": 22
+   },
+   "height": 1.5,
+   "line": "voxel small cartoon townsperson (female, outfit d)",
+   "tags": [
+    "person",
+    "human",
+    "hero",
+    "character",
+    "townsperson",
+    "woman",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.mini_female_e",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "voxelize": "style.lowpoly.mini_female_e",
+    "res": 22
+   },
+   "height": 1.5,
+   "line": "voxel small cartoon townsperson (female, outfit e)",
+   "tags": [
+    "person",
+    "human",
+    "hero",
+    "character",
+    "townsperson",
+    "woman",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.mini_female_f",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "voxelize": "style.lowpoly.mini_female_f",
+    "res": 22
+   },
+   "height": 1.5,
+   "line": "voxel small cartoon townsperson (female, outfit f)",
+   "tags": [
+    "person",
+    "human",
+    "hero",
+    "character",
+    "townsperson",
+    "woman",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blocky_a",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "voxelize": "style.lowpoly.blocky_a",
+    "res": 22
+   },
+   "height": 1.8,
+   "line": "voxel blocky square-headed person (variant a)",
+   "tags": [
+    "person",
+    "human",
+    "blocky",
+    "character",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blocky_b",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "voxelize": "style.lowpoly.blocky_b",
+    "res": 22
+   },
+   "height": 1.8,
+   "line": "voxel blocky square-headed person (variant b)",
+   "tags": [
+    "person",
+    "human",
+    "blocky",
+    "character",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blocky_c",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "voxelize": "style.lowpoly.blocky_c",
+    "res": 22
+   },
+   "height": 1.8,
+   "line": "voxel blocky square-headed person (variant c)",
+   "tags": [
+    "person",
+    "human",
+    "blocky",
+    "character",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blocky_d",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "voxelize": "style.lowpoly.blocky_d",
+    "res": 22
+   },
+   "height": 1.8,
+   "line": "voxel blocky square-headed person (variant d)",
+   "tags": [
+    "person",
+    "human",
+    "blocky",
+    "character",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blocky_e",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "voxelize": "style.lowpoly.blocky_e",
+    "res": 22
+   },
+   "height": 1.8,
+   "line": "voxel blocky square-headed person (variant e)",
+   "tags": [
+    "person",
+    "human",
+    "blocky",
+    "character",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blocky_f",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "voxelize": "style.lowpoly.blocky_f",
+    "res": 22
+   },
+   "height": 1.8,
+   "line": "voxel blocky square-headed person (variant f)",
+   "tags": [
+    "person",
+    "human",
+    "blocky",
+    "character",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blocky_g",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "voxelize": "style.lowpoly.blocky_g",
+    "res": 22
+   },
+   "height": 1.8,
+   "line": "voxel blocky square-headed person (variant g)",
+   "tags": [
+    "person",
+    "human",
+    "blocky",
+    "character",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blocky_h",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "voxelize": "style.lowpoly.blocky_h",
+    "res": 22
+   },
+   "height": 1.8,
+   "line": "voxel blocky square-headed person (variant h)",
+   "tags": [
+    "person",
+    "human",
+    "blocky",
+    "character",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blocky_i",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "voxelize": "style.lowpoly.blocky_i",
+    "res": 22
+   },
+   "height": 1.8,
+   "line": "voxel blocky square-headed person (variant i)",
+   "tags": [
+    "person",
+    "human",
+    "blocky",
+    "character",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blocky_j",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "voxelize": "style.lowpoly.blocky_j",
+    "res": 22
+   },
+   "height": 1.8,
+   "line": "voxel blocky square-headed person (variant j)",
+   "tags": [
+    "person",
+    "human",
+    "blocky",
+    "character",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blocky_k",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "voxelize": "style.lowpoly.blocky_k",
+    "res": 22
+   },
+   "height": 1.8,
+   "line": "voxel blocky square-headed person (variant k)",
+   "tags": [
+    "person",
+    "human",
+    "blocky",
+    "character",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blocky_l",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "voxelize": "style.lowpoly.blocky_l",
+    "res": 22
+   },
+   "height": 1.8,
+   "line": "voxel blocky square-headed person (variant l)",
+   "tags": [
+    "person",
+    "human",
+    "blocky",
+    "character",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blocky_m",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "voxelize": "style.lowpoly.blocky_m",
+    "res": 22
+   },
+   "height": 1.8,
+   "line": "voxel blocky square-headed person (variant m)",
+   "tags": [
+    "person",
+    "human",
+    "blocky",
+    "character",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blocky_n",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "voxelize": "style.lowpoly.blocky_n",
+    "res": 22
+   },
+   "height": 1.8,
+   "line": "voxel blocky square-headed person (variant n)",
+   "tags": [
+    "person",
+    "human",
+    "blocky",
+    "character",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blocky_o",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "voxelize": "style.lowpoly.blocky_o",
+    "res": 22
+   },
+   "height": 1.8,
+   "line": "voxel blocky square-headed person (variant o)",
+   "tags": [
+    "person",
+    "human",
+    "blocky",
+    "character",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blocky_p",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "voxelize": "style.lowpoly.blocky_p",
+    "res": 22
+   },
+   "height": 1.8,
+   "line": "voxel blocky square-headed person (variant p)",
+   "tags": [
+    "person",
+    "human",
+    "blocky",
+    "character",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blocky_q",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "voxelize": "style.lowpoly.blocky_q",
+    "res": 22
+   },
+   "height": 1.8,
+   "line": "voxel blocky square-headed person (variant q)",
+   "tags": [
+    "person",
+    "human",
+    "blocky",
+    "character",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blocky_r",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "voxelize": "style.lowpoly.blocky_r",
+    "res": 22
+   },
+   "height": 1.8,
+   "line": "voxel blocky square-headed person (variant r)",
+   "tags": [
+    "person",
+    "human",
+    "blocky",
+    "character",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.astronaut",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.astronaut",
+    "res": 22
+   },
+   "height": 1.7,
+   "line": "voxel frog-faced space explorer in a suit, gun poses",
+   "tags": [
+    "astronaut",
+    "spaceman",
+    "explorer",
+    "pilot",
+    "soldier",
+    "hero",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.monarch",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.monarch",
+    "res": 22
+   },
+   "height": 1.7,
+   "line": "voxel dark armored ruler, gun poses",
+   "tags": [
+    "king",
+    "ruler",
+    "royal",
+    "noble",
+    "hero",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.rogue",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.rogue",
+    "res": 22
+   },
+   "height": 1.7,
+   "line": "voxel hooded adventurer with dagger moves",
+   "tags": [
+    "rogue",
+    "thief",
+    "adventurer",
+    "hero",
+    "assassin",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.pirate",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.pirate",
+    "res": 22
+   },
+   "height": 1.7,
+   "line": "voxel sea captain with a big hat",
+   "tags": [
+    "pirate",
+    "captain",
+    "sailor",
+    "buccaneer",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.zombie",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.zombie",
+    "res": 22
+   },
+   "height": 1.7,
+   "line": "voxel shambling undead person, crawls and lunges",
+   "tags": [
+    "zombie",
+    "undead",
+    "walker",
+    "ghoul",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.skeleton_crew",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.skeleton_crew",
+    "res": 22
+   },
+   "height": 1.7,
+   "line": "voxel skeleton sailor",
+   "tags": [
+    "skeleton",
+    "undead",
+    "bones",
+    "pirate",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.mech",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.mech",
+    "res": 22
+   },
+   "height": 1.9,
+   "line": "voxel walking mech with a small pilot",
+   "tags": [
+    "robot",
+    "mech",
+    "android",
+    "machine",
+    "bot",
+    "voxel"
+   ],
+   "aliases": [
+    "style.voxel.aegis"
+   ]
+  },
+  {
+   "id": "style.voxel.skeleton",
+   "kind": "creature",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.skeleton",
+    "res": 24
+   },
+   "height": 1.7,
+   "line": "voxel skeleton warrior that rises from the ground",
+   "tags": [
+    "skeleton",
+    "undead",
+    "bones",
+    "warrior",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.skeleton_grunt",
+   "kind": "creature",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.skeleton_grunt",
+    "res": 24
+   },
+   "height": 1.6,
+   "line": "voxel skeleton grunt enemy",
+   "tags": [
+    "skeleton",
+    "undead",
+    "grunt",
+    "enemy",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.goblin",
+   "kind": "creature",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.goblin",
+    "res": 18
+   },
+   "height": 1.2,
+   "line": "voxel small green goblin enemy",
+   "tags": [
+    "goblin",
+    "imp",
+    "gremlin",
+    "enemy",
+    "green",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.zombie_grunt",
+   "kind": "creature",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.zombie_grunt",
+    "res": 24
+   },
+   "height": 1.6,
+   "line": "voxel zombie grunt enemy",
+   "tags": [
+    "zombie",
+    "undead",
+    "grunt",
+    "enemy",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.demon",
+   "kind": "creature",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.demon",
+    "res": 24
+   },
+   "height": 1.8,
+   "line": "voxel horned red demon brute",
+   "tags": [
+    "demon",
+    "devil",
+    "fiend",
+    "horned",
+    "red",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.demon_blue",
+   "kind": "creature",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.demon_blue",
+    "res": 30
+   },
+   "height": 2.2,
+   "line": "voxel blue club-wielding brute",
+   "tags": [
+    "demon",
+    "fiend",
+    "brute",
+    "blue",
+    "big",
+    "voxel"
+   ],
+   "aliases": [
+    "style.voxel.ash_matron"
+   ]
+  },
+  {
+   "id": "style.voxel.orc_brute",
+   "kind": "creature",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.orc_brute",
+    "res": 24
+   },
+   "height": 2,
+   "line": "voxel green orc brute with a spiked club",
+   "tags": [
+    "orc",
+    "brute",
+    "ogre",
+    "warrior",
+    "big",
+    "voxel"
+   ],
+   "aliases": [
+    "style.voxel.brute"
+   ]
+  },
+  {
+   "id": "style.voxel.yeti",
+   "kind": "creature",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.yeti",
+    "res": 24
+   },
+   "height": 2,
+   "line": "voxel furry snow beast",
+   "tags": [
+    "yeti",
+    "snow",
+    "beast",
+    "furry",
+    "ape",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.mushroom_king",
+   "kind": "creature",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.mushroom_king",
+    "res": 34
+   },
+   "height": 2.2,
+   "line": "voxel giant mushroom-capped boss",
+   "tags": [
+    "mushroom",
+    "fungus",
+    "boss",
+    "king",
+    "giant",
+    "voxel"
+   ],
+   "aliases": [
+    "style.voxel.bell_warden"
+   ]
+  },
+  {
+   "id": "style.voxel.alien_big",
+   "kind": "creature",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.alien_big",
+    "res": 24
+   },
+   "height": 2,
+   "line": "voxel big-headed alien brute",
+   "tags": [
+    "alien",
+    "martian",
+    "invader",
+    "big",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.dino",
+   "kind": "creature",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.dino",
+    "res": 24
+   },
+   "height": 1.8,
+   "line": "voxel horned red cartoon dinosaur",
+   "tags": [
+    "dinosaur",
+    "dino",
+    "lizard",
+    "reptile",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.ninja_brute",
+   "kind": "creature",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.ninja_brute",
+    "res": 24
+   },
+   "height": 1.9,
+   "line": "voxel masked martial-arts brute",
+   "tags": [
+    "ninja",
+    "fighter",
+    "martial",
+    "masked",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.frog",
+   "kind": "creature",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.frog",
+    "res": 14
+   },
+   "height": 0.8,
+   "line": "voxel hopping frog",
+   "tags": [
+    "frog",
+    "toad",
+    "amphibian",
+    "hopper",
+    "voxel"
+   ],
+   "aliases": [
+    "style.voxel.spitter"
+   ]
+  },
+  {
+   "id": "style.voxel.slime_green",
+   "kind": "creature",
+   "plan": "blob",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.slime_green",
+    "res": 13
+   },
+   "height": 0.9,
+   "line": "voxel round green slime with a big grin",
+   "tags": [
+    "slime",
+    "blob",
+    "goo",
+    "jelly",
+    "green",
+    "voxel"
+   ],
+   "aliases": [
+    "style.voxel.brood"
+   ]
+  },
+  {
+   "id": "style.voxel.slime_pink",
+   "kind": "creature",
+   "plan": "blob",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.slime_pink",
+    "res": 13
+   },
+   "height": 0.9,
+   "line": "voxel pink jelly slime",
+   "tags": [
+    "slime",
+    "blob",
+    "goo",
+    "jelly",
+    "pink",
+    "voxel"
+   ],
+   "aliases": [
+    "style.voxel.bloat"
+   ]
+  },
+  {
+   "id": "style.voxel.slime_spiky",
+   "kind": "creature",
+   "plan": "blob",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.slime_spiky",
+    "res": 14
+   },
+   "height": 1,
+   "line": "voxel green slime with spikes",
+   "tags": [
+    "slime",
+    "blob",
+    "spiky",
+    "goo",
+    "green",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.slime_drop",
+   "kind": "creature",
+   "plan": "blob",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.slime_drop",
+    "res": 13
+   },
+   "height": 0.8,
+   "line": "voxel teardrop slime",
+   "tags": [
+    "slime",
+    "blob",
+    "drop",
+    "goo",
+    "jelly",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.slime_horned",
+   "kind": "creature",
+   "plan": "blob",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.slime_horned",
+    "res": 14
+   },
+   "height": 0.9,
+   "line": "voxel horned slime enemy",
+   "tags": [
+    "slime",
+    "blob",
+    "horned",
+    "enemy",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.mushroom_imp",
+   "kind": "creature",
+   "plan": "blob",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.mushroom_imp",
+    "res": 16
+   },
+   "height": 0.9,
+   "line": "voxel walking mushroom critter",
+   "tags": [
+    "mushroom",
+    "fungus",
+    "critter",
+    "shroom",
+    "voxel"
+   ],
+   "aliases": [
+    "style.voxel.husk"
+   ]
+  },
+  {
+   "id": "style.voxel.blob_wizard",
+   "kind": "creature",
+   "plan": "blob",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.blob_wizard",
+    "res": 18
+   },
+   "height": 1,
+   "line": "voxel round little spellcaster",
+   "tags": [
+    "wizard",
+    "mage",
+    "caster",
+    "blob",
+    "voxel"
+   ],
+   "aliases": [
+    "style.voxel.mender"
+   ]
+  },
+  {
+   "id": "style.voxel.blob_alien",
+   "kind": "creature",
+   "plan": "blob",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.blob_alien",
+    "res": 18
+   },
+   "height": 0.9,
+   "line": "voxel round little alien",
+   "tags": [
+    "alien",
+    "martian",
+    "blob",
+    "critter",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blob_yeti",
+   "kind": "creature",
+   "plan": "blob",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.blob_yeti",
+    "res": 18
+   },
+   "height": 1,
+   "line": "voxel round furry snow critter",
+   "tags": [
+    "yeti",
+    "snow",
+    "furry",
+    "blob",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blob_orc",
+   "kind": "creature",
+   "plan": "blob",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.blob_orc",
+    "res": 18
+   },
+   "height": 1,
+   "line": "voxel round tusked critter",
+   "tags": [
+    "orc",
+    "tusked",
+    "blob",
+    "critter",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blob_ninja",
+   "kind": "creature",
+   "plan": "blob",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.blob_ninja",
+    "res": 18
+   },
+   "height": 0.9,
+   "line": "voxel round masked critter",
+   "tags": [
+    "ninja",
+    "masked",
+    "blob",
+    "critter",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blob_bird",
+   "kind": "creature",
+   "plan": "blob",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.blob_bird",
+    "res": 18
+   },
+   "height": 0.9,
+   "line": "voxel round chick-like bird",
+   "tags": [
+    "bird",
+    "chick",
+    "blob",
+    "critter",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.skull_hopper",
+   "kind": "creature",
+   "plan": "blob",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.skull_hopper",
+    "res": 18
+   },
+   "height": 0.8,
+   "line": "voxel hopping skull enemy",
+   "tags": [
+    "skull",
+    "undead",
+    "hopper",
+    "enemy",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.crab",
+   "kind": "creature",
+   "plan": "blob",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.crab",
+    "res": 18
+   },
+   "height": 0.8,
+   "line": "voxel snapping crab enemy",
+   "tags": [
+    "crab",
+    "crustacean",
+    "beach",
+    "enemy",
+    "voxel"
+   ],
+   "aliases": [
+    "style.voxel.scrap_mite"
+   ]
+  },
+  {
+   "id": "style.voxel.ghost",
+   "kind": "creature",
+   "plan": "flyer",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.ghost",
+    "res": 18
+   },
+   "height": 1.3,
+   "line": "voxel floating sheet ghost",
+   "tags": [
+    "ghost",
+    "spirit",
+    "phantom",
+    "spooky",
+    "shade",
+    "voxel"
+   ],
+   "aliases": [
+    "style.voxel.shade"
+   ]
+  },
+  {
+   "id": "style.voxel.ghost_skull",
+   "kind": "creature",
+   "plan": "flyer",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.ghost_skull",
+    "res": 18
+   },
+   "height": 1.3,
+   "line": "voxel floating skull spirit",
+   "tags": [
+    "ghost",
+    "skull",
+    "spirit",
+    "undead",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.bat",
+   "kind": "creature",
+   "plan": "flyer",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.bat",
+    "res": 18
+   },
+   "height": 0.8,
+   "line": "voxel flapping bat",
+   "tags": [
+    "bat",
+    "flyer",
+    "cave",
+    "night",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.dragon_whelp",
+   "kind": "creature",
+   "plan": "flyer",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.dragon_whelp",
+    "res": 18
+   },
+   "height": 1.2,
+   "line": "voxel small winged dragon",
+   "tags": [
+    "dragon",
+    "drake",
+    "whelp",
+    "winged",
+    "flyer",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.dragon",
+   "kind": "creature",
+   "plan": "flyer",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.dragon",
+    "res": 32
+   },
+   "height": 2,
+   "line": "voxel big winged dragon",
+   "tags": [
+    "dragon",
+    "drake",
+    "winged",
+    "boss",
+    "flyer",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.wyvern",
+   "kind": "creature",
+   "plan": "flyer",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.wyvern",
+    "res": 24
+   },
+   "height": 2,
+   "line": "voxel long-necked flying wyvern",
+   "tags": [
+    "dragon",
+    "wyvern",
+    "winged",
+    "flyer",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.bee",
+   "kind": "creature",
+   "plan": "flyer",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.bee",
+    "res": 16
+   },
+   "height": 0.7,
+   "line": "voxel buzzing bee enemy",
+   "tags": [
+    "bee",
+    "wasp",
+    "insect",
+    "bug",
+    "swarm",
+    "gnat",
+    "voxel"
+   ],
+   "aliases": [
+    "style.voxel.gnat"
+   ]
+  },
+  {
+   "id": "style.voxel.armored_bee",
+   "kind": "creature",
+   "plan": "flyer",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.armored_bee",
+    "res": 18
+   },
+   "height": 1,
+   "line": "voxel armored flying bug",
+   "tags": [
+    "bee",
+    "beetle",
+    "insect",
+    "armored",
+    "bug",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.imp",
+   "kind": "creature",
+   "plan": "flyer",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.imp",
+    "res": 18
+   },
+   "height": 1.1,
+   "line": "voxel winged little demon",
+   "tags": [
+    "imp",
+    "demon",
+    "winged",
+    "devil",
+    "flyer",
+    "voxel"
+   ],
+   "aliases": [
+    "style.voxel.caller"
+   ]
+  },
+  {
+   "id": "style.voxel.pebble_flyer",
+   "kind": "creature",
+   "plan": "flyer",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.pebble_flyer",
+    "res": 18
+   },
+   "height": 1,
+   "line": "voxel floating rock critter",
+   "tags": [
+    "golem",
+    "rock",
+    "stone",
+    "flyer",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.jelly_flyer",
+   "kind": "creature",
+   "plan": "flyer",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.jelly_flyer",
+    "res": 18
+   },
+   "height": 1.2,
+   "line": "voxel floating jelly creature",
+   "tags": [
+    "jellyfish",
+    "jelly",
+    "floating",
+    "flyer",
+    "squid",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.fluffy_flyer",
+   "kind": "creature",
+   "plan": "flyer",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.fluffy_flyer",
+    "res": 18
+   },
+   "height": 1.2,
+   "line": "voxel fluffy flying llama critter",
+   "tags": [
+    "llama",
+    "fluffy",
+    "cloud",
+    "flyer",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.fox",
+   "kind": "creature",
+   "plan": "quadruped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.fox",
+    "res": 18
+   },
+   "height": 0.8,
+   "line": "voxel red fox",
+   "tags": [
+    "fox",
+    "animal",
+    "canine",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.wolf",
+   "kind": "creature",
+   "plan": "quadruped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.wolf",
+    "res": 18
+   },
+   "height": 1,
+   "line": "voxel grey wolf",
+   "tags": [
+    "wolf",
+    "animal",
+    "canine",
+    "dog",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.husky",
+   "kind": "creature",
+   "plan": "quadruped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.husky",
+    "res": 18
+   },
+   "height": 0.9,
+   "line": "voxel sled dog",
+   "tags": [
+    "dog",
+    "husky",
+    "animal",
+    "pet",
+    "canine",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.stag",
+   "kind": "creature",
+   "plan": "quadruped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.stag",
+    "res": 24
+   },
+   "height": 1.6,
+   "line": "voxel antlered stag",
+   "tags": [
+    "deer",
+    "stag",
+    "antlers",
+    "animal",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.deer",
+   "kind": "creature",
+   "plan": "quadruped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.deer",
+    "res": 18
+   },
+   "height": 1.3,
+   "line": "voxel doe",
+   "tags": [
+    "deer",
+    "doe",
+    "animal",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.wolf_cartoon",
+   "kind": "creature",
+   "plan": "quadruped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.wolf_cartoon",
+    "res": 18
+   },
+   "height": 0.9,
+   "line": "voxel blocky wolf",
+   "tags": [
+    "wolf",
+    "animal",
+    "canine",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.trex",
+   "kind": "creature",
+   "plan": "quadruped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.trex",
+    "res": 34
+   },
+   "height": 3,
+   "line": "voxel big predator dinosaur",
+   "tags": [
+    "dinosaur",
+    "trex",
+    "predator",
+    "boss",
+    "dino",
+    "voxel"
+   ],
+   "aliases": [
+    "style.voxel.gloam_ram"
+   ]
+  },
+  {
+   "id": "style.voxel.raptor",
+   "kind": "creature",
+   "plan": "quadruped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.raptor",
+    "res": 18
+   },
+   "height": 1.4,
+   "line": "voxel fast clawed dinosaur",
+   "tags": [
+    "dinosaur",
+    "raptor",
+    "dino",
+    "fast",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.triceratops",
+   "kind": "creature",
+   "plan": "quadruped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.triceratops",
+    "res": 24
+   },
+   "height": 1.8,
+   "line": "voxel three-horned dinosaur",
+   "tags": [
+    "dinosaur",
+    "horned",
+    "dino",
+    "tank",
+    "voxel"
+   ],
+   "aliases": [
+    "style.voxel.ram"
+   ]
+  },
+  {
+   "id": "style.voxel.adventurer",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.adventurer",
+    "res": 22
+   },
+   "height": 1.7,
+   "line": "voxel adventurer with a backpack, gun poses",
+   "tags": [
+    "adventurer",
+    "explorer",
+    "hero",
+    "traveler",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.hooded_adventurer",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.hooded_adventurer",
+    "res": 22
+   },
+   "height": 1.7,
+   "line": "voxel hooded adventurer, gun poses",
+   "tags": [
+    "adventurer",
+    "hooded",
+    "ranger",
+    "keeper",
+    "hero",
+    "voxel"
+   ],
+   "aliases": [
+    "style.voxel.keeper_01"
+   ]
+  },
+  {
+   "id": "style.voxel.soldier",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.soldier",
+    "res": 22
+   },
+   "height": 1.8,
+   "line": "voxel armored trooper with a rifle",
+   "tags": [
+    "soldier",
+    "trooper",
+    "marine",
+    "gunner",
+    "hero",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.worker",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.worker",
+    "res": 22
+   },
+   "height": 1.7,
+   "line": "voxel everyday worker in overalls",
+   "tags": [
+    "worker",
+    "man",
+    "handyman",
+    "plumber",
+    "builder",
+    "hero",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.robot_walker",
+   "kind": "creature",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.robot_walker",
+    "res": 18
+   },
+   "height": 1.3,
+   "line": "voxel round robot drone with arms",
+   "tags": [
+    "robot",
+    "bot",
+    "droid",
+    "enemy",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.robot_gunner",
+   "kind": "creature",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.robot_gunner",
+    "res": 18
+   },
+   "height": 1.5,
+   "line": "voxel round robot drone with a gun",
+   "tags": [
+    "robot",
+    "bot",
+    "gunner",
+    "enemy",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.robot_large",
+   "kind": "creature",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.robot_large",
+    "res": 30
+   },
+   "height": 2.4,
+   "line": "voxel big black robot orb with a red eye",
+   "tags": [
+    "robot",
+    "bot",
+    "brute",
+    "boss",
+    "big",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.robot_flyer",
+   "kind": "creature",
+   "plan": "flyer",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.robot_flyer",
+    "res": 18
+   },
+   "height": 1,
+   "line": "voxel flying robot drone",
+   "tags": [
+    "robot",
+    "drone",
+    "flyer",
+    "bot",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.robot_flyer_gun",
+   "kind": "creature",
+   "plan": "flyer",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.robot_flyer_gun",
+    "res": 18
+   },
+   "height": 1,
+   "line": "voxel flying robot with a gun",
+   "tags": [
+    "robot",
+    "drone",
+    "flyer",
+    "gunner",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.mech_heavy",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.mech_heavy",
+    "res": 22
+   },
+   "height": 2.2,
+   "line": "voxel heavy walking mech",
+   "tags": [
+    "mech",
+    "robot",
+    "walker",
+    "heavy",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.cat",
+   "kind": "creature",
+   "plan": "quadruped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.cat",
+    "res": 18
+   },
+   "height": 0.6,
+   "line": "voxel blocky cat",
+   "tags": [
+    "cat",
+    "kitten",
+    "pet",
+    "animal",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.shiba",
+   "kind": "creature",
+   "plan": "quadruped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.shiba",
+    "res": 18
+   },
+   "height": 0.7,
+   "line": "voxel fox-like dog",
+   "tags": [
+    "dog",
+    "shiba",
+    "pet",
+    "animal",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.pug",
+   "kind": "creature",
+   "plan": "quadruped",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.pug",
+    "res": 18
+   },
+   "height": 0.5,
+   "line": "voxel small round dog",
+   "tags": [
+    "dog",
+    "pug",
+    "pet",
+    "animal",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.tank",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.tank",
+    "res": 16
+   },
+   "height": 1.8,
+   "line": "voxel tracked battle tank with a turret",
+   "tags": [
+    "tank",
+    "army",
+    "military",
+    "vehicle",
+    "armor",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.tank_heavy",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "rig": "quaternius",
+   "source": {
+    "voxelize": "style.lowpoly.tank_heavy",
+    "res": 16
+   },
+   "height": 2,
+   "line": "voxel heavy battle tank",
+   "tags": [
+    "tank",
+    "army",
+    "military",
+    "vehicle",
+    "armor",
+    "heavy",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.sword",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.sword",
+    "res": 18
+   },
+   "height": 1,
+   "line": "voxel straight sword",
+   "tags": [
+    "sword",
+    "blade",
+    "weapon",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.greatsword",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.greatsword",
+    "res": 18
+   },
+   "height": 1.5,
+   "line": "voxel two-handed greatsword",
+   "tags": [
+    "sword",
+    "greatsword",
+    "blade",
+    "weapon",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.axe",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.axe",
+    "res": 18
+   },
+   "height": 0.9,
+   "line": "voxel battle axe",
+   "tags": [
+    "axe",
+    "weapon",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.chest",
+   "kind": "prop",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.chest",
+    "res": 14
+   },
+   "height": 0.8,
+   "line": "voxel treasure chest",
+   "tags": [
+    "chest",
+    "treasure",
+    "loot",
+    "box",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.coin",
+   "kind": "pickup",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.coin",
+    "res": 12
+   },
+   "height": 0.5,
+   "line": "voxel gold coin",
+   "tags": [
+    "coin",
+    "money",
+    "gold",
+    "pickup",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.crystal",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.crystal",
+    "res": 16
+   },
+   "height": 1.4,
+   "line": "voxel big crystal",
+   "tags": [
+    "crystal",
+    "gem",
+    "ore",
+    "mineral",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.gem_pink",
+   "kind": "pickup",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.gem_pink",
+    "res": 12
+   },
+   "height": 0.4,
+   "line": "voxel pink cut gem",
+   "tags": [
+    "gem",
+    "jewel",
+    "diamond",
+    "pickup",
+    "pink",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.sedan",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "voxelize": "style.lowpoly.sedan",
+    "res": 16
+   },
+   "height": 1.6,
+   "line": "voxel family car",
+   "tags": [
+    "car",
+    "sedan",
+    "vehicle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.sedan_sports",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "voxelize": "style.lowpoly.sedan_sports",
+    "res": 16
+   },
+   "height": 1.6,
+   "line": "voxel sporty sedan",
+   "tags": [
+    "car",
+    "sports car",
+    "vehicle",
+    "fast",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.hatchback_sports",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "voxelize": "style.lowpoly.hatchback_sports",
+    "res": 16
+   },
+   "height": 1.6,
+   "line": "voxel sporty hatchback",
+   "tags": [
+    "car",
+    "hatchback",
+    "vehicle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.suv",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "voxelize": "style.lowpoly.suv",
+    "res": 16
+   },
+   "height": 1.6,
+   "line": "voxel boxy SUV",
+   "tags": [
+    "car",
+    "suv",
+    "jeep",
+    "vehicle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.suv_luxury",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "voxelize": "style.lowpoly.suv_luxury",
+    "res": 16
+   },
+   "height": 1.6,
+   "line": "voxel luxury SUV",
+   "tags": [
+    "car",
+    "suv",
+    "vehicle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.taxi",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "voxelize": "style.lowpoly.taxi",
+    "res": 16
+   },
+   "height": 1.6,
+   "line": "voxel yellow taxi cab",
+   "tags": [
+    "car",
+    "taxi",
+    "cab",
+    "vehicle",
+    "yellow",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.police_car",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "voxelize": "style.lowpoly.police_car",
+    "res": 16
+   },
+   "height": 1.6,
+   "line": "voxel police cruiser",
+   "tags": [
+    "car",
+    "police",
+    "cop",
+    "vehicle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.ambulance",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "voxelize": "style.lowpoly.ambulance",
+    "res": 16
+   },
+   "height": 1.6,
+   "line": "voxel ambulance van",
+   "tags": [
+    "ambulance",
+    "van",
+    "medic",
+    "vehicle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.firetruck",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "voxelize": "style.lowpoly.firetruck",
+    "res": 16
+   },
+   "height": 2.6,
+   "line": "voxel fire engine",
+   "tags": [
+    "firetruck",
+    "fire engine",
+    "truck",
+    "vehicle",
+    "red",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.garbage_truck",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "voxelize": "style.lowpoly.garbage_truck",
+    "res": 16
+   },
+   "height": 2.6,
+   "line": "voxel garbage truck",
+   "tags": [
+    "truck",
+    "garbage",
+    "vehicle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.delivery_van",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "voxelize": "style.lowpoly.delivery_van",
+    "res": 16
+   },
+   "height": 1.6,
+   "line": "voxel delivery van",
+   "tags": [
+    "van",
+    "delivery",
+    "vehicle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.delivery_flat",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "voxelize": "style.lowpoly.delivery_flat",
+    "res": 16
+   },
+   "height": 1.6,
+   "line": "voxel flatbed delivery truck",
+   "tags": [
+    "truck",
+    "flatbed",
+    "vehicle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.truck",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "voxelize": "style.lowpoly.truck",
+    "res": 16
+   },
+   "height": 1.6,
+   "line": "voxel pickup truck",
+   "tags": [
+    "truck",
+    "pickup",
+    "pickup truck",
+    "vehicle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.truck_flat",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "voxelize": "style.lowpoly.truck_flat",
+    "res": 18
+   },
+   "height": 1.6,
+   "line": "voxel flatbed truck",
+   "tags": [
+    "truck",
+    "flatbed",
+    "vehicle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.van",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "voxelize": "style.lowpoly.van",
+    "res": 18
+   },
+   "height": 1.6,
+   "line": "voxel panel van",
+   "tags": [
+    "van",
+    "vehicle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.tractor",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "voxelize": "style.lowpoly.tractor",
+    "res": 16
+   },
+   "height": 1.6,
+   "line": "voxel farm tractor",
+   "tags": [
+    "tractor",
+    "farm",
+    "vehicle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.digger",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "voxelize": "style.lowpoly.digger",
+    "res": 16
+   },
+   "height": 1.6,
+   "line": "voxel front loader with a shovel",
+   "tags": [
+    "digger",
+    "loader",
+    "bulldozer",
+    "construction",
+    "vehicle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.race_car",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "voxelize": "style.lowpoly.race_car",
+    "res": 16
+   },
+   "height": 1.6,
+   "line": "voxel open-wheel race car",
+   "tags": [
+    "race car",
+    "racer",
+    "car",
+    "vehicle",
+    "fast",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.race_car_future",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "voxelize": "style.lowpoly.race_car_future",
+    "res": 16
+   },
+   "height": 1.6,
+   "line": "voxel futuristic race car",
+   "tags": [
+    "race car",
+    "racer",
+    "future",
+    "car",
+    "vehicle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.kart_a",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "voxelize": "style.lowpoly.kart_a",
+    "res": 16
+   },
+   "height": 0.9,
+   "line": "voxel go-kart (colour a)",
+   "tags": [
+    "kart",
+    "go-kart",
+    "racer",
+    "vehicle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.kart_b",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "voxelize": "style.lowpoly.kart_b",
+    "res": 16
+   },
+   "height": 0.9,
+   "line": "voxel go-kart (colour b)",
+   "tags": [
+    "kart",
+    "go-kart",
+    "racer",
+    "vehicle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.kart_c",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "voxelize": "style.lowpoly.kart_c",
+    "res": 16
+   },
+   "height": 0.9,
+   "line": "voxel go-kart (colour c)",
+   "tags": [
+    "kart",
+    "go-kart",
+    "racer",
+    "vehicle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.kart_d",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "voxelize": "style.lowpoly.kart_d",
+    "res": 16
+   },
+   "height": 0.9,
+   "line": "voxel go-kart (colour d)",
+   "tags": [
+    "kart",
+    "go-kart",
+    "racer",
+    "vehicle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.kart_e",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "voxelize": "style.lowpoly.kart_e",
+    "res": 16
+   },
+   "height": 0.9,
+   "line": "voxel go-kart (colour e)",
+   "tags": [
+    "kart",
+    "go-kart",
+    "racer",
+    "vehicle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.rover",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "voxelize": "style.lowpoly.rover",
+    "res": 16
+   },
+   "height": 1.4,
+   "line": "voxel six-wheeled planet rover",
+   "tags": [
+    "rover",
+    "buggy",
+    "space",
+    "vehicle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.speeder_a",
+   "kind": "vehicle",
+   "plan": "flyer",
+   "source": {
+    "voxelize": "style.lowpoly.speeder_a",
+    "res": 16
+   },
+   "height": 1,
+   "line": "voxel hover speeder",
+   "tags": [
+    "speeder",
+    "hovercraft",
+    "ship",
+    "spaceship",
+    "drone",
+    "voxel"
+   ],
+   "aliases": [
+    "style.voxel.drone"
+   ]
+  },
+  {
+   "id": "style.voxel.speeder_b",
+   "kind": "vehicle",
+   "plan": "flyer",
+   "source": {
+    "voxelize": "style.lowpoly.speeder_b",
+    "res": 16
+   },
+   "height": 1,
+   "line": "voxel hover speeder, wide",
+   "tags": [
+    "speeder",
+    "hovercraft",
+    "ship",
+    "spaceship",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.speeder_c",
+   "kind": "vehicle",
+   "plan": "flyer",
+   "source": {
+    "voxelize": "style.lowpoly.speeder_c",
+    "res": 16
+   },
+   "height": 1,
+   "line": "voxel hover speeder, long",
+   "tags": [
+    "speeder",
+    "hovercraft",
+    "ship",
+    "spaceship",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.racer_ship",
+   "kind": "vehicle",
+   "plan": "flyer",
+   "source": {
+    "voxelize": "style.lowpoly.racer_ship",
+    "res": 16
+   },
+   "height": 1,
+   "line": "voxel racing spaceship",
+   "tags": [
+    "spaceship",
+    "racer",
+    "ship",
+    "fighter",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.cargo_ship",
+   "kind": "vehicle",
+   "plan": "flyer",
+   "source": {
+    "voxelize": "style.lowpoly.cargo_ship",
+    "res": 16
+   },
+   "height": 1.6,
+   "line": "voxel cargo spaceship",
+   "tags": [
+    "spaceship",
+    "cargo",
+    "ship",
+    "freighter",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.miner_ship",
+   "kind": "vehicle",
+   "plan": "flyer",
+   "source": {
+    "voxelize": "style.lowpoly.miner_ship",
+    "res": 16
+   },
+   "height": 1.4,
+   "line": "voxel mining spaceship",
+   "tags": [
+    "spaceship",
+    "miner",
+    "ship",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.turret",
+   "kind": "prop",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.turret",
+    "res": 16
+   },
+   "height": 1.4,
+   "line": "voxel gun turret",
+   "tags": [
+    "turret",
+    "cannon",
+    "tank",
+    "gun",
+    "defense",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.turret_double",
+   "kind": "prop",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.turret_double",
+    "res": 16
+   },
+   "height": 1.4,
+   "line": "voxel double-barrel turret",
+   "tags": [
+    "turret",
+    "cannon",
+    "tank",
+    "gun",
+    "defense",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.generator",
+   "kind": "prop",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.generator",
+    "res": 22
+   },
+   "height": 2.4,
+   "line": "voxel power generator machine",
+   "tags": [
+    "generator",
+    "machine",
+    "power",
+    "transformer",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.generator_large",
+   "kind": "prop",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.generator_large",
+    "res": 16
+   },
+   "height": 3,
+   "line": "voxel large power generator",
+   "tags": [
+    "generator",
+    "machine",
+    "power",
+    "transformer",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.satellite_dish",
+   "kind": "prop",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.satellite_dish",
+    "res": 26
+   },
+   "height": 3,
+   "line": "voxel satellite dish",
+   "tags": [
+    "satellite",
+    "dish",
+    "antenna",
+    "radar",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.crystal_rock",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.crystal_rock",
+    "res": 18
+   },
+   "height": 1.6,
+   "line": "voxel rock with glowing crystals",
+   "tags": [
+    "crystal",
+    "gem",
+    "rock",
+    "ore",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.meteor",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.meteor",
+    "res": 18
+   },
+   "height": 1.2,
+   "line": "voxel space rock",
+   "tags": [
+    "meteor",
+    "asteroid",
+    "rock",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.barrel",
+   "kind": "prop",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.barrel",
+    "res": 16
+   },
+   "height": 1,
+   "line": "voxel metal barrel",
+   "tags": [
+    "barrel",
+    "drum",
+    "container",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.barrels",
+   "kind": "prop",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.barrels",
+    "res": 14
+   },
+   "height": 1.2,
+   "line": "voxel stack of metal barrels",
+   "tags": [
+    "barrels",
+    "drums",
+    "container",
+    "cover",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.hangar",
+   "kind": "building",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.hangar",
+    "res": 40
+   },
+   "height": 4,
+   "line": "voxel round hangar",
+   "tags": [
+    "hangar",
+    "building",
+    "base",
+    "dome",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.rocket",
+   "kind": "prop",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.rocket",
+    "res": 16
+   },
+   "height": 3,
+   "line": "voxel rocket base section",
+   "tags": [
+    "rocket",
+    "launch",
+    "space",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blaster_a",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.blaster_a",
+    "res": 18
+   },
+   "height": 0.5,
+   "line": "voxel chunky sci-fi blaster (model a)",
+   "tags": [
+    "blaster",
+    "gun",
+    "weapon",
+    "pistol",
+    "rifle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blaster_b",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.blaster_b",
+    "res": 18
+   },
+   "height": 0.5,
+   "line": "voxel chunky sci-fi blaster (model b)",
+   "tags": [
+    "blaster",
+    "gun",
+    "weapon",
+    "pistol",
+    "rifle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blaster_c",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.blaster_c",
+    "res": 18
+   },
+   "height": 0.5,
+   "line": "voxel chunky sci-fi blaster (model c)",
+   "tags": [
+    "blaster",
+    "gun",
+    "weapon",
+    "pistol",
+    "rifle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blaster_d",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.blaster_d",
+    "res": 18
+   },
+   "height": 0.5,
+   "line": "voxel chunky sci-fi blaster (model d)",
+   "tags": [
+    "blaster",
+    "gun",
+    "weapon",
+    "pistol",
+    "rifle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blaster_e",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.blaster_e",
+    "res": 18
+   },
+   "height": 0.5,
+   "line": "voxel chunky sci-fi blaster (model e)",
+   "tags": [
+    "blaster",
+    "gun",
+    "weapon",
+    "pistol",
+    "rifle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blaster_f",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.blaster_f",
+    "res": 18
+   },
+   "height": 0.5,
+   "line": "voxel chunky sci-fi blaster (model f)",
+   "tags": [
+    "blaster",
+    "gun",
+    "weapon",
+    "pistol",
+    "rifle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blaster_g",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.blaster_g",
+    "res": 18
+   },
+   "height": 0.5,
+   "line": "voxel chunky sci-fi blaster (model g)",
+   "tags": [
+    "blaster",
+    "gun",
+    "weapon",
+    "pistol",
+    "rifle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blaster_h",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.blaster_h",
+    "res": 20
+   },
+   "height": 0.5,
+   "line": "voxel chunky sci-fi blaster (model h)",
+   "tags": [
+    "blaster",
+    "gun",
+    "weapon",
+    "pistol",
+    "rifle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blaster_i",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.blaster_i",
+    "res": 18
+   },
+   "height": 0.5,
+   "line": "voxel chunky sci-fi blaster (model i)",
+   "tags": [
+    "blaster",
+    "gun",
+    "weapon",
+    "pistol",
+    "rifle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blaster_j",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.blaster_j",
+    "res": 18
+   },
+   "height": 0.5,
+   "line": "voxel chunky sci-fi blaster (model j)",
+   "tags": [
+    "blaster",
+    "gun",
+    "weapon",
+    "pistol",
+    "rifle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blaster_k",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.blaster_k",
+    "res": 18
+   },
+   "height": 0.5,
+   "line": "voxel chunky sci-fi blaster (model k)",
+   "tags": [
+    "blaster",
+    "gun",
+    "weapon",
+    "pistol",
+    "rifle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blaster_l",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.blaster_l",
+    "res": 18
+   },
+   "height": 0.5,
+   "line": "voxel chunky sci-fi blaster (model l)",
+   "tags": [
+    "blaster",
+    "gun",
+    "weapon",
+    "pistol",
+    "rifle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blaster_m",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.blaster_m",
+    "res": 18
+   },
+   "height": 0.5,
+   "line": "voxel chunky sci-fi blaster (model m)",
+   "tags": [
+    "blaster",
+    "gun",
+    "weapon",
+    "pistol",
+    "rifle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blaster_n",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.blaster_n",
+    "res": 18
+   },
+   "height": 0.5,
+   "line": "voxel chunky sci-fi blaster (model n)",
+   "tags": [
+    "blaster",
+    "gun",
+    "weapon",
+    "pistol",
+    "rifle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blaster_o",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.blaster_o",
+    "res": 18
+   },
+   "height": 0.5,
+   "line": "voxel chunky sci-fi blaster (model o)",
+   "tags": [
+    "blaster",
+    "gun",
+    "weapon",
+    "pistol",
+    "rifle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blaster_p",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.blaster_p",
+    "res": 18
+   },
+   "height": 0.5,
+   "line": "voxel chunky sci-fi blaster (model p)",
+   "tags": [
+    "blaster",
+    "gun",
+    "weapon",
+    "pistol",
+    "rifle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blaster_q",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.blaster_q",
+    "res": 18
+   },
+   "height": 0.5,
+   "line": "voxel chunky sci-fi blaster (model q)",
+   "tags": [
+    "blaster",
+    "gun",
+    "weapon",
+    "pistol",
+    "rifle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.blaster_r",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.blaster_r",
+    "res": 18
+   },
+   "height": 0.5,
+   "line": "voxel chunky sci-fi blaster (model r)",
+   "tags": [
+    "blaster",
+    "gun",
+    "weapon",
+    "pistol",
+    "rifle",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.grenade",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.grenade",
+    "res": 18
+   },
+   "height": 0.25,
+   "line": "voxel round grenade",
+   "tags": [
+    "grenade",
+    "bomb",
+    "explosive",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.crate",
+   "kind": "prop",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.crate",
+    "res": 16
+   },
+   "height": 0.8,
+   "line": "voxel supply crate",
+   "tags": [
+    "crate",
+    "box",
+    "supply",
+    "loot",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.target",
+   "kind": "prop",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.target",
+    "res": 16
+   },
+   "height": 1.2,
+   "line": "voxel practice target",
+   "tags": [
+    "target",
+    "bullseye",
+    "practice",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.tree_oak",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.tree_oak",
+    "res": 24
+   },
+   "height": 4.5,
+   "line": "voxel round leafy tree",
+   "tags": [
+    "tree",
+    "oak",
+    "forest",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.tree_pine",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.tree_pine",
+    "res": 26
+   },
+   "height": 5,
+   "line": "voxel pine tree",
+   "tags": [
+    "tree",
+    "pine",
+    "conifer",
+    "forest",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.tree_pine_tall",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.tree_pine_tall",
+    "res": 34
+   },
+   "height": 7,
+   "line": "voxel tall pine tree",
+   "tags": [
+    "tree",
+    "pine",
+    "tall",
+    "forest",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.tree_palm",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.tree_palm",
+    "res": 30
+   },
+   "height": 6,
+   "line": "voxel palm tree",
+   "tags": [
+    "tree",
+    "palm",
+    "beach",
+    "tropical",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.tree_fat",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.tree_fat",
+    "res": 30
+   },
+   "height": 4,
+   "line": "voxel chunky round tree",
+   "tags": [
+    "tree",
+    "forest",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.tree_autumn",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.tree_autumn",
+    "res": 30
+   },
+   "height": 4.5,
+   "line": "voxel autumn tree",
+   "tags": [
+    "tree",
+    "autumn",
+    "fall",
+    "orange",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.tree_dark",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.tree_dark",
+    "res": 24
+   },
+   "height": 4.5,
+   "line": "voxel dark green tree",
+   "tags": [
+    "tree",
+    "dark",
+    "forest",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.stump",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.stump",
+    "res": 10
+   },
+   "height": 0.6,
+   "line": "voxel tree stump",
+   "tags": [
+    "stump",
+    "wood",
+    "forest",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.bush",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.bush",
+    "res": 12
+   },
+   "height": 0.8,
+   "line": "voxel leafy bush",
+   "tags": [
+    "bush",
+    "shrub",
+    "plant",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.bush_large",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.bush_large",
+    "res": 18
+   },
+   "height": 1.2,
+   "line": "voxel big bush",
+   "tags": [
+    "bush",
+    "shrub",
+    "plant",
+    "cover",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.rock_large",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.rock_large",
+    "res": 12
+   },
+   "height": 1.6,
+   "line": "voxel big boulder",
+   "tags": [
+    "rock",
+    "boulder",
+    "stone",
+    "cover",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.rock_tall",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.rock_tall",
+    "res": 18
+   },
+   "height": 2.4,
+   "line": "voxel tall rock spire",
+   "tags": [
+    "rock",
+    "spire",
+    "stone",
+    "pillar",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.rock_small",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.rock_small",
+    "res": 12
+   },
+   "height": 0.4,
+   "line": "voxel small rock",
+   "tags": [
+    "rock",
+    "pebble",
+    "stone",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.mushroom_red",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.mushroom_red",
+    "res": 12
+   },
+   "height": 0.6,
+   "line": "voxel red toadstool",
+   "tags": [
+    "mushroom",
+    "toadstool",
+    "fungus",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.log",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.log",
+    "res": 12
+   },
+   "height": 0.6,
+   "line": "voxel fallen log",
+   "tags": [
+    "log",
+    "wood",
+    "timber",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.campfire",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.campfire",
+    "res": 12
+   },
+   "height": 0.6,
+   "line": "voxel campfire ring",
+   "tags": [
+    "campfire",
+    "fire",
+    "camp",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.tent",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.tent",
+    "res": 18
+   },
+   "height": 2,
+   "line": "voxel camping tent",
+   "tags": [
+    "tent",
+    "camp",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.fence",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.fence",
+    "res": 12
+   },
+   "height": 1,
+   "line": "voxel wooden fence section",
+   "tags": [
+    "fence",
+    "wall",
+    "barrier",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.flower_red",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.flower_red",
+    "res": 12
+   },
+   "height": 0.4,
+   "line": "voxel red flowers",
+   "tags": [
+    "flower",
+    "plant",
+    "red",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.cactus",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.cactus",
+    "res": 18
+   },
+   "height": 2,
+   "line": "voxel tall cactus",
+   "tags": [
+    "cactus",
+    "desert",
+    "plant",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.column",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.column",
+    "res": 30
+   },
+   "height": 3,
+   "line": "voxel stone column",
+   "tags": [
+    "column",
+    "pillar",
+    "ruin",
+    "stone",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.column_broken",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.column_broken",
+    "res": 18
+   },
+   "height": 2.4,
+   "line": "voxel broken stone column",
+   "tags": [
+    "column",
+    "pillar",
+    "ruin",
+    "broken",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.obelisk",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.obelisk",
+    "res": 30
+   },
+   "height": 4,
+   "line": "voxel stone obelisk",
+   "tags": [
+    "obelisk",
+    "monument",
+    "pillar",
+    "stone",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.apple",
+   "kind": "food",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.apple",
+    "res": 12
+   },
+   "height": 0.5,
+   "line": "voxel apple",
+   "tags": [
+    "food",
+    "apple",
+    "snack",
+    "pickup",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.banana",
+   "kind": "food",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.banana",
+    "res": 12
+   },
+   "height": 0.5,
+   "line": "voxel banana",
+   "tags": [
+    "food",
+    "banana",
+    "snack",
+    "pickup",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.burger",
+   "kind": "food",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.burger",
+    "res": 12
+   },
+   "height": 0.5,
+   "line": "voxel burger",
+   "tags": [
+    "food",
+    "burger",
+    "snack",
+    "pickup",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.pizza",
+   "kind": "food",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.pizza",
+    "res": 12
+   },
+   "height": 0.5,
+   "line": "voxel pizza",
+   "tags": [
+    "food",
+    "pizza",
+    "snack",
+    "pickup",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.donut",
+   "kind": "food",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.donut",
+    "res": 12
+   },
+   "height": 0.5,
+   "line": "voxel donut",
+   "tags": [
+    "food",
+    "donut",
+    "snack",
+    "pickup",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.cake",
+   "kind": "food",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.cake",
+    "res": 12
+   },
+   "height": 0.5,
+   "line": "voxel cake",
+   "tags": [
+    "food",
+    "cake",
+    "snack",
+    "pickup",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.carrot",
+   "kind": "food",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.carrot",
+    "res": 12
+   },
+   "height": 0.5,
+   "line": "voxel carrot",
+   "tags": [
+    "food",
+    "carrot",
+    "snack",
+    "pickup",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.cheese",
+   "kind": "food",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.cheese",
+    "res": 12
+   },
+   "height": 0.5,
+   "line": "voxel cheese",
+   "tags": [
+    "food",
+    "cheese",
+    "snack",
+    "pickup",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.fish",
+   "kind": "food",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.fish",
+    "res": 12
+   },
+   "height": 0.5,
+   "line": "voxel fish",
+   "tags": [
+    "food",
+    "fish",
+    "snack",
+    "pickup",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.watermelon",
+   "kind": "food",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.watermelon",
+    "res": 12
+   },
+   "height": 0.5,
+   "line": "voxel watermelon",
+   "tags": [
+    "food",
+    "watermelon",
+    "snack",
+    "pickup",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.ice_cream",
+   "kind": "food",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.ice_cream",
+    "res": 12
+   },
+   "height": 0.5,
+   "line": "voxel ice cream",
+   "tags": [
+    "food",
+    "ice cream",
+    "snack",
+    "pickup",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.hot_dog",
+   "kind": "food",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.hot_dog",
+    "res": 12
+   },
+   "height": 0.5,
+   "line": "voxel hot dog",
+   "tags": [
+    "food",
+    "hot dog",
+    "snack",
+    "pickup",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.taco",
+   "kind": "food",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.taco",
+    "res": 12
+   },
+   "height": 0.5,
+   "line": "voxel taco",
+   "tags": [
+    "food",
+    "taco",
+    "snack",
+    "pickup",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.sushi",
+   "kind": "food",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.sushi",
+    "res": 12
+   },
+   "height": 0.5,
+   "line": "voxel sushi",
+   "tags": [
+    "food",
+    "sushi",
+    "snack",
+    "pickup",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.cupcake",
+   "kind": "food",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.cupcake",
+    "res": 12
+   },
+   "height": 0.5,
+   "line": "voxel cupcake",
+   "tags": [
+    "food",
+    "cupcake",
+    "snack",
+    "pickup",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.pumpkin",
+   "kind": "food",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.pumpkin",
+    "res": 12
+   },
+   "height": 0.5,
+   "line": "voxel pumpkin",
+   "tags": [
+    "food",
+    "pumpkin",
+    "snack",
+    "pickup",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.cookie",
+   "kind": "food",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.cookie",
+    "res": 12
+   },
+   "height": 0.5,
+   "line": "voxel cookie",
+   "tags": [
+    "food",
+    "cookie",
+    "snack",
+    "pickup",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.fries",
+   "kind": "food",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.fries",
+    "res": 12
+   },
+   "height": 0.5,
+   "line": "voxel fries",
+   "tags": [
+    "food",
+    "fries",
+    "snack",
+    "pickup",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.building_a",
+   "kind": "building",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.building_a",
+    "res": 40
+   },
+   "height": 8,
+   "line": "voxel city shop building (style a)",
+   "tags": [
+    "building",
+    "shop",
+    "city",
+    "house",
+    "store",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.building_b",
+   "kind": "building",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.building_b",
+    "res": 40
+   },
+   "height": 8,
+   "line": "voxel city shop building (style b)",
+   "tags": [
+    "building",
+    "shop",
+    "city",
+    "house",
+    "store",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.building_c",
+   "kind": "building",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.building_c",
+    "res": 40
+   },
+   "height": 8,
+   "line": "voxel city shop building (style c)",
+   "tags": [
+    "building",
+    "shop",
+    "city",
+    "house",
+    "store",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.building_d",
+   "kind": "building",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.building_d",
+    "res": 40
+   },
+   "height": 8,
+   "line": "voxel city shop building (style d)",
+   "tags": [
+    "building",
+    "shop",
+    "city",
+    "house",
+    "store",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.building_e",
+   "kind": "building",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.building_e",
+    "res": 40
+   },
+   "height": 8,
+   "line": "voxel city shop building (style e)",
+   "tags": [
+    "building",
+    "shop",
+    "city",
+    "house",
+    "store",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.building_f",
+   "kind": "building",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.building_f",
+    "res": 40
+   },
+   "height": 8,
+   "line": "voxel city shop building (style f)",
+   "tags": [
+    "building",
+    "shop",
+    "city",
+    "house",
+    "store",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.building_g",
+   "kind": "building",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.building_g",
+    "res": 40
+   },
+   "height": 8,
+   "line": "voxel city shop building (style g)",
+   "tags": [
+    "building",
+    "shop",
+    "city",
+    "house",
+    "store",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.building_h",
+   "kind": "building",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.building_h",
+    "res": 40
+   },
+   "height": 8,
+   "line": "voxel city shop building (style h)",
+   "tags": [
+    "building",
+    "shop",
+    "city",
+    "house",
+    "store",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.skyscraper_a",
+   "kind": "building",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.skyscraper_a",
+    "res": 40
+   },
+   "height": 20,
+   "line": "voxel skyscraper (style a)",
+   "tags": [
+    "skyscraper",
+    "tower",
+    "building",
+    "city",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.skyscraper_b",
+   "kind": "building",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.skyscraper_b",
+    "res": 40
+   },
+   "height": 20,
+   "line": "voxel skyscraper (style b)",
+   "tags": [
+    "skyscraper",
+    "tower",
+    "building",
+    "city",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.skyscraper_c",
+   "kind": "building",
+   "plan": "static",
+   "source": {
+    "voxelize": "style.lowpoly.skyscraper_c",
+    "res": 40
+   },
+   "height": 20,
+   "line": "voxel skyscraper (style c)",
+   "tags": [
+    "skyscraper",
+    "tower",
+    "building",
+    "city",
+    "voxel"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.voxel.gem_small",
+   "kind": "pickup",
+   "plan": "static",
+   "source": {
+    "procedural": "voxel_gem_small"
+   },
+   "height": 0.5,
+   "line": "small amber voxel gem (xp)",
+   "tags": [
+    "gem",
+    "xp",
+    "ember",
+    "crystal",
+    "small",
+    "voxel"
+   ],
+   "aliases": [
+    "style.voxel.ember_small"
+   ]
+  },
+  {
+   "id": "style.voxel.gem_mid",
+   "kind": "pickup",
+   "plan": "static",
+   "source": {
+    "procedural": "voxel_gem_mid"
+   },
+   "height": 0.5,
+   "line": "blue voxel gem (more xp)",
+   "tags": [
+    "gem",
+    "xp",
+    "crystal",
+    "blue",
+    "voxel"
+   ],
+   "aliases": [
+    "style.voxel.ember_mid"
+   ]
+  },
+  {
+   "id": "style.voxel.gem_large",
+   "kind": "pickup",
+   "plan": "static",
+   "source": {
+    "procedural": "voxel_gem_large"
+   },
+   "height": 0.5,
+   "line": "big magenta voxel gem (lots of xp)",
+   "tags": [
+    "gem",
+    "xp",
+    "crystal",
+    "large",
+    "pink",
+    "voxel"
+   ],
+   "aliases": [
+    "style.voxel.ember_large"
+   ]
+  },
+  {
+   "id": "style.voxel.cell_heal",
+   "kind": "pickup",
+   "plan": "static",
+   "source": {
+    "procedural": "voxel_cell_heal"
+   },
+   "height": 0.5,
+   "line": "green voxel health cell",
+   "tags": [
+    "heal",
+    "health",
+    "cell",
+    "potion",
+    "green",
+    "voxel"
+   ],
+   "aliases": [
+    "style.voxel.volt_cell"
+   ]
+  },
+  {
+   "id": "style.voxel.cell_spark",
+   "kind": "pickup",
+   "plan": "static",
+   "source": {
+    "procedural": "voxel_cell_spark"
+   },
+   "height": 0.5,
+   "line": "blue voxel energy cell",
+   "tags": [
+    "energy",
+    "cell",
+    "spark",
+    "power",
+    "blue",
+    "voxel"
+   ],
+   "aliases": [
+    "style.voxel.spark_cell"
+   ]
+  }
+ ]
+}

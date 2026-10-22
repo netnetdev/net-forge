@@ -1,0 +1,125 @@
+# TORQUEBAY: the racer template (NetNet game runtime, play style "racer")
+
+> Kart races for up to 8 players on harbour circuits, with seat bots filling
+> the grid. A round is one race of a few laps; the next round runs another
+> circuit. You change the game by editing src/game.ts only. The template
+> already has the kart physics (throttle, brakes, steering, grip, drift
+> mini-turbos in three tiers, boost pads, coins that raise top speed, grass,
+> barriers, kart bumps), laps through ordered checkpoints, the race clock and
+> places, bots that drive the racing line, netcode with client prediction at
+> 60 Hz, a streamed track (only the road near you is built), rendering in
+> every art style, keyboard, gamepad and touch controls, earn and the store.
+> Do not write renderers, netcode, physics or bot AI.
+
+## Files
+
+- src/game.ts: THE GAME. Declarations against @netnetcapital/engine:
+  game(), upgrade(), system(), earn.rule(), earn.stake(), store.sku().
+- src/names.json: the title and every label players read.
+- Everything else is template machinery.
+
+## Rules the build enforces
+
+- game({ template: "racer", style: "lowpoly", tracks: [...] }) with 1 to 8 tracks.
+- No weapon(), director(), keeper() or enemy prefabs.
+- A track has 4 to 64 control points at least 6 m apart and is at least 200 m round.
+- Asset ids look like "style.lowpoly.kart_a", never URLs or paths, and must be in the asset library.
+- game({ style }) is the art style the creator picked: lowpoly, toon, ps1, pixel, voxel or handdrawn. Keep it.
+- Ids are lower_snake_case. Every game declares at least one earn.rule and one earn.stake (the buy-in run).
+- Upgrades raise one of: speed (top speed), haste (drift charge rate), might
+  (boost length), armor (grass and wall losses), magnet (coin reach, m).
+- 4 players plus seat bots must all finish a race, and an earn rule must
+  fire, in a 4-minute playtest.
+
+## Units
+
+Seconds, metres, metres per second. The ground plane: x and z in metres.
+Tick rate 60 Hz. Default top speed 26 m/s; a kart is about 1.8 m long.
+
+## The loop
+
+Everyone lines up on a staggered grid behind the line. A 3 s countdown, then
+the race: W/Up accelerate, S/Down brake, A/D steer, hold Space or Shift
+while steering through a bend to drift (sparks turn blue, orange, then
+purple as the mini-turbo charges; release for a 0.5, 0.9 or 1.4 s boost).
+Boost pads boost; each coin held adds 1% top speed, up to 10. Grass slows,
+barriers bounce. Laps count through four quarter checkpoints in order. The
+round closes 25 s after the first person finishes (or at round.seconds);
+the results show, then the next circuit.
+
+## Building a track
+
+tracks: [{
+  name: "Harbour Loop",
+  laps: 3,
+  width: 14,                                 // asphalt, m (8 to 30)
+  points: [[0, 0], [90, 0], [150, 15], ...], // the closed centreline in driving order; a smooth curve runs through them
+  boosts: [[0.12, 0], [0.47, -0.4]],         // [lap fraction 0..1, lateral -1 (left) .. 1 (right)]
+  coins: [[0.04, 0.5], [0.046, 0.5]],        // same coordinates; each kart collects its own (at most 62)
+  verge: 4,                                  // optional grass before the barrier, m
+}]
+Rules of thumb: 500 to 900 m a lap at 14 m wide runs 25 to 40 s a lap; keep
+neighbouring points 20 m or more apart for smooth bends; a hairpin needs
+about 25 m of radius; put boosts on the exits of bends and coin rows on the
+racing line or slightly off it (a choice). Two to four laps a race.
+
+## Common changes
+
+### A new circuit
+Add a track to tracks. Circuits come one a round (the room draws one per round).
+
+### Tune the handling
+kart: { topSpeed: 30, turn: 2.6, grip: 10, driftGrip: 1.5 } (topSpeed 10-45,
+accel 8-80, turn 1-4, grip 3-20, driftGrip 0.5-6, grass 0.2-1, boostSpeed 1-1.8).
+
+### Round length and bots
+round: { seconds: 240 } (60 to 600). players.bots: 6 fills the grid up to 6
+with seat bots (0 turns them off). Bots drive the racing line, shaded by
+skill, never earn, and a win over a field of bots pays nothing extra.
+
+### Add an earn rule
+earn.rule("lap_leader", { when: "lap.completed", n: 2, pay: 3, oncePer: "run" });
+Events: player.finished (you finished the race), race.won (first, paid only
+with another person in the round), race.podium (top three, same),
+lap.completed, coin.collected, drift.boosted (a mini-turbo fired),
+drift.ultra (a full-charge one), kart.bumped (a hard wall hit),
+round.finished, run.started (unpaid), and anything you emit(). Each rule
+pays once per race per player, in coins; the room server is the referee.
+
+### Track something with a system
+system("clean_line", ({ on, emit }) => {
+  const scrapes = new Map<number, number>();
+  on("kart.bumped", (ids) => { for (const id of ids) scrapes.set(id, (scrapes.get(id) ?? 0) + 1); });
+  on("player.finished", (ids) => { const clean = ids.filter((id) => !scrapes.get(id)); if (clean.length) emit("race.clean", clean); });
+  on("run.started", (ids) => { for (const id of ids) scrapes.delete(id); });
+});
+Systems also have every, after, onTick, players(), random(), announce(text),
+upcoming(label, seconds) and end(). spawn and enemies are not part of this template.
+
+### The buy-in run (required)
+earn.stake({ min: 10, max: 100, multiple: 2 }); one top-level line. "stake" is reserved.
+
+### Losable gear (optional)
+store.sku("bumper_kit", { coins: 120, grants: { gear: "bumpers", loseBelow: 0.25 } });
+Owned in the profile, coins only; one level of its upgrade in every staked
+race; lost when that race makes less than loseBelow of its most earn.
+
+### Coins: earn and the store
+store.sku("turbo", { coins: 40 });                               // one level of the "turbo" upgrade for the race
+store.sku("skin_flame", { coins: 300, grants: { cosmetic: 1 } }); // a paint job, owned for good
+Keep the five SKUs the client is wired to (turbo, tuned_engine, soft_tyres,
+skin_flame, skin_chrome) at their prices, with the paints' grants (flame 1,
+chrome 2). PvP pots are not part of this template.
+
+### Change the karts (the asset library)
+players: { prefab: "style.lowpoly.race_car", ... } (any vehicle: kart_a..e,
+race_car, race_car_future, buggy-like speeder_a..c). Seat bots drive
+kart_b..e; the pixel style draws its own kart sprites.
+
+## Test
+
+engine.test.run({ ticks: 60 * 240, bots: 4, assert: [...] }) runs races on
+the server sim with 4 playtest drivers plus seat bots and reports rounds
+(wave), runs.won (races every playtest driver finished), scorers (drivers
+that finished at least once), deaths (hard wall hits), earned by rule,
+softlock and ms per tick.

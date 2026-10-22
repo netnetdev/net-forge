@@ -1,0 +1,4 @@
+:root { color-scheme: dark; }
+html, body { margin: 0; height: 100%; background: #07090d; color: #d8e1ea; font: 14px/1.4 ui-monospace, Menlo, monospace; }
+body { display: grid; place-items: center; }
+canvas { background: #0b0f16; border: 1px solid #1d2633; max-width: 100vw; max-height: 100vh; touch-action: none; }

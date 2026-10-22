@@ -1,0 +1,14 @@
+{
+  "name": "comet-sweep",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "typescript": "5.8.3",
+    "vite": "6.4.3"
+  }
+}

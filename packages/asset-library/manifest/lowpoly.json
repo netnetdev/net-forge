@@ -1,0 +1,4486 @@
+{
+ "style": "lowpoly",
+ "dimension": "3d",
+ "palette": [
+  "#1d2b53",
+  "#7e2553",
+  "#008751",
+  "#ab5236",
+  "#5f574f",
+  "#c2c3c7",
+  "#fff1e8",
+  "#ff004d",
+  "#ffa300",
+  "#ffec27",
+  "#00e436",
+  "#29adff",
+  "#83769c",
+  "#ff77a8",
+  "#ffccaa",
+  "#000000"
+ ],
+ "assets": [
+  {
+   "id": "style.lowpoly.mini_male_a",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "pack": "kenney_mini_characters",
+    "path": "Models/GLB format/character-male-a.glb"
+   },
+   "height": 1.5,
+   "line": "small cartoon townsperson (male, outfit a)",
+   "tags": [
+    "person",
+    "human",
+    "hero",
+    "character",
+    "townsperson",
+    "man"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.mini_male_b",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "pack": "kenney_mini_characters",
+    "path": "Models/GLB format/character-male-b.glb"
+   },
+   "height": 1.5,
+   "line": "small cartoon townsperson (male, outfit b)",
+   "tags": [
+    "person",
+    "human",
+    "hero",
+    "character",
+    "townsperson",
+    "man"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.mini_male_c",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "pack": "kenney_mini_characters",
+    "path": "Models/GLB format/character-male-c.glb"
+   },
+   "height": 1.5,
+   "line": "small cartoon townsperson (male, outfit c)",
+   "tags": [
+    "person",
+    "human",
+    "hero",
+    "character",
+    "townsperson",
+    "man"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.mini_male_d",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "pack": "kenney_mini_characters",
+    "path": "Models/GLB format/character-male-d.glb"
+   },
+   "height": 1.5,
+   "line": "small cartoon townsperson (male, outfit d)",
+   "tags": [
+    "person",
+    "human",
+    "hero",
+    "character",
+    "townsperson",
+    "man"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.mini_male_e",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "pack": "kenney_mini_characters",
+    "path": "Models/GLB format/character-male-e.glb"
+   },
+   "height": 1.5,
+   "line": "small cartoon townsperson (male, outfit e)",
+   "tags": [
+    "person",
+    "human",
+    "hero",
+    "character",
+    "townsperson",
+    "man"
+   ],
+   "aliases": [
+    "style.lowpoly.bruiser"
+   ]
+  },
+  {
+   "id": "style.lowpoly.mini_male_f",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "pack": "kenney_mini_characters",
+    "path": "Models/GLB format/character-male-f.glb"
+   },
+   "height": 1.5,
+   "line": "small cartoon townsperson (male, outfit f)",
+   "tags": [
+    "person",
+    "human",
+    "hero",
+    "character",
+    "townsperson",
+    "man"
+   ],
+   "aliases": [
+    "style.lowpoly.wirejack"
+   ]
+  },
+  {
+   "id": "style.lowpoly.mini_female_a",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "pack": "kenney_mini_characters",
+    "path": "Models/GLB format/character-female-a.glb"
+   },
+   "height": 1.5,
+   "line": "small cartoon townsperson (female, outfit a)",
+   "tags": [
+    "person",
+    "human",
+    "hero",
+    "character",
+    "townsperson",
+    "woman"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.mini_female_b",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "pack": "kenney_mini_characters",
+    "path": "Models/GLB format/character-female-b.glb"
+   },
+   "height": 1.5,
+   "line": "small cartoon townsperson (female, outfit b)",
+   "tags": [
+    "person",
+    "human",
+    "hero",
+    "character",
+    "townsperson",
+    "woman"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.mini_female_c",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "pack": "kenney_mini_characters",
+    "path": "Models/GLB format/character-female-c.glb"
+   },
+   "height": 1.5,
+   "line": "small cartoon townsperson (female, outfit c)",
+   "tags": [
+    "person",
+    "human",
+    "hero",
+    "character",
+    "townsperson",
+    "woman"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.mini_female_d",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "pack": "kenney_mini_characters",
+    "path": "Models/GLB format/character-female-d.glb"
+   },
+   "height": 1.5,
+   "line": "small cartoon townsperson (female, outfit d)",
+   "tags": [
+    "person",
+    "human",
+    "hero",
+    "character",
+    "townsperson",
+    "woman"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.mini_female_e",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "pack": "kenney_mini_characters",
+    "path": "Models/GLB format/character-female-e.glb"
+   },
+   "height": 1.5,
+   "line": "small cartoon townsperson (female, outfit e)",
+   "tags": [
+    "person",
+    "human",
+    "hero",
+    "character",
+    "townsperson",
+    "woman"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.mini_female_f",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "pack": "kenney_mini_characters",
+    "path": "Models/GLB format/character-female-f.glb"
+   },
+   "height": 1.5,
+   "line": "small cartoon townsperson (female, outfit f)",
+   "tags": [
+    "person",
+    "human",
+    "hero",
+    "character",
+    "townsperson",
+    "woman"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blocky_a",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "pack": "kenney_blocky_characters",
+    "path": "Models/GLB format/character-a.glb"
+   },
+   "height": 1.8,
+   "line": "blocky square-headed person (variant a)",
+   "tags": [
+    "person",
+    "human",
+    "blocky",
+    "character"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blocky_b",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "pack": "kenney_blocky_characters",
+    "path": "Models/GLB format/character-b.glb"
+   },
+   "height": 1.8,
+   "line": "blocky square-headed person (variant b)",
+   "tags": [
+    "person",
+    "human",
+    "blocky",
+    "character"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blocky_c",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "pack": "kenney_blocky_characters",
+    "path": "Models/GLB format/character-c.glb"
+   },
+   "height": 1.8,
+   "line": "blocky square-headed person (variant c)",
+   "tags": [
+    "person",
+    "human",
+    "blocky",
+    "character"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blocky_d",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "pack": "kenney_blocky_characters",
+    "path": "Models/GLB format/character-d.glb"
+   },
+   "height": 1.8,
+   "line": "blocky square-headed person (variant d)",
+   "tags": [
+    "person",
+    "human",
+    "blocky",
+    "character"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blocky_e",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "pack": "kenney_blocky_characters",
+    "path": "Models/GLB format/character-e.glb"
+   },
+   "height": 1.8,
+   "line": "blocky square-headed person (variant e)",
+   "tags": [
+    "person",
+    "human",
+    "blocky",
+    "character"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blocky_f",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "pack": "kenney_blocky_characters",
+    "path": "Models/GLB format/character-f.glb"
+   },
+   "height": 1.8,
+   "line": "blocky square-headed person (variant f)",
+   "tags": [
+    "person",
+    "human",
+    "blocky",
+    "character"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blocky_g",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "pack": "kenney_blocky_characters",
+    "path": "Models/GLB format/character-g.glb"
+   },
+   "height": 1.8,
+   "line": "blocky square-headed person (variant g)",
+   "tags": [
+    "person",
+    "human",
+    "blocky",
+    "character"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blocky_h",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "pack": "kenney_blocky_characters",
+    "path": "Models/GLB format/character-h.glb"
+   },
+   "height": 1.8,
+   "line": "blocky square-headed person (variant h)",
+   "tags": [
+    "person",
+    "human",
+    "blocky",
+    "character"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blocky_i",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "pack": "kenney_blocky_characters",
+    "path": "Models/GLB format/character-i.glb"
+   },
+   "height": 1.8,
+   "line": "blocky square-headed person (variant i)",
+   "tags": [
+    "person",
+    "human",
+    "blocky",
+    "character"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blocky_j",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "pack": "kenney_blocky_characters",
+    "path": "Models/GLB format/character-j.glb"
+   },
+   "height": 1.8,
+   "line": "blocky square-headed person (variant j)",
+   "tags": [
+    "person",
+    "human",
+    "blocky",
+    "character"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blocky_k",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "pack": "kenney_blocky_characters",
+    "path": "Models/GLB format/character-k.glb"
+   },
+   "height": 1.8,
+   "line": "blocky square-headed person (variant k)",
+   "tags": [
+    "person",
+    "human",
+    "blocky",
+    "character"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blocky_l",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "pack": "kenney_blocky_characters",
+    "path": "Models/GLB format/character-l.glb"
+   },
+   "height": 1.8,
+   "line": "blocky square-headed person (variant l)",
+   "tags": [
+    "person",
+    "human",
+    "blocky",
+    "character"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blocky_m",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "pack": "kenney_blocky_characters",
+    "path": "Models/GLB format/character-m.glb"
+   },
+   "height": 1.8,
+   "line": "blocky square-headed person (variant m)",
+   "tags": [
+    "person",
+    "human",
+    "blocky",
+    "character"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blocky_n",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "pack": "kenney_blocky_characters",
+    "path": "Models/GLB format/character-n.glb"
+   },
+   "height": 1.8,
+   "line": "blocky square-headed person (variant n)",
+   "tags": [
+    "person",
+    "human",
+    "blocky",
+    "character"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blocky_o",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "pack": "kenney_blocky_characters",
+    "path": "Models/GLB format/character-o.glb"
+   },
+   "height": 1.8,
+   "line": "blocky square-headed person (variant o)",
+   "tags": [
+    "person",
+    "human",
+    "blocky",
+    "character"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blocky_p",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "pack": "kenney_blocky_characters",
+    "path": "Models/GLB format/character-p.glb"
+   },
+   "height": 1.8,
+   "line": "blocky square-headed person (variant p)",
+   "tags": [
+    "person",
+    "human",
+    "blocky",
+    "character"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blocky_q",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "pack": "kenney_blocky_characters",
+    "path": "Models/GLB format/character-q.glb"
+   },
+   "height": 1.8,
+   "line": "blocky square-headed person (variant q)",
+   "tags": [
+    "person",
+    "human",
+    "blocky",
+    "character"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blocky_r",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "kenney_humanoid",
+   "source": {
+    "pack": "kenney_blocky_characters",
+    "path": "Models/GLB format/character-r.glb"
+   },
+   "height": 1.8,
+   "line": "blocky square-headed person (variant r)",
+   "tags": [
+    "person",
+    "human",
+    "blocky",
+    "character"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.astronaut",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/f06659f2-e505-43df-a3db-84faec811a57.glb",
+    "page": "https://poly.pizza/m/0D54W8yfrA",
+    "sha256": "9127bc1c51a8b63d2f9c9c119e26824d0811cd113d9a79f6cda65f0787e8a91f"
+   },
+   "height": 1.7,
+   "line": "frog-faced space explorer in a suit, gun poses",
+   "tags": [
+    "astronaut",
+    "spaceman",
+    "explorer",
+    "pilot",
+    "soldier",
+    "hero"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.monarch",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/29a3436b-3b06-4dbf-a236-bcec18f3351a.glb",
+    "page": "https://poly.pizza/m/I1gTjmuK2m",
+    "sha256": "0f20861fbc1670b8cc87b2dbbe7dbe8d9fc6f0f794703b6bfee8431f3de8c5cf"
+   },
+   "height": 1.7,
+   "line": "dark armored ruler, gun poses",
+   "tags": [
+    "king",
+    "ruler",
+    "royal",
+    "noble",
+    "hero"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.rogue",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/1a8a9d55-9aa9-43c4-a031-d926e251d80a.glb",
+    "page": "https://poly.pizza/m/DgOCW9ZCRJ",
+    "sha256": "a24a3bc1160b9ee730f0d01d0a6d2c8c74e35fa9a5671843d9a4a61444a95119"
+   },
+   "height": 1.7,
+   "line": "hooded adventurer with dagger moves",
+   "tags": [
+    "rogue",
+    "thief",
+    "adventurer",
+    "hero",
+    "assassin"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.pirate",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/c814c745-1cf5-4d92-bd85-200c66eb7843.glb",
+    "page": "https://poly.pizza/m/sN18LyyHAU",
+    "sha256": "688b0db0487dadaa6dbbf9e5613793aa9c1280902255212bd51bc46ff17f695d"
+   },
+   "height": 1.7,
+   "line": "sea captain with a big hat",
+   "tags": [
+    "pirate",
+    "captain",
+    "sailor",
+    "buccaneer"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.zombie",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/c4002f69-6979-42e8-ad6e-2f4e14fc3a9d.glb",
+    "page": "https://poly.pizza/m/VlXjG0N8Eg",
+    "sha256": "3afd2837b117f264afd037a350759b96d6f837fc9b381cca35cf6796b4bab09d"
+   },
+   "height": 1.7,
+   "line": "shambling undead person, crawls and lunges",
+   "tags": [
+    "zombie",
+    "undead",
+    "walker",
+    "ghoul"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.skeleton_crew",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/a089d0ae-5a26-448b-b038-4884d64099e3.glb",
+    "page": "https://poly.pizza/m/yq5ATpujSt",
+    "sha256": "80be43fa7bd961faef44fa82a8067048a48ba329d65fed663a184ee73a18aacb"
+   },
+   "height": 1.7,
+   "line": "skeleton sailor",
+   "tags": [
+    "skeleton",
+    "undead",
+    "bones",
+    "pirate"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.mech",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/a242e73b-6a40-4bd9-bfa9-ed1d8e49ea21.glb",
+    "page": "https://poly.pizza/m/o3Ps8z8ByP",
+    "sha256": "d61427def92c18148eaa9cebbc0dbd26b8e55ea5d048293840165077180bd181"
+   },
+   "height": 1.9,
+   "line": "walking mech with a small pilot",
+   "tags": [
+    "robot",
+    "mech",
+    "android",
+    "machine",
+    "bot"
+   ],
+   "aliases": [
+    "style.lowpoly.aegis"
+   ]
+  },
+  {
+   "id": "style.lowpoly.skeleton",
+   "kind": "creature",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/b1ea7fcc-7d7f-4e93-aac5-507358399a7b.glb",
+    "page": "https://poly.pizza/m/wODZYCgX5Z",
+    "sha256": "ccdc14bb5ebe996fff407081af7f13466e874c14498a6281a775382c5e55cc59"
+   },
+   "height": 1.7,
+   "line": "skeleton warrior that rises from the ground",
+   "tags": [
+    "skeleton",
+    "undead",
+    "bones",
+    "warrior"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.skeleton_grunt",
+   "kind": "creature",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/852e5efb-89a7-4e7c-af17-e9d3b8f6654b.glb",
+    "page": "https://poly.pizza/m/DM4QScSmbS",
+    "sha256": "45a973c553fd84943da3561ccda663cd30a18d0b11ee8a3fc964498380616499"
+   },
+   "height": 1.6,
+   "line": "skeleton grunt enemy",
+   "tags": [
+    "skeleton",
+    "undead",
+    "grunt",
+    "enemy"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.goblin",
+   "kind": "creature",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/54e0fd61-6898-4b17-b039-8fa656d02954.glb",
+    "page": "https://poly.pizza/m/OdCOFSmEhl",
+    "sha256": "189c34c4ae369d0e722f5555fc214fd6a3757f4babc71b864c3a5d686d3cae14"
+   },
+   "height": 1.2,
+   "line": "small green goblin enemy",
+   "tags": [
+    "goblin",
+    "imp",
+    "gremlin",
+    "enemy",
+    "green"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.zombie_grunt",
+   "kind": "creature",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/af74108f-e770-4ed0-9d17-83576afece78.glb",
+    "page": "https://poly.pizza/m/JoBvxIUpZP",
+    "sha256": "1cc73c5deff5bfab2ded571f53993afb6dce01baa86172ea5ab027900632bf4c"
+   },
+   "height": 1.6,
+   "line": "zombie grunt enemy",
+   "tags": [
+    "zombie",
+    "undead",
+    "grunt",
+    "enemy"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.demon",
+   "kind": "creature",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/46b52ba4-5d2a-4fc8-85cc-3e980f199141.glb",
+    "page": "https://poly.pizza/m/LnfIziKv4o",
+    "sha256": "7da854e1d43428b89b1afca0feca3f323b869b1d8ed7df74d17354260b607262"
+   },
+   "height": 1.8,
+   "line": "horned red demon brute",
+   "tags": [
+    "demon",
+    "devil",
+    "fiend",
+    "horned",
+    "red"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.demon_blue",
+   "kind": "creature",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/6fbb8914-bd11-45e1-a906-51ace2ca5d2d.glb",
+    "page": "https://poly.pizza/m/S7jYW6Amye",
+    "sha256": "6a8e743deba6f43f0f9b1e702016b04ddba1d3bf73b7101d2c86d64ae526f87c"
+   },
+   "height": 2.2,
+   "line": "blue club-wielding brute",
+   "tags": [
+    "demon",
+    "fiend",
+    "brute",
+    "blue",
+    "big"
+   ],
+   "aliases": [
+    "style.lowpoly.ash_matron"
+   ]
+  },
+  {
+   "id": "style.lowpoly.orc_brute",
+   "kind": "creature",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/52a479b3-a635-4a23-92cb-6697eaa5eed5.glb",
+    "page": "https://poly.pizza/m/5vO2YJsPEf",
+    "sha256": "fb5d9da18e16fd3bd6f066692576845d411acf19536d46c7598f5d701b6db19f"
+   },
+   "height": 2,
+   "line": "green orc brute with a spiked club",
+   "tags": [
+    "orc",
+    "brute",
+    "ogre",
+    "warrior",
+    "big"
+   ],
+   "aliases": [
+    "style.lowpoly.brute"
+   ]
+  },
+  {
+   "id": "style.lowpoly.yeti",
+   "kind": "creature",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/40a831b3-686a-4af8-b189-a13b38a3c26a.glb",
+    "page": "https://poly.pizza/m/ceRHrn8HHE",
+    "sha256": "789fcdd3d32a1bf6ceaa0e30f9ac5d8d2c52d15fa0181d4d1d980a1b2a2ac869"
+   },
+   "height": 2,
+   "line": "furry snow beast",
+   "tags": [
+    "yeti",
+    "snow",
+    "beast",
+    "furry",
+    "ape"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.mushroom_king",
+   "kind": "creature",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/798301fb-b950-460c-9c67-526621ad8500.glb",
+    "page": "https://poly.pizza/m/grnFTziU8u",
+    "sha256": "45bbb9d659697d0127be159af0a58fae3fe8eef430adacaf994efcf0769b2e09"
+   },
+   "height": 2.2,
+   "line": "giant mushroom-capped boss",
+   "tags": [
+    "mushroom",
+    "fungus",
+    "boss",
+    "king",
+    "giant"
+   ],
+   "aliases": [
+    "style.lowpoly.bell_warden"
+   ]
+  },
+  {
+   "id": "style.lowpoly.alien_big",
+   "kind": "creature",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/b048d82a-7fc2-4631-b859-4bde0ed19b59.glb",
+    "page": "https://poly.pizza/m/RRliSQBP7r",
+    "sha256": "746d9caf75897297dfd76678c55dc3dfe84e5b9e6ce816276db300cea11c27bb"
+   },
+   "height": 2,
+   "line": "big-headed alien brute",
+   "tags": [
+    "alien",
+    "martian",
+    "invader",
+    "big"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.dino",
+   "kind": "creature",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/1c1ae302-b948-4de4-961a-44f762b722cf.glb",
+    "page": "https://poly.pizza/m/wuerCFCWNR",
+    "sha256": "19b9a3841ebfd7595da9cd595b74e231da29730fe8030a2d17a021bc26b563ef"
+   },
+   "height": 1.8,
+   "line": "horned red cartoon dinosaur",
+   "tags": [
+    "dinosaur",
+    "dino",
+    "lizard",
+    "reptile"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.ninja_brute",
+   "kind": "creature",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/2ed11876-720e-457a-8a69-4a14ba7234dc.glb",
+    "page": "https://poly.pizza/m/xGYmeDpfTu",
+    "sha256": "f9d38ed5156252a675b40a16c8a01795c16b78b464edbde1ab9fc46951ae420e"
+   },
+   "height": 1.9,
+   "line": "masked martial-arts brute",
+   "tags": [
+    "ninja",
+    "fighter",
+    "martial",
+    "masked"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.frog",
+   "kind": "creature",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/08416495-b056-4ed7-b23b-5a10e82277a0.glb",
+    "page": "https://poly.pizza/m/9Z2V8fpazF",
+    "sha256": "92dc96c90e7228676f8c43dc7711ba5ed5505029ebb2f6d4ad198d9e35bdbfe0"
+   },
+   "height": 0.8,
+   "line": "hopping frog",
+   "tags": [
+    "frog",
+    "toad",
+    "amphibian",
+    "hopper"
+   ],
+   "aliases": [
+    "style.lowpoly.spitter"
+   ]
+  },
+  {
+   "id": "style.lowpoly.slime_green",
+   "kind": "creature",
+   "plan": "blob",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/64ab590e-1f77-4678-b357-78c430fd73bf.glb",
+    "page": "https://poly.pizza/m/y4kJh8EeYS",
+    "sha256": "31c46edd6306e4ab21bec4608b41003baa74f430f27d357b90c9b6401d88a584"
+   },
+   "height": 0.9,
+   "line": "round green slime with a big grin",
+   "tags": [
+    "slime",
+    "blob",
+    "goo",
+    "jelly",
+    "green"
+   ],
+   "aliases": [
+    "style.lowpoly.brood"
+   ]
+  },
+  {
+   "id": "style.lowpoly.slime_pink",
+   "kind": "creature",
+   "plan": "blob",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/3ddbff73-430c-4ca0-bb25-11211683fbb9.glb",
+    "page": "https://poly.pizza/m/AyP8sQmDLh",
+    "sha256": "34bb111a7931bb957f992e127d71fac321aaeea1bdcc7da56fa5aba55c83d783"
+   },
+   "height": 0.9,
+   "line": "pink jelly slime",
+   "tags": [
+    "slime",
+    "blob",
+    "goo",
+    "jelly",
+    "pink"
+   ],
+   "aliases": [
+    "style.lowpoly.bloat"
+   ]
+  },
+  {
+   "id": "style.lowpoly.slime_spiky",
+   "kind": "creature",
+   "plan": "blob",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/cd25a048-719e-4ec4-bbf5-a266776fe129.glb",
+    "page": "https://poly.pizza/m/IoWG5F9WUc",
+    "sha256": "ad5e8b1cdf8c0d328b4b44537d3da8fa98119a9a99fb6163e2f325dbb8bbecc1"
+   },
+   "height": 1,
+   "line": "green slime with spikes",
+   "tags": [
+    "slime",
+    "blob",
+    "spiky",
+    "goo",
+    "green"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.slime_drop",
+   "kind": "creature",
+   "plan": "blob",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/195565b4-842a-44e9-a59a-5ebb1d133255.glb",
+    "page": "https://poly.pizza/m/LyjSUKHKnh",
+    "sha256": "21d9819032c8cf6e5cacd20ffb83c4bc781f65843f707b2a0dcc71ba6e75d75a"
+   },
+   "height": 0.8,
+   "line": "teardrop slime",
+   "tags": [
+    "slime",
+    "blob",
+    "drop",
+    "goo",
+    "jelly"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.slime_horned",
+   "kind": "creature",
+   "plan": "blob",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/93e6c3e3-75f8-441f-86d0-b223f7829005.glb",
+    "page": "https://poly.pizza/m/eSLKTsbl7F",
+    "sha256": "1432712fb6a0734adbed0a13fea9d1f793908e6757dd0e4fd97f20aeb9021d6a"
+   },
+   "height": 0.9,
+   "line": "horned slime enemy",
+   "tags": [
+    "slime",
+    "blob",
+    "horned",
+    "enemy"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.mushroom_imp",
+   "kind": "creature",
+   "plan": "blob",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/55c64684-49a4-4fcc-b393-113126add89b.glb",
+    "page": "https://poly.pizza/m/LWKmS30Xxl",
+    "sha256": "04614a9d0db2a00d17cd85f4ef9c54e19cd3692530c0724b46809aa928e161e9"
+   },
+   "height": 0.9,
+   "line": "walking mushroom critter",
+   "tags": [
+    "mushroom",
+    "fungus",
+    "critter",
+    "shroom"
+   ],
+   "aliases": [
+    "style.lowpoly.husk"
+   ]
+  },
+  {
+   "id": "style.lowpoly.blob_wizard",
+   "kind": "creature",
+   "plan": "blob",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/d206c071-7934-40eb-9091-35ebdf93c317.glb",
+    "page": "https://poly.pizza/m/o87Upt5uHX",
+    "sha256": "fb577146c7624e001222f0efaed6fb553b2fadff181f1a8d2585c3940a5d1a25"
+   },
+   "height": 1,
+   "line": "round little spellcaster",
+   "tags": [
+    "wizard",
+    "mage",
+    "caster",
+    "blob"
+   ],
+   "aliases": [
+    "style.lowpoly.mender"
+   ]
+  },
+  {
+   "id": "style.lowpoly.blob_alien",
+   "kind": "creature",
+   "plan": "blob",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/0bb74be9-e9d1-4321-aedb-a9eccecb04a1.glb",
+    "page": "https://poly.pizza/m/sUTLXji0aL",
+    "sha256": "9eb262825e32ce95207243890a980ff4722e6fd6c443ef62aac520e3bc996310"
+   },
+   "height": 0.9,
+   "line": "round little alien",
+   "tags": [
+    "alien",
+    "martian",
+    "blob",
+    "critter"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blob_yeti",
+   "kind": "creature",
+   "plan": "blob",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/085b078d-b72a-4d8e-a030-000d36c58447.glb",
+    "page": "https://poly.pizza/m/S1E7idPFhe",
+    "sha256": "20aaa4fc5fc3b9fe30b6109f88061f2d6f49e03b26a51ebee08f50bd1c26caaf"
+   },
+   "height": 1,
+   "line": "round furry snow critter",
+   "tags": [
+    "yeti",
+    "snow",
+    "furry",
+    "blob"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blob_orc",
+   "kind": "creature",
+   "plan": "blob",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/3076c5f7-9bdf-4c27-8083-f280ee6cd64b.glb",
+    "page": "https://poly.pizza/m/Q3z8ZX4kUy",
+    "sha256": "7cd4898ef9f64c65bc6f84b718e723550a42709f40e0b38487f976bfc47e893b"
+   },
+   "height": 1,
+   "line": "round tusked critter",
+   "tags": [
+    "orc",
+    "tusked",
+    "blob",
+    "critter"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blob_ninja",
+   "kind": "creature",
+   "plan": "blob",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/42162a27-0aaa-40be-b50e-919776021a11.glb",
+    "page": "https://poly.pizza/m/mCNoqcqpvC",
+    "sha256": "327c9ead9999cd25dbcda757c6c16be0cb1baee9bad224b99c917b4a9a00d15a"
+   },
+   "height": 0.9,
+   "line": "round masked critter",
+   "tags": [
+    "ninja",
+    "masked",
+    "blob",
+    "critter"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blob_bird",
+   "kind": "creature",
+   "plan": "blob",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/05dac745-bdd0-4169-9e64-f497ca21f69a.glb",
+    "page": "https://poly.pizza/m/gZ2ExU9OAB",
+    "sha256": "63719ca3ebae056716b7e5380d4294b3a3dcc39f6a4f54dc3e5d1af962c3ca1f"
+   },
+   "height": 0.9,
+   "line": "round chick-like bird",
+   "tags": [
+    "bird",
+    "chick",
+    "blob",
+    "critter"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.skull_hopper",
+   "kind": "creature",
+   "plan": "blob",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/9d87fc71-0800-4ee6-9cbe-81f497f477d3.glb",
+    "page": "https://poly.pizza/m/EHHwZ17lWD",
+    "sha256": "3d8e50d4c94b0f3b9c55414d68c8e71776272cc685035cc430b3284121fe7050"
+   },
+   "height": 0.8,
+   "line": "hopping skull enemy",
+   "tags": [
+    "skull",
+    "undead",
+    "hopper",
+    "enemy"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.crab",
+   "kind": "creature",
+   "plan": "blob",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/b9bbf6bd-2b21-4013-bc38-0f5e524ac12c.glb",
+    "page": "https://poly.pizza/m/Gs3yfsV5lB",
+    "sha256": "b5487be2c83059cf5b834d4d90cccc69346af36427a8d9ee4509f96af0c148f6"
+   },
+   "height": 0.8,
+   "line": "snapping crab enemy",
+   "tags": [
+    "crab",
+    "crustacean",
+    "beach",
+    "enemy"
+   ],
+   "aliases": [
+    "style.lowpoly.scrap_mite"
+   ]
+  },
+  {
+   "id": "style.lowpoly.ghost",
+   "kind": "creature",
+   "plan": "flyer",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/810f60a2-6e45-4c4e-a0d5-da91cd7288bd.glb",
+    "page": "https://poly.pizza/m/Iip30bDHmu",
+    "sha256": "4ed7656e2155d47b7d5fe08f31a7e764d79255f477d90040e4472552d7d5ac68"
+   },
+   "height": 1.3,
+   "line": "floating sheet ghost",
+   "tags": [
+    "ghost",
+    "spirit",
+    "phantom",
+    "spooky",
+    "shade"
+   ],
+   "aliases": [
+    "style.lowpoly.shade"
+   ]
+  },
+  {
+   "id": "style.lowpoly.ghost_skull",
+   "kind": "creature",
+   "plan": "flyer",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/0716bf8e-1894-4a90-8d10-34868975a239.glb",
+    "page": "https://poly.pizza/m/TX8r9WBXpe",
+    "sha256": "d1e2268fe9621583ff879d6e6e3ace80b0a6a2373ec0139a8139c88fe6e4d942"
+   },
+   "height": 1.3,
+   "line": "floating skull spirit",
+   "tags": [
+    "ghost",
+    "skull",
+    "spirit",
+    "undead"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.bat",
+   "kind": "creature",
+   "plan": "flyer",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/4ae13ae9-c257-41ed-86b5-1b4760924ebc.glb",
+    "page": "https://poly.pizza/m/hNO9XvjlKa",
+    "sha256": "ff20d0c0d68be4ed4ba3a402b8ceaeaf54de5d0c9dc3968117749214aee63c9b"
+   },
+   "height": 0.8,
+   "line": "flapping bat",
+   "tags": [
+    "bat",
+    "flyer",
+    "cave",
+    "night"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.dragon_whelp",
+   "kind": "creature",
+   "plan": "flyer",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/ae5b8510-1fa5-4d53-b943-a4f3b88fb629.glb",
+    "page": "https://poly.pizza/m/3rUm1cN3yp",
+    "sha256": "d8a12f3f819e86518f5a44984db611ffaaa800895da33928d66519e629615705"
+   },
+   "height": 1.2,
+   "line": "small winged dragon",
+   "tags": [
+    "dragon",
+    "drake",
+    "whelp",
+    "winged",
+    "flyer"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.dragon",
+   "kind": "creature",
+   "plan": "flyer",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/90ed3740-d8c4-4910-88ce-ac2ed426022d.glb",
+    "page": "https://poly.pizza/m/LlwD0QNUPj",
+    "sha256": "f660d8f48be4ea3f39639f6206a0181127e7fe7503cb4bad8d07d27d80528f3a"
+   },
+   "height": 2,
+   "line": "big winged dragon",
+   "tags": [
+    "dragon",
+    "drake",
+    "winged",
+    "boss",
+    "flyer"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.wyvern",
+   "kind": "creature",
+   "plan": "flyer",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/9714f533-5d2d-4cfd-b8f1-c8dfff64a672.glb",
+    "page": "https://poly.pizza/m/VBvzjFIYws",
+    "sha256": "983f28d4864199f45e1ca67005466d35f2381f08ecf2e234735bf65ecd7be252"
+   },
+   "height": 2,
+   "line": "long-necked flying wyvern",
+   "tags": [
+    "dragon",
+    "wyvern",
+    "winged",
+    "flyer"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.bee",
+   "kind": "creature",
+   "plan": "flyer",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/19203489-125b-41f5-b9c9-801a522cb775.glb",
+    "page": "https://poly.pizza/m/6HsU6GQt3a",
+    "sha256": "29a3ac29e6859208bdab9db3d34387e1d154f14564bd17cdc57eda669cb557cf"
+   },
+   "height": 0.7,
+   "line": "buzzing bee enemy",
+   "tags": [
+    "bee",
+    "wasp",
+    "insect",
+    "bug",
+    "swarm",
+    "gnat"
+   ],
+   "aliases": [
+    "style.lowpoly.gnat"
+   ]
+  },
+  {
+   "id": "style.lowpoly.armored_bee",
+   "kind": "creature",
+   "plan": "flyer",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/de63aaf6-9170-47f7-933d-439af68826a6.glb",
+    "page": "https://poly.pizza/m/42djT5zJnx",
+    "sha256": "9a47899a2320aa42d5f550598a981c26517c6e27723980f5d2080a557eb88dc2"
+   },
+   "height": 1,
+   "line": "armored flying bug",
+   "tags": [
+    "bee",
+    "beetle",
+    "insect",
+    "armored",
+    "bug"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.imp",
+   "kind": "creature",
+   "plan": "flyer",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/c2e39eb4-4b8e-4d31-b014-d637bf4e15c6.glb",
+    "page": "https://poly.pizza/m/Mo2ky6vkf8",
+    "sha256": "9b235359e2e28a8000a92de055ab9c8a9ed123da279461d452357dbbc30de117"
+   },
+   "height": 1.1,
+   "line": "winged little demon",
+   "tags": [
+    "imp",
+    "demon",
+    "winged",
+    "devil",
+    "flyer"
+   ],
+   "aliases": [
+    "style.lowpoly.caller"
+   ]
+  },
+  {
+   "id": "style.lowpoly.pebble_flyer",
+   "kind": "creature",
+   "plan": "flyer",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/51bf31d7-1aee-4a51-acb1-d667843af205.glb",
+    "page": "https://poly.pizza/m/71gomWolax",
+    "sha256": "fe6b5a04aef77aa9b38afee216802823b543d2409674bc86bd8bd152cb8cebce"
+   },
+   "height": 1,
+   "line": "floating rock critter",
+   "tags": [
+    "golem",
+    "rock",
+    "stone",
+    "flyer"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.jelly_flyer",
+   "kind": "creature",
+   "plan": "flyer",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/27590c4e-41ee-41b5-aaaa-581de0031605.glb",
+    "page": "https://poly.pizza/m/Z9lddNpM1M",
+    "sha256": "cc85f0fe7fa65b9fcbe35fddfc38f28ba564b20533a520b42f2bbb339903a878"
+   },
+   "height": 1.2,
+   "line": "floating jelly creature",
+   "tags": [
+    "jellyfish",
+    "jelly",
+    "floating",
+    "flyer",
+    "squid"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.fluffy_flyer",
+   "kind": "creature",
+   "plan": "flyer",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/acb0f155-4a8a-4084-a2a8-9c17cbff7d21.glb",
+    "page": "https://poly.pizza/m/AQ8zbFoDln",
+    "sha256": "f1a7a128256db5fede6018a715d4a92d8e2841bbddb3a49e390ce8da3f647ca7"
+   },
+   "height": 1.2,
+   "line": "fluffy flying llama critter",
+   "tags": [
+    "llama",
+    "fluffy",
+    "cloud",
+    "flyer"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.fox",
+   "kind": "creature",
+   "plan": "quadruped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/e18e86df-1692-48d8-ac6e-1e25ab4ad574.glb",
+    "page": "https://poly.pizza/m/Bc97C66HKi",
+    "sha256": "9917771e1414c46557b011cbaaee6de82a827605008227a364c3862f0be62ddc"
+   },
+   "height": 0.8,
+   "line": "red fox",
+   "tags": [
+    "fox",
+    "animal",
+    "canine"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.wolf",
+   "kind": "creature",
+   "plan": "quadruped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/f1d12388-e39b-4157-b32a-646a1d089fc4.glb",
+    "page": "https://poly.pizza/m/P1gU3Qkr9r",
+    "sha256": "16ac96339d06f7def9af20d5d9b27622d61e53580dab43970c9edb1bffbe8f84"
+   },
+   "height": 1,
+   "line": "grey wolf",
+   "tags": [
+    "wolf",
+    "animal",
+    "canine",
+    "dog"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.husky",
+   "kind": "creature",
+   "plan": "quadruped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/611d25c7-430f-4bb5-ab2c-d8f5f3cb9712.glb",
+    "page": "https://poly.pizza/m/wcWiuEqwzq",
+    "sha256": "a1e107ec4c2c62ce8cad86f750a7f6f9f2065c691dc6f88fce39667d3f4877eb"
+   },
+   "height": 0.9,
+   "line": "sled dog",
+   "tags": [
+    "dog",
+    "husky",
+    "animal",
+    "pet",
+    "canine"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.stag",
+   "kind": "creature",
+   "plan": "quadruped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/a9c69fbc-bf7c-4585-9a49-a82e0be1ac6b.glb",
+    "page": "https://poly.pizza/m/tQdzbZ1Cmw",
+    "sha256": "3c2df7c13a3d37c8660684e46aa1e5a2bf7e91a9b279983921d48bd93d0b67ed"
+   },
+   "height": 1.6,
+   "line": "antlered stag",
+   "tags": [
+    "deer",
+    "stag",
+    "antlers",
+    "animal"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.deer",
+   "kind": "creature",
+   "plan": "quadruped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/4b6c2a41-43c7-404c-ae37-e8c4645ff93b.glb",
+    "page": "https://poly.pizza/m/T6Cs7tmMHJ",
+    "sha256": "fabf360b22eaccccd056ee99d698a9562d15aa245821f96e4fbad6db3751604e"
+   },
+   "height": 1.3,
+   "line": "doe",
+   "tags": [
+    "deer",
+    "doe",
+    "animal"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.wolf_cartoon",
+   "kind": "creature",
+   "plan": "quadruped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/2cd00c92-295b-4652-b1a3-c3a1394e5d83.glb",
+    "page": "https://poly.pizza/m/XU7oNeKShV",
+    "sha256": "c36fd15453f6d93c3eff98f99a14fd5792b0f4377a83cc134222732d75e50832"
+   },
+   "height": 0.9,
+   "line": "blocky wolf",
+   "tags": [
+    "wolf",
+    "animal",
+    "canine"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.trex",
+   "kind": "creature",
+   "plan": "quadruped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/34eed102-48f0-43dd-bc6f-ef7a6dfddfbb.glb",
+    "page": "https://poly.pizza/m/UYtneO5FpF",
+    "sha256": "e1c9862deef89f096c7d85dacf62aa9ce48089e5867d2bf632ed1e1733013349"
+   },
+   "height": 3,
+   "line": "big predator dinosaur",
+   "tags": [
+    "dinosaur",
+    "trex",
+    "predator",
+    "boss",
+    "dino"
+   ],
+   "aliases": [
+    "style.lowpoly.gloam_ram"
+   ]
+  },
+  {
+   "id": "style.lowpoly.raptor",
+   "kind": "creature",
+   "plan": "quadruped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/c1f0c4cb-c84f-415c-8323-d8cb871a2126.glb",
+    "page": "https://poly.pizza/m/cnlGH2UcDd",
+    "sha256": "1d9ecad0a65c0c858a216ff25f224d02b18ce86fa0ed4df8f9ecece43f3a745c"
+   },
+   "height": 1.4,
+   "line": "fast clawed dinosaur",
+   "tags": [
+    "dinosaur",
+    "raptor",
+    "dino",
+    "fast"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.triceratops",
+   "kind": "creature",
+   "plan": "quadruped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/6aa1f3ff-b9b3-4bb5-9d85-b2ffa514f0cc.glb",
+    "page": "https://poly.pizza/m/IGvrUqGrRM",
+    "sha256": "79ade346de5e778a58ce8c253c7e6dbd505499176a616583d1a29fa4624f498c"
+   },
+   "height": 1.8,
+   "line": "three-horned dinosaur",
+   "tags": [
+    "dinosaur",
+    "horned",
+    "dino",
+    "tank"
+   ],
+   "aliases": [
+    "style.lowpoly.ram"
+   ]
+  },
+  {
+   "id": "style.lowpoly.adventurer",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/bbe369ee-a686-42c7-adad-14356f5f2f15.glb",
+    "page": "https://poly.pizza/m/5EGWBMpuXq",
+    "sha256": "4a8639cd8eee9d8a150464edc25eb0536ced464790704a64e40c8620d99f66db"
+   },
+   "height": 1.7,
+   "line": "adventurer with a backpack, gun poses",
+   "tags": [
+    "adventurer",
+    "explorer",
+    "hero",
+    "traveler"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.hooded_adventurer",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/3186b8e9-afd5-4d48-846c-b2b530cd23e2.glb",
+    "page": "https://poly.pizza/m/y9KWOVG21R",
+    "sha256": "703d20f529f7bc46763c4abc59db7df636d1a018e74e348c53341b4a1083608b"
+   },
+   "height": 1.7,
+   "line": "hooded adventurer, gun poses",
+   "tags": [
+    "adventurer",
+    "hooded",
+    "ranger",
+    "keeper",
+    "hero"
+   ],
+   "aliases": [
+    "style.lowpoly.keeper_01"
+   ]
+  },
+  {
+   "id": "style.lowpoly.soldier",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/1083c1d3-d1d4-4682-adf6-bc516d06ac84.glb",
+    "page": "https://poly.pizza/m/PpLF4rt4ah",
+    "sha256": "06597e2cd20840eee8bed03790f32138e379ba3d6c7f61eb87e29f0c672d4d54"
+   },
+   "height": 1.8,
+   "line": "armored trooper with a rifle",
+   "tags": [
+    "soldier",
+    "trooper",
+    "marine",
+    "gunner",
+    "hero"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.worker",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/3746be88-6799-4817-929b-6bc067c47caa.glb",
+    "page": "https://poly.pizza/m/HMnuH5geEG",
+    "sha256": "dad8fa3ca2bc7760892f9ff47f544941179e50acb2aa772cf9f035154a37fc58"
+   },
+   "height": 1.7,
+   "line": "everyday worker in overalls",
+   "tags": [
+    "worker",
+    "man",
+    "handyman",
+    "plumber",
+    "builder",
+    "hero"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.robot_walker",
+   "kind": "creature",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/9c45ab2b-c46a-4319-bc2a-88d6dbbc8e42.glb",
+    "page": "https://poly.pizza/m/1gNo5ezvmr",
+    "sha256": "d5d1de1481560415c9006dd1989c2dd09ee1b59955c43bcd8d331445a5e69cb7"
+   },
+   "height": 1.3,
+   "line": "round robot drone with arms",
+   "tags": [
+    "robot",
+    "bot",
+    "droid",
+    "enemy"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.robot_gunner",
+   "kind": "creature",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/c320ce4a-25be-4704-bda9-b67e1aa97a70.glb",
+    "page": "https://poly.pizza/m/lFZfDh2hzP",
+    "sha256": "fda86deed47bef0877f0e890de60c41101ca2f06937834b25110392b8b2afd7c"
+   },
+   "height": 1.5,
+   "line": "round robot drone with a gun",
+   "tags": [
+    "robot",
+    "bot",
+    "gunner",
+    "enemy"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.robot_large",
+   "kind": "creature",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/86da7c34-9196-43b3-975d-db2325c83a65.glb",
+    "page": "https://poly.pizza/m/mPDR0L5uKx",
+    "sha256": "1d21ee204a8080897623171baadcd3b4b10fd24c9c959eae2a94c0042a5462d7"
+   },
+   "height": 2.4,
+   "line": "big black robot orb with a red eye",
+   "tags": [
+    "robot",
+    "bot",
+    "brute",
+    "boss",
+    "big"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.robot_flyer",
+   "kind": "creature",
+   "plan": "flyer",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/abb31ff6-3e2d-43a6-bf13-dba39b0c596d.glb",
+    "page": "https://poly.pizza/m/lF3jeRJwiH",
+    "sha256": "7e3a27532b43807b375e3d3ad9cbe1f7e20d8bb723f2dcc2a3c9efb38da73a5b"
+   },
+   "height": 1,
+   "line": "flying robot drone",
+   "tags": [
+    "robot",
+    "drone",
+    "flyer",
+    "bot"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.robot_flyer_gun",
+   "kind": "creature",
+   "plan": "flyer",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/6d0889f1-0c3f-4f98-b011-fbcf6c79a93b.glb",
+    "page": "https://poly.pizza/m/UDTM6X1y9a",
+    "sha256": "af82b5b458530b31ce9694cf0461649839e1e822a922203faa16f4c32c21e595"
+   },
+   "height": 1,
+   "line": "flying robot with a gun",
+   "tags": [
+    "robot",
+    "drone",
+    "flyer",
+    "gunner"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.mech_heavy",
+   "kind": "character",
+   "plan": "biped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/6f884100-f3e8-4302-b74a-10965c14956a.glb",
+    "page": "https://poly.pizza/m/tLs9mFVCSU",
+    "sha256": "795d137e3413ca0412835c8624f3fce56d69243f86e50481c72effea1354a488"
+   },
+   "height": 2.2,
+   "line": "heavy walking mech",
+   "tags": [
+    "mech",
+    "robot",
+    "walker",
+    "heavy"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.cat",
+   "kind": "creature",
+   "plan": "quadruped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/67f5e3fe-37ee-4c86-95c8-d269d8c9f8ba.glb",
+    "page": "https://poly.pizza/m/qKICY6xla2",
+    "sha256": "842c5f96c480b9a7800994345ed83be5e9ba5fc8e18be633f2b7cfe09cf8fef7"
+   },
+   "height": 0.6,
+   "line": "blocky cat",
+   "tags": [
+    "cat",
+    "kitten",
+    "pet",
+    "animal"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.shiba",
+   "kind": "creature",
+   "plan": "quadruped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/ba6d0ee3-bcc0-4ef0-9d3c-a3e245b41c77.glb",
+    "page": "https://poly.pizza/m/y4wdQpg767",
+    "sha256": "9cbd4f1e12f85024126eab6a2c5706c099196df1a10db74e6c8b67bac3fff54a"
+   },
+   "height": 0.7,
+   "line": "fox-like dog",
+   "tags": [
+    "dog",
+    "shiba",
+    "pet",
+    "animal"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.pug",
+   "kind": "creature",
+   "plan": "quadruped",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/094335c0-632a-45f5-8583-27d5cab53b54.glb",
+    "page": "https://poly.pizza/m/1gXKv15ik8",
+    "sha256": "c71f7aa272d5947b5cd39b8fe5df44696391b0b19a74937ece40f91cd1f28cf5"
+   },
+   "height": 0.5,
+   "line": "small round dog",
+   "tags": [
+    "dog",
+    "pug",
+    "pet",
+    "animal"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.tank",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/58c387b2-636f-49dc-a900-13b0852717d6.glb",
+    "page": "https://poly.pizza/m/cW3zvvkMOM",
+    "sha256": "1763818d11cb5cef32dcbe9cf52af108710310c034591e9bdf4555847e73e979"
+   },
+   "height": 1.8,
+   "line": "tracked battle tank with a turret",
+   "tags": [
+    "tank",
+    "army",
+    "military",
+    "vehicle",
+    "armor"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.tank_heavy",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "rig": "quaternius",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/52977e64-f4b3-4845-9d44-fe50ec8154e3.glb",
+    "page": "https://poly.pizza/m/jWS1CLA0RO",
+    "sha256": "1e46eaeef496c569f7b8e85aae8c49e113568d12c0f303e641b7a3d2e0b4b700"
+   },
+   "height": 2,
+   "line": "heavy battle tank",
+   "tags": [
+    "tank",
+    "army",
+    "military",
+    "vehicle",
+    "armor",
+    "heavy"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.sword",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/65837148-8c3c-42d5-9ce7-c55f9295cc7e.glb",
+    "page": "https://poly.pizza/m/9lLmH8Et4K",
+    "sha256": "ebf6a37a1570d3c01822f3e65ae3dca76a76fcc1943ed33bdcd90dc75329218a"
+   },
+   "height": 1,
+   "line": "straight sword",
+   "tags": [
+    "sword",
+    "blade",
+    "weapon"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.greatsword",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/91388f84-ac26-48b5-9d7f-6c4b0181a830.glb",
+    "page": "https://poly.pizza/m/BBhN1O6TOL",
+    "sha256": "a3ea019a6ac39dfdffd90f115e480122deffea802a120a5a842c165085f5be89"
+   },
+   "height": 1.5,
+   "line": "two-handed greatsword",
+   "tags": [
+    "sword",
+    "greatsword",
+    "blade",
+    "weapon"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.axe",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/ce6585dc-980a-4fc5-a496-78a6fab47167.glb",
+    "page": "https://poly.pizza/m/FkzZ6I1zjT",
+    "sha256": "eb8d33717a7feb625b3ab17dc42421d2794c07aa27db786cb6525d601bda07b9"
+   },
+   "height": 0.9,
+   "line": "battle axe",
+   "tags": [
+    "axe",
+    "weapon"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.chest",
+   "kind": "prop",
+   "plan": "static",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/803af4ae-433f-4b05-b1f1-c6a2da02d768.glb",
+    "page": "https://poly.pizza/m/O72u4Drp8k",
+    "sha256": "07193221a749d5dcf2b0a3d82d4ee9831da2e2c4ca71b395050a88bb2babe75b"
+   },
+   "height": 0.8,
+   "line": "treasure chest",
+   "tags": [
+    "chest",
+    "treasure",
+    "loot",
+    "box"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.coin",
+   "kind": "pickup",
+   "plan": "static",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/b39a14ae-3c2f-4b28-ad1d-79d457f9b8b1.glb",
+    "page": "https://poly.pizza/m/7IrL01B97W",
+    "sha256": "7163e6e639c6f7251cd8eef817a64c3038c9a6ce45668b177cc5c65ea45c0a6b"
+   },
+   "height": 0.5,
+   "line": "gold coin",
+   "tags": [
+    "coin",
+    "money",
+    "gold",
+    "pickup"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.crystal",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/f2bbae6a-f84c-493e-8a39-7498e90fbd49.glb",
+    "page": "https://poly.pizza/m/pf5lzmgr2J",
+    "sha256": "4188382ed26aa578b59ed1e18b3a29febfb246904484a1a08ed237ce1c7beb7f"
+   },
+   "height": 1.4,
+   "line": "big crystal",
+   "tags": [
+    "crystal",
+    "gem",
+    "ore",
+    "mineral"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.gem_pink",
+   "kind": "pickup",
+   "plan": "static",
+   "source": {
+    "pack": "quaternius_poly_pizza",
+    "url": "https://static.poly.pizza/97fcdb07-9d4d-46f2-8c17-392bb61915e6.glb",
+    "page": "https://poly.pizza/m/PJnKvWluqs",
+    "sha256": "ad216953c74193455a56f0ea40f36b1ed7bd714f21459a59ed74fa0e34efe312"
+   },
+   "height": 0.4,
+   "line": "pink cut gem",
+   "tags": [
+    "gem",
+    "jewel",
+    "diamond",
+    "pickup",
+    "pink"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.sedan",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "pack": "kenney_car_kit",
+    "path": "Models/GLB format/sedan.glb"
+   },
+   "height": 1.6,
+   "line": "family car",
+   "tags": [
+    "car",
+    "sedan",
+    "vehicle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.sedan_sports",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "pack": "kenney_car_kit",
+    "path": "Models/GLB format/sedan-sports.glb"
+   },
+   "height": 1.6,
+   "line": "sporty sedan",
+   "tags": [
+    "car",
+    "sports car",
+    "vehicle",
+    "fast"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.hatchback_sports",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "pack": "kenney_car_kit",
+    "path": "Models/GLB format/hatchback-sports.glb"
+   },
+   "height": 1.6,
+   "line": "sporty hatchback",
+   "tags": [
+    "car",
+    "hatchback",
+    "vehicle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.suv",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "pack": "kenney_car_kit",
+    "path": "Models/GLB format/suv.glb"
+   },
+   "height": 1.6,
+   "line": "boxy SUV",
+   "tags": [
+    "car",
+    "suv",
+    "jeep",
+    "vehicle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.suv_luxury",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "pack": "kenney_car_kit",
+    "path": "Models/GLB format/suv-luxury.glb"
+   },
+   "height": 1.6,
+   "line": "luxury SUV",
+   "tags": [
+    "car",
+    "suv",
+    "vehicle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.taxi",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "pack": "kenney_car_kit",
+    "path": "Models/GLB format/taxi.glb"
+   },
+   "height": 1.6,
+   "line": "yellow taxi cab",
+   "tags": [
+    "car",
+    "taxi",
+    "cab",
+    "vehicle",
+    "yellow"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.police_car",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "pack": "kenney_car_kit",
+    "path": "Models/GLB format/police.glb"
+   },
+   "height": 1.6,
+   "line": "police cruiser",
+   "tags": [
+    "car",
+    "police",
+    "cop",
+    "vehicle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.ambulance",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "pack": "kenney_car_kit",
+    "path": "Models/GLB format/ambulance.glb"
+   },
+   "height": 1.6,
+   "line": "ambulance van",
+   "tags": [
+    "ambulance",
+    "van",
+    "medic",
+    "vehicle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.firetruck",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "pack": "kenney_car_kit",
+    "path": "Models/GLB format/firetruck.glb"
+   },
+   "height": 2.6,
+   "line": "fire engine",
+   "tags": [
+    "firetruck",
+    "fire engine",
+    "truck",
+    "vehicle",
+    "red"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.garbage_truck",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "pack": "kenney_car_kit",
+    "path": "Models/GLB format/garbage-truck.glb"
+   },
+   "height": 2.6,
+   "line": "garbage truck",
+   "tags": [
+    "truck",
+    "garbage",
+    "vehicle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.delivery_van",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "pack": "kenney_car_kit",
+    "path": "Models/GLB format/delivery.glb"
+   },
+   "height": 1.6,
+   "line": "delivery van",
+   "tags": [
+    "van",
+    "delivery",
+    "vehicle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.delivery_flat",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "pack": "kenney_car_kit",
+    "path": "Models/GLB format/delivery-flat.glb"
+   },
+   "height": 1.6,
+   "line": "flatbed delivery truck",
+   "tags": [
+    "truck",
+    "flatbed",
+    "vehicle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.truck",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "pack": "kenney_car_kit",
+    "path": "Models/GLB format/truck.glb"
+   },
+   "height": 1.6,
+   "line": "pickup truck",
+   "tags": [
+    "truck",
+    "pickup",
+    "pickup truck",
+    "vehicle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.truck_flat",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "pack": "kenney_car_kit",
+    "path": "Models/GLB format/truck-flat.glb"
+   },
+   "height": 1.6,
+   "line": "flatbed truck",
+   "tags": [
+    "truck",
+    "flatbed",
+    "vehicle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.van",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "pack": "kenney_car_kit",
+    "path": "Models/GLB format/van.glb"
+   },
+   "height": 1.6,
+   "line": "panel van",
+   "tags": [
+    "van",
+    "vehicle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.tractor",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "pack": "kenney_car_kit",
+    "path": "Models/GLB format/tractor.glb"
+   },
+   "height": 1.6,
+   "line": "farm tractor",
+   "tags": [
+    "tractor",
+    "farm",
+    "vehicle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.digger",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "pack": "kenney_car_kit",
+    "path": "Models/GLB format/tractor-shovel.glb"
+   },
+   "height": 1.6,
+   "line": "front loader with a shovel",
+   "tags": [
+    "digger",
+    "loader",
+    "bulldozer",
+    "construction",
+    "vehicle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.race_car",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "pack": "kenney_car_kit",
+    "path": "Models/GLB format/race.glb"
+   },
+   "height": 1.6,
+   "line": "open-wheel race car",
+   "tags": [
+    "race car",
+    "racer",
+    "car",
+    "vehicle",
+    "fast"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.race_car_future",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "pack": "kenney_car_kit",
+    "path": "Models/GLB format/race-future.glb"
+   },
+   "height": 1.6,
+   "line": "futuristic race car",
+   "tags": [
+    "race car",
+    "racer",
+    "future",
+    "car",
+    "vehicle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.kart_a",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "pack": "kenney_car_kit",
+    "path": "Models/GLB format/kart-oobi.glb"
+   },
+   "height": 0.9,
+   "line": "go-kart (colour a)",
+   "tags": [
+    "kart",
+    "go-kart",
+    "racer",
+    "vehicle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.kart_b",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "pack": "kenney_car_kit",
+    "path": "Models/GLB format/kart-oodi.glb"
+   },
+   "height": 0.9,
+   "line": "go-kart (colour b)",
+   "tags": [
+    "kart",
+    "go-kart",
+    "racer",
+    "vehicle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.kart_c",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "pack": "kenney_car_kit",
+    "path": "Models/GLB format/kart-ooli.glb"
+   },
+   "height": 0.9,
+   "line": "go-kart (colour c)",
+   "tags": [
+    "kart",
+    "go-kart",
+    "racer",
+    "vehicle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.kart_d",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "pack": "kenney_car_kit",
+    "path": "Models/GLB format/kart-oopi.glb"
+   },
+   "height": 0.9,
+   "line": "go-kart (colour d)",
+   "tags": [
+    "kart",
+    "go-kart",
+    "racer",
+    "vehicle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.kart_e",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "pack": "kenney_car_kit",
+    "path": "Models/GLB format/kart-oozi.glb"
+   },
+   "height": 0.9,
+   "line": "go-kart (colour e)",
+   "tags": [
+    "kart",
+    "go-kart",
+    "racer",
+    "vehicle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.monster_truck",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "base": "style.lowpoly.truck",
+    "appearance": {
+     "parts": [
+      "big_wheels"
+     ],
+     "scale": 1.3
+    }
+   },
+   "height": 2.2,
+   "line": "pickup truck on giant wheels",
+   "tags": [
+    "monster truck",
+    "truck",
+    "big wheels",
+    "vehicle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.rover",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "pack": "kenney_space_kit",
+    "path": "Models/GLTF format/rover.glb"
+   },
+   "height": 1.4,
+   "line": "six-wheeled planet rover",
+   "tags": [
+    "rover",
+    "buggy",
+    "space",
+    "vehicle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.speeder_a",
+   "kind": "vehicle",
+   "plan": "flyer",
+   "source": {
+    "pack": "kenney_space_kit",
+    "path": "Models/GLTF format/craft_speederA.glb"
+   },
+   "height": 1,
+   "line": "hover speeder",
+   "tags": [
+    "speeder",
+    "hovercraft",
+    "ship",
+    "spaceship",
+    "drone"
+   ],
+   "aliases": [
+    "style.lowpoly.drone"
+   ]
+  },
+  {
+   "id": "style.lowpoly.speeder_b",
+   "kind": "vehicle",
+   "plan": "flyer",
+   "source": {
+    "pack": "kenney_space_kit",
+    "path": "Models/GLTF format/craft_speederB.glb"
+   },
+   "height": 1,
+   "line": "hover speeder, wide",
+   "tags": [
+    "speeder",
+    "hovercraft",
+    "ship",
+    "spaceship"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.speeder_c",
+   "kind": "vehicle",
+   "plan": "flyer",
+   "source": {
+    "pack": "kenney_space_kit",
+    "path": "Models/GLTF format/craft_speederC.glb"
+   },
+   "height": 1,
+   "line": "hover speeder, long",
+   "tags": [
+    "speeder",
+    "hovercraft",
+    "ship",
+    "spaceship"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.racer_ship",
+   "kind": "vehicle",
+   "plan": "flyer",
+   "source": {
+    "pack": "kenney_space_kit",
+    "path": "Models/GLTF format/craft_racer.glb"
+   },
+   "height": 1,
+   "line": "racing spaceship",
+   "tags": [
+    "spaceship",
+    "racer",
+    "ship",
+    "fighter"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.cargo_ship",
+   "kind": "vehicle",
+   "plan": "flyer",
+   "source": {
+    "pack": "kenney_space_kit",
+    "path": "Models/GLTF format/craft_cargoA.glb"
+   },
+   "height": 1.6,
+   "line": "cargo spaceship",
+   "tags": [
+    "spaceship",
+    "cargo",
+    "ship",
+    "freighter"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.miner_ship",
+   "kind": "vehicle",
+   "plan": "flyer",
+   "source": {
+    "pack": "kenney_space_kit",
+    "path": "Models/GLTF format/craft_miner.glb"
+   },
+   "height": 1.4,
+   "line": "mining spaceship",
+   "tags": [
+    "spaceship",
+    "miner",
+    "ship"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.turret",
+   "kind": "prop",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_space_kit",
+    "path": "Models/GLTF format/turret_single.glb"
+   },
+   "height": 1.4,
+   "line": "gun turret",
+   "tags": [
+    "turret",
+    "cannon",
+    "tank",
+    "gun",
+    "defense"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.turret_double",
+   "kind": "prop",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_space_kit",
+    "path": "Models/GLTF format/turret_double.glb"
+   },
+   "height": 1.4,
+   "line": "double-barrel turret",
+   "tags": [
+    "turret",
+    "cannon",
+    "tank",
+    "gun",
+    "defense"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.generator",
+   "kind": "prop",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_space_kit",
+    "path": "Models/GLTF format/machine_generator.glb"
+   },
+   "height": 2.4,
+   "line": "power generator machine",
+   "tags": [
+    "generator",
+    "machine",
+    "power",
+    "transformer"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.generator_large",
+   "kind": "prop",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_space_kit",
+    "path": "Models/GLTF format/machine_generatorLarge.glb"
+   },
+   "height": 3,
+   "line": "large power generator",
+   "tags": [
+    "generator",
+    "machine",
+    "power",
+    "transformer"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.satellite_dish",
+   "kind": "prop",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_space_kit",
+    "path": "Models/GLTF format/satelliteDish_large.glb"
+   },
+   "height": 3,
+   "line": "satellite dish",
+   "tags": [
+    "satellite",
+    "dish",
+    "antenna",
+    "radar"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.crystal_rock",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_space_kit",
+    "path": "Models/GLTF format/rock_crystalsLargeA.glb"
+   },
+   "height": 1.6,
+   "line": "rock with glowing crystals",
+   "tags": [
+    "crystal",
+    "gem",
+    "rock",
+    "ore"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.meteor",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_space_kit",
+    "path": "Models/GLTF format/meteor_detailed.glb"
+   },
+   "height": 1.2,
+   "line": "space rock",
+   "tags": [
+    "meteor",
+    "asteroid",
+    "rock"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.barrel",
+   "kind": "prop",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_space_kit",
+    "path": "Models/GLTF format/barrel.glb"
+   },
+   "height": 1,
+   "line": "metal barrel",
+   "tags": [
+    "barrel",
+    "drum",
+    "container"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.barrels",
+   "kind": "prop",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_space_kit",
+    "path": "Models/GLTF format/barrels.glb"
+   },
+   "height": 1.2,
+   "line": "stack of metal barrels",
+   "tags": [
+    "barrels",
+    "drums",
+    "container",
+    "cover"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.hangar",
+   "kind": "building",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_space_kit",
+    "path": "Models/GLTF format/hangar_roundA.glb"
+   },
+   "height": 4,
+   "line": "round hangar",
+   "tags": [
+    "hangar",
+    "building",
+    "base",
+    "dome"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.rocket",
+   "kind": "prop",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_space_kit",
+    "path": "Models/GLTF format/rocket_baseA.glb"
+   },
+   "height": 3,
+   "line": "rocket base section",
+   "tags": [
+    "rocket",
+    "launch",
+    "space"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blaster_a",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_blaster_kit",
+    "path": "Models/GLB format/blaster-a.glb"
+   },
+   "height": 0.5,
+   "line": "chunky sci-fi blaster (model a)",
+   "tags": [
+    "blaster",
+    "gun",
+    "weapon",
+    "pistol",
+    "rifle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blaster_b",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_blaster_kit",
+    "path": "Models/GLB format/blaster-b.glb"
+   },
+   "height": 0.5,
+   "line": "chunky sci-fi blaster (model b)",
+   "tags": [
+    "blaster",
+    "gun",
+    "weapon",
+    "pistol",
+    "rifle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blaster_c",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_blaster_kit",
+    "path": "Models/GLB format/blaster-c.glb"
+   },
+   "height": 0.5,
+   "line": "chunky sci-fi blaster (model c)",
+   "tags": [
+    "blaster",
+    "gun",
+    "weapon",
+    "pistol",
+    "rifle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blaster_d",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_blaster_kit",
+    "path": "Models/GLB format/blaster-d.glb"
+   },
+   "height": 0.5,
+   "line": "chunky sci-fi blaster (model d)",
+   "tags": [
+    "blaster",
+    "gun",
+    "weapon",
+    "pistol",
+    "rifle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blaster_e",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_blaster_kit",
+    "path": "Models/GLB format/blaster-e.glb"
+   },
+   "height": 0.5,
+   "line": "chunky sci-fi blaster (model e)",
+   "tags": [
+    "blaster",
+    "gun",
+    "weapon",
+    "pistol",
+    "rifle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blaster_f",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_blaster_kit",
+    "path": "Models/GLB format/blaster-f.glb"
+   },
+   "height": 0.5,
+   "line": "chunky sci-fi blaster (model f)",
+   "tags": [
+    "blaster",
+    "gun",
+    "weapon",
+    "pistol",
+    "rifle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blaster_g",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_blaster_kit",
+    "path": "Models/GLB format/blaster-g.glb"
+   },
+   "height": 0.5,
+   "line": "chunky sci-fi blaster (model g)",
+   "tags": [
+    "blaster",
+    "gun",
+    "weapon",
+    "pistol",
+    "rifle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blaster_h",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_blaster_kit",
+    "path": "Models/GLB format/blaster-h.glb"
+   },
+   "height": 0.5,
+   "line": "chunky sci-fi blaster (model h)",
+   "tags": [
+    "blaster",
+    "gun",
+    "weapon",
+    "pistol",
+    "rifle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blaster_i",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_blaster_kit",
+    "path": "Models/GLB format/blaster-i.glb"
+   },
+   "height": 0.5,
+   "line": "chunky sci-fi blaster (model i)",
+   "tags": [
+    "blaster",
+    "gun",
+    "weapon",
+    "pistol",
+    "rifle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blaster_j",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_blaster_kit",
+    "path": "Models/GLB format/blaster-j.glb"
+   },
+   "height": 0.5,
+   "line": "chunky sci-fi blaster (model j)",
+   "tags": [
+    "blaster",
+    "gun",
+    "weapon",
+    "pistol",
+    "rifle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blaster_k",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_blaster_kit",
+    "path": "Models/GLB format/blaster-k.glb"
+   },
+   "height": 0.5,
+   "line": "chunky sci-fi blaster (model k)",
+   "tags": [
+    "blaster",
+    "gun",
+    "weapon",
+    "pistol",
+    "rifle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blaster_l",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_blaster_kit",
+    "path": "Models/GLB format/blaster-l.glb"
+   },
+   "height": 0.5,
+   "line": "chunky sci-fi blaster (model l)",
+   "tags": [
+    "blaster",
+    "gun",
+    "weapon",
+    "pistol",
+    "rifle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blaster_m",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_blaster_kit",
+    "path": "Models/GLB format/blaster-m.glb"
+   },
+   "height": 0.5,
+   "line": "chunky sci-fi blaster (model m)",
+   "tags": [
+    "blaster",
+    "gun",
+    "weapon",
+    "pistol",
+    "rifle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blaster_n",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_blaster_kit",
+    "path": "Models/GLB format/blaster-n.glb"
+   },
+   "height": 0.5,
+   "line": "chunky sci-fi blaster (model n)",
+   "tags": [
+    "blaster",
+    "gun",
+    "weapon",
+    "pistol",
+    "rifle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blaster_o",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_blaster_kit",
+    "path": "Models/GLB format/blaster-o.glb"
+   },
+   "height": 0.5,
+   "line": "chunky sci-fi blaster (model o)",
+   "tags": [
+    "blaster",
+    "gun",
+    "weapon",
+    "pistol",
+    "rifle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blaster_p",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_blaster_kit",
+    "path": "Models/GLB format/blaster-p.glb"
+   },
+   "height": 0.5,
+   "line": "chunky sci-fi blaster (model p)",
+   "tags": [
+    "blaster",
+    "gun",
+    "weapon",
+    "pistol",
+    "rifle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blaster_q",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_blaster_kit",
+    "path": "Models/GLB format/blaster-q.glb"
+   },
+   "height": 0.5,
+   "line": "chunky sci-fi blaster (model q)",
+   "tags": [
+    "blaster",
+    "gun",
+    "weapon",
+    "pistol",
+    "rifle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.blaster_r",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_blaster_kit",
+    "path": "Models/GLB format/blaster-r.glb"
+   },
+   "height": 0.5,
+   "line": "chunky sci-fi blaster (model r)",
+   "tags": [
+    "blaster",
+    "gun",
+    "weapon",
+    "pistol",
+    "rifle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.grenade",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_blaster_kit",
+    "path": "Models/GLB format/grenade-a.glb"
+   },
+   "height": 0.25,
+   "line": "round grenade",
+   "tags": [
+    "grenade",
+    "bomb",
+    "explosive"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.crate",
+   "kind": "prop",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_blaster_kit",
+    "path": "Models/GLB format/crate-medium.glb"
+   },
+   "height": 0.8,
+   "line": "supply crate",
+   "tags": [
+    "crate",
+    "box",
+    "supply",
+    "loot"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.target",
+   "kind": "prop",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_blaster_kit",
+    "path": "Models/GLB format/target-large.glb"
+   },
+   "height": 1.2,
+   "line": "practice target",
+   "tags": [
+    "target",
+    "bullseye",
+    "practice"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.tree_oak",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_nature_kit",
+    "path": "Models/GLTF format/tree_oak.glb"
+   },
+   "height": 4.5,
+   "line": "round leafy tree",
+   "tags": [
+    "tree",
+    "oak",
+    "forest"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.tree_pine",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_nature_kit",
+    "path": "Models/GLTF format/tree_pineDefaultA.glb"
+   },
+   "height": 5,
+   "line": "pine tree",
+   "tags": [
+    "tree",
+    "pine",
+    "conifer",
+    "forest"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.tree_pine_tall",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_nature_kit",
+    "path": "Models/GLTF format/tree_pineTallA_detailed.glb"
+   },
+   "height": 7,
+   "line": "tall pine tree",
+   "tags": [
+    "tree",
+    "pine",
+    "tall",
+    "forest"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.tree_palm",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_nature_kit",
+    "path": "Models/GLTF format/tree_palmTall.glb"
+   },
+   "height": 6,
+   "line": "palm tree",
+   "tags": [
+    "tree",
+    "palm",
+    "beach",
+    "tropical"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.tree_fat",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_nature_kit",
+    "path": "Models/GLTF format/tree_fat.glb"
+   },
+   "height": 4,
+   "line": "chunky round tree",
+   "tags": [
+    "tree",
+    "forest"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.tree_autumn",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_nature_kit",
+    "path": "Models/GLTF format/tree_default_fall.glb"
+   },
+   "height": 4.5,
+   "line": "autumn tree",
+   "tags": [
+    "tree",
+    "autumn",
+    "fall",
+    "orange"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.tree_dark",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_nature_kit",
+    "path": "Models/GLTF format/tree_default_dark.glb"
+   },
+   "height": 4.5,
+   "line": "dark green tree",
+   "tags": [
+    "tree",
+    "dark",
+    "forest"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.stump",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_nature_kit",
+    "path": "Models/GLTF format/stump_round.glb"
+   },
+   "height": 0.6,
+   "line": "tree stump",
+   "tags": [
+    "stump",
+    "wood",
+    "forest"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.bush",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_nature_kit",
+    "path": "Models/GLTF format/plant_bush.glb"
+   },
+   "height": 0.8,
+   "line": "leafy bush",
+   "tags": [
+    "bush",
+    "shrub",
+    "plant"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.bush_large",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_nature_kit",
+    "path": "Models/GLTF format/plant_bushLarge.glb"
+   },
+   "height": 1.2,
+   "line": "big bush",
+   "tags": [
+    "bush",
+    "shrub",
+    "plant",
+    "cover"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.rock_large",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_nature_kit",
+    "path": "Models/GLTF format/rock_largeA.glb"
+   },
+   "height": 1.6,
+   "line": "big boulder",
+   "tags": [
+    "rock",
+    "boulder",
+    "stone",
+    "cover"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.rock_tall",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_nature_kit",
+    "path": "Models/GLTF format/rock_tallA.glb"
+   },
+   "height": 2.4,
+   "line": "tall rock spire",
+   "tags": [
+    "rock",
+    "spire",
+    "stone",
+    "pillar"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.rock_small",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_nature_kit",
+    "path": "Models/GLTF format/rock_smallA.glb"
+   },
+   "height": 0.4,
+   "line": "small rock",
+   "tags": [
+    "rock",
+    "pebble",
+    "stone"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.mushroom_red",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_nature_kit",
+    "path": "Models/GLTF format/mushroom_redTall.glb"
+   },
+   "height": 0.6,
+   "line": "red toadstool",
+   "tags": [
+    "mushroom",
+    "toadstool",
+    "fungus"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.log",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_nature_kit",
+    "path": "Models/GLTF format/log_large.glb"
+   },
+   "height": 0.6,
+   "line": "fallen log",
+   "tags": [
+    "log",
+    "wood",
+    "timber"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.campfire",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_nature_kit",
+    "path": "Models/GLTF format/campfire_stones.glb"
+   },
+   "height": 0.6,
+   "line": "campfire ring",
+   "tags": [
+    "campfire",
+    "fire",
+    "camp"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.tent",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_nature_kit",
+    "path": "Models/GLTF format/tent_detailedOpen.glb"
+   },
+   "height": 2,
+   "line": "camping tent",
+   "tags": [
+    "tent",
+    "camp"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.fence",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_nature_kit",
+    "path": "Models/GLTF format/fence_simple.glb"
+   },
+   "height": 1,
+   "line": "wooden fence section",
+   "tags": [
+    "fence",
+    "wall",
+    "barrier"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.flower_red",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_nature_kit",
+    "path": "Models/GLTF format/flower_redA.glb"
+   },
+   "height": 0.4,
+   "line": "red flowers",
+   "tags": [
+    "flower",
+    "plant",
+    "red"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.cactus",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_nature_kit",
+    "path": "Models/GLTF format/cactus_tall.glb"
+   },
+   "height": 2,
+   "line": "tall cactus",
+   "tags": [
+    "cactus",
+    "desert",
+    "plant"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.column",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_nature_kit",
+    "path": "Models/GLTF format/statue_column.glb"
+   },
+   "height": 3,
+   "line": "stone column",
+   "tags": [
+    "column",
+    "pillar",
+    "ruin",
+    "stone"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.column_broken",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_nature_kit",
+    "path": "Models/GLTF format/statue_columnDamaged.glb"
+   },
+   "height": 2.4,
+   "line": "broken stone column",
+   "tags": [
+    "column",
+    "pillar",
+    "ruin",
+    "broken"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.obelisk",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_nature_kit",
+    "path": "Models/GLTF format/statue_obelisk.glb"
+   },
+   "height": 4,
+   "line": "stone obelisk",
+   "tags": [
+    "obelisk",
+    "monument",
+    "pillar",
+    "stone"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.apple",
+   "kind": "food",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_food_kit",
+    "path": "Models/GLB format/apple.glb"
+   },
+   "height": 0.5,
+   "line": "apple",
+   "tags": [
+    "food",
+    "apple",
+    "snack",
+    "pickup"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.banana",
+   "kind": "food",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_food_kit",
+    "path": "Models/GLB format/banana.glb"
+   },
+   "height": 0.5,
+   "line": "banana",
+   "tags": [
+    "food",
+    "banana",
+    "snack",
+    "pickup"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.burger",
+   "kind": "food",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_food_kit",
+    "path": "Models/GLB format/burger.glb"
+   },
+   "height": 0.5,
+   "line": "burger",
+   "tags": [
+    "food",
+    "burger",
+    "snack",
+    "pickup"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.pizza",
+   "kind": "food",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_food_kit",
+    "path": "Models/GLB format/pizza.glb"
+   },
+   "height": 0.5,
+   "line": "pizza",
+   "tags": [
+    "food",
+    "pizza",
+    "snack",
+    "pickup"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.donut",
+   "kind": "food",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_food_kit",
+    "path": "Models/GLB format/donut-sprinkles.glb"
+   },
+   "height": 0.5,
+   "line": "donut",
+   "tags": [
+    "food",
+    "donut",
+    "snack",
+    "pickup"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.cake",
+   "kind": "food",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_food_kit",
+    "path": "Models/GLB format/cake-birthday.glb"
+   },
+   "height": 0.5,
+   "line": "cake",
+   "tags": [
+    "food",
+    "cake",
+    "snack",
+    "pickup"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.carrot",
+   "kind": "food",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_food_kit",
+    "path": "Models/GLB format/carrot.glb"
+   },
+   "height": 0.5,
+   "line": "carrot",
+   "tags": [
+    "food",
+    "carrot",
+    "snack",
+    "pickup"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.cheese",
+   "kind": "food",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_food_kit",
+    "path": "Models/GLB format/cheese.glb"
+   },
+   "height": 0.5,
+   "line": "cheese",
+   "tags": [
+    "food",
+    "cheese",
+    "snack",
+    "pickup"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.fish",
+   "kind": "food",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_food_kit",
+    "path": "Models/GLB format/fish.glb"
+   },
+   "height": 0.5,
+   "line": "fish",
+   "tags": [
+    "food",
+    "fish",
+    "snack",
+    "pickup"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.watermelon",
+   "kind": "food",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_food_kit",
+    "path": "Models/GLB format/watermelon.glb"
+   },
+   "height": 0.5,
+   "line": "watermelon",
+   "tags": [
+    "food",
+    "watermelon",
+    "snack",
+    "pickup"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.ice_cream",
+   "kind": "food",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_food_kit",
+    "path": "Models/GLB format/ice-cream.glb"
+   },
+   "height": 0.5,
+   "line": "ice cream",
+   "tags": [
+    "food",
+    "ice cream",
+    "snack",
+    "pickup"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.hot_dog",
+   "kind": "food",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_food_kit",
+    "path": "Models/GLB format/hot-dog.glb"
+   },
+   "height": 0.5,
+   "line": "hot dog",
+   "tags": [
+    "food",
+    "hot dog",
+    "snack",
+    "pickup"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.taco",
+   "kind": "food",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_food_kit",
+    "path": "Models/GLB format/taco.glb"
+   },
+   "height": 0.5,
+   "line": "taco",
+   "tags": [
+    "food",
+    "taco",
+    "snack",
+    "pickup"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.sushi",
+   "kind": "food",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_food_kit",
+    "path": "Models/GLB format/sushi-salmon.glb"
+   },
+   "height": 0.5,
+   "line": "sushi",
+   "tags": [
+    "food",
+    "sushi",
+    "snack",
+    "pickup"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.cupcake",
+   "kind": "food",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_food_kit",
+    "path": "Models/GLB format/cupcake.glb"
+   },
+   "height": 0.5,
+   "line": "cupcake",
+   "tags": [
+    "food",
+    "cupcake",
+    "snack",
+    "pickup"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.pumpkin",
+   "kind": "food",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_food_kit",
+    "path": "Models/GLB format/pumpkin.glb"
+   },
+   "height": 0.5,
+   "line": "pumpkin",
+   "tags": [
+    "food",
+    "pumpkin",
+    "snack",
+    "pickup"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.cookie",
+   "kind": "food",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_food_kit",
+    "path": "Models/GLB format/cookie-chocolate.glb"
+   },
+   "height": 0.5,
+   "line": "cookie",
+   "tags": [
+    "food",
+    "cookie",
+    "snack",
+    "pickup"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.fries",
+   "kind": "food",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_food_kit",
+    "path": "Models/GLB format/fries.glb"
+   },
+   "height": 0.5,
+   "line": "fries",
+   "tags": [
+    "food",
+    "fries",
+    "snack",
+    "pickup"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.building_a",
+   "kind": "building",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_city_kit_commercial",
+    "path": "Models/GLB format/building-a.glb"
+   },
+   "height": 8,
+   "line": "city shop building (style a)",
+   "tags": [
+    "building",
+    "shop",
+    "city",
+    "house",
+    "store"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.building_b",
+   "kind": "building",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_city_kit_commercial",
+    "path": "Models/GLB format/building-b.glb"
+   },
+   "height": 8,
+   "line": "city shop building (style b)",
+   "tags": [
+    "building",
+    "shop",
+    "city",
+    "house",
+    "store"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.building_c",
+   "kind": "building",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_city_kit_commercial",
+    "path": "Models/GLB format/building-c.glb"
+   },
+   "height": 8,
+   "line": "city shop building (style c)",
+   "tags": [
+    "building",
+    "shop",
+    "city",
+    "house",
+    "store"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.building_d",
+   "kind": "building",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_city_kit_commercial",
+    "path": "Models/GLB format/building-d.glb"
+   },
+   "height": 8,
+   "line": "city shop building (style d)",
+   "tags": [
+    "building",
+    "shop",
+    "city",
+    "house",
+    "store"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.building_e",
+   "kind": "building",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_city_kit_commercial",
+    "path": "Models/GLB format/building-e.glb"
+   },
+   "height": 8,
+   "line": "city shop building (style e)",
+   "tags": [
+    "building",
+    "shop",
+    "city",
+    "house",
+    "store"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.building_f",
+   "kind": "building",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_city_kit_commercial",
+    "path": "Models/GLB format/building-f.glb"
+   },
+   "height": 8,
+   "line": "city shop building (style f)",
+   "tags": [
+    "building",
+    "shop",
+    "city",
+    "house",
+    "store"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.building_g",
+   "kind": "building",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_city_kit_commercial",
+    "path": "Models/GLB format/building-g.glb"
+   },
+   "height": 8,
+   "line": "city shop building (style g)",
+   "tags": [
+    "building",
+    "shop",
+    "city",
+    "house",
+    "store"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.building_h",
+   "kind": "building",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_city_kit_commercial",
+    "path": "Models/GLB format/building-h.glb"
+   },
+   "height": 8,
+   "line": "city shop building (style h)",
+   "tags": [
+    "building",
+    "shop",
+    "city",
+    "house",
+    "store"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.skyscraper_a",
+   "kind": "building",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_city_kit_commercial",
+    "path": "Models/GLB format/building-skyscraper-a.glb"
+   },
+   "height": 20,
+   "line": "skyscraper (style a)",
+   "tags": [
+    "skyscraper",
+    "tower",
+    "building",
+    "city"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.skyscraper_b",
+   "kind": "building",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_city_kit_commercial",
+    "path": "Models/GLB format/building-skyscraper-b.glb"
+   },
+   "height": 20,
+   "line": "skyscraper (style b)",
+   "tags": [
+    "skyscraper",
+    "tower",
+    "building",
+    "city"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.skyscraper_c",
+   "kind": "building",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_city_kit_commercial",
+    "path": "Models/GLB format/building-skyscraper-c.glb"
+   },
+   "height": 20,
+   "line": "skyscraper (style c)",
+   "tags": [
+    "skyscraper",
+    "tower",
+    "building",
+    "city"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.lowpoly.gem_small",
+   "kind": "pickup",
+   "plan": "static",
+   "source": {
+    "procedural": "gem_small"
+   },
+   "height": 0.5,
+   "line": "small glowing gem",
+   "tags": [
+    "gem",
+    "xp",
+    "crystal",
+    "pickup"
+   ],
+   "aliases": [
+    "style.lowpoly.ember_small"
+   ]
+  },
+  {
+   "id": "style.lowpoly.gem_mid",
+   "kind": "pickup",
+   "plan": "static",
+   "source": {
+    "procedural": "gem_mid"
+   },
+   "height": 0.5,
+   "line": "glowing gem",
+   "tags": [
+    "gem",
+    "xp",
+    "crystal",
+    "pickup"
+   ],
+   "aliases": [
+    "style.lowpoly.ember_mid"
+   ]
+  },
+  {
+   "id": "style.lowpoly.gem_large",
+   "kind": "pickup",
+   "plan": "static",
+   "source": {
+    "procedural": "gem_large"
+   },
+   "height": 0.5,
+   "line": "big glowing gem",
+   "tags": [
+    "gem",
+    "xp",
+    "crystal",
+    "pickup"
+   ],
+   "aliases": [
+    "style.lowpoly.ember_large"
+   ]
+  },
+  {
+   "id": "style.lowpoly.cell_heal",
+   "kind": "pickup",
+   "plan": "static",
+   "source": {
+    "procedural": "cell_heal"
+   },
+   "height": 0.5,
+   "line": "glowing heal cell",
+   "tags": [
+    "heal",
+    "health",
+    "cell",
+    "battery",
+    "pickup"
+   ],
+   "aliases": [
+    "style.lowpoly.volt_cell"
+   ]
+  },
+  {
+   "id": "style.lowpoly.cell_spark",
+   "kind": "pickup",
+   "plan": "static",
+   "source": {
+    "procedural": "cell_spark"
+   },
+   "height": 0.5,
+   "line": "glowing energy cell",
+   "tags": [
+    "energy",
+    "cell",
+    "battery",
+    "pickup"
+   ],
+   "aliases": [
+    "style.lowpoly.spark_cell"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,183 @@
+# NetNet game engine: physics, game feel and rendering (llms.txt)
+
+> The engine every Net Forge game runs on (specs/game-runtime.md). Two
+> layers matter here:
+>  1. Game code (src/game.ts) only DECLARES how things look and feel, with
+>     `look` on game() and `feel` on prefab() and weapon(). Templates draw it.
+>  2. Template code (client/ and the sim) uses the runtime APIs below:
+>     the physics world in @netnetcapital/engine-sim, and the feel kit and
+>     render stack in @netnetcapital/engine/runtime.
+> Generated game code never imports the runtime. It cannot reach the
+> renderer, netcode or physics, and it does not need to.
+
+## 1. Game code: look and feel declarations
+
+Everything here is presentation. It never changes the simulation, so it
+is always safe to tune. Unknown values fail the build with a message.
+
+### The look of the whole game (game({ look }))
+
+game({
+  template: "survivor", style: "lowpoly", places: { ... }, players: { ... },
+  look: { preset: "dusk", bloom: 1.3, fog: 0.4, vignette: 0.4, tint: "#ffd9a0" },
+});
+
+- preset: "night" | "dusk" | "day" | "studio". Sets the sun, sky, fog and
+  colour grade together. Default "night".
+- bloom: glow on bright and emissive things, 0 (off) to 3. Default 1.
+- shadows: sun shadows on or off (on by default above the low quality tier).
+- outline: a toon outline around shapes (true or false).
+- fog: 0 (clear) to 1 (thick).
+- exposure (0.2 to 3), saturation (0 to 2), contrast (0.5 to 1.5),
+  vignette (0 to 1), tint ("#rrggbb", a grading colour over the frame).
+
+Slow devices drop shadows, post and resolution by themselves (quality
+tiers and dynamic resolution), so turning things on never breaks 60 fps.
+
+### How a prefab dies and takes hits (prefab({ feel }))
+
+prefab("brute", { model: "style.lowpoly.brute", health: 160, speed: 2.2, radius: 0.8, mass: 6,
+  feel: { particles: "burst", decal: "scorch", sound: "boom", shake: 0.5, hitStop: 0.06, color: "#ff4d5e" } });
+
+### How a weapon's impacts look (weapon({ feel }))
+
+weapon("frost_ring", { kind: "nova", damage: 6, cooldown: 0.8, range: 5, knockback: 8,
+  feel: { particles: "magic", decal: "ring", color: "#7ad7ff", shake: 0.1 } });
+
+feel fields, all optional:
+- shake: screen shake added, 0 to 1 (0.2 a bump, 0.6 a big hit).
+- hitStop: seconds the picture freezes on impact (0.03 to 0.08 feels good, 0.2 max).
+- particles: "sparks" | "burst" | "embers" | "smoke" | "hitSpark" | "dust" | "magic".
+- decal: "none" | "scorch" | "splat" | "ring" (left on the ground, fades).
+- sound: "none" | "hit" | "crunch" | "boom" | "zap" | "chime" | "thud".
+- color: "#rrggbb" for particles, decals and flashes.
+- flash: false turns off the white hit flash.
+
+### Knockback is physics
+
+weapon knockback is metres per second pushed into each enemy, divided by
+the enemy's mass. Enemies knocked hard stagger, slide, bounce off pillars
+and shove the enemies behind them. mass 1 is light, 6 is a brute, 20 a
+boss (light hits barely move it).
+
+### Dungeon levels (game({ field }) with walls and floors)
+
+const CRYPT = dungeon({ seed: 2026, rooms: 10, cell: 24, size: [12, 18], corridor: 6, loops: 2 });
+game({ template: "dungeon", ..., field: CRYPT.field });
+
+dungeon(...) grows a floor plan from a seed: rooms on a grid, joined by
+corridors, the start room centred on [0, 0] and the deepest room as
+CRYPT.boss. field.walls are boxes [x, z, halfX, halfZ] that stop players,
+enemies and bolts; field.floors are the only ground (spawns land on them,
+and enemies behind a wall path round it through the doors on a flow
+field). Systems get onScreen(x, z) to bring enemies in where nobody is
+looking. A system's room logic reads CRYPT.rooms and CRYPT.roomAt(x, z).
+
+## 2. Template code: the physics world (@netnetcapital/engine-sim)
+
+Deterministic Rapier on client and server. No rendering dependency.
+
+import { initSim, createPhysics, restorePhysics, Layer } from "@netnetcapital/engine-sim";
+await initSim();
+const p = createPhysics({ gravity: [0, -20, 0], tickRate: 30 });
+p.addStaticBox([30, 0.5, 30], [0, -0.5, 0], { layer: Layer.Level });
+const crate = p.addBody({ type: "dynamic", shape: { box: [0.4, 0.4, 0.4] }, position: [0, 2, 0],
+  mass: 20, friction: 0.7, restitution: 0.2, layer: Layer.Prop });
+const bolt = p.addBody({ type: "dynamic", shape: { sphere: 0.1 }, ccd: true, gravityScale: 0,
+  linearVelocity: [80, 0, 0], layer: Layer.Projectile, mask: Layer.Level | Layer.Enemy });
+const zone = p.addTrigger({ box: [2, 2, 2] }, [5, 1, 0]);
+const hero = p.addCharacter({ position: [0, 1, 0], maxSpeed: 7, jumpVelocity: 8, coyoteTicks: 5,
+  jumpBufferTicks: 5, airAccel: 18, dashTicks: 6, dashSpeed: 22, dashCooldownTicks: 30 });
+const { events, characters } = p.step(new Map([[hero, { moveX: 1, moveZ: 0, jump: true, dash: false }]]));
+
+- Bodies: dynamic, kinematic (setKinematicTarget) or static; box, sphere,
+  capsule, cylinder; mass or density, friction, restitution, damping,
+  gravityScale, lockRotations, sensor, ccd, userData (a NetId).
+- Layers: Layer.Level, Player, Enemy, Projectile, Pickup, Prop, Trigger,
+  Debris, User1..8. A pair collides only when each mask holds the other.
+- Events from step(): contact.start, contact.end, trigger.enter,
+  trigger.exit, sorted, with a < b.
+- Forces: applyImpulse, applyForce (one step), applyKnockback(id, from,
+  strength, { lift, byMass }). Knockback works on characters too.
+- Queries: raycast(origin, dir, maxDist, { mask, exclude, includeSensors })
+  for line of sight and hitscan; raycastAll; shapeCast; overlap.
+- Joints: addJoint({ kind: "fixed" | "ball" | "hinge" | "slider", a, b }).
+- Character motor: slopes (climb and slide), steps, ground snapping, coyote
+  time, jump buffering, variable jump height, ground and air acceleration,
+  terminal velocity, dash with buffer, cooldown and invulnerability,
+  pushing dynamic bodies. Per-step reports: grounded, landed, jumped,
+  dashed, hitCeiling, groundNormal. characterState / setCharacterState for
+  reconcile.
+- Netcode: snapshot() and restorePhysics(bytes) restore bit-exact;
+  stateHash() hashes every pose, velocity and motor state.
+- Rapier 0.21 already stops small fast spheres on thin walls; use round
+  projectiles (thin spinning planks can still tunnel).
+
+## 3. Template code: game feel (@netnetcapital/engine/runtime)
+
+import { FeelKit } from "@netnetcapital/engine/runtime";
+const feel = new FeelKit({ preset: "default" });   // "subtle" | "default" | "heavy"
+feel.camera = rig;  feel.project = (x, y, z) => scene.project(x, y, z);  feel.particles = stack.particles;
+// per frame
+const { now, dt, realDt } = feel.tick(performance.now());   // hit-stop aware render clock
+feel.hit({ id, x, y, z, amount, big, dirX, dirZ });          // flash, knockback, number, sound, shake
+feel.kill({ x, y, z, big, color });                           // particles, shake, hit-stop when big
+feel.hurt(damage, maxHealth);                                 // shake, stop, rumble, hurtPulse
+feel.levelUp(); feel.dash(); feel.land(0.6); feel.footstep(speed);
+feel.update(dt, realDt);
+
+Parts, each usable alone: Trauma (seeded trauma shake), FeelClock (hit-stop,
+slow motion, smooth catch-up), HitFlash, KnockbackOffsets (spring offsets
+and squash), Spring and Spring3, DamageNumbers (pooled, merges rapid hits),
+Tweens and Ease with pop / shakeEl / countUp for UI, FeelAudio (procedural
+cues, throttles, voice limits, pan, distance) and Footsteps, Rumble
+(Gamepad dual-rumble, navigator.vibrate fallback). CameraRig adds
+addTrauma, punch (FOV kick), a smoothed and clamped lead and a dead zone.
+
+Real sound (SoundPlayer): CC0 samples for the cues and one music loop from
+the asset library's audio section. Samples replace the synth recipes under
+the same cue names (the synth plays until a sample loads, or if it fails).
+
+import { soundBank } from "@netnetcapital/asset-library";
+const sound = new SoundPlayer(feel.audio, { key: "mygame:sound", musicVolume: 0.35 });
+sound.load(soundBank(libraryBase));     // cues: hit impact kill bigKill hurt levelUp gem coin dash step land boss ui pick downed revive shoot
+sound.toggle();                         // the mute (effects and music), remembered; returns true when muted
+feel.audio.play("boss");                // any cue by name
+
+Camera bounds: never show the void past the field.
+rig.setBounds(fieldBounds(half, 16));   // the field plus 16 m of dressed outside ground
+The clamp moves the camera by the overshoot of what it sees (groundFootprint,
+boundsShift); dress that outside strip (ground, trees, fog).
+
+Hero highlight: an outline and a rim on one character (the local hero), as
+extra draws that share its geometry and skeleton; its materials stay as
+they are.
+const hl = new HeroHighlight(character.root, { rim: 0xffd27a, outline: 0x140a02, outlineWidth: 0.05 });
+hl.strength = 0.4;  hl.dispose();
+
+## 4. Template code: rendering (@netnetcapital/engine/runtime)
+
+const stack = createRenderStack(handle, scene, rig.camera, { preset: "night", quality: "auto", bloom: true });
+stack.frame(dt, focus);       // instead of renderer.render(scene, camera)
+stack.particles.burst("bigKill", x, y, z, { color: 0xffc070 });
+stack.decals.add("scorch", x, z, { size: 3 });
+stack.rings.fire(x, z, 6, { color: 0xffb347 });
+stack.post.hurt.value = feel.hurtPulse;
+
+- LightingRig: hemisphere, sun shadow following the focus with texel
+  snapping, presets.
+- PostFX: bloom, grade (contrast, saturation, split tone, vignette, hurt
+  pulse), tone mapping once, FXAA, optional depth outline.
+- Atmosphere: fog (linear or exp2, height fog) and sky gradient. A high
+  top-down camera should set heightFog 0.
+- QualityManager / DynamicResolution: tiers low, medium and high
+  (auto-detected), pixel ratio held to the frame budget.
+- GpuParticles: one draw for every preset; motion runs on the GPU.
+- GroundDecals and GroundRings: pooled, one draw each.
+- AnimatedCrowd: procedural vertex animation for instanced crowds (bob,
+  waddle, lean, hit squash, flash). VatCrowd with bakeVertexAnimation:
+  skinned clips baked to a texture, thousands of instances in one draw.
+  AnimatedCharacter: skinned glTF with locomotion blending.
+- WebGPU pipelines build on first use. Draw one of everything out of sight
+  at load (EMBERWATCH's SurvivorScene.warmup) so the first kill does not
+  hitch.

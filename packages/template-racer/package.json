@@ -1,0 +1,57 @@
+{
+  "name": "@netnetcapital/template-racer",
+  "version": "0.1.0",
+  "description": "TORQUEBAY: a racer template of the NetNet game runtime, kart races on harbour circuits with drift mini-turbos, boost pads, coins and laps at 60 Hz, a streamed track and seat-filling bots. The game module, its browser client and its playtest bots.",
+  "license": "SEE LICENSE IN LICENSE",
+  "type": "module",
+  "exports": {
+    ".": "./src/manifest.ts",
+    "./store": "./src/store.ts"
+  },
+  "files": [
+    "src",
+    "client",
+    "!client/vite.config.ts",
+    "llms.txt",
+    "README.md",
+    "NOTICE",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/netnetdev/net-forge.git",
+    "directory": "packages/template-racer"
+  },
+  "homepage": "https://github.com/netnetdev/net-forge/tree/main/packages/template-racer#readme",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node ../engine/scripts/fresh-dist.mjs && vite build --config client/vite.config.ts",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "dev": "vite --config client/vite.config.ts",
+    "preview": "vite preview --config client/vite.config.ts",
+    "prepublishOnly": "node ../engine/scripts/license-gate.mjs"
+  },
+  "dependencies": {
+    "@netnetcapital/asset-library": "workspace:*",
+    "@netnetcapital/engine": "workspace:*",
+    "@netnetcapital/engine-sim": "workspace:*",
+    "three": "0.186.1"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.1",
+    "@types/three": "0.186.0",
+    "tsx": "4.23.0",
+    "typescript": "5.8.3",
+    "vite": "6.4.3",
+    "vitest": "3.2.7"
+  },
+  "bugs": {
+    "url": "https://github.com/netnetdev/net-forge/issues"
+  }
+}

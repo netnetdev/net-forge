@@ -1,0 +1,33 @@
+@netnetcapital/template-racer (TORQUEBAY)
+Copyright (c) 2026 NetNet Capital Management
+
+An original game. No names, characters, maps, models, sounds or code from
+any other game or franchise.
+
+Art and sound
+- Models come from the per-style asset library
+  (@netnetcapital/asset-library): CC0 1.0 models by Kenney (Car Kit: the
+  karts and trucks; Nature Kit: trees; City Kit Commercial: buildings;
+  Space Kit: barrels) and Quaternius
+  (via Poly Pizza: the coin), each pack listed with its
+  source URL and licence verification in that package's NOTICE and
+  manifest/packs.json. The files are fetched and built, never committed
+  here; the build copies only the models this game uses.
+- The road, kerbs, barriers, boost pads, the start line and the fallback
+  kart (client/scene.ts) are generated from three.js primitives; all textures
+  are drawn on a canvas at load. Sounds are the library's CC0 samples with
+  WebAudio-synthesized fallbacks (client/audio.ts).
+
+Dependencies (unmodified, via npm)
+- three.js 0.186.1 (https://github.com/mrdoob/three.js), MIT.
+- @netnetcapital/engine and @netnetcapital/engine-sim (this repository);
+  see their NOTICE files (bitECS MPL-2.0, Rapier Apache-2.0, Colyseus MIT,
+  zod MIT).
+
+Patterns (ideas only)
+- The kart racing genre's general mechanics (laps, drifting to charge a
+  boost, boost pads, coins, a grid of rivals). Mechanics, not expression;
+  no track, vehicle, character or text was copied from any game.
+- Arcade vehicle handling (forward and sideways velocity, grip, drift) as
+  described in common public write-ups on arcade car physics. Implemented
+  from scratch in engine-sim src/kart.ts.

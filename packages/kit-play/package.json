@@ -1,0 +1,80 @@
+{
+  "name": "@netnetcapital/kit-play",
+  "version": "0.1.0",
+  "description": "kit play: run a game downloaded from Net Forge on your own computer with play money. Builds the template client with your game module and runs a local room host from the engine's open simulation. No wallet, no chain, no Net Forge servers.",
+  "license": "SEE LICENSE IN LICENSE",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "kit-play": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/netnetdev/net-forge.git",
+    "directory": "packages/kit-play"
+  },
+  "homepage": "https://github.com/netnetdev/net-forge/tree/main/packages/kit-play#readme",
+  "keywords": [
+    "netnet",
+    "net-forge",
+    "game",
+    "local",
+    "three.js"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node ../engine/scripts/fresh-dist.mjs && tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.test.json",
+    "test": "vitest run",
+    "prepack": "pnpm build",
+    "prepublishOnly": "node ../engine/scripts/license-gate.mjs"
+  },
+  "dependencies": {
+    "@colyseus/core": "0.18.18",
+    "@colyseus/ws-transport": "0.18.4",
+    "@netnetcapital/asset-library": "workspace:*",
+    "@netnetcapital/asset-library-files": "workspace:*",
+    "@netnetcapital/engine": "workspace:*",
+    "@netnetcapital/engine-sim": "workspace:*",
+    "@netnetcapital/tabletop": "workspace:*",
+    "@netnetcapital/template-arena": "workspace:*",
+    "@netnetcapital/template-cards": "workspace:*",
+    "@netnetcapital/template-collector": "workspace:*",
+    "@netnetcapital/template-dungeon": "workspace:*",
+    "@netnetcapital/template-idle": "workspace:*",
+    "@netnetcapital/template-party": "workspace:*",
+    "@netnetcapital/template-platformer": "workspace:*",
+    "@netnetcapital/template-racer": "workspace:*",
+    "@netnetcapital/template-survivor": "workspace:*",
+    "@netnetcapital/template-tower": "workspace:*",
+    "esbuild": "0.25.12",
+    "vite": "6.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.1",
+    "typescript": "5.8.3",
+    "vitest": "3.2.7"
+  },
+  "bugs": {
+    "url": "https://github.com/netnetdev/net-forge/issues"
+  }
+}

@@ -1,0 +1,32 @@
+@netnetcapital/template-party (ROMPHOUSE)
+Copyright (c) 2026 NetNet Capital Management
+
+An original game. No names, characters, sprites, models, sounds or code
+from any other game or franchise. Nothing from PokéSurvivor (its code and
+sprites are non-commercial) or SpriteCollab was used or consulted for code.
+
+Art and sound
+- Models come from the per-style asset library
+  (@netnetcapital/asset-library): CC0 1.0 models by Quaternius (party-goers,
+  the party crowd) and Kenney (crates, chests and pickups), each pack listed
+  with its source URL and licence verification in that package's NOTICE and
+  manifest/packs.json. The files are fetched and built, never committed
+  here; the build copies only the models this game uses.
+- Fallback shapes (client/library.ts) are generated from three.js
+  primitives; textures are drawn on a canvas at load.
+
+Dependencies (unmodified, via npm)
+- three.js 0.186.1 (https://github.com/mrdoob/three.js), MIT.
+- nipplejs 1.0.4 (https://github.com/yoannmoinet/nipplejs), MIT.
+- @netnetcapital/engine and @netnetcapital/engine-sim (this repository);
+  see their NOTICE files (bitECS MPL-2.0, Rapier Apache-2.0, Colyseus MIT,
+  zod MIT).
+
+Patterns (ideas only)
+- The party-game genre's general mechanics (short rounds of different
+  minigames, a shared team goal per round, a show that is won by winning
+  most rounds) and the survivor-like's auto-firing weapons and
+  pick-one-of-three level-ups. Mechanics, not expression; no minigame,
+  character, level or text was copied from any game.
+- Hit-stop, screen shake and damage numbers as described in common
+  game-feel talks and articles (e.g. "Juice it or lose it", GDC 2012).

@@ -1,0 +1,113 @@
+# MOSSBOUND: the monster collector template (NetNet game runtime, board genre)
+
+> A shared marsh for up to 8 keepers. Each picks one of the starters at
+> camp, walks the marsh, meets wild creatures in tall grass and battles them
+> turn by turn with a team of three, snaring the ones worth keeping. Every
+> keeper in the marsh wears down the same warden; it must fall before dusk.
+> You change the game by editing src/game.ts only. The template already has
+> walking and collision, encounters, turn order, damage, the element cycle,
+> snaring, team swaps, XP and levels, the camp, the warden fight, dusk,
+> netcode, rendering, touch controls, earn and the store. Do not write
+> renderers, netcode or battle AI.
+
+## Files
+
+- src/game.ts: THE GAME. Declarations against @netnetcapital/engine:
+  game(), marsh(), creature(), move(), upgrade(), earn.rule(), earn.stake(), store.sku().
+- src/names.json: the title and every label players read. Creatures go in
+  "weapons" ({ name, line }), the warden in "enemies", plus upgrades, earn
+  rules and store items. Moves are shown from their ids ("leaf_lash" reads
+  "Leaf Lash"), so name moves the way players should read them.
+- Everything else is template machinery.
+
+## Rules the build enforces
+
+- game({ template: "collector", style, places, players: { prefab, max } }).
+- Exactly one marsh(...); 1 to 24 creature(...)s; at most 48 move(...)s.
+- Every creature's moves are declared moves (1 to 4 each).
+- marsh starters and grass pools name declared creatures that are not
+  bosses; the warden names a creature with boss: true.
+- The camp and the warden stand inside the marsh on tiles that are not
+  blocked; grass and blocked rects stay inside the marsh.
+- Elements are "root", "tide", "spark", "stone": a cycle where each beats
+  the next (root soaks tide, tide shorts spark, spark cracks stone, stone
+  crushes root). Strong hits deal 1.5x, weak ones 0.67x.
+- Upgrades read five stats only: might (team attack), maxHealth (team
+  health, a fraction: 0.15 is +15%), armor (team defence), amount (extra
+  snares) and regen (share of max health healed each second out of battle).
+- No weapon(...): a collector game declares creature(...) and move(...).
+- Asset ids look like "style.lowpoly.frog", never URLs or paths, and must be
+  in the asset library. game({ style }) is the art style the creator picked
+  (lowpoly, toon, ps1, pixel, voxel or handdrawn); keep it.
+- 4 playtest keepers must win battles, catch creatures and fire an earn rule
+  in 4 minutes, and must not lose their whole team more than twice each.
+
+## Units
+
+A tile is 2 m; marsh rects are [x, y, width, height] in tiles. Stats are
+base values at level 1 and grow 12% a level. power 40 is a plain hit.
+Walking speed is metres a second. Tick rate 30 Hz.
+
+## The loop
+
+A keeper picks a starter at camp (starterLevel). Every step into a new tile
+of tall grass rolls the zone's rate; a hit starts a battle with a creature
+from the zone's pool at a level in its range. A turn: you pick a move, a
+swap, a snare or flee; the faster creature acts first; the foe answers
+with its best move. A beaten foe gives XP (the active creature full, the
+rest half). A snare's chance is catchRate x (0.25 + 0.75 x the foe's
+missing health); a caught creature joins the team (three at most; more go
+into the lantern). Wild creatures hit at 80%. If your whole team faints you
+are sent to camp with half health; standing at camp heals. Near the
+warden, Challenge starts the warden fight: its health is one pool for the
+whole marsh, it hits at full strength, and when it falls everyone who hurt
+it shares the win. At dusk the run is lost.
+
+## Common changes
+
+### A new creature
+creature("thistlehog", { model: "style.lowpoly.fox", element: "root", hp: 50, atk: 52, def: 48, spd: 46, moves: ["leaf_lash", "thorn_curl"], catchRate: 0.7 });
+move("thorn_curl", { element: "root", power: 0, effect: "guard" });
+Then put it in a grass pool, and its label in names.json weapons.
+
+### Moves
+move("tide_crash", { element: "tide", power: 70, accuracy: 0.8 });
+effect "drain" heals half the damage dealt; "heal" (power 0) restores
+amount of max health; "guard" halves the next hit taken.
+
+### The map
+marsh({ size: [30, 20], camp: [2, 10], water: [[11, 0, 2, 6]], blocked: [[19, 0, 1, 8]],
+  grass: [{ at: [4, 2, 6, 5], rate: 0.22, pool: [{ creature: "sporecap", weight: 3, level: [2, 3] }] }], ... });
+Put weak creatures near camp and stronger ones toward the warden. Leave a
+walkable way from camp to every grass zone and to the warden.
+
+### Harder or easier
+Raise pool levels, the warden's level or hp, or lower snares and grass
+rates. "Longer": a later dusk. "More catching": higher catchRate and snares.
+
+### Add an earn rule
+earn.rule("ten_wins", { when: "creature.defeated", n: 10, pay: 15, oncePer: "run" });
+Events: creature.caught, creature.defeated, creature.levelup, level.five
+and level.ten (each credits the keeper), warden.defeated (everyone who hurt
+it), run.won (everyone in the marsh). Each rule pays once per run per player,
+in coins; the room server is the referee.
+
+### The buy-in run (required)
+earn.stake({ min: 20, max: 200, multiple: 2 });
+One top-level line; a game without it does not build. "stake" is reserved.
+
+### Coins: earn and the store
+Every game has coins: 1 coin = 1 of the game's own token, shown under the
+token's own name, symbol and logo.
+store.sku("thornbark", { coins: 40 });                                  // one level of the "thornbark" upgrade for the run
+store.sku("skin_amber", { coins: 500, grants: { cosmetic: 2 } });       // a keeper's cloak, owned for good
+store.sku("lucky_reed", { coins: 150, grants: { gear: "thornbark", loseBelow: 0.25 } }); // losable gear
+Keep the SKUs the client is wired to (thornbark, mossmail, spare_snares,
+fen_tonic, skin_lichen, skin_amber, lucky_reed) at their prices.
+
+## Test
+
+engine.test.run({ ticks: 30 * 240, bots: 4 }) plays the marsh with 4
+keepers and reports battles won plus catches (kills), 1 + catches (wave),
+the highest level, team wipes (deaths), earned by rule, softlock, ms per
+tick, and the genre's own checks under rules.checks.

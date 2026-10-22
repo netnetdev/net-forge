@@ -1,0 +1,36 @@
+{
+  "name": "@netnetcapital/asset-library-files",
+  "version": "0.1.0",
+  "description": "The built NetNet game asset library (optimized models, sprites, textures and sounds, all third-party CC0 art) that kit play serves to a game running on your own computer.",
+  "license": "SEE LICENSE IN LICENSE",
+  "type": "module",
+  "exports": {
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "library",
+    "README.md",
+    "LICENSE",
+    "NOTICE",
+    "CC0-1.0.txt"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/netnetdev/net-forge.git",
+    "directory": "packages/asset-library-files"
+  },
+  "homepage": "https://github.com/netnetdev/net-forge/tree/main/packages/asset-library-files#readme",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "prepack": "node scripts/stage.mjs",
+    "prepublishOnly": "node ../engine/scripts/license-gate.mjs"
+  },
+  "bugs": {
+    "url": "https://github.com/netnetdev/net-forge/issues"
+  }
+}

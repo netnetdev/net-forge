@@ -1,0 +1,3543 @@
+{
+ "schema": "netnet-asset-library/1",
+ "assets": {
+  "audio.music.battle_theme_a": {
+   "path": "audio/music/battle_theme_a.mp3",
+   "bytes": 3289143,
+   "sha256": "6042399782e581d753d616bc703e66483d5eccb5fb687a20c9a552d68c49e620"
+  },
+  "audio.sfx.big_kill": {
+   "path": "audio/sfx/big_kill.ogg",
+   "bytes": 14317,
+   "sha256": "3cb48d86dab63140cfb9aaeea4d4a6846abaca5831d157d8adbec0490da26343"
+  },
+  "audio.sfx.boss": {
+   "path": "audio/sfx/boss.ogg",
+   "bytes": 13915,
+   "sha256": "94b8bb5f2d43ab65e4bcc32b28562416e9bc2c51d9fd4be1e333660ee52f977f"
+  },
+  "audio.sfx.coin": {
+   "path": "audio/sfx/coin.ogg",
+   "bytes": 25394,
+   "sha256": "8a91f969e932df709df80ee124d86a51389eed9b67f22e5e716bc2bbf60d8dab"
+  },
+  "audio.sfx.confirm": {
+   "path": "audio/sfx/confirm.ogg",
+   "bytes": 8968,
+   "sha256": "063564703b6094d70718a3e787a55cc9141611e4ecd6b6637f8828f79b4a8c3a"
+  },
+  "audio.sfx.dash": {
+   "path": "audio/sfx/dash.ogg",
+   "bytes": 6733,
+   "sha256": "c60069ed7108678dd6a1306404d168a93cc2575cda37b06add9dd6c4d46352a3"
+  },
+  "audio.sfx.downed": {
+   "path": "audio/sfx/downed.ogg",
+   "bytes": 5956,
+   "sha256": "e0215fcfd8b9d7877f74d5c46b239a13d7db0d25998da97b80404931ef9eef5d"
+  },
+  "audio.sfx.gem": {
+   "path": "audio/sfx/gem.ogg",
+   "bytes": 6103,
+   "sha256": "183eebee20eb0a532b0b85104d139cbf2673eb66d95c3cc733ac9ea98362e7e8"
+  },
+  "audio.sfx.hit": {
+   "path": "audio/sfx/hit.ogg",
+   "bytes": 5827,
+   "sha256": "f0e982611e97512fee5f777986b67e8b435434b601f94992ec044f7e89fb5acb"
+  },
+  "audio.sfx.hurt": {
+   "path": "audio/sfx/hurt.ogg",
+   "bytes": 11617,
+   "sha256": "b33a8f14068aec24ec69ba85e5e87fdc41228975f6a1a3e44a6e7d6fc3d9f8d8"
+  },
+  "audio.sfx.impact": {
+   "path": "audio/sfx/impact.ogg",
+   "bytes": 8800,
+   "sha256": "486988aa2d6440ffc4c62a0e8ccf3c23673ba84424bd4723378d451b7255eb5c"
+  },
+  "audio.sfx.kill": {
+   "path": "audio/sfx/kill.ogg",
+   "bytes": 5351,
+   "sha256": "7d3ba0bb5e60a11b5d3e558c141303dcf494256675fbf753c0d252d2cf0481e3"
+  },
+  "audio.sfx.land": {
+   "path": "audio/sfx/land.ogg",
+   "bytes": 6570,
+   "sha256": "49e7ca88743fca974bb8676ea138b751cfd8f9033b5e7af8736c2a215d6edbc1"
+  },
+  "audio.sfx.level_up": {
+   "path": "audio/sfx/level_up.ogg",
+   "bytes": 5577,
+   "sha256": "83786b43d828a399e14ac20604b63a60ca05385977f5477d00304c2adc696204"
+  },
+  "audio.sfx.revive": {
+   "path": "audio/sfx/revive.ogg",
+   "bytes": 6135,
+   "sha256": "cbc1c3c7ccf5d7903818144a4c3f5b2ed2385095792f29d8d7c76360ba4fa559"
+  },
+  "audio.sfx.shoot": {
+   "path": "audio/sfx/shoot.ogg",
+   "bytes": 7286,
+   "sha256": "72b589eadd41781257ac859e4f4d030222e623390e4a1a83f6d05329a6e026f1"
+  },
+  "audio.sfx.step": {
+   "path": "audio/sfx/step.ogg",
+   "bytes": 8290,
+   "sha256": "9d49497777405d78d7cf7f2888e28277f3a23192300cfd1d79d54876b20f479f"
+  },
+  "audio.sfx.ui": {
+   "path": "audio/sfx/ui.ogg",
+   "bytes": 5468,
+   "sha256": "aec0c31ea934a35936ae0d2ab8fac8123c93aa5647f935853a58dbaf90278b7a"
+  },
+  "style.lowpoly.adventurer": {
+   "path": "lowpoly/adventurer.glb",
+   "bytes": 621164,
+   "sha256": "05a9210725e5e6c154b4c0bcba6ac1ae8d185501e85a196c69f3b8a92ba3194d",
+   "triangles": 10198,
+   "animations": 24
+  },
+  "style.lowpoly.alien_big": {
+   "path": "lowpoly/alien_big.glb",
+   "bytes": 202496,
+   "sha256": "acbb2bbc3c575b5f1fc6ec5db90bce80a206edafd766a3985e1191a54e380172",
+   "triangles": 7676,
+   "animations": 14
+  },
+  "style.lowpoly.ambulance": {
+   "path": "lowpoly/ambulance.glb",
+   "bytes": 39344,
+   "sha256": "faa6771e6b196d659a9f9c0ba6641beca2214ecb9db18ff22c95bbbf9504e988",
+   "triangles": 1948,
+   "animations": 0
+  },
+  "style.lowpoly.apple": {
+   "path": "lowpoly/apple.glb",
+   "bytes": 14588,
+   "sha256": "fbd43394b36d3601069e9c191dc6bb8ac0cfa5d6ccbdaea1725f64a931cb0c9e",
+   "triangles": 136,
+   "animations": 0
+  },
+  "style.lowpoly.armored_bee": {
+   "path": "lowpoly/armored_bee.glb",
+   "bytes": 73120,
+   "sha256": "c232f011c36e03de2d9948fc505569cb838ee0ebdceb1ba68d60396843ec0bf1",
+   "triangles": 2280,
+   "animations": 8
+  },
+  "style.lowpoly.astronaut": {
+   "path": "lowpoly/astronaut.glb",
+   "bytes": 271764,
+   "sha256": "0a669622994b8de6fc0c577fd480f0e393798525bb4c5e052c7a245b0baa203c",
+   "triangles": 8606,
+   "animations": 18
+  },
+  "style.lowpoly.axe": {
+   "path": "lowpoly/axe.glb",
+   "bytes": 26780,
+   "sha256": "31fc17e216afbf42e724c7ece11e43a95986249e02ffe3c8c773cc64fb30ff6f",
+   "triangles": 1436,
+   "animations": 0
+  },
+  "style.lowpoly.banana": {
+   "path": "lowpoly/banana.glb",
+   "bytes": 14448,
+   "sha256": "464a4ab2316c859eed25860df966fcee8e3eb968e67f8206c228e27eee716b9d",
+   "triangles": 104,
+   "animations": 0
+  },
+  "style.lowpoly.barrel": {
+   "path": "lowpoly/barrel.glb",
+   "bytes": 3644,
+   "sha256": "98dc9342b229763a076021bdf69bd2caa51e5acb47d066624c24546b72103bd1",
+   "triangles": 56,
+   "animations": 0
+  },
+  "style.lowpoly.barrels": {
+   "path": "lowpoly/barrels.glb",
+   "bytes": 6692,
+   "sha256": "8d79e2200088abdaf8282c61db69abec1d566fe9191e117def0906c0b01c87cb",
+   "triangles": 100,
+   "animations": 0
+  },
+  "style.lowpoly.bat": {
+   "path": "lowpoly/bat.glb",
+   "bytes": 104268,
+   "sha256": "5b3435752abf9f11b131161418ad3b2d13cb118e9fd801d6ddc723981b71cc26",
+   "triangles": 1046,
+   "animations": 5
+  },
+  "style.lowpoly.bee": {
+   "path": "lowpoly/bee.glb",
+   "bytes": 61528,
+   "sha256": "dbe1f01490d2d0c2c8ad86dadbce5993f8eec97932197be70f263198286b8efa",
+   "triangles": 3040,
+   "animations": 4
+  },
+  "style.lowpoly.blaster_a": {
+   "path": "lowpoly/blaster_a.glb",
+   "bytes": 20552,
+   "sha256": "49a725c8d0bf821884576a50691cfee479146b67652f564905fb3646ffee1726",
+   "triangles": 470,
+   "animations": 0
+  },
+  "style.lowpoly.blaster_b": {
+   "path": "lowpoly/blaster_b.glb",
+   "bytes": 17864,
+   "sha256": "4869095c0c8a3f6de38fee7ef08ab99858bfb55397f0c7ddc621aff475912062",
+   "triangles": 368,
+   "animations": 0
+  },
+  "style.lowpoly.blaster_c": {
+   "path": "lowpoly/blaster_c.glb",
+   "bytes": 18144,
+   "sha256": "8dfdc76abf94f609102067fea52f4d7d491376533a842cd828cfdc1e56c3a935",
+   "triangles": 388,
+   "animations": 0
+  },
+  "style.lowpoly.blaster_d": {
+   "path": "lowpoly/blaster_d.glb",
+   "bytes": 20832,
+   "sha256": "da89b0cc6e63bc136dea349504b9c5da88dd60cff926f9fcea8688ccd149d648",
+   "triangles": 486,
+   "animations": 0
+  },
+  "style.lowpoly.blaster_e": {
+   "path": "lowpoly/blaster_e.glb",
+   "bytes": 25968,
+   "sha256": "091e7b20a2b7164a427490e26db1474b8b1e21247b9ce14919f1d4f64acf3aea",
+   "triangles": 802,
+   "animations": 0
+  },
+  "style.lowpoly.blaster_f": {
+   "path": "lowpoly/blaster_f.glb",
+   "bytes": 26088,
+   "sha256": "fc48fed7a2f7636dde51b05c5bac45185c2bea4e63ce778dddf80faa79112d05",
+   "triangles": 768,
+   "animations": 0
+  },
+  "style.lowpoly.blaster_g": {
+   "path": "lowpoly/blaster_g.glb",
+   "bytes": 20864,
+   "sha256": "9fad4fa8d1bb35fbdee162c09cf3d9639ed47509ed8971121e3046d6e2d78f85",
+   "triangles": 618,
+   "animations": 0
+  },
+  "style.lowpoly.blaster_h": {
+   "path": "lowpoly/blaster_h.glb",
+   "bytes": 16952,
+   "sha256": "a9068aa5d0d875640c91f7bb04f75c068ba27c56c2f1659cb8495d316aaeb4c3",
+   "triangles": 296,
+   "animations": 0
+  },
+  "style.lowpoly.blaster_i": {
+   "path": "lowpoly/blaster_i.glb",
+   "bytes": 18444,
+   "sha256": "3584a77d3738eeb1e4cea4db4566f5304930419b95891270ccf359c6b328aa1b",
+   "triangles": 416,
+   "animations": 0
+  },
+  "style.lowpoly.blaster_j": {
+   "path": "lowpoly/blaster_j.glb",
+   "bytes": 21340,
+   "sha256": "6769496a8d84da40614e0a3497a33f45f3a72852499fa431a46fe3ec0a3a3593",
+   "triangles": 548,
+   "animations": 0
+  },
+  "style.lowpoly.blaster_k": {
+   "path": "lowpoly/blaster_k.glb",
+   "bytes": 17912,
+   "sha256": "90bb89a4689748202c592dc936a68a0449dafc0b82f6819c0df9b9b95f7501cd",
+   "triangles": 392,
+   "animations": 0
+  },
+  "style.lowpoly.blaster_l": {
+   "path": "lowpoly/blaster_l.glb",
+   "bytes": 18780,
+   "sha256": "15ae0fe29cb6dc041768f9cadec9b19b04dd1e9ec7a38108798bef9e743a2e9d",
+   "triangles": 450,
+   "animations": 0
+  },
+  "style.lowpoly.blaster_m": {
+   "path": "lowpoly/blaster_m.glb",
+   "bytes": 18652,
+   "sha256": "1548ba054ad3669e92ebd2b0b99c3a95d92f7b9891f617807660666e2ebf2038",
+   "triangles": 440,
+   "animations": 0
+  },
+  "style.lowpoly.blaster_n": {
+   "path": "lowpoly/blaster_n.glb",
+   "bytes": 18064,
+   "sha256": "a5569479bab7b3ea1020f5dc6e045b143da206904fba0a0d9bc4a0268d03b439",
+   "triangles": 410,
+   "animations": 0
+  },
+  "style.lowpoly.blaster_o": {
+   "path": "lowpoly/blaster_o.glb",
+   "bytes": 21104,
+   "sha256": "1b77b02c7246a17e5768f86c771869ad219dcd74926fc9d96d967a8dfe2a9a14",
+   "triangles": 664,
+   "animations": 0
+  },
+  "style.lowpoly.blaster_p": {
+   "path": "lowpoly/blaster_p.glb",
+   "bytes": 25292,
+   "sha256": "8adc2370550237fd3605744395be18473c6bc1f0d6a0128a4ea3a42b7386c162",
+   "triangles": 882,
+   "animations": 0
+  },
+  "style.lowpoly.blaster_q": {
+   "path": "lowpoly/blaster_q.glb",
+   "bytes": 20504,
+   "sha256": "c22b39574a814535e270202991ec9604dac38f798086f7bec8919ea13c8d2684",
+   "triangles": 602,
+   "animations": 0
+  },
+  "style.lowpoly.blaster_r": {
+   "path": "lowpoly/blaster_r.glb",
+   "bytes": 21036,
+   "sha256": "02218ddfa704a2326f56236da7f2be876d67c6f7782f074a87783e3988a9871b",
+   "triangles": 524,
+   "animations": 0
+  },
+  "style.lowpoly.blob_alien": {
+   "path": "lowpoly/blob_alien.glb",
+   "bytes": 48292,
+   "sha256": "4ed3b18bd9d5c6bce60f47de6198ae060a36d02805b7a0c7afc3b45fac261200",
+   "triangles": 2616,
+   "animations": 9
+  },
+  "style.lowpoly.blob_bird": {
+   "path": "lowpoly/blob_bird.glb",
+   "bytes": 61136,
+   "sha256": "3b090db70aa2404dc0b5d03f880e9ee8d05d800a8778046abad035c80af796d0",
+   "triangles": 3164,
+   "animations": 9
+  },
+  "style.lowpoly.blob_ninja": {
+   "path": "lowpoly/blob_ninja.glb",
+   "bytes": 46732,
+   "sha256": "1e1c6ad28c635b3b873c1df9040839e10d0c9fd9f98ccc48def9e5850ff7d04a",
+   "triangles": 2160,
+   "animations": 9
+  },
+  "style.lowpoly.blob_orc": {
+   "path": "lowpoly/blob_orc.glb",
+   "bytes": 54856,
+   "sha256": "31910c3d0284405ed2790ad45c071a0f5436e78bba87df4b28054a702fa37c97",
+   "triangles": 2296,
+   "animations": 9
+  },
+  "style.lowpoly.blob_wizard": {
+   "path": "lowpoly/blob_wizard.glb",
+   "bytes": 43160,
+   "sha256": "2cbe2cd36a236c774d95663df55d51e1016f3471142e997c04b73985dbd263c4",
+   "triangles": 1674,
+   "animations": 9
+  },
+  "style.lowpoly.blob_yeti": {
+   "path": "lowpoly/blob_yeti.glb",
+   "bytes": 49488,
+   "sha256": "e36852fed17342522e87adcd5f09f3800c10c3696d246e274051a15c608741e5",
+   "triangles": 2136,
+   "animations": 9
+  },
+  "style.lowpoly.blocky_a": {
+   "path": "lowpoly/blocky_a.glb",
+   "bytes": 63512,
+   "sha256": "d5fd9952f4723770773f43fda6fbbeddb557c9808f317adc04b1cb0589984d43",
+   "triangles": 72,
+   "animations": 27
+  },
+  "style.lowpoly.blocky_b": {
+   "path": "lowpoly/blocky_b.glb",
+   "bytes": 58944,
+   "sha256": "297e695f9284b2c19d54f4617ac3b6b4eebbf000eeb5179307ee3203696a50a9",
+   "triangles": 72,
+   "animations": 27
+  },
+  "style.lowpoly.blocky_c": {
+   "path": "lowpoly/blocky_c.glb",
+   "bytes": 56152,
+   "sha256": "2ef40595a3478b36cc4c83a98e1dd4a77144cf485e2424439bb6b3e47e322004",
+   "triangles": 72,
+   "animations": 27
+  },
+  "style.lowpoly.blocky_d": {
+   "path": "lowpoly/blocky_d.glb",
+   "bytes": 56488,
+   "sha256": "8060bfd01b7c47bcb615a01ef9de726a47188300af6d20e7caa72aa089963748",
+   "triangles": 72,
+   "animations": 27
+  },
+  "style.lowpoly.blocky_e": {
+   "path": "lowpoly/blocky_e.glb",
+   "bytes": 57848,
+   "sha256": "98c0491280a362088053ee361e9ad805e56ba349ec473e415351da4800ed9ebc",
+   "triangles": 72,
+   "animations": 27
+  },
+  "style.lowpoly.blocky_f": {
+   "path": "lowpoly/blocky_f.glb",
+   "bytes": 59220,
+   "sha256": "d49430e0c88037ded4aeaaf3ce1770e6fa9ea1bfb53aaba93a5f05f68e969f44",
+   "triangles": 72,
+   "animations": 27
+  },
+  "style.lowpoly.blocky_g": {
+   "path": "lowpoly/blocky_g.glb",
+   "bytes": 59408,
+   "sha256": "14bd541bf4d35f8bbe82da7bd18bd75488bf1533208a5120be9c167ff2b6957d",
+   "triangles": 72,
+   "animations": 27
+  },
+  "style.lowpoly.blocky_h": {
+   "path": "lowpoly/blocky_h.glb",
+   "bytes": 59552,
+   "sha256": "a308710c4012471a54ec833da3eb5d7d158200ba851712ed1f2173bbb24e826a",
+   "triangles": 72,
+   "animations": 27
+  },
+  "style.lowpoly.blocky_i": {
+   "path": "lowpoly/blocky_i.glb",
+   "bytes": 60216,
+   "sha256": "9bd3d5fb03f996584d0e76c0437793b74f6b9d9c307226dc40ba93e30cddce8e",
+   "triangles": 72,
+   "animations": 27
+  },
+  "style.lowpoly.blocky_j": {
+   "path": "lowpoly/blocky_j.glb",
+   "bytes": 60900,
+   "sha256": "0b8558461b2190ed10999a830f5de8b2834c1a5ad64a4cfd12eb93926917982f",
+   "triangles": 72,
+   "animations": 27
+  },
+  "style.lowpoly.blocky_k": {
+   "path": "lowpoly/blocky_k.glb",
+   "bytes": 60776,
+   "sha256": "c0d89da2bee99d1a622107513d43c7a50c7150bd8ba1a37d752a9747114fee83",
+   "triangles": 72,
+   "animations": 27
+  },
+  "style.lowpoly.blocky_l": {
+   "path": "lowpoly/blocky_l.glb",
+   "bytes": 66104,
+   "sha256": "1ad37ed6e58d4ce6072d6c2890e81cf1ac80b6b1d1ed5f013b4a53e5acee2c1e",
+   "triangles": 72,
+   "animations": 27
+  },
+  "style.lowpoly.blocky_m": {
+   "path": "lowpoly/blocky_m.glb",
+   "bytes": 62680,
+   "sha256": "d3ca0fd471fc137135773e09b79763b783c9ffdad42181e981f5e0b8fce5bf5e",
+   "triangles": 72,
+   "animations": 27
+  },
+  "style.lowpoly.blocky_n": {
+   "path": "lowpoly/blocky_n.glb",
+   "bytes": 60160,
+   "sha256": "9c8e3fbc7f8b244642247aad259498ece444a6765151a4e8f370220bd62a90fa",
+   "triangles": 72,
+   "animations": 27
+  },
+  "style.lowpoly.blocky_o": {
+   "path": "lowpoly/blocky_o.glb",
+   "bytes": 64400,
+   "sha256": "41f142ebd689af71e3bf8d62b441ffcada578a34cc8a3436f0947e4841580267",
+   "triangles": 72,
+   "animations": 27
+  },
+  "style.lowpoly.blocky_p": {
+   "path": "lowpoly/blocky_p.glb",
+   "bytes": 61324,
+   "sha256": "38e4220b62c0689af2f38594bf831f536c89075334fa5d63f4e277324454049f",
+   "triangles": 72,
+   "animations": 27
+  },
+  "style.lowpoly.blocky_q": {
+   "path": "lowpoly/blocky_q.glb",
+   "bytes": 59440,
+   "sha256": "1a0005615ab9ed230f664aaa640b8f84fa6dc34874e91f8f836db4ecf3153c99",
+   "triangles": 72,
+   "animations": 27
+  },
+  "style.lowpoly.blocky_r": {
+   "path": "lowpoly/blocky_r.glb",
+   "bytes": 57248,
+   "sha256": "3646fd426664e7783e3ae0f273940bee0ec66cbf532b860cd46634638673afe0",
+   "triangles": 72,
+   "animations": 27
+  },
+  "style.lowpoly.building_a": {
+   "path": "lowpoly/building_a.glb",
+   "bytes": 28324,
+   "sha256": "8eeb41373632a5e1c82fc4f76005fd657cea424dc633f4391703e964c07ab34b",
+   "triangles": 1252,
+   "animations": 0
+  },
+  "style.lowpoly.building_b": {
+   "path": "lowpoly/building_b.glb",
+   "bytes": 28628,
+   "sha256": "effdff1729c113080a0af9b3b040214c6fd21692d8d54094934978c7c5f2ba4f",
+   "triangles": 1276,
+   "animations": 0
+  },
+  "style.lowpoly.building_c": {
+   "path": "lowpoly/building_c.glb",
+   "bytes": 27452,
+   "sha256": "43c5fb342706f006f17b2c442acbc0f05fdfef0441b51bd9094c874e12d35be7",
+   "triangles": 1195,
+   "animations": 0
+  },
+  "style.lowpoly.building_d": {
+   "path": "lowpoly/building_d.glb",
+   "bytes": 26300,
+   "sha256": "f6d9a66fe2073861a3f10a1432c570aeca1b4ec84b3dac1823ef908229ccc810",
+   "triangles": 1100,
+   "animations": 0
+  },
+  "style.lowpoly.building_e": {
+   "path": "lowpoly/building_e.glb",
+   "bytes": 32188,
+   "sha256": "5a37dc710880c7e8b02aca5b007862f5c5f31bf4914e7f2a88cc80d8455f15ca",
+   "triangles": 1509,
+   "animations": 0
+  },
+  "style.lowpoly.building_f": {
+   "path": "lowpoly/building_f.glb",
+   "bytes": 33904,
+   "sha256": "62cfca3789f285d500378ea47a91a16ba8448d2b49a96283699df5efe4ef9e7c",
+   "triangles": 1794,
+   "animations": 0
+  },
+  "style.lowpoly.building_g": {
+   "path": "lowpoly/building_g.glb",
+   "bytes": 37188,
+   "sha256": "e63fdec09bdb2a7d1bb05f41c05d15d71db0882a50cdeee7a6ff3ef750d934ba",
+   "triangles": 2006,
+   "animations": 0
+  },
+  "style.lowpoly.building_h": {
+   "path": "lowpoly/building_h.glb",
+   "bytes": 30896,
+   "sha256": "f77c97924daab494562c4e0b3d8cd7b53c79e7aba8f15bf4469cdd4b9a51f0ae",
+   "triangles": 1512,
+   "animations": 0
+  },
+  "style.lowpoly.burger": {
+   "path": "lowpoly/burger.glb",
+   "bytes": 23956,
+   "sha256": "6cad21df94f168240db45d8c8c0257f8b3bedcf739d84bda0217bfdc6dd01ca3",
+   "triangles": 294,
+   "animations": 0
+  },
+  "style.lowpoly.bush": {
+   "path": "lowpoly/bush.glb",
+   "bytes": 2588,
+   "sha256": "682a79f4df51bbf91879c0824b1eb6b059780eb16df6e8bca43207902724884a",
+   "triangles": 32,
+   "animations": 0
+  },
+  "style.lowpoly.bush_large": {
+   "path": "lowpoly/bush_large.glb",
+   "bytes": 3180,
+   "sha256": "3866b5d14340c37865e38d5f648f7e77da6a64d92cb0802d357f8f1441b01dff",
+   "triangles": 60,
+   "animations": 0
+  },
+  "style.lowpoly.cactus": {
+   "path": "lowpoly/cactus.glb",
+   "bytes": 3816,
+   "sha256": "86242c771b867df71217bc5d6e2456baf62bebd31818d8bf23d1545d4f950413",
+   "triangles": 122,
+   "animations": 0
+  },
+  "style.lowpoly.cake": {
+   "path": "lowpoly/cake.glb",
+   "bytes": 35756,
+   "sha256": "8774df7e0a98f0ea215b8031cdaf966e82d2927004262a1492cbefc51371e8df",
+   "triangles": 1146,
+   "animations": 0
+  },
+  "style.lowpoly.campfire": {
+   "path": "lowpoly/campfire.glb",
+   "bytes": 5404,
+   "sha256": "d5e2868856f2f96a678b7f512235eaec9a9fe77904b24b8b20f38368c31ed148",
+   "triangles": 264,
+   "animations": 0
+  },
+  "style.lowpoly.cargo_ship": {
+   "path": "lowpoly/cargo_ship.glb",
+   "bytes": 8292,
+   "sha256": "23673fcd71770724355e503cc00258d1746fb9b5a2416a3546c29daa70b0943a",
+   "triangles": 264,
+   "animations": 0
+  },
+  "style.lowpoly.carrot": {
+   "path": "lowpoly/carrot.glb",
+   "bytes": 15204,
+   "sha256": "91793c1bc5ed2296ea2329b16cba05a5e0d65545fac0bc7b36a17b6fb765f240",
+   "triangles": 148,
+   "animations": 0
+  },
+  "style.lowpoly.cat": {
+   "path": "lowpoly/cat.glb",
+   "bytes": 66584,
+   "sha256": "a7bf890ddb81b945404e396375a4c5dc7c1fbd5f846eedf5f4b7ed2b5c0dda0f",
+   "triangles": 2448,
+   "animations": 8
+  },
+  "style.lowpoly.cheese": {
+   "path": "lowpoly/cheese.glb",
+   "bytes": 35624,
+   "sha256": "dbfbfa4588f3089d4c6f34eb100043e552b084397642c66222bd62cba2a856c1",
+   "triangles": 576,
+   "animations": 0
+  },
+  "style.lowpoly.chest": {
+   "path": "lowpoly/chest.glb",
+   "bytes": 35080,
+   "sha256": "6aa463131c39f6b3de830895bc01a1ab2b0e7e21fd6bb4ec2f176f40d61183ec",
+   "triangles": 1676,
+   "animations": 0
+  },
+  "style.lowpoly.coin": {
+   "path": "lowpoly/coin.glb",
+   "bytes": 8808,
+   "sha256": "445deaefd7ef2b4a5f603344f7d8affbea8a080e586ef548ad742c6c04226883",
+   "triangles": 396,
+   "animations": 0
+  },
+  "style.lowpoly.column": {
+   "path": "lowpoly/column.glb",
+   "bytes": 5508,
+   "sha256": "ffce96e3ed0cdc74910537ce77e4a435694ad21fae02c9558d041d8020f05a39",
+   "triangles": 122,
+   "animations": 0
+  },
+  "style.lowpoly.column_broken": {
+   "path": "lowpoly/column_broken.glb",
+   "bytes": 4224,
+   "sha256": "00b31388bdb4f5dcb0a3f7a0b3087035facacc09cdfa3f6d88b17276d244c0f1",
+   "triangles": 108,
+   "animations": 0
+  },
+  "style.lowpoly.cookie": {
+   "path": "lowpoly/cookie.glb",
+   "bytes": 14744,
+   "sha256": "d3770c8ede7cb7f6aee851359deac5a6d1559f3fbe20cc4646dddf96d2d1d7c5",
+   "triangles": 136,
+   "animations": 0
+  },
+  "style.lowpoly.crab": {
+   "path": "lowpoly/crab.glb",
+   "bytes": 73760,
+   "sha256": "def8e4a3a0e35ba9923670c2b819067b2f8e69c09fdd28d48c858aa2953ffa46",
+   "triangles": 3624,
+   "animations": 10
+  },
+  "style.lowpoly.crate": {
+   "path": "lowpoly/crate.glb",
+   "bytes": 23728,
+   "sha256": "65ccc2829b6da1ca6b16155ad0558cb4391e1a8db9e6d4eb7f87113164ca57e2",
+   "triangles": 628,
+   "animations": 3
+  },
+  "style.lowpoly.crystal": {
+   "path": "lowpoly/crystal.glb",
+   "bytes": 14804,
+   "sha256": "dba00aab82398db64680c060784ac0cb7238b17cbd31b4f9b4ee4fd090798f1f",
+   "triangles": 590,
+   "animations": 0
+  },
+  "style.lowpoly.crystal_rock": {
+   "path": "lowpoly/crystal_rock.glb",
+   "bytes": 9328,
+   "sha256": "091f510cc2ed7ccc2468da7de17cd4ce9efef5e1880570812407bbc92935deec",
+   "triangles": 384,
+   "animations": 0
+  },
+  "style.lowpoly.cupcake": {
+   "path": "lowpoly/cupcake.glb",
+   "bytes": 18740,
+   "sha256": "d7dcb40f5fdbd8f02cc7206d0adec117fa89ca8e13e15835dca08db8786caa04",
+   "triangles": 204,
+   "animations": 0
+  },
+  "style.lowpoly.deer": {
+   "path": "lowpoly/deer.glb",
+   "bytes": 381812,
+   "sha256": "faa7478be20eefbc6c73f90e070ee00cb931e31bf4e796549107f2fe2937853e",
+   "triangles": 2096,
+   "animations": 26
+  },
+  "style.lowpoly.delivery_flat": {
+   "path": "lowpoly/delivery_flat.glb",
+   "bytes": 34236,
+   "sha256": "d3ec72fdba12a7fb37a906f0bccdfffbf0f00f554043fe2cfb07a8a1e297c4f5",
+   "triangles": 1718,
+   "animations": 0
+  },
+  "style.lowpoly.delivery_van": {
+   "path": "lowpoly/delivery_van.glb",
+   "bytes": 35288,
+   "sha256": "1a98a2c08bcad24dd2230ce04680d5b4c01ca41119731856fe56e117ac1850b1",
+   "triangles": 1620,
+   "animations": 0
+  },
+  "style.lowpoly.demon": {
+   "path": "lowpoly/demon.glb",
+   "bytes": 203120,
+   "sha256": "8b99ef1dab63988bc6aa8d2ca798aa58589886e05d99a36e91eac295bbc03722",
+   "triangles": 6712,
+   "animations": 14
+  },
+  "style.lowpoly.demon_blue": {
+   "path": "lowpoly/demon_blue.glb",
+   "bytes": 194900,
+   "sha256": "41e6bc6b554420ec39dad64dacc01f9f02d5adba24826e1823cecf1865260e84",
+   "triangles": 5800,
+   "animations": 15
+  },
+  "style.lowpoly.digger": {
+   "path": "lowpoly/digger.glb",
+   "bytes": 49788,
+   "sha256": "5034418fa74fb1373b061499d0c3a69b94bc9c97ae53a8063dbfbc09786d89d7",
+   "triangles": 2646,
+   "animations": 0
+  },
+  "style.lowpoly.dino": {
+   "path": "lowpoly/dino.glb",
+   "bytes": 186084,
+   "sha256": "880eb5ae56e83a0cf4a84905ab23e1b952ed356d9ee43efad839b8a4652215eb",
+   "triangles": 5414,
+   "animations": 14
+  },
+  "style.lowpoly.donut": {
+   "path": "lowpoly/donut.glb",
+   "bytes": 16044,
+   "sha256": "a38d531beb524011c952c04adebd6bf42c70a2d71539f85f9e07a026b79f560f",
+   "triangles": 180,
+   "animations": 0
+  },
+  "style.lowpoly.dragon": {
+   "path": "lowpoly/dragon.glb",
+   "bytes": 180908,
+   "sha256": "eeadd837fa1090e761c1b2487a163862a3211b4efac02baf7f4a798d16ddfd41",
+   "triangles": 7438,
+   "animations": 8
+  },
+  "style.lowpoly.dragon_whelp": {
+   "path": "lowpoly/dragon_whelp.glb",
+   "bytes": 96084,
+   "sha256": "fd7eaf15d621873ad1525a1d41de82b90f5c2e7a51d280a43310e4bda4399546",
+   "triangles": 4562,
+   "animations": 8
+  },
+  "style.lowpoly.fence": {
+   "path": "lowpoly/fence.glb",
+   "bytes": 3528,
+   "sha256": "3ceb7f51e1f38431f10b489685a7b0e6f5618b31786a000f4cfd9e9b9c387f43",
+   "triangles": 64,
+   "animations": 0
+  },
+  "style.lowpoly.firetruck": {
+   "path": "lowpoly/firetruck.glb",
+   "bytes": 39796,
+   "sha256": "48c4e85bf9afd7e1a4f9a32af7c3f0ca0a027a96238515155451ded3c83ed5f7",
+   "triangles": 1911,
+   "animations": 0
+  },
+  "style.lowpoly.fish": {
+   "path": "lowpoly/fish.glb",
+   "bytes": 16596,
+   "sha256": "47c9fc34244a6abeb015337279f932118c9a0de2201a00994102ed9c437b1147",
+   "triangles": 233,
+   "animations": 0
+  },
+  "style.lowpoly.flower_red": {
+   "path": "lowpoly/flower_red.glb",
+   "bytes": 4096,
+   "sha256": "ca591d7f367c205b67a9cbccaecb1e6d7bfd63d40c8f7e2e22290a3ea0e42a28",
+   "triangles": 76,
+   "animations": 0
+  },
+  "style.lowpoly.fluffy_flyer": {
+   "path": "lowpoly/fluffy_flyer.glb",
+   "bytes": 74848,
+   "sha256": "0a97a3d6de78fe08828cbf0fd31e9ab3de490fa8ad4101ca3626bc631b0a58d4",
+   "triangles": 2508,
+   "animations": 8
+  },
+  "style.lowpoly.fox": {
+   "path": "lowpoly/fox.glb",
+   "bytes": 421652,
+   "sha256": "bdc65987437d5dbb33b33685a5aad9a9f42ca9b9cd3aed460d63a0e6f4ed1ffb",
+   "triangles": 1848,
+   "animations": 24
+  },
+  "style.lowpoly.fries": {
+   "path": "lowpoly/fries.glb",
+   "bytes": 26340,
+   "sha256": "2c3fbf19ecfc2bf043c9c80079b19981e7ff62e14d221ce2dfb4dc2778dd0779",
+   "triangles": 564,
+   "animations": 0
+  },
+  "style.lowpoly.frog": {
+   "path": "lowpoly/frog.glb",
+   "bytes": 169864,
+   "sha256": "20d156405a379ee38d2c2cd856ca2f50151d2f7193bf4d8640cd48cb0aa24fa1",
+   "triangles": 4920,
+   "animations": 4
+  },
+  "style.lowpoly.garbage_truck": {
+   "path": "lowpoly/garbage_truck.glb",
+   "bytes": 46168,
+   "sha256": "513ce2d49eaf26ed537c59ee883ebcced3e3e5cb7e8e3298f543cbb35e82a542",
+   "triangles": 2268,
+   "animations": 0
+  },
+  "style.lowpoly.gem_pink": {
+   "path": "lowpoly/gem_pink.glb",
+   "bytes": 12252,
+   "sha256": "68c174f1c5c2442d81603432b5a249980614718f75606c928b7235b56586431c",
+   "triangles": 44,
+   "animations": 0
+  },
+  "style.lowpoly.generator": {
+   "path": "lowpoly/generator.glb",
+   "bytes": 9844,
+   "sha256": "773d7547a6674552930d9d16599ecdf9c16a0e8af39f4ff81509d0123d044620",
+   "triangles": 406,
+   "animations": 0
+  },
+  "style.lowpoly.generator_large": {
+   "path": "lowpoly/generator_large.glb",
+   "bytes": 6344,
+   "sha256": "9a51c2b5bd1f69ec9902cbcae8882cde9241016b38f75b0db760b462e1355597",
+   "triangles": 126,
+   "animations": 0
+  },
+  "style.lowpoly.ghost": {
+   "path": "lowpoly/ghost.glb",
+   "bytes": 99616,
+   "sha256": "3157d7a85c476a6d1430d04be61c676c9b05ded02dd25c24949fdb51d815dfbe",
+   "triangles": 3192,
+   "animations": 8
+  },
+  "style.lowpoly.ghost_skull": {
+   "path": "lowpoly/ghost_skull.glb",
+   "bytes": 105292,
+   "sha256": "35e3b7fe6ce276213f9eb43033363e059cb2b63bbcb2d4eb00ace82090c20a1f",
+   "triangles": 3144,
+   "animations": 8
+  },
+  "style.lowpoly.goblin": {
+   "path": "lowpoly/goblin.glb",
+   "bytes": 64548,
+   "sha256": "41a8cad6b1fa3f6faabe6361194f9f5b13bbdccd1f5f0fde860db6ed411dbaf5",
+   "triangles": 2912,
+   "animations": 7
+  },
+  "style.lowpoly.greatsword": {
+   "path": "lowpoly/greatsword.glb",
+   "bytes": 20096,
+   "sha256": "b653b0e3315e98131d7f9cf7b6004f3e0a5d5b30c6380cb3a784353b058c42c9",
+   "triangles": 1031,
+   "animations": 0
+  },
+  "style.lowpoly.grenade": {
+   "path": "lowpoly/grenade.glb",
+   "bytes": 15460,
+   "sha256": "940255fcfe774c9871dc62f940ce9bb2deda2c22993feb6467f5eb850e63cb53",
+   "triangles": 200,
+   "animations": 0
+  },
+  "style.lowpoly.hangar": {
+   "path": "lowpoly/hangar.glb",
+   "bytes": 7124,
+   "sha256": "a133bcc51ad4899978b4f8bf459c7a7457181f069a4a16ac7403b1d380abfd4c",
+   "triangles": 166,
+   "animations": 0
+  },
+  "style.lowpoly.hatchback_sports": {
+   "path": "lowpoly/hatchback_sports.glb",
+   "bytes": 33012,
+   "sha256": "12ce01f69cf16d1eef2f3eb494c9208856d07473b3b89e7674535de293df278d",
+   "triangles": 1424,
+   "animations": 0
+  },
+  "style.lowpoly.hooded_adventurer": {
+   "path": "lowpoly/hooded_adventurer.glb",
+   "bytes": 569028,
+   "sha256": "d57645bdecd71a4dbd9a6113835711cd79ada3a4b73f81a5c86bbe14e86cc4cf",
+   "triangles": 7276,
+   "animations": 24
+  },
+  "style.lowpoly.hot_dog": {
+   "path": "lowpoly/hot_dog.glb",
+   "bytes": 19416,
+   "sha256": "c2e1d68eab2962da737fdcd53cea822c56076625fb594f5ce075e1abb8bac1b4",
+   "triangles": 272,
+   "animations": 0
+  },
+  "style.lowpoly.husky": {
+   "path": "lowpoly/husky.glb",
+   "bytes": 452348,
+   "sha256": "d5a6e1d4f86b5acd9415bd47c734573edb986cdcd6b44784aa7c104b3f280808",
+   "triangles": 1920,
+   "animations": 24
+  },
+  "style.lowpoly.ice_cream": {
+   "path": "lowpoly/ice_cream.glb",
+   "bytes": 15500,
+   "sha256": "91c220ccbfbb8b580e3081482d299637b872cc0230da1cbb3f611da3387ef8a6",
+   "triangles": 80,
+   "animations": 0
+  },
+  "style.lowpoly.imp": {
+   "path": "lowpoly/imp.glb",
+   "bytes": 142576,
+   "sha256": "65fe968cb6b9aa3e5e0b09556a21d1f86b816b2612914068480031957f2059ce",
+   "triangles": 4784,
+   "animations": 8
+  },
+  "style.lowpoly.jelly_flyer": {
+   "path": "lowpoly/jelly_flyer.glb",
+   "bytes": 87192,
+   "sha256": "b322b302e1e979e6df7dddea91424682b28e6bcda63824e62cf776b214080b71",
+   "triangles": 4452,
+   "animations": 8
+  },
+  "style.lowpoly.kart_a": {
+   "path": "lowpoly/kart_a.glb",
+   "bytes": 41992,
+   "sha256": "0612a6d9262d0ec6a68966d8f968e17f22f0a54becbe5419ab6bf56c36d8f508",
+   "triangles": 2220,
+   "animations": 0
+  },
+  "style.lowpoly.kart_b": {
+   "path": "lowpoly/kart_b.glb",
+   "bytes": 40644,
+   "sha256": "7174c0aa268c6b4bb83500ff21037fd655d9fefc77f82756aba2ed0f596c8c46",
+   "triangles": 2062,
+   "animations": 0
+  },
+  "style.lowpoly.kart_c": {
+   "path": "lowpoly/kart_c.glb",
+   "bytes": 40724,
+   "sha256": "4e95d686866dd9bc939de31f1e47f9e3ad5028fb5d318dfa578635ffd60e3bd9",
+   "triangles": 2042,
+   "animations": 0
+  },
+  "style.lowpoly.kart_d": {
+   "path": "lowpoly/kart_d.glb",
+   "bytes": 40660,
+   "sha256": "7c9bfdad7a11dae2343d5f73431b776794221ccafce1c84b3ac2ed2c2b9c3946",
+   "triangles": 2062,
+   "animations": 0
+  },
+  "style.lowpoly.kart_e": {
+   "path": "lowpoly/kart_e.glb",
+   "bytes": 40528,
+   "sha256": "048efad258810d318326a628670ab2e9018f44d525659424435707d20b71fbf7",
+   "triangles": 2062,
+   "animations": 0
+  },
+  "style.lowpoly.log": {
+   "path": "lowpoly/log.glb",
+   "bytes": 4248,
+   "sha256": "9fe589fdeb55383aea1441017ab878e1dcac73b5d11abf31b65b7bec018321d6",
+   "triangles": 96,
+   "animations": 0
+  },
+  "style.lowpoly.mech": {
+   "path": "lowpoly/mech.glb",
+   "bytes": 172696,
+   "sha256": "16a1ae4d2a30982c0370ae576b6dca3cc36125d042d4d639c2e79c86f3426ab8",
+   "triangles": 5846,
+   "animations": 17
+  },
+  "style.lowpoly.mech_heavy": {
+   "path": "lowpoly/mech_heavy.glb",
+   "bytes": 148232,
+   "sha256": "122dc81cb86f78f0225f408cfef99db5511e1ed7c254723e5032a81e09494457",
+   "triangles": 4086,
+   "animations": 17
+  },
+  "style.lowpoly.meteor": {
+   "path": "lowpoly/meteor.glb",
+   "bytes": 4972,
+   "sha256": "f280e73c11b735298e128b91141774d715d393e380c7537f295785c72babae67",
+   "triangles": 196,
+   "animations": 0
+  },
+  "style.lowpoly.miner_ship": {
+   "path": "lowpoly/miner_ship.glb",
+   "bytes": 10020,
+   "sha256": "6e713f46c6cd6e6ca7b3ba753a51d4ea1b7668975a04ff2448f5e78afad39f0b",
+   "triangles": 384,
+   "animations": 0
+  },
+  "style.lowpoly.mini_female_a": {
+   "path": "lowpoly/mini_female_a.glb",
+   "bytes": 79300,
+   "sha256": "20624d1b19423ac8ab03ac8f91bbaf02b1da8e1907dfe0972736d1e77cf14c8c",
+   "triangles": 876,
+   "animations": 32
+  },
+  "style.lowpoly.mini_female_b": {
+   "path": "lowpoly/mini_female_b.glb",
+   "bytes": 76944,
+   "sha256": "d116f74b076892e10e5375a2eaf0a9bb92e0392f88071e25b6a62ccb387b830c",
+   "triangles": 742,
+   "animations": 32
+  },
+  "style.lowpoly.mini_female_c": {
+   "path": "lowpoly/mini_female_c.glb",
+   "bytes": 77216,
+   "sha256": "0bc906e4b8e93afd331a4d95758113f01a2b9a024a5c57b85b99fce1082ee71d",
+   "triangles": 732,
+   "animations": 32
+  },
+  "style.lowpoly.mini_female_d": {
+   "path": "lowpoly/mini_female_d.glb",
+   "bytes": 77932,
+   "sha256": "fb8369718489dc09c55b081cd7303c02dac30bd314a5fe8c89204ba056a5de07",
+   "triangles": 797,
+   "animations": 32
+  },
+  "style.lowpoly.mini_female_e": {
+   "path": "lowpoly/mini_female_e.glb",
+   "bytes": 77256,
+   "sha256": "cd079f105adf221f9359ebd7a568568d7c9e1d0526c9dc294648a2630ab4b76e",
+   "triangles": 756,
+   "animations": 32
+  },
+  "style.lowpoly.mini_female_f": {
+   "path": "lowpoly/mini_female_f.glb",
+   "bytes": 78000,
+   "sha256": "304be80045a74d713a69936da4fe1f77e299df483ab63a99a554b14cbac683c6",
+   "triangles": 788,
+   "animations": 32
+  },
+  "style.lowpoly.mini_male_a": {
+   "path": "lowpoly/mini_male_a.glb",
+   "bytes": 76676,
+   "sha256": "d3ddd36feb5b27ceec4117cc264bd52343632b965298cd14d195c9cee11c430b",
+   "triangles": 723,
+   "animations": 32
+  },
+  "style.lowpoly.mini_male_b": {
+   "path": "lowpoly/mini_male_b.glb",
+   "bytes": 76704,
+   "sha256": "ca4c27f8e08038179ab991e9be115d1ce0f5a71a78ab45341b57c6199fcdb595",
+   "triangles": 690,
+   "animations": 32
+  },
+  "style.lowpoly.mini_male_c": {
+   "path": "lowpoly/mini_male_c.glb",
+   "bytes": 78416,
+   "sha256": "1c2877e852de73300f0da1e5f15615fc71f7506bb37baabd4ffa00403c6e3b94",
+   "triangles": 793,
+   "animations": 32
+  },
+  "style.lowpoly.mini_male_d": {
+   "path": "lowpoly/mini_male_d.glb",
+   "bytes": 76776,
+   "sha256": "eb75827cc40dc13d46c26115d27da9542ef28c8f4492821f1bd09dcccdb242c0",
+   "triangles": 711,
+   "animations": 32
+  },
+  "style.lowpoly.mini_male_e": {
+   "path": "lowpoly/mini_male_e.glb",
+   "bytes": 76896,
+   "sha256": "ebdb0bc18b47b4e0407a486b0320b442c1f511ec3f98d3052749c471ef507548",
+   "triangles": 710,
+   "animations": 32
+  },
+  "style.lowpoly.mini_male_f": {
+   "path": "lowpoly/mini_male_f.glb",
+   "bytes": 76984,
+   "sha256": "4e637719529130260bf11414a4cb7eaab12feebf78bd26820acecfe77e6c0841",
+   "triangles": 701,
+   "animations": 32
+  },
+  "style.lowpoly.monarch": {
+   "path": "lowpoly/monarch.glb",
+   "bytes": 623944,
+   "sha256": "abd568addfdcafe6625d209c8e8512c9fc639c2ef1efa51e71c59d490b5529e3",
+   "triangles": 11100,
+   "animations": 24
+  },
+  "style.lowpoly.mushroom_imp": {
+   "path": "lowpoly/mushroom_imp.glb",
+   "bytes": 35680,
+   "sha256": "bc6eaac6de5da1e68fb964c56d928913b23b2ff0820ed7fd6ae4ff788554d4d3",
+   "triangles": 1248,
+   "animations": 9
+  },
+  "style.lowpoly.mushroom_king": {
+   "path": "lowpoly/mushroom_king.glb",
+   "bytes": 198844,
+   "sha256": "50db1ced7b079e0606d85b9a62bfdf3423f23e91aac1c47744004f4eb03835da",
+   "triangles": 6044,
+   "animations": 14
+  },
+  "style.lowpoly.mushroom_red": {
+   "path": "lowpoly/mushroom_red.glb",
+   "bytes": 3624,
+   "sha256": "9a02bde6eb5aecb2e33de51af4ddacd1473a3c580c5cc55b3546c1d579d5b443",
+   "triangles": 48,
+   "animations": 0
+  },
+  "style.lowpoly.ninja_brute": {
+   "path": "lowpoly/ninja_brute.glb",
+   "bytes": 200368,
+   "sha256": "2dc848d0ef5845738d56c02b8865360f3bad0e5263e086f9ada52f8d3197890c",
+   "triangles": 5964,
+   "animations": 14
+  },
+  "style.lowpoly.obelisk": {
+   "path": "lowpoly/obelisk.glb",
+   "bytes": 3528,
+   "sha256": "844f12d58299170ca6af46d54dfefa703e83f42b037be3637cb256d0b2d19c45",
+   "triangles": 38,
+   "animations": 0
+  },
+  "style.lowpoly.orc_brute": {
+   "path": "lowpoly/orc_brute.glb",
+   "bytes": 220968,
+   "sha256": "c95b2f52b86daef824f5f626734c7f04e9e8ed937cd7faa6228c58d17bd52413",
+   "triangles": 7344,
+   "animations": 14
+  },
+  "style.lowpoly.pebble_flyer": {
+   "path": "lowpoly/pebble_flyer.glb",
+   "bytes": 86184,
+   "sha256": "fe5e1023f8f1d85237d4ac9318e31163b82f302540da3ecf5588f39b153147ca",
+   "triangles": 3696,
+   "animations": 8
+  },
+  "style.lowpoly.pirate": {
+   "path": "lowpoly/pirate.glb",
+   "bytes": 240436,
+   "sha256": "370d6d442510bb41e6e27057b38326dcba6d00040cc1c3263340253b5cb0dbd3",
+   "triangles": 10576,
+   "animations": 14
+  },
+  "style.lowpoly.pizza": {
+   "path": "lowpoly/pizza.glb",
+   "bytes": 37980,
+   "sha256": "f67be736be5b95cc58d401c9648e5641b6ff070623d97f4796ba0cb209298534",
+   "triangles": 1208,
+   "animations": 0
+  },
+  "style.lowpoly.police_car": {
+   "path": "lowpoly/police_car.glb",
+   "bytes": 35812,
+   "sha256": "02e6499c6bb5b617732fa659e158384ef251573f5e8773b455d68a59a28eefe3",
+   "triangles": 1640,
+   "animations": 0
+  },
+  "style.lowpoly.pug": {
+   "path": "lowpoly/pug.glb",
+   "bytes": 57508,
+   "sha256": "732050e340752eee150a9bd3bfd4d4a801f3277f1e4a5d44c28fc28fb02b849a",
+   "triangles": 644,
+   "animations": 2
+  },
+  "style.lowpoly.pumpkin": {
+   "path": "lowpoly/pumpkin.glb",
+   "bytes": 15728,
+   "sha256": "eb30478ba66696b6168aed29fa8256c80f9695a76fc84d2e39ca31daa884a394",
+   "triangles": 188,
+   "animations": 0
+  },
+  "style.lowpoly.race_car": {
+   "path": "lowpoly/race_car.glb",
+   "bytes": 29536,
+   "sha256": "534f6acb7dd07132b83282cb877d7d06b4ad470bdea95e0336e24c2e42b59c8d",
+   "triangles": 1288,
+   "animations": 0
+  },
+  "style.lowpoly.race_car_future": {
+   "path": "lowpoly/race_car_future.glb",
+   "bytes": 31608,
+   "sha256": "c7df98507ab7365892929aed53a0f3f5cc7363eb3cc9dc696611161523c07d38",
+   "triangles": 1404,
+   "animations": 0
+  },
+  "style.lowpoly.racer_ship": {
+   "path": "lowpoly/racer_ship.glb",
+   "bytes": 8488,
+   "sha256": "debe9e15ba7001d42162049706e21504c4a5846c7f9e01c85a51f92002eb439d",
+   "triangles": 280,
+   "animations": 0
+  },
+  "style.lowpoly.raptor": {
+   "path": "lowpoly/raptor.glb",
+   "bytes": 138332,
+   "sha256": "caefc81206f9b85d8225333d1ac3af47300dc8c8102b8be033b2d5b528231224",
+   "triangles": 1248,
+   "animations": 6
+  },
+  "style.lowpoly.robot_flyer": {
+   "path": "lowpoly/robot_flyer.glb",
+   "bytes": 81024,
+   "sha256": "383e119f2585c13e0d4c4a26393acdf2bfff0192657e8b251ad09fae1c07463f",
+   "triangles": 4544,
+   "animations": 6
+  },
+  "style.lowpoly.robot_flyer_gun": {
+   "path": "lowpoly/robot_flyer_gun.glb",
+   "bytes": 87612,
+   "sha256": "9f5e9770a362e6c0cae27f6d0a79df4b38950366cf29e2c1cf0cc5cb01b6c82a",
+   "triangles": 4582,
+   "animations": 6
+  },
+  "style.lowpoly.robot_gunner": {
+   "path": "lowpoly/robot_gunner.glb",
+   "bytes": 101764,
+   "sha256": "de32e9c10cc6f7e4fe2d6c352c1cd9fe9018373a76322d36f3fc12c3952c2bf3",
+   "triangles": 4702,
+   "animations": 7
+  },
+  "style.lowpoly.robot_large": {
+   "path": "lowpoly/robot_large.glb",
+   "bytes": 114984,
+   "sha256": "755ba37a418a010a91277484824e15343f1d6790b6054e3181cd316cfa9f1176",
+   "triangles": 4256,
+   "animations": 8
+  },
+  "style.lowpoly.robot_walker": {
+   "path": "lowpoly/robot_walker.glb",
+   "bytes": 126792,
+   "sha256": "c178d80aa84211ad52cd5ab094828f3e8bd78414423e6bf7e1e0b7eb69439dab",
+   "triangles": 4380,
+   "animations": 7
+  },
+  "style.lowpoly.rock_large": {
+   "path": "lowpoly/rock_large.glb",
+   "bytes": 4256,
+   "sha256": "2c9d61bc3d1f491938f40d77feec60cae889eaefdc1490e27deae999ec4668db",
+   "triangles": 80,
+   "animations": 0
+  },
+  "style.lowpoly.rock_small": {
+   "path": "lowpoly/rock_small.glb",
+   "bytes": 3168,
+   "sha256": "44d67e6ae2dd8d46b66e4fb3ee0fb78678c3b1639aab4f53f0227e26c74bb644",
+   "triangles": 16,
+   "animations": 0
+  },
+  "style.lowpoly.rock_tall": {
+   "path": "lowpoly/rock_tall.glb",
+   "bytes": 5880,
+   "sha256": "1b7c06187c64ccbd5dfee1e020dd0f3943401c0f1a6f31098d76e59bcd737d45",
+   "triangles": 136,
+   "animations": 0
+  },
+  "style.lowpoly.rocket": {
+   "path": "lowpoly/rocket.glb",
+   "bytes": 7744,
+   "sha256": "42311e89e3355f675ee0462d1385b5dde6afafb48682764861b2a343e1dc5576",
+   "triangles": 300,
+   "animations": 0
+  },
+  "style.lowpoly.rogue": {
+   "path": "lowpoly/rogue.glb",
+   "bytes": 278100,
+   "sha256": "5f6b89e6da42a0f583f27e9827b6a51f19c387480b8001bd0769fb7ad14aef68",
+   "triangles": 6050,
+   "animations": 24
+  },
+  "style.lowpoly.rover": {
+   "path": "lowpoly/rover.glb",
+   "bytes": 7372,
+   "sha256": "27bacf8e2ee8b0ed255e10b47fb0109ccbc08a28020b1f19e8422adb4056b80e",
+   "triangles": 172,
+   "animations": 0
+  },
+  "style.lowpoly.satellite_dish": {
+   "path": "lowpoly/satellite_dish.glb",
+   "bytes": 6844,
+   "sha256": "798c2f5a1ebd2bd079eda4f922f9c14c2ce825ec2852a91181edc61fa5565ea5",
+   "triangles": 186,
+   "animations": 0
+  },
+  "style.lowpoly.sedan": {
+   "path": "lowpoly/sedan.glb",
+   "bytes": 32048,
+   "sha256": "68276daf41b3a8d32e5417aac8095c1abbfea1d3857b69e6863a6c5210fb5783",
+   "triangles": 1368,
+   "animations": 0
+  },
+  "style.lowpoly.sedan_sports": {
+   "path": "lowpoly/sedan_sports.glb",
+   "bytes": 34396,
+   "sha256": "3479dc4bcc858265a2f96c626413dddcdbc53a696afb8d098f1b82235a022611",
+   "triangles": 1424,
+   "animations": 0
+  },
+  "style.lowpoly.shiba": {
+   "path": "lowpoly/shiba.glb",
+   "bytes": 378632,
+   "sha256": "4c528f41f5a8adf53ee4e80fb2786a4d2fc2b1330535e685e421b570e5c83575",
+   "triangles": 1950,
+   "animations": 24
+  },
+  "style.lowpoly.skeleton": {
+   "path": "lowpoly/skeleton.glb",
+   "bytes": 65048,
+   "sha256": "63af67c0488cbb5dc4d500a3ce892c078efe1305796bd34f03b5a22a8f010924",
+   "triangles": 1810,
+   "animations": 5
+  },
+  "style.lowpoly.skeleton_crew": {
+   "path": "lowpoly/skeleton_crew.glb",
+   "bytes": 276268,
+   "sha256": "cdb834e6e2f9ed4ffa73e4207234f1001a682557aea3716d6cc1a5dfc86fd12f",
+   "triangles": 14260,
+   "animations": 15
+  },
+  "style.lowpoly.skeleton_grunt": {
+   "path": "lowpoly/skeleton_grunt.glb",
+   "bytes": 104028,
+   "sha256": "e422286cd99bba4561a7f99c399c872f0323861ef8057b5b35bec9aece9feb87",
+   "triangles": 6854,
+   "animations": 7
+  },
+  "style.lowpoly.skull_hopper": {
+   "path": "lowpoly/skull_hopper.glb",
+   "bytes": 46708,
+   "sha256": "050a5cde931062cbd94919cf0ef58accbf155729282484493843238f6afcbdf7",
+   "triangles": 1804,
+   "animations": 10
+  },
+  "style.lowpoly.skyscraper_a": {
+   "path": "lowpoly/skyscraper_a.glb",
+   "bytes": 30292,
+   "sha256": "9a4747156219a994c9c51aba63738ad9a882132e93a1a17b8738ff62a1456817",
+   "triangles": 1292,
+   "animations": 0
+  },
+  "style.lowpoly.skyscraper_b": {
+   "path": "lowpoly/skyscraper_b.glb",
+   "bytes": 34228,
+   "sha256": "3de405ed2f785155989d5a95d7700363eb7708aa66c92216f10caa79c8f53536",
+   "triangles": 1592,
+   "animations": 0
+  },
+  "style.lowpoly.skyscraper_c": {
+   "path": "lowpoly/skyscraper_c.glb",
+   "bytes": 34608,
+   "sha256": "d1f7a427bf9920a9f3e6bcc9d89ad8da1dc9cfcbd1d4888f1d9c8c272c45b568",
+   "triangles": 1704,
+   "animations": 0
+  },
+  "style.lowpoly.slime_drop": {
+   "path": "lowpoly/slime_drop.glb",
+   "bytes": 55984,
+   "sha256": "52ac4999c460a25db7f9d32b97f915683bf1e50dd21862d7ebd24ea4458efee3",
+   "triangles": 1440,
+   "animations": 4
+  },
+  "style.lowpoly.slime_green": {
+   "path": "lowpoly/slime_green.glb",
+   "bytes": 37804,
+   "sha256": "bd26c3fdc485f23323bc3a69eebac3109f4109c3f7d6593de20b7992d4ba54d9",
+   "triangles": 1520,
+   "animations": 9
+  },
+  "style.lowpoly.slime_horned": {
+   "path": "lowpoly/slime_horned.glb",
+   "bytes": 68704,
+   "sha256": "0ca8d6ffabd1b769d3295681d1020b4806c4f1731c4ff8df8227da67b64b4963",
+   "triangles": 1968,
+   "animations": 10
+  },
+  "style.lowpoly.slime_pink": {
+   "path": "lowpoly/slime_pink.glb",
+   "bytes": 34820,
+   "sha256": "7de220e22cea257d946d1e3c0f8bbfca8680a1a19f4d34716a951ce9b51b96f9",
+   "triangles": 1030,
+   "animations": 9
+  },
+  "style.lowpoly.slime_spiky": {
+   "path": "lowpoly/slime_spiky.glb",
+   "bytes": 66116,
+   "sha256": "f7a9e7db0b0a332970379223de126f7a6ec25b1912c0d86394ffac3c4aa6f6d0",
+   "triangles": 4888,
+   "animations": 9
+  },
+  "style.lowpoly.soldier": {
+   "path": "lowpoly/soldier.glb",
+   "bytes": 409640,
+   "sha256": "a462f808c29ac6e20fed9d0713990c3edf6f6e61f66f3476d35a2ffb2935d93b",
+   "triangles": 20712,
+   "animations": 14
+  },
+  "style.lowpoly.speeder_a": {
+   "path": "lowpoly/speeder_a.glb",
+   "bytes": 8708,
+   "sha256": "9b92d8fa3acf4900424e2d4e6d7b20695e10b1985f608b883904aee177e77d11",
+   "triangles": 280,
+   "animations": 0
+  },
+  "style.lowpoly.speeder_b": {
+   "path": "lowpoly/speeder_b.glb",
+   "bytes": 8268,
+   "sha256": "4a87be51e7ed37259af283099f9fd25fb06caa7b235bee90458c070ed8d71b72",
+   "triangles": 270,
+   "animations": 0
+  },
+  "style.lowpoly.speeder_c": {
+   "path": "lowpoly/speeder_c.glb",
+   "bytes": 8676,
+   "sha256": "c56ef3e31cb70f82c1ff26572e8220ac35d9b98e90bb44b09f68ad6f125f31e6",
+   "triangles": 292,
+   "animations": 0
+  },
+  "style.lowpoly.stag": {
+   "path": "lowpoly/stag.glb",
+   "bytes": 363904,
+   "sha256": "64073a9815158e492616591c4bd571042b9b2e224af2e741132d063706426820",
+   "triangles": 3667,
+   "animations": 26
+  },
+  "style.lowpoly.stump": {
+   "path": "lowpoly/stump.glb",
+   "bytes": 3756,
+   "sha256": "578837811cd269a4728b6dc6717c61e42111f3b33657e2ea4748748f7c2fe05c",
+   "triangles": 56,
+   "animations": 0
+  },
+  "style.lowpoly.sushi": {
+   "path": "lowpoly/sushi.glb",
+   "bytes": 14460,
+   "sha256": "3d4b4d791c43288c67008d2e80d792dfa1bda54f07ea57d92e05ef6ecfebfd67",
+   "triangles": 96,
+   "animations": 0
+  },
+  "style.lowpoly.suv": {
+   "path": "lowpoly/suv.glb",
+   "bytes": 36232,
+   "sha256": "6a6506ffe63ee10dffb71735f268467a3a14bda9b12c33f7dbacef25a33b1ccc",
+   "triangles": 1810,
+   "animations": 0
+  },
+  "style.lowpoly.suv_luxury": {
+   "path": "lowpoly/suv_luxury.glb",
+   "bytes": 32716,
+   "sha256": "336b6f8d6f96d089948a48e5b45d9040570c0594dcfcdd63520f063abe70da42",
+   "triangles": 1422,
+   "animations": 0
+  },
+  "style.lowpoly.sword": {
+   "path": "lowpoly/sword.glb",
+   "bytes": 18492,
+   "sha256": "00d8447572722530f2ca1e56fc03eba19fa191d5ac070f8330504e44647b5dcc",
+   "triangles": 872,
+   "animations": 0
+  },
+  "style.lowpoly.taco": {
+   "path": "lowpoly/taco.glb",
+   "bytes": 16236,
+   "sha256": "9f791991b0dd36d391c53e8b03f3b25dd4e19e098e293e6c870d0271a37ec69a",
+   "triangles": 174,
+   "animations": 0
+  },
+  "style.lowpoly.tank": {
+   "path": "lowpoly/tank.glb",
+   "bytes": 155592,
+   "sha256": "b8d1c8c813dfeb79fb2d9c2a5f368647b5ba9bb668fc7489609e58d720a7fdb3",
+   "triangles": 6544,
+   "animations": 4
+  },
+  "style.lowpoly.tank_heavy": {
+   "path": "lowpoly/tank_heavy.glb",
+   "bytes": 152760,
+   "sha256": "14e804c9714b9007ce58b3437cdff5333f4fcc15e27b1e96223c6998525938da",
+   "triangles": 6064,
+   "animations": 4
+  },
+  "style.lowpoly.target": {
+   "path": "lowpoly/target.glb",
+   "bytes": 13632,
+   "sha256": "ba27dfbf644188c417936ee23e8c0261ac43e45c6ce562c5a02cfa558a8900f6",
+   "triangles": 84,
+   "animations": 0
+  },
+  "style.lowpoly.taxi": {
+   "path": "lowpoly/taxi.glb",
+   "bytes": 31324,
+   "sha256": "55f06e0c767cf936d77232fbb98089480c9b7022ce74b42f066f242299ef4a1b",
+   "triangles": 1408,
+   "animations": 0
+  },
+  "style.lowpoly.tent": {
+   "path": "lowpoly/tent.glb",
+   "bytes": 5500,
+   "sha256": "6645843458414744e0e130d83ff8ef3c1a8a20e1b1f93420d594b8a34f7d78e3",
+   "triangles": 232,
+   "animations": 0
+  },
+  "style.lowpoly.tractor": {
+   "path": "lowpoly/tractor.glb",
+   "bytes": 41856,
+   "sha256": "9f2949b20b81a1580f7893ceb799dd2dd42ba872d7b14161231fe364fc5dfbe4",
+   "triangles": 2044,
+   "animations": 0
+  },
+  "style.lowpoly.tree_autumn": {
+   "path": "lowpoly/tree_autumn.glb",
+   "bytes": 6336,
+   "sha256": "0b788f62040b71c22ed61f072f1c9ddbc1b367bec097b5b8b555629c4937a75a",
+   "triangles": 228,
+   "animations": 0
+  },
+  "style.lowpoly.tree_dark": {
+   "path": "lowpoly/tree_dark.glb",
+   "bytes": 4680,
+   "sha256": "4e7cf3d344724190bc81dc459fffcd5e15c291825980a744c4de4f4a40502a1b",
+   "triangles": 114,
+   "animations": 0
+  },
+  "style.lowpoly.tree_fat": {
+   "path": "lowpoly/tree_fat.glb",
+   "bytes": 3816,
+   "sha256": "f360b11e4ca93fef09c167a56bf5d14909490c68c75a1ebbe139bacfd850ded3",
+   "triangles": 50,
+   "animations": 0
+  },
+  "style.lowpoly.tree_oak": {
+   "path": "lowpoly/tree_oak.glb",
+   "bytes": 5812,
+   "sha256": "874b530b24d92f9cb8ee04ac0883d52bc6269582b14f268b8324296cb54c53d5",
+   "triangles": 196,
+   "animations": 0
+  },
+  "style.lowpoly.tree_palm": {
+   "path": "lowpoly/tree_palm.glb",
+   "bytes": 6184,
+   "sha256": "2b2efb937beed9d4a1309e0fda505c36ddfb56f5b36581823bb280bdd8688042",
+   "triangles": 190,
+   "animations": 0
+  },
+  "style.lowpoly.tree_pine": {
+   "path": "lowpoly/tree_pine.glb",
+   "bytes": 6140,
+   "sha256": "29abd5450f000b0e7b2580f9b3a32d8ab2f74dc1b2c8ec2d2fcaa5942d61e19a",
+   "triangles": 230,
+   "animations": 0
+  },
+  "style.lowpoly.tree_pine_tall": {
+   "path": "lowpoly/tree_pine_tall.glb",
+   "bytes": 4968,
+   "sha256": "af4a0ea29ad3463c82b973698febb4d686de0dbd7a55b45cdf727d1d9ea215fd",
+   "triangles": 134,
+   "animations": 0
+  },
+  "style.lowpoly.trex": {
+   "path": "lowpoly/trex.glb",
+   "bytes": 159136,
+   "sha256": "4d09580cb319e2cf015ba39903091c92c1993b2eddbdc2315614e73ba04e5627",
+   "triangles": 1820,
+   "animations": 6
+  },
+  "style.lowpoly.triceratops": {
+   "path": "lowpoly/triceratops.glb",
+   "bytes": 160976,
+   "sha256": "83d163783fe1d848549f57b3e199003ac9f65e1753610c153f7f07d9197bc811",
+   "triangles": 1332,
+   "animations": 6
+  },
+  "style.lowpoly.truck": {
+   "path": "lowpoly/truck.glb",
+   "bytes": 32704,
+   "sha256": "cdf209ba55d80e528b47d64a2833d24cfe0c98b085fbcac890c5e809a785bc43",
+   "triangles": 1418,
+   "animations": 0
+  },
+  "style.lowpoly.truck_flat": {
+   "path": "lowpoly/truck_flat.glb",
+   "bytes": 33648,
+   "sha256": "c1fbbd0461229c943e285f528b86163960b71d6c395bcc7e7eca7cce2c4f549b",
+   "triangles": 1632,
+   "animations": 0
+  },
+  "style.lowpoly.turret": {
+   "path": "lowpoly/turret.glb",
+   "bytes": 13660,
+   "sha256": "a0055777b2201a19855421370d93ea18b34b2c784b4d918fdffeba3fcd170ffa",
+   "triangles": 458,
+   "animations": 0
+  },
+  "style.lowpoly.turret_double": {
+   "path": "lowpoly/turret_double.glb",
+   "bytes": 14096,
+   "sha256": "f8ddf4250376c40983898f1f233c9ae5cc34485d7b24bdedac1ceb43d6dda791",
+   "triangles": 876,
+   "animations": 0
+  },
+  "style.lowpoly.van": {
+   "path": "lowpoly/van.glb",
+   "bytes": 32692,
+   "sha256": "cd1d826741d76c56294d556bd296f03952367874b343b9c0d6d3d092d56d0056",
+   "triangles": 1418,
+   "animations": 0
+  },
+  "style.lowpoly.watermelon": {
+   "path": "lowpoly/watermelon.glb",
+   "bytes": 38776,
+   "sha256": "7612bb5294127b36753ea56f3daab03d2af12b0a5c653483558ebea387f9db44",
+   "triangles": 1376,
+   "animations": 0
+  },
+  "style.lowpoly.wolf": {
+   "path": "lowpoly/wolf.glb",
+   "bytes": 419948,
+   "sha256": "ecda3aba0784190621f476419e77546a4af82db2e2a611bbbde402a93631b69c",
+   "triangles": 1962,
+   "animations": 24
+  },
+  "style.lowpoly.wolf_cartoon": {
+   "path": "lowpoly/wolf_cartoon.glb",
+   "bytes": 68084,
+   "sha256": "0c72afbc9294349ec28a767978aff29eb5dca261b0674e0bd3bc25dd002e9aee",
+   "triangles": 2740,
+   "animations": 8
+  },
+  "style.lowpoly.worker": {
+   "path": "lowpoly/worker.glb",
+   "bytes": 188768,
+   "sha256": "ba034a087e5f26c43da0f8213dd3cb5cbcee057bf195fde4f66f5aa2951b7727",
+   "triangles": 1852,
+   "animations": 11
+  },
+  "style.lowpoly.wyvern": {
+   "path": "lowpoly/wyvern.glb",
+   "bytes": 119812,
+   "sha256": "b8123627aaa2c15d3cf45498d33842bbfc3ea52cda4c67f629e52349dbe6f2d9",
+   "triangles": 1344,
+   "animations": 5
+  },
+  "style.lowpoly.yeti": {
+   "path": "lowpoly/yeti.glb",
+   "bytes": 189692,
+   "sha256": "b911f4640d063dd246f406b5e90648d4b2bf2b0e5d6d1be374a3e83b7d110d63",
+   "triangles": 6094,
+   "animations": 14
+  },
+  "style.lowpoly.zombie": {
+   "path": "lowpoly/zombie.glb",
+   "bytes": 350200,
+   "sha256": "55002b53e87fe087fc67162efd6d680072f954b56160db3753a6dc3aac826231",
+   "triangles": 7822,
+   "animations": 32
+  },
+  "style.lowpoly.zombie_grunt": {
+   "path": "lowpoly/zombie_grunt.glb",
+   "bytes": 70480,
+   "sha256": "1983fe1bf8f18054549201b0935fa2ca07c380f57d71fb6bdfac76d99f031df3",
+   "triangles": 3550,
+   "animations": 7
+  },
+  "style.pixel.ambulance": {
+   "path": "pixel/ambulance.png",
+   "bytes": 272,
+   "sha256": "1aff15bdc69430ab2a5becbc53b357491c7c906e5a571357bc68e3b7adfe9377"
+  },
+  "style.pixel.angry_block": {
+   "path": "pixel/angry_block.png",
+   "bytes": 173,
+   "sha256": "d6c5419b9121b5b0dd8e4f97b9d3b5aac17be2f567decbf8032c82796a606bd6"
+  },
+  "style.pixel.anvil": {
+   "path": "pixel/anvil.png",
+   "bytes": 183,
+   "sha256": "af3ad2c5dca2b31723905e78ecbd19da776e010e17c4333054be6b57926554ac"
+  },
+  "style.pixel.astro_blue": {
+   "path": "pixel/astro_blue.png",
+   "bytes": 231,
+   "sha256": "9990607534396731ee9ef43ea6b1d7350ef0a483cd7db35b4a32f857495fd2f8"
+  },
+  "style.pixel.astro_green": {
+   "path": "pixel/astro_green.png",
+   "bytes": 241,
+   "sha256": "77839475ab0ca1ff93b4d10c4cb6b91b222c352eeb865a3951c5b5a4e6160607"
+  },
+  "style.pixel.astro_pink": {
+   "path": "pixel/astro_pink.png",
+   "bytes": 241,
+   "sha256": "e9b3b98cd3bca13bbf0388a0db847e810a89b4e2edc08e4633116c1974ac39a2"
+  },
+  "style.pixel.astro_yellow": {
+   "path": "pixel/astro_yellow.png",
+   "bytes": 241,
+   "sha256": "62ecb953973519a400fad515e54f38f774202a28b76fe030039bf6c8f35811e8"
+  },
+  "style.pixel.axe": {
+   "path": "pixel/axe.png",
+   "bytes": 186,
+   "sha256": "4ee4c73df4abaffc7a0ddae7067ebffc69413b9e9f00493797fdd68c429c2308"
+  },
+  "style.pixel.barrel": {
+   "path": "pixel/barrel.png",
+   "bytes": 203,
+   "sha256": "c771abdd75e678724b46f67cf5391f94f5a43cc4b5067da2136831cac00efb96"
+  },
+  "style.pixel.bat": {
+   "path": "pixel/bat.png",
+   "bytes": 194,
+   "sha256": "cfa80f7a095cf41bde7da5174256cf91a2305768c43ec1d1a44217bc0443e084"
+  },
+  "style.pixel.bat_bot": {
+   "path": "pixel/bat_bot.png",
+   "bytes": 229,
+   "sha256": "7cc838aef36b67322143dfdeef02409b5ad8401081a133595e56b8460396663e"
+  },
+  "style.pixel.bookshelf": {
+   "path": "pixel/bookshelf.png",
+   "bytes": 137,
+   "sha256": "36bdb2dd4a8641724038f8954759c286c9306389467c63b312f7d2526fae3fb6"
+  },
+  "style.pixel.buggy": {
+   "path": "pixel/buggy.png",
+   "bytes": 232,
+   "sha256": "18b444437775b210c70c6d7af10abec1c771be47621d59dd24b2fa5cd65be7a4"
+  },
+  "style.pixel.bus": {
+   "path": "pixel/bus.png",
+   "bytes": 299,
+   "sha256": "e860366c5c4bacdd5d313442fabb78216a727ac08ea47490e18782961f3f38f3"
+  },
+  "style.pixel.car": {
+   "path": "pixel/car.png",
+   "bytes": 231,
+   "sha256": "81dd19408f20bad592fa6909864c20562e809b28e0f54f4067018110bb620792"
+  },
+  "style.pixel.chest": {
+   "path": "pixel/chest.png",
+   "bytes": 189,
+   "sha256": "1e80ef2b7b47b122109ce0f3a1deb52ff65b02cf6ed7db549a2d4b762363cd84"
+  },
+  "style.pixel.crab": {
+   "path": "pixel/crab.png",
+   "bytes": 224,
+   "sha256": "365b80d7b6640004fa22d158b5d3606c615aa4438f9eaeb9f7cf9cb21f44a222"
+  },
+  "style.pixel.cyclops": {
+   "path": "pixel/cyclops.png",
+   "bytes": 229,
+   "sha256": "9a1c393fb19e00d9ecde79c9f645df83e829e6fb6afc72ed0f84d6703d72827b"
+  },
+  "style.pixel.drill_bot": {
+   "path": "pixel/drill_bot.png",
+   "bytes": 229,
+   "sha256": "877d4c8f9a6f393f7ec06e38f889b9f8c9a3a24c5bcf8b6b704e10138afda5e7"
+  },
+  "style.pixel.dwarf": {
+   "path": "pixel/dwarf.png",
+   "bytes": 249,
+   "sha256": "9e3212e3da29744862c947c98b59ef3036b44a727f326eb58a79e5be5854c7d1"
+  },
+  "style.pixel.firetruck": {
+   "path": "pixel/firetruck.png",
+   "bytes": 284,
+   "sha256": "e3a756ad35dbcd663e675c98b9074c357bc7987c2d03d8f9d0fe826212ed1955"
+  },
+  "style.pixel.flame_sprite": {
+   "path": "pixel/flame_sprite.png",
+   "bytes": 192,
+   "sha256": "2d0d14a1db64cf566b8f6c0a2906383760e504c1af97e49fca5b30af226ebef2"
+  },
+  "style.pixel.flame_sword": {
+   "path": "pixel/flame_sword.png",
+   "bytes": 154,
+   "sha256": "a16f079da5bcd4f28513ba873130909db481e39d38d3e41571acf5975dbd6c67"
+  },
+  "style.pixel.gem": {
+   "path": "pixel/gem.png",
+   "bytes": 150,
+   "sha256": "d783325c8fea33112a4a8c92f3bcc3bd30e576def18c637d0b226fb06792a82f"
+  },
+  "style.pixel.ghost": {
+   "path": "pixel/ghost.png",
+   "bytes": 186,
+   "sha256": "516942ac06f43681fd6b838715727a60edcec6aaa8aab342931bdf620b52f9dd"
+  },
+  "style.pixel.gravestone": {
+   "path": "pixel/gravestone.png",
+   "bytes": 174,
+   "sha256": "952eb23ee5bb9a62667b74964740d9194bbd5ef53a3eae90c8f28a486e68a368"
+  },
+  "style.pixel.hammer": {
+   "path": "pixel/hammer.png",
+   "bytes": 176,
+   "sha256": "dd308282f105edee42ffbdd5afa4152b88f0d4ac1ab8ce2eb9cb656082baf5c3"
+  },
+  "style.pixel.kart": {
+   "path": "pixel/kart.png",
+   "bytes": 184,
+   "sha256": "1d3f034c5819b728bd127a6a3dcfad348e1996af20c834046527778607e05b7a"
+  },
+  "style.pixel.knight": {
+   "path": "pixel/knight.png",
+   "bytes": 200,
+   "sha256": "301a3fee4eeab5351f4757c03f2563d91b82b63d635535804eb2cdf31b55e95a"
+  },
+  "style.pixel.knight_visor": {
+   "path": "pixel/knight_visor.png",
+   "bytes": 223,
+   "sha256": "661b5554e1aebbdc94ed1f4e2aded1f3ecb993124f4d877fa799e9f35e318bb9"
+  },
+  "style.pixel.military_suv": {
+   "path": "pixel/military_suv.png",
+   "bytes": 246,
+   "sha256": "bfa5ab8ad89d9c142d7f7a9db7078772855b4695ad79ab319249c150393ae852"
+  },
+  "style.pixel.mimic": {
+   "path": "pixel/mimic.png",
+   "bytes": 238,
+   "sha256": "dae88a8da42033d4032c4a0bd99657bff84c8f460d134ec9528889f173da8702"
+  },
+  "style.pixel.mushroom": {
+   "path": "pixel/mushroom.png",
+   "bytes": 195,
+   "sha256": "c501c19e8f4841bff2df8b3f848bf98c1a47d2dc59c629b74818a08d6943f378"
+  },
+  "style.pixel.pine": {
+   "path": "pixel/pine.png",
+   "bytes": 194,
+   "sha256": "4cf6879a3ecffe35219f2efb28ba58fd7eab35d8138fe9966ef466d3de6db4ab"
+  },
+  "style.pixel.police_car": {
+   "path": "pixel/police_car.png",
+   "bytes": 240,
+   "sha256": "d4755bfe71a1da33750910d7e4091f3a0de1b23ce75947c129377a0e4eb61c9a"
+  },
+  "style.pixel.potion_blue": {
+   "path": "pixel/potion_blue.png",
+   "bytes": 168,
+   "sha256": "525d247378b7df6478dff66e4bc7aa469535b8cb39981177534f3f2957b63416"
+  },
+  "style.pixel.potion_green": {
+   "path": "pixel/potion_green.png",
+   "bytes": 168,
+   "sha256": "710084a1a14d4eba546ee354a80bf1529bd551d2882dac9babb1dede231678d4"
+  },
+  "style.pixel.potion_red": {
+   "path": "pixel/potion_red.png",
+   "bytes": 165,
+   "sha256": "f68b5e2c7201c85480cb86dc5bb6d803ca349361957670116d7776fabc5b7576"
+  },
+  "style.pixel.princess": {
+   "path": "pixel/princess.png",
+   "bytes": 239,
+   "sha256": "5df6e6475bb08e5850e48af9101840160d43a74a0c86cc7310ebd5c292645fbe"
+  },
+  "style.pixel.ranger": {
+   "path": "pixel/ranger.png",
+   "bytes": 244,
+   "sha256": "32dcb6f63dcef92bf683a9fa00d9e06412f91a0c41a4e4264e54d275a443316e"
+  },
+  "style.pixel.rat": {
+   "path": "pixel/rat.png",
+   "bytes": 204,
+   "sha256": "a7363135c17127ea17ca0cccdeb96223831a168375f290a3a526d9a9264c8ed6"
+  },
+  "style.pixel.rubble": {
+   "path": "pixel/rubble.png",
+   "bytes": 181,
+   "sha256": "775ea52a84cad13343fcd2e327621bbf9074d9fa4a35c1bbd9cdf972816bb353"
+  },
+  "style.pixel.sage": {
+   "path": "pixel/sage.png",
+   "bytes": 243,
+   "sha256": "df3b282e96b4dc2e47a3c0b5b22d7d1297068c3abaefad6d175d1cb682f1a373"
+  },
+  "style.pixel.shield": {
+   "path": "pixel/shield.png",
+   "bytes": 140,
+   "sha256": "280f1f47be1f1281939bb9b184fb167f4137817180b0bc774d04788bed15ab57"
+  },
+  "style.pixel.slime": {
+   "path": "pixel/slime.png",
+   "bytes": 163,
+   "sha256": "a61ff4003a2ee983a829f154c577e14c33e257ae32eeae6ad7ffde08d67b398b"
+  },
+  "style.pixel.spear": {
+   "path": "pixel/spear.png",
+   "bytes": 153,
+   "sha256": "82ec6a5f7cf87b1a8402100d89b22b6d3eeabb7b8bda865accdc7a4c25bc1515"
+  },
+  "style.pixel.spider": {
+   "path": "pixel/spider.png",
+   "bytes": 246,
+   "sha256": "19a22869c094162df811751fe1b913fb4d8fd5cfe8c787df3353fe46e67fb008"
+  },
+  "style.pixel.spike_ball": {
+   "path": "pixel/spike_ball.png",
+   "bytes": 246,
+   "sha256": "c4130662bb01df59b2ac731051ffbb5c032e77a9a80f7a509c63d64e5af1187c"
+  },
+  "style.pixel.sports_car": {
+   "path": "pixel/sports_car.png",
+   "bytes": 223,
+   "sha256": "4948d2552c1d94e498ffccd3abc1d3fbea624f0a6aa60d84ade25ff0ffe2ff7c"
+  },
+  "style.pixel.staff": {
+   "path": "pixel/staff.png",
+   "bytes": 150,
+   "sha256": "34699993e7377f2086fce05b1cd7dea7009f177b978268c7c37d05f802c7102c"
+  },
+  "style.pixel.sword": {
+   "path": "pixel/sword.png",
+   "bytes": 141,
+   "sha256": "0a0de85c0427a7ff197487366e25713a3801bc11be340095e1350a7c59fd43f1"
+  },
+  "style.pixel.tank_bot": {
+   "path": "pixel/tank_bot.png",
+   "bytes": 228,
+   "sha256": "30178b304ee3c6ac015928247abc8a1fc0f3d495c37bfe564e9479334bb0ef34"
+  },
+  "style.pixel.taxi": {
+   "path": "pixel/taxi.png",
+   "bytes": 251,
+   "sha256": "65edf83bb304f38d729ce4fda5b44f9c05b5ceb3fa7529c7d11079257a091159"
+  },
+  "style.pixel.thief": {
+   "path": "pixel/thief.png",
+   "bytes": 237,
+   "sha256": "3dea4f1f57eede030baac56950379412f2174873c792017f268438e8cbbcc2de"
+  },
+  "style.pixel.tractor": {
+   "path": "pixel/tractor.png",
+   "bytes": 260,
+   "sha256": "931cca077c9307ba165a19503be9cf35ef36375ce64c9c5b7978e2a2c1287b7d"
+  },
+  "style.pixel.truck": {
+   "path": "pixel/truck.png",
+   "bytes": 319,
+   "sha256": "85fc7c863984e7ee983bcc670526aa9eebbc2dd2b3dfccb8fbcd2f9276865619"
+  },
+  "style.pixel.villager": {
+   "path": "pixel/villager.png",
+   "bytes": 222,
+   "sha256": "3453485cbce3f4db05ebf0914fa6c1ba4aeb6d8017c9d121d308a30d8665aa4b"
+  },
+  "style.pixel.wizard": {
+   "path": "pixel/wizard.png",
+   "bytes": 231,
+   "sha256": "726e5a3db048b58582c4b8b527a76d362ca14fe837a4d2b0cacdadf91af831ef"
+  },
+  "style.ps1.surface_bark": {
+   "path": "ps1/surface_bark.png",
+   "bytes": 5764,
+   "sha256": "7afa0fcddb73c5f03ad86abdddb4aec9c1a7dddc89a26555a015a6331421199f"
+  },
+  "style.ps1.surface_concrete": {
+   "path": "ps1/surface_concrete.png",
+   "bytes": 3226,
+   "sha256": "61a7a0f7f2fe95877586d487ce9fa7bc83fae7e504d13cafd2c18b5f4278a95d"
+  },
+  "style.ps1.surface_dirt": {
+   "path": "ps1/surface_dirt.png",
+   "bytes": 2782,
+   "sha256": "c327b76963f9ac979dbefa574d37df8d9f574c21ec1ce9750659db7d36eaca29"
+  },
+  "style.ps1.surface_grass": {
+   "path": "ps1/surface_grass.png",
+   "bytes": 6963,
+   "sha256": "826eec6ba9e9330e49d3e74772c3ba66b9c6fee86b49232b06d5ee329b891f41"
+  },
+  "style.ps1.surface_gravel": {
+   "path": "ps1/surface_gravel.png",
+   "bytes": 1955,
+   "sha256": "646e487896ab0fbfa307921b20f8dc140d3f290ac5900127dccd3924a8c388cc"
+  },
+  "style.ps1.surface_metal": {
+   "path": "ps1/surface_metal.png",
+   "bytes": 2906,
+   "sha256": "50d5c1ae044a58b5939bfa6f266d4bebb4560fa303506fb01ac4efe95d4c4189"
+  },
+  "style.ps1.surface_plate": {
+   "path": "ps1/surface_plate.png",
+   "bytes": 4712,
+   "sha256": "5eb8a50c8cff9ccceec1b856eab0f9eed1e0656f62401a5528f3ea4a075e1c34"
+  },
+  "style.ps1.surface_stone": {
+   "path": "ps1/surface_stone.png",
+   "bytes": 6751,
+   "sha256": "5bb10eddd383cadd5d662734ebb3e9a40475a79dd708890307f3690d68bc7154"
+  },
+  "style.ps1.surface_wall": {
+   "path": "ps1/surface_wall.png",
+   "bytes": 6365,
+   "sha256": "0bfc7ea8a94a2d260c789212475a3755281c466892529d0a54d4b380ed11b75d"
+  },
+  "style.ps1.surface_wood": {
+   "path": "ps1/surface_wood.png",
+   "bytes": 4755,
+   "sha256": "6014997d54b67b54d73cd2a42a0afd181f89779dcecbd58e2c37e5b6bee77268"
+  },
+  "style.voxel.adventurer": {
+   "path": "voxel/adventurer.glb",
+   "bytes": 377204,
+   "sha256": "2fbedd540e1a36c6c530a6a10d279202d3e7f3a34cd787ef00e9d8ce1b047b5e",
+   "triangles": 1992,
+   "animations": 24
+  },
+  "style.voxel.alien_big": {
+   "path": "voxel/alien_big.glb",
+   "bytes": 175460,
+   "sha256": "32a8042bd8f52ceaded30f89edba8ce1518cff8095dfa4e559ab7d6c78925568",
+   "triangles": 4206,
+   "animations": 14
+  },
+  "style.voxel.ambulance": {
+   "path": "voxel/ambulance.glb",
+   "bytes": 20080,
+   "sha256": "d047a6d9666f362d321b64f7bff6e274c9b83c143d99f805dbbd28a1c1eac46a",
+   "triangles": 1536,
+   "animations": 0
+  },
+  "style.voxel.apple": {
+   "path": "voxel/apple.glb",
+   "bytes": 18596,
+   "sha256": "aaaa9c9c48dc322f4cb93aa0181f702fed9e872f45bb951e0d90caa286ab2a4a",
+   "triangles": 1386,
+   "animations": 0
+  },
+  "style.voxel.armored_bee": {
+   "path": "voxel/armored_bee.glb",
+   "bytes": 79740,
+   "sha256": "14911b169178b45c02cc8eceec960d1aeaafce72f3457dd0b15f5e1799f04d6e",
+   "triangles": 2942,
+   "animations": 8
+  },
+  "style.voxel.astronaut": {
+   "path": "voxel/astronaut.glb",
+   "bytes": 209812,
+   "sha256": "c2fd8e88ef88e06eef574813f4e155de2a52c911c9d510311251a7d9ff16f400",
+   "triangles": 4626,
+   "animations": 18
+  },
+  "style.voxel.axe": {
+   "path": "voxel/axe.glb",
+   "bytes": 13480,
+   "sha256": "1e2131bad1d18be70610065bf292738b47431c280cd0dd7cc6d6eebb2298953b",
+   "triangles": 962,
+   "animations": 0
+  },
+  "style.voxel.banana": {
+   "path": "voxel/banana.glb",
+   "bytes": 17804,
+   "sha256": "3c6d72a17f31b39cd88a6d4895be284e9292fc1d40d033aa26fcc1ece095d864",
+   "triangles": 1430,
+   "animations": 0
+  },
+  "style.voxel.barrel": {
+   "path": "voxel/barrel.glb",
+   "bytes": 5512,
+   "sha256": "31558e1d134cf9a1f9536a018ef9497a685e593e0fca97a7fb2345516076a54d",
+   "triangles": 282,
+   "animations": 0
+  },
+  "style.voxel.barrels": {
+   "path": "voxel/barrels.glb",
+   "bytes": 13732,
+   "sha256": "b7ad049fe6b078b2db819fe934d67a6ea64ef27a854ddcbd278aefb645febe9d",
+   "triangles": 1134,
+   "animations": 0
+  },
+  "style.voxel.bat": {
+   "path": "voxel/bat.glb",
+   "bytes": 96968,
+   "sha256": "fb79a05a27bb4043881e0b1041b94ef96101ab8cfd2d2da1ed24f262341cf9f7",
+   "triangles": 2894,
+   "animations": 5
+  },
+  "style.voxel.bee": {
+   "path": "voxel/bee.glb",
+   "bytes": 55388,
+   "sha256": "35b83f565bf10bb5ed3717de2b0b9998ac55ab3fbadc5504edabc999a521a89a",
+   "triangles": 3182,
+   "animations": 4
+  },
+  "style.voxel.blaster_a": {
+   "path": "voxel/blaster_a.glb",
+   "bytes": 12744,
+   "sha256": "18f7d13078042987c8efd753bd2abbef5532a33307a6d77586e548f2f8f3f892",
+   "triangles": 1098,
+   "animations": 0
+  },
+  "style.voxel.blaster_b": {
+   "path": "voxel/blaster_b.glb",
+   "bytes": 17676,
+   "sha256": "23b3563b6a3256befef4b3f5944c89769034304319c40dd8b93bdd371dec7c01",
+   "triangles": 1300,
+   "animations": 0
+  },
+  "style.voxel.blaster_c": {
+   "path": "voxel/blaster_c.glb",
+   "bytes": 20076,
+   "sha256": "50901a0d5498eb10d302d5d3e268b3832e431cea1657969c1acf6ce651fa3e1e",
+   "triangles": 1562,
+   "animations": 0
+  },
+  "style.voxel.blaster_d": {
+   "path": "voxel/blaster_d.glb",
+   "bytes": 25980,
+   "sha256": "0dc17bf423e858cc58abc4f28773fc46340d8048bbdc2cbdf2067b303410c3a5",
+   "triangles": 2232,
+   "animations": 0
+  },
+  "style.voxel.blaster_e": {
+   "path": "voxel/blaster_e.glb",
+   "bytes": 25644,
+   "sha256": "08482d3bc836281b7a0893900bb22881931c1a4ef28139e33f0b59681e8e1bd6",
+   "triangles": 2148,
+   "animations": 0
+  },
+  "style.voxel.blaster_f": {
+   "path": "voxel/blaster_f.glb",
+   "bytes": 27532,
+   "sha256": "4ea47f9bebba3edd455b60d639a44d461391dbfe5770850a4a9a5e49163468fd",
+   "triangles": 2302,
+   "animations": 0
+  },
+  "style.voxel.blaster_g": {
+   "path": "voxel/blaster_g.glb",
+   "bytes": 23164,
+   "sha256": "8b02bbe536ef547d30578c412d5714d50a397413245b80575b1bb5e4ec42f66e",
+   "triangles": 1974,
+   "animations": 0
+  },
+  "style.voxel.blaster_h": {
+   "path": "voxel/blaster_h.glb",
+   "bytes": 19996,
+   "sha256": "211eabccfa46211f3850d793a2e93f41c80ba292e2a7516fa23f7cf3824171f9",
+   "triangles": 1726,
+   "animations": 0
+  },
+  "style.voxel.blaster_i": {
+   "path": "voxel/blaster_i.glb",
+   "bytes": 18560,
+   "sha256": "deb960bf95b9cad7ca67196412f3d5c167234aaa586f1b361f5a0c3bde57155a",
+   "triangles": 1398,
+   "animations": 0
+  },
+  "style.voxel.blaster_j": {
+   "path": "voxel/blaster_j.glb",
+   "bytes": 22224,
+   "sha256": "f0125eb3d0526b298f981e75d887885f9e0d9be466c1f183d81a17adcba707be",
+   "triangles": 1712,
+   "animations": 0
+  },
+  "style.voxel.blaster_k": {
+   "path": "voxel/blaster_k.glb",
+   "bytes": 20624,
+   "sha256": "3b9f2e73a198ab57f1a06e3e90e67b040d725af5470ed26616d8280afca0f5ea",
+   "triangles": 1598,
+   "animations": 0
+  },
+  "style.voxel.blaster_l": {
+   "path": "voxel/blaster_l.glb",
+   "bytes": 23088,
+   "sha256": "e4f5813629388d0be97fe499e09d8dc381f60f627a3cbdf2aba4c9299c53ad7a",
+   "triangles": 1870,
+   "animations": 0
+  },
+  "style.voxel.blaster_m": {
+   "path": "voxel/blaster_m.glb",
+   "bytes": 21684,
+   "sha256": "412e5ece80af08a2b6b9df5ec0495ca5a549de9b72cd73d3f0aa79faf37b72f7",
+   "triangles": 1674,
+   "animations": 0
+  },
+  "style.voxel.blaster_n": {
+   "path": "voxel/blaster_n.glb",
+   "bytes": 21444,
+   "sha256": "6f1e7a6f4f6c5866c99411ae062b0a9c997caf30906e6c8c4f05e5a6a0c94d27",
+   "triangles": 1698,
+   "animations": 0
+  },
+  "style.voxel.blaster_o": {
+   "path": "voxel/blaster_o.glb",
+   "bytes": 21960,
+   "sha256": "f366dd63413e8fb5ced1598ea0d498c1750589504da8ea7e222f3592b0db1774",
+   "triangles": 1766,
+   "animations": 0
+  },
+  "style.voxel.blaster_p": {
+   "path": "voxel/blaster_p.glb",
+   "bytes": 25028,
+   "sha256": "b6960eabdbe0549c236e9badcb5117d92f73f7e2826b6ec6e1b259105bd86b31",
+   "triangles": 2162,
+   "animations": 0
+  },
+  "style.voxel.blaster_q": {
+   "path": "voxel/blaster_q.glb",
+   "bytes": 27340,
+   "sha256": "d4e37097db4dc800504466a4dbd78e668b0dd99a290d9ba793a6b49093ff541c",
+   "triangles": 2382,
+   "animations": 0
+  },
+  "style.voxel.blaster_r": {
+   "path": "voxel/blaster_r.glb",
+   "bytes": 19072,
+   "sha256": "303bdf5d7fcee081786c7b5dfc45edd5bc7af831ae537bdf9331b53aed407944",
+   "triangles": 1438,
+   "animations": 0
+  },
+  "style.voxel.blob_alien": {
+   "path": "voxel/blob_alien.glb",
+   "bytes": 47740,
+   "sha256": "4d73f65c2d879b898a495f73975a08022cc6d28701d04ba378457d17e8655f2a",
+   "triangles": 2600,
+   "animations": 9
+  },
+  "style.voxel.blob_bird": {
+   "path": "voxel/blob_bird.glb",
+   "bytes": 57460,
+   "sha256": "b873540445edf90fec6ab7fcea4e8052e321a4af49bc6993e004a322f71ffbc5",
+   "triangles": 3440,
+   "animations": 9
+  },
+  "style.voxel.blob_ninja": {
+   "path": "voxel/blob_ninja.glb",
+   "bytes": 50276,
+   "sha256": "d2b9146ba98b3a0de50684b337f1265b4b3102f08411845f756883991f1a832a",
+   "triangles": 2984,
+   "animations": 9
+  },
+  "style.voxel.blob_orc": {
+   "path": "voxel/blob_orc.glb",
+   "bytes": 57040,
+   "sha256": "558aaeb3a0e28801995d04818d69bf43d4d9bdb9e40bcf0093fe922866a37403",
+   "triangles": 3274,
+   "animations": 9
+  },
+  "style.voxel.blob_wizard": {
+   "path": "voxel/blob_wizard.glb",
+   "bytes": 51668,
+   "sha256": "28cb8f0721ed99b6ea24b367c1887b47cebb51bffa5356f11685da84e777955c",
+   "triangles": 3238,
+   "animations": 9
+  },
+  "style.voxel.blob_yeti": {
+   "path": "voxel/blob_yeti.glb",
+   "bytes": 86068,
+   "sha256": "bd976b40f62e2bafbe95b1bdee958a5f5e483e7c8adc8f1bc026cfe94562cd31",
+   "triangles": 5816,
+   "animations": 9
+  },
+  "style.voxel.blocky_a": {
+   "path": "voxel/blocky_a.glb",
+   "bytes": 55408,
+   "sha256": "593038b0207c759e94e5d3b2ad0924db79e645f4aafb805b8470c29534dc9f49",
+   "triangles": 1388,
+   "animations": 27
+  },
+  "style.voxel.blocky_b": {
+   "path": "voxel/blocky_b.glb",
+   "bytes": 52512,
+   "sha256": "3bd5a854a4edbdec6370ccb864a3cb942245c06eb9abac8a77d3ed7a70115bdc",
+   "triangles": 1188,
+   "animations": 27
+  },
+  "style.voxel.blocky_c": {
+   "path": "voxel/blocky_c.glb",
+   "bytes": 53648,
+   "sha256": "fbfe4933e9e3916a23e2f528e456041f0bb2c82165b7f256350cc150481a9c22",
+   "triangles": 1246,
+   "animations": 27
+  },
+  "style.voxel.blocky_d": {
+   "path": "voxel/blocky_d.glb",
+   "bytes": 52136,
+   "sha256": "cc6f2b427af10e7c50f0b21782ef4b7a2b435e18f306dbfd17d5340a97b30598",
+   "triangles": 1128,
+   "animations": 27
+  },
+  "style.voxel.blocky_e": {
+   "path": "voxel/blocky_e.glb",
+   "bytes": 53608,
+   "sha256": "95fefbc6eeabf92d9899414c8d4c1735012a4ba6af215ce580dccf7c1c34c1be",
+   "triangles": 1232,
+   "animations": 27
+  },
+  "style.voxel.blocky_f": {
+   "path": "voxel/blocky_f.glb",
+   "bytes": 52816,
+   "sha256": "3bb4d9bfaf96966d3ff09bc412955cad88597607ba000658075d2715c1e47c6a",
+   "triangles": 1198,
+   "animations": 27
+  },
+  "style.voxel.blocky_g": {
+   "path": "voxel/blocky_g.glb",
+   "bytes": 54332,
+   "sha256": "2e1f395f1398bf71f0e09d3fbd36821b84bf8123b00bdb40f10f5a6546af2312",
+   "triangles": 1290,
+   "animations": 27
+  },
+  "style.voxel.blocky_h": {
+   "path": "voxel/blocky_h.glb",
+   "bytes": 55432,
+   "sha256": "a0bb53efd3bb476c92e93173e57a8faeb154b225251f03085eca976bd26c9c46",
+   "triangles": 1382,
+   "animations": 27
+  },
+  "style.voxel.blocky_i": {
+   "path": "voxel/blocky_i.glb",
+   "bytes": 52468,
+   "sha256": "735d9fbf5b5659a24914983974fb73928063723b92570f861c11dfbf19395bbb",
+   "triangles": 1138,
+   "animations": 27
+  },
+  "style.voxel.blocky_j": {
+   "path": "voxel/blocky_j.glb",
+   "bytes": 55068,
+   "sha256": "eb551e3f8362720e8d41e5b8328c0f05d951a3a3b7a9e5abfc2893b9c7f20235",
+   "triangles": 1392,
+   "animations": 27
+  },
+  "style.voxel.blocky_k": {
+   "path": "voxel/blocky_k.glb",
+   "bytes": 54024,
+   "sha256": "749564da3ea5f96ab1c9d65b5cc8adb7a99da68811c74f4057804863efb2ebe6",
+   "triangles": 1282,
+   "animations": 27
+  },
+  "style.voxel.blocky_l": {
+   "path": "voxel/blocky_l.glb",
+   "bytes": 54180,
+   "sha256": "cced05b3bce110583dc2a6233be3be7c8474e3f9c46a911543dbb04a67b27211",
+   "triangles": 1312,
+   "animations": 27
+  },
+  "style.voxel.blocky_m": {
+   "path": "voxel/blocky_m.glb",
+   "bytes": 54336,
+   "sha256": "dd8294e494a16e49509cc2929e58055950d06403653a84966ca73c4ad29bb7f4",
+   "triangles": 1306,
+   "animations": 27
+  },
+  "style.voxel.blocky_n": {
+   "path": "voxel/blocky_n.glb",
+   "bytes": 51116,
+   "sha256": "8f5ba185a557a6913bc6d6f7daca7fa2ccb1df8850dd144517ba03905ba24b8d",
+   "triangles": 1076,
+   "animations": 27
+  },
+  "style.voxel.blocky_o": {
+   "path": "voxel/blocky_o.glb",
+   "bytes": 52908,
+   "sha256": "8a3c636f818ffbfdae191302e3d18fea590928f77d8cd9cc1aaa12777befcd23",
+   "triangles": 1210,
+   "animations": 27
+  },
+  "style.voxel.blocky_p": {
+   "path": "voxel/blocky_p.glb",
+   "bytes": 53536,
+   "sha256": "ee0f341f6d53e349eb53e7a91fc461fe8f56170d593ac28ef8758b0efd4f38f9",
+   "triangles": 1252,
+   "animations": 27
+  },
+  "style.voxel.blocky_q": {
+   "path": "voxel/blocky_q.glb",
+   "bytes": 51920,
+   "sha256": "7dc1b95e4eeea62ab5c50b44dec43fa3445127f764acf2a7ca25971f4a7b086b",
+   "triangles": 1170,
+   "animations": 27
+  },
+  "style.voxel.blocky_r": {
+   "path": "voxel/blocky_r.glb",
+   "bytes": 52904,
+   "sha256": "965cb9ee900d0c942ca907a2c5083c9f4a46a3f882d158a0adbeaf551e9c5c37",
+   "triangles": 1228,
+   "animations": 27
+  },
+  "style.voxel.building_a": {
+   "path": "voxel/building_a.glb",
+   "bytes": 48980,
+   "sha256": "b846d2d657f9f131c2363020fcb2e8e57147c88c175d2d447cb2e726686fd0c8",
+   "triangles": 4104,
+   "animations": 0
+  },
+  "style.voxel.building_b": {
+   "path": "voxel/building_b.glb",
+   "bytes": 48440,
+   "sha256": "c165f5078760b332e69dd97063138aad4753fc3bdfd8862cab3b5a5a73ef4674",
+   "triangles": 4178,
+   "animations": 0
+  },
+  "style.voxel.building_c": {
+   "path": "voxel/building_c.glb",
+   "bytes": 72120,
+   "sha256": "2c8eeceb6f881442aaf38aa1cd2e06a46763ba6a0a41309f6e91e7ccbaf132f8",
+   "triangles": 6136,
+   "animations": 0
+  },
+  "style.voxel.building_d": {
+   "path": "voxel/building_d.glb",
+   "bytes": 30152,
+   "sha256": "3516dd42c94f414a9c88ebae809e045efee27a9aee058b126f88745ec116d13a",
+   "triangles": 2584,
+   "animations": 0
+  },
+  "style.voxel.building_e": {
+   "path": "voxel/building_e.glb",
+   "bytes": 80164,
+   "sha256": "7a2677347b54eadec15b9675e9ccbd4eb949e7490478554be625161db50f688a",
+   "triangles": 7048,
+   "animations": 0
+  },
+  "style.voxel.building_f": {
+   "path": "voxel/building_f.glb",
+   "bytes": 31520,
+   "sha256": "9448549a04e0fb64dd83103582a8b6acbd241f393f3fc5a5e872176e04f0800c",
+   "triangles": 2600,
+   "animations": 0
+  },
+  "style.voxel.building_g": {
+   "path": "voxel/building_g.glb",
+   "bytes": 31432,
+   "sha256": "06656a41e64b077452808a387d4dab0ae901e328c74b76b83655d73d79befea2",
+   "triangles": 2664,
+   "animations": 0
+  },
+  "style.voxel.building_h": {
+   "path": "voxel/building_h.glb",
+   "bytes": 37196,
+   "sha256": "834c226e95022754d2c489e4b3b582ae88921a1106069c939be9a79d2acb96ab",
+   "triangles": 3338,
+   "animations": 0
+  },
+  "style.voxel.burger": {
+   "path": "voxel/burger.glb",
+   "bytes": 29212,
+   "sha256": "f4ca7add04ffb27f5515b850c86b4a94dc6fb5f6474a37e18d06b535347b86e4",
+   "triangles": 2096,
+   "animations": 0
+  },
+  "style.voxel.bush": {
+   "path": "voxel/bush.glb",
+   "bytes": 12016,
+   "sha256": "6bce70ab118f1a99f1c2e0c375dda4def829396631f117c9cd56ba84ba084491",
+   "triangles": 916,
+   "animations": 0
+  },
+  "style.voxel.bush_large": {
+   "path": "voxel/bush_large.glb",
+   "bytes": 53424,
+   "sha256": "3779fe5921129d594530c7bd9b67a0948ea5b9b8193f5f6b33094e97e43a8f82",
+   "triangles": 4670,
+   "animations": 0
+  },
+  "style.voxel.cactus": {
+   "path": "voxel/cactus.glb",
+   "bytes": 5500,
+   "sha256": "25588656893c57163c7e773ca1a4afa96069a31d9055b8d20d2d3ce02656ad58",
+   "triangles": 310,
+   "animations": 0
+  },
+  "style.voxel.cake": {
+   "path": "voxel/cake.glb",
+   "bytes": 33644,
+   "sha256": "53cc0aaa8b565c3d4c6f3f3d9251b1936eca8f6814670ab909ad799caf64ac2f",
+   "triangles": 2714,
+   "animations": 0
+  },
+  "style.voxel.campfire": {
+   "path": "voxel/campfire.glb",
+   "bytes": 54140,
+   "sha256": "6c75ae9b5c78d2d214391c6103c5c6617f79f4399d734131da855c52eb480f9a",
+   "triangles": 5138,
+   "animations": 0
+  },
+  "style.voxel.cargo_ship": {
+   "path": "voxel/cargo_ship.glb",
+   "bytes": 18876,
+   "sha256": "8ccd44b3abd05350f67bdbca5a73f34637d322798a0fdfda6c7228d1fbfa4aea",
+   "triangles": 1722,
+   "animations": 0
+  },
+  "style.voxel.carrot": {
+   "path": "voxel/carrot.glb",
+   "bytes": 6356,
+   "sha256": "70cc1479dff0b104e027908e45be6aaabc584870968a8c03c7d2dedc58a5c6c8",
+   "triangles": 334,
+   "animations": 0
+  },
+  "style.voxel.cat": {
+   "path": "voxel/cat.glb",
+   "bytes": 43332,
+   "sha256": "30d6b849093202f57d65df27d462fe16f2a4c58575df8095c7de0fe3b297ff5a",
+   "triangles": 1038,
+   "animations": 8
+  },
+  "style.voxel.cheese": {
+   "path": "voxel/cheese.glb",
+   "bytes": 49536,
+   "sha256": "1e7bc9c27415ab08a10296852be68212e4e3e2d0bf6c3437d217b06cca5e2317",
+   "triangles": 4718,
+   "animations": 0
+  },
+  "style.voxel.chest": {
+   "path": "voxel/chest.glb",
+   "bytes": 10268,
+   "sha256": "23ecb44da2c9ae75a023abdba6c2c61f7230415025ced062c2ffbf6f67a5bce2",
+   "triangles": 798,
+   "animations": 0
+  },
+  "style.voxel.coin": {
+   "path": "voxel/coin.glb",
+   "bytes": 4352,
+   "sha256": "78fface5299d234f39c988950189ba0fb169dbc0f57ad9dcd135d22818345f37",
+   "triangles": 188,
+   "animations": 0
+  },
+  "style.voxel.column": {
+   "path": "voxel/column.glb",
+   "bytes": 5968,
+   "sha256": "69fbcf85cb0c20144b3bebc9c4f5d1f5055d7560edcf03a6042d13d4471ca80e",
+   "triangles": 348,
+   "animations": 0
+  },
+  "style.voxel.column_broken": {
+   "path": "voxel/column_broken.glb",
+   "bytes": 4788,
+   "sha256": "6fe04f60cb76a644f90e4babd4082d11411e961b5d52526eee42ece410018b1d",
+   "triangles": 234,
+   "animations": 0
+  },
+  "style.voxel.cookie": {
+   "path": "voxel/cookie.glb",
+   "bytes": 37988,
+   "sha256": "de5946e125d5dff7d055b3736ed5f64b98753916ab97e56a6ae655e848b38ab6",
+   "triangles": 3230,
+   "animations": 0
+  },
+  "style.voxel.crab": {
+   "path": "voxel/crab.glb",
+   "bytes": 89644,
+   "sha256": "8124a1bbaaae1ca3f6f9a58c2c9192930edd039d47fe9c66c7f69faded7af13a",
+   "triangles": 5012,
+   "animations": 10
+  },
+  "style.voxel.crate": {
+   "path": "voxel/crate.glb",
+   "bytes": 31936,
+   "sha256": "7c36090aa3a445a2dc1a90c8ecb1ac888dcce65761aa7ebf66d91a6910601501",
+   "triangles": 2258,
+   "animations": 3
+  },
+  "style.voxel.crystal": {
+   "path": "voxel/crystal.glb",
+   "bytes": 16380,
+   "sha256": "7b97332086ece6b0b13128eb40405ed1425e5e3d88c47328988a89045da71916",
+   "triangles": 1434,
+   "animations": 0
+  },
+  "style.voxel.crystal_rock": {
+   "path": "voxel/crystal_rock.glb",
+   "bytes": 30476,
+   "sha256": "a960b5e9ef905f951837fe7051cc89590a2b18005879c20cb58b91cbcabde1c5",
+   "triangles": 2778,
+   "animations": 0
+  },
+  "style.voxel.cupcake": {
+   "path": "voxel/cupcake.glb",
+   "bytes": 13512,
+   "sha256": "106372bf2fdfeda73025656094d6514fa0cb008ae79b50361979fbfe46c79bf9",
+   "triangles": 834,
+   "animations": 0
+  },
+  "style.voxel.deer": {
+   "path": "voxel/deer.glb",
+   "bytes": 340260,
+   "sha256": "23e63c091f85af80ecd0770dd2835949a4f19aa9dc58ba9bc1360237b250daa9",
+   "triangles": 2486,
+   "animations": 26
+  },
+  "style.voxel.delivery_flat": {
+   "path": "voxel/delivery_flat.glb",
+   "bytes": 21796,
+   "sha256": "9f8836087667eb99c1215fc7362773f18079f5df8ff7c6a78ac7945ab9f63af0",
+   "triangles": 1836,
+   "animations": 0
+  },
+  "style.voxel.delivery_van": {
+   "path": "voxel/delivery_van.glb",
+   "bytes": 15468,
+   "sha256": "a63794dc4e36ac5d8fa53decb490b0d7ed5769b246ab1998957d2ef53f56ca90",
+   "triangles": 1410,
+   "animations": 0
+  },
+  "style.voxel.demon": {
+   "path": "voxel/demon.glb",
+   "bytes": 189180,
+   "sha256": "6ca5862c57721b9a1ce83c6e022b39f68546464cf82009dc113c5fa9b8acad7a",
+   "triangles": 5578,
+   "animations": 14
+  },
+  "style.voxel.demon_blue": {
+   "path": "voxel/demon_blue.glb",
+   "bytes": 226540,
+   "sha256": "d3ab91b1b7a5f98c2f9335442b8c73018227d4d1fb01bc081f38486928e7d1e0",
+   "triangles": 8574,
+   "animations": 15
+  },
+  "style.voxel.digger": {
+   "path": "voxel/digger.glb",
+   "bytes": 30792,
+   "sha256": "98c07bbb4386544bac34a08fcf3784ae850a791d26654b999d8428e7b2855b21",
+   "triangles": 2456,
+   "animations": 0
+  },
+  "style.voxel.dino": {
+   "path": "voxel/dino.glb",
+   "bytes": 183520,
+   "sha256": "d7a2b0aa2397efbdd95c607eda5766cc5a400e68a85d7662b4fb21d0dbabf5d2",
+   "triangles": 4820,
+   "animations": 14
+  },
+  "style.voxel.donut": {
+   "path": "voxel/donut.glb",
+   "bytes": 63380,
+   "sha256": "2a036dc410e519cab945de0c4de710dcef0d7342da1c28bf129cb377135557be",
+   "triangles": 5182,
+   "animations": 0
+  },
+  "style.voxel.dragon": {
+   "path": "voxel/dragon.glb",
+   "bytes": 240260,
+   "sha256": "d6142dcf00372e5e85b2bddb569ba690ba3b5506a9becad5d8a5162374138b65",
+   "triangles": 13640,
+   "animations": 8
+  },
+  "style.voxel.dragon_whelp": {
+   "path": "voxel/dragon_whelp.glb",
+   "bytes": 82548,
+   "sha256": "2007c19e8c743fa1e590874ecf297648ddb09c8edb54d846620bc198f89e5741",
+   "triangles": 3236,
+   "animations": 8
+  },
+  "style.voxel.fence": {
+   "path": "voxel/fence.glb",
+   "bytes": 4288,
+   "sha256": "6aeecf0cad1e87ab98d738edd9cf63c12e84feede5cf0301cd702c8ae2ecdf59",
+   "triangles": 220,
+   "animations": 0
+  },
+  "style.voxel.firetruck": {
+   "path": "voxel/firetruck.glb",
+   "bytes": 24664,
+   "sha256": "22eabd8a366bb8352b64bcf6990567e9e97b58c3c7e38dad0e2a500154b18c1c",
+   "triangles": 1946,
+   "animations": 0
+  },
+  "style.voxel.fish": {
+   "path": "voxel/fish.glb",
+   "bytes": 16860,
+   "sha256": "b5591dc4a308dbaa2c56f50bca3f008a4d9fac091ce3ddad499372f8a87a62d3",
+   "triangles": 1190,
+   "animations": 0
+  },
+  "style.voxel.flower_red": {
+   "path": "voxel/flower_red.glb",
+   "bytes": 6324,
+   "sha256": "307f3bb7ae01a6b48564991751d819be892a33dd4082a6eaca6f2a6461e4249e",
+   "triangles": 344,
+   "animations": 0
+  },
+  "style.voxel.fluffy_flyer": {
+   "path": "voxel/fluffy_flyer.glb",
+   "bytes": 78512,
+   "sha256": "0f3ac7e8bf8f0e875f66d98315d328edfe6c0fd2f9a34d07ffa6905193352765",
+   "triangles": 2842,
+   "animations": 8
+  },
+  "style.voxel.fox": {
+   "path": "voxel/fox.glb",
+   "bytes": 413136,
+   "sha256": "d467d0f1bb7095a517b933ee489e9bee2c1e90a042d4e6a1f94756b1964049cd",
+   "triangles": 4520,
+   "animations": 24
+  },
+  "style.voxel.fries": {
+   "path": "voxel/fries.glb",
+   "bytes": 8392,
+   "sha256": "97f511cc32587ec95f4cf03198f4dbec906f80ab8fae92e8ec3dcf66e36cb7f8",
+   "triangles": 488,
+   "animations": 0
+  },
+  "style.voxel.frog": {
+   "path": "voxel/frog.glb",
+   "bytes": 130432,
+   "sha256": "e70f7c4f71d4c789bca112ab2a550a257f0a7580bcb83ff46d06833adab18bc6",
+   "triangles": 6574,
+   "animations": 4
+  },
+  "style.voxel.garbage_truck": {
+   "path": "voxel/garbage_truck.glb",
+   "bytes": 37264,
+   "sha256": "45fc1d07857ca588dfa886c1fb988e568866bbdb9606a54269f34838170fb198",
+   "triangles": 3098,
+   "animations": 0
+  },
+  "style.voxel.gem_pink": {
+   "path": "voxel/gem_pink.glb",
+   "bytes": 5216,
+   "sha256": "9de825282bbdcf7a2a2282524ef7d758d8bb4c9b2d1677d1f1ad2278d552cfd3",
+   "triangles": 302,
+   "animations": 0
+  },
+  "style.voxel.generator": {
+   "path": "voxel/generator.glb",
+   "bytes": 13136,
+   "sha256": "18c2005b99cb72810411f4531e0d88b614616d9a4e7d56b058527841e677b761",
+   "triangles": 1130,
+   "animations": 0
+  },
+  "style.voxel.generator_large": {
+   "path": "voxel/generator_large.glb",
+   "bytes": 14680,
+   "sha256": "fda3b127e0f556004b3bd7033322319ec5ce745ec297023b02ccd54343330ed1",
+   "triangles": 1274,
+   "animations": 0
+  },
+  "style.voxel.ghost": {
+   "path": "voxel/ghost.glb",
+   "bytes": 103380,
+   "sha256": "3d2abdccca2117a454f1a780c9d0f58c3dc0767a421a4e6bed1743c85c3d25dc",
+   "triangles": 3312,
+   "animations": 8
+  },
+  "style.voxel.ghost_skull": {
+   "path": "voxel/ghost_skull.glb",
+   "bytes": 103480,
+   "sha256": "7a31db5a6c938ac65af8dd2198824961b5be621cd7b8e1309799e23e297bdc8a",
+   "triangles": 3406,
+   "animations": 8
+  },
+  "style.voxel.goblin": {
+   "path": "voxel/goblin.glb",
+   "bytes": 40512,
+   "sha256": "0c40541eefce02a2aa25ca20cca8bd846362fd372729e3a489bf33c8eedb0a6d",
+   "triangles": 1070,
+   "animations": 7
+  },
+  "style.voxel.greatsword": {
+   "path": "voxel/greatsword.glb",
+   "bytes": 3664,
+   "sha256": "bca0925c02919f58468d3216c646a5cb70e37e41c0e7e3e4221e1c4f2d115f88",
+   "triangles": 108,
+   "animations": 0
+  },
+  "style.voxel.grenade": {
+   "path": "voxel/grenade.glb",
+   "bytes": 23272,
+   "sha256": "e94ab3559f55d0d392a505c4ead9bb752f9111ad8449c4cddd0496a13cbe3f05",
+   "triangles": 1712,
+   "animations": 0
+  },
+  "style.voxel.hangar": {
+   "path": "voxel/hangar.glb",
+   "bytes": 162616,
+   "sha256": "6ffcbf9a2c873f73917d474437b8ec0a86671c9724f82b3a10641a7ce75d8186",
+   "triangles": 16820,
+   "animations": 0
+  },
+  "style.voxel.hatchback_sports": {
+   "path": "voxel/hatchback_sports.glb",
+   "bytes": 25908,
+   "sha256": "f33617731142309034d0b046d502f563873e41c4515434058cad81295477a62d",
+   "triangles": 2166,
+   "animations": 0
+  },
+  "style.voxel.hooded_adventurer": {
+   "path": "voxel/hooded_adventurer.glb",
+   "bytes": 386236,
+   "sha256": "4f4eeb8a5133e515017c06408705d16b0502df3abd01ece46c8a4c30660ae9a2",
+   "triangles": 1878,
+   "animations": 24
+  },
+  "style.voxel.hot_dog": {
+   "path": "voxel/hot_dog.glb",
+   "bytes": 34544,
+   "sha256": "f6c3e9d57f36aa161efa1d85dbc4ba884517c396e6bbf3231f0790666038f49e",
+   "triangles": 2870,
+   "animations": 0
+  },
+  "style.voxel.husky": {
+   "path": "voxel/husky.glb",
+   "bytes": 429384,
+   "sha256": "44683f84289eaaac71bf545b88ff95a4f3cf4956853b72d28e5549c63aa6fdcd",
+   "triangles": 3370,
+   "animations": 24
+  },
+  "style.voxel.ice_cream": {
+   "path": "voxel/ice_cream.glb",
+   "bytes": 9572,
+   "sha256": "d02a5d5094db3f9465da7be721b3dc229f98bd50808fe736aebea53da8742db6",
+   "triangles": 540,
+   "animations": 0
+  },
+  "style.voxel.imp": {
+   "path": "voxel/imp.glb",
+   "bytes": 145620,
+   "sha256": "87add1efeb74dfecd239fa6725dfe04a75d764b76796d9724d4991b6b93f35f5",
+   "triangles": 6198,
+   "animations": 8
+  },
+  "style.voxel.jelly_flyer": {
+   "path": "voxel/jelly_flyer.glb",
+   "bytes": 63844,
+   "sha256": "f8c37c97b1d3b7c64171b940100d5e561a738d1ed5812b224cdbee256b5513c7",
+   "triangles": 1470,
+   "animations": 8
+  },
+  "style.voxel.kart_a": {
+   "path": "voxel/kart_a.glb",
+   "bytes": 29796,
+   "sha256": "525b734e97e9298016763f876ea7e213178edc5077998af34ff56f89ff87fc44",
+   "triangles": 2132,
+   "animations": 0
+  },
+  "style.voxel.kart_b": {
+   "path": "voxel/kart_b.glb",
+   "bytes": 30216,
+   "sha256": "e316f08bc23e08fe7c1a7e41b30749970298b7f550e22436b41e894f01176d54",
+   "triangles": 2166,
+   "animations": 0
+  },
+  "style.voxel.kart_c": {
+   "path": "voxel/kart_c.glb",
+   "bytes": 29756,
+   "sha256": "99103d6d85f57185ad8e3e5b6485a3cb30c6aa2e20c91f99f5528be62d032e25",
+   "triangles": 2142,
+   "animations": 0
+  },
+  "style.voxel.kart_d": {
+   "path": "voxel/kart_d.glb",
+   "bytes": 29828,
+   "sha256": "09a80ad2a4ee8276812ce9566f88648a72fd0c29ab58dfa8ad47eda2433195e0",
+   "triangles": 2140,
+   "animations": 0
+  },
+  "style.voxel.kart_e": {
+   "path": "voxel/kart_e.glb",
+   "bytes": 30092,
+   "sha256": "d66a7f947dc9018bea6d5042f0faa0355c77522b4aebe727c8ce1e5e51bbcf71",
+   "triangles": 2156,
+   "animations": 0
+  },
+  "style.voxel.log": {
+   "path": "voxel/log.glb",
+   "bytes": 7864,
+   "sha256": "f42134b186acacc9046d838d0598906d8ea0ad72fc891c601c59685855230637",
+   "triangles": 550,
+   "animations": 0
+  },
+  "style.voxel.mech": {
+   "path": "voxel/mech.glb",
+   "bytes": 149332,
+   "sha256": "6f204eaee770d3f06e3f35a2215f406749434098f3f98866cc2df3ae8532e0cc",
+   "triangles": 4586,
+   "animations": 17
+  },
+  "style.voxel.mech_heavy": {
+   "path": "voxel/mech_heavy.glb",
+   "bytes": 133292,
+   "sha256": "230ca548136602980a046ef7d866484d2c5b91e18ed0fc75b81377d376e6f8b2",
+   "triangles": 2886,
+   "animations": 17
+  },
+  "style.voxel.meteor": {
+   "path": "voxel/meteor.glb",
+   "bytes": 22704,
+   "sha256": "a63c7a687ee2a11039c178be21900b88229140fae99feb691b3f770bf9f1911f",
+   "triangles": 1936,
+   "animations": 0
+  },
+  "style.voxel.miner_ship": {
+   "path": "voxel/miner_ship.glb",
+   "bytes": 22056,
+   "sha256": "6ed7708280c1a8f954f633a0e022cbb6f8d5f1ff4e11181b3ab819608e3ea5ca",
+   "triangles": 2148,
+   "animations": 0
+  },
+  "style.voxel.mini_female_a": {
+   "path": "voxel/mini_female_a.glb",
+   "bytes": 88236,
+   "sha256": "cdbdb38a734577cbca23e539abf8bfbd77c2469ce4b4889c1bba7e4034875cae",
+   "triangles": 3238,
+   "animations": 32
+  },
+  "style.voxel.mini_female_b": {
+   "path": "voxel/mini_female_b.glb",
+   "bytes": 95008,
+   "sha256": "1fcb8e51b3a574c5e6268e6bfb858f2bc8028689e02d4065678064f4c99aaf32",
+   "triangles": 3096,
+   "animations": 32
+  },
+  "style.voxel.mini_female_c": {
+   "path": "voxel/mini_female_c.glb",
+   "bytes": 96356,
+   "sha256": "76ab9daf4e5751eac5e5050ce80b755d209aee28cf6a92c13eb42a2b4210e71f",
+   "triangles": 3082,
+   "animations": 32
+  },
+  "style.voxel.mini_female_d": {
+   "path": "voxel/mini_female_d.glb",
+   "bytes": 97284,
+   "sha256": "1eb9019928e4397bd41ac83cc1d0e737b8b7f3817201ecd6019b52f8298b6d5a",
+   "triangles": 3242,
+   "animations": 32
+  },
+  "style.voxel.mini_female_e": {
+   "path": "voxel/mini_female_e.glb",
+   "bytes": 95992,
+   "sha256": "34d4cc99e80853d126a8524bbf485fa21d7b06bebf4314ab136da5a2cbc4e624",
+   "triangles": 3286,
+   "animations": 32
+  },
+  "style.voxel.mini_female_f": {
+   "path": "voxel/mini_female_f.glb",
+   "bytes": 103736,
+   "sha256": "6504b568d6839f170942ad8b8fadb34224605b8bed086635c62656417a85322c",
+   "triangles": 3890,
+   "animations": 32
+  },
+  "style.voxel.mini_male_a": {
+   "path": "voxel/mini_male_a.glb",
+   "bytes": 92736,
+   "sha256": "e665b14e5bed9b29eb4ea703a34a83a6b7b2f3986f4c2b7ebfba4b09878ef764",
+   "triangles": 2948,
+   "animations": 32
+  },
+  "style.voxel.mini_male_b": {
+   "path": "voxel/mini_male_b.glb",
+   "bytes": 99372,
+   "sha256": "dd7dcfb5706e175124aebd78e463bde6edf4ce423cf2f9902f19d09f8f651f15",
+   "triangles": 3504,
+   "animations": 32
+  },
+  "style.voxel.mini_male_c": {
+   "path": "voxel/mini_male_c.glb",
+   "bytes": 92608,
+   "sha256": "fc6454ebd06c4d825927921c8c460906eec5c5a32b33cabcf478f5ed1a2ca0cc",
+   "triangles": 2900,
+   "animations": 32
+  },
+  "style.voxel.mini_male_d": {
+   "path": "voxel/mini_male_d.glb",
+   "bytes": 87128,
+   "sha256": "9aa04619556a4be7eec42e02c698c605f8fe0b0900bb97441cf3492a1bf46c97",
+   "triangles": 2620,
+   "animations": 32
+  },
+  "style.voxel.mini_male_e": {
+   "path": "voxel/mini_male_e.glb",
+   "bytes": 95904,
+   "sha256": "c6916873c7c39891e5f10ed9e897e30a3d56550bb3a66f3c8ed10d3f7420fc36",
+   "triangles": 3188,
+   "animations": 32
+  },
+  "style.voxel.mini_male_f": {
+   "path": "voxel/mini_male_f.glb",
+   "bytes": 100604,
+   "sha256": "2cba22f8634216eeb05fb15badf81094910016dcb5cbc757879e9e34fd94ab41",
+   "triangles": 3530,
+   "animations": 32
+  },
+  "style.voxel.monarch": {
+   "path": "voxel/monarch.glb",
+   "bytes": 377128,
+   "sha256": "1c78d2ee1e93047abe38641b6f8419b74ed54a2cd46d1087fda8c452350ec54f",
+   "triangles": 1952,
+   "animations": 24
+  },
+  "style.voxel.mushroom_imp": {
+   "path": "voxel/mushroom_imp.glb",
+   "bytes": 45672,
+   "sha256": "98ee2e5d1de1d8f3a9daeca09241811861cb4ca561df411571c61c81d48e761c",
+   "triangles": 2244,
+   "animations": 9
+  },
+  "style.voxel.mushroom_king": {
+   "path": "voxel/mushroom_king.glb",
+   "bytes": 230132,
+   "sha256": "8322e8a930e1ce762e3f666fc31d59dba546e159d94b439dcaecbdd801802f00",
+   "triangles": 8584,
+   "animations": 14
+  },
+  "style.voxel.mushroom_red": {
+   "path": "voxel/mushroom_red.glb",
+   "bytes": 5452,
+   "sha256": "4cb3459fb1690e66564202ad1a86ee4a69d910e5afa5881d427dfe71b09cc119",
+   "triangles": 276,
+   "animations": 0
+  },
+  "style.voxel.ninja_brute": {
+   "path": "voxel/ninja_brute.glb",
+   "bytes": 194800,
+   "sha256": "463ffa81c7c2249c0f2d15aaecca022bf46fecc9dbd02f907d727cf5f7cde409",
+   "triangles": 5760,
+   "animations": 14
+  },
+  "style.voxel.obelisk": {
+   "path": "voxel/obelisk.glb",
+   "bytes": 4436,
+   "sha256": "f08ee3ea62403a0987ec21fa3b4abb64f8fbe28b6b113ee59dd3020c44b00fd2",
+   "triangles": 200,
+   "animations": 0
+  },
+  "style.voxel.orc_brute": {
+   "path": "voxel/orc_brute.glb",
+   "bytes": 191880,
+   "sha256": "f1963531e85795a55f9922ce7ac3fce59ccbe4b6076ef056622f105b40f9fbd9",
+   "triangles": 5008,
+   "animations": 14
+  },
+  "style.voxel.pebble_flyer": {
+   "path": "voxel/pebble_flyer.glb",
+   "bytes": 111332,
+   "sha256": "d3e6cada27798d20500b9263488acccc44950cd79b42a4202fc63551bc2fc9a7",
+   "triangles": 6286,
+   "animations": 8
+  },
+  "style.voxel.pirate": {
+   "path": "voxel/pirate.glb",
+   "bytes": 168620,
+   "sha256": "a79e17c1386c3ecb29c03620a5c4369439745ee6d43541ca106d081987691bfc",
+   "triangles": 4494,
+   "animations": 14
+  },
+  "style.voxel.pizza": {
+   "path": "voxel/pizza.glb",
+   "bytes": 59988,
+   "sha256": "7dc9e16e48cbfc6a6006a44d11ea984eed8e47a4e8681bbdc0e97d115b0a4a3d",
+   "triangles": 5408,
+   "animations": 0
+  },
+  "style.voxel.police_car": {
+   "path": "voxel/police_car.glb",
+   "bytes": 28148,
+   "sha256": "f22d52d85ba1248105dd41df47f2042b683c263795c51adcaeb415b1144891e3",
+   "triangles": 2352,
+   "animations": 0
+  },
+  "style.voxel.pug": {
+   "path": "voxel/pug.glb",
+   "bytes": 87796,
+   "sha256": "3dff12d39a264aeb4b827d28bc51e990b0111b44c9b5dde0e651564d1130e172",
+   "triangles": 4240,
+   "animations": 2
+  },
+  "style.voxel.pumpkin": {
+   "path": "voxel/pumpkin.glb",
+   "bytes": 19880,
+   "sha256": "c99f12ba7ae330a78d4779d22bb8297691386d1340030e3255e74d70bc9c0be8",
+   "triangles": 1490,
+   "animations": 0
+  },
+  "style.voxel.race_car": {
+   "path": "voxel/race_car.glb",
+   "bytes": 64996,
+   "sha256": "401b1ed3b07e86497143a2e222636a8b917d04eb9e1be7088b2f9031af7e50c0",
+   "triangles": 6278,
+   "animations": 0
+  },
+  "style.voxel.race_car_future": {
+   "path": "voxel/race_car_future.glb",
+   "bytes": 51784,
+   "sha256": "9afd1262c8960e38154923da4d27ddf2a5ea194aba29c6b8b61dce3fc44f3134",
+   "triangles": 4858,
+   "animations": 0
+  },
+  "style.voxel.racer_ship": {
+   "path": "voxel/racer_ship.glb",
+   "bytes": 19624,
+   "sha256": "30f4fe8264ba8bc177dfc1db2ff60485ce97e93e7ef56dd46602e4c8ca4f5533",
+   "triangles": 1802,
+   "animations": 0
+  },
+  "style.voxel.raptor": {
+   "path": "voxel/raptor.glb",
+   "bytes": 136664,
+   "sha256": "4e0c0afc5671bf22329ff0b1eeecbd68930fdd45c359a3340a743eb3199a9984",
+   "triangles": 3032,
+   "animations": 6
+  },
+  "style.voxel.robot_flyer": {
+   "path": "voxel/robot_flyer.glb",
+   "bytes": 62760,
+   "sha256": "ece423c7b69492281b2fefad177891dddd9a949db3b69f920db88a6b3e936786",
+   "triangles": 3074,
+   "animations": 6
+  },
+  "style.voxel.robot_flyer_gun": {
+   "path": "voxel/robot_flyer_gun.glb",
+   "bytes": 61136,
+   "sha256": "f07a14ca95e8c88f473b97878590feab788faf8336eda40fb7a655dea3e16359",
+   "triangles": 2780,
+   "animations": 6
+  },
+  "style.voxel.robot_gunner": {
+   "path": "voxel/robot_gunner.glb",
+   "bytes": 80900,
+   "sha256": "1f2a26eeaef4d230c68e695eb884d3d0fc84ff74847d3da8b6927570d46df135",
+   "triangles": 2816,
+   "animations": 7
+  },
+  "style.voxel.robot_large": {
+   "path": "voxel/robot_large.glb",
+   "bytes": 121320,
+   "sha256": "e81b96aacbc97832e6caaa0adff7c78ebd8dadb32ef0e33c9dad42ab22a28795",
+   "triangles": 7370,
+   "animations": 8
+  },
+  "style.voxel.robot_walker": {
+   "path": "voxel/robot_walker.glb",
+   "bytes": 86552,
+   "sha256": "a5a6ccb6d97f83713f5477dd813cc3c56200509ca68e3520f95b2a2c52e438b0",
+   "triangles": 3150,
+   "animations": 7
+  },
+  "style.voxel.rock_large": {
+   "path": "voxel/rock_large.glb",
+   "bytes": 46532,
+   "sha256": "49cc9f011dff16704ea6b4d7f4d47b170e2563964167b579e4df1a40d4243f04",
+   "triangles": 4398,
+   "animations": 0
+  },
+  "style.voxel.rock_small": {
+   "path": "voxel/rock_small.glb",
+   "bytes": 24268,
+   "sha256": "71babe8122252a09257ffb92ea0f2c7881fae6d23a0e6f9ef0e1f9102c6a81e8",
+   "triangles": 2010,
+   "animations": 0
+  },
+  "style.voxel.rock_tall": {
+   "path": "voxel/rock_tall.glb",
+   "bytes": 14248,
+   "sha256": "85c965af15e17aebb17b6afc3dcc15dd8f71ef5608739dab6f0c2da7746ea8e2",
+   "triangles": 1098,
+   "animations": 0
+  },
+  "style.voxel.rocket": {
+   "path": "voxel/rocket.glb",
+   "bytes": 14764,
+   "sha256": "0251c28e25a402b0627c6abe7762e497de0f772e6f5049d9b805063d092ec8f0",
+   "triangles": 1172,
+   "animations": 0
+  },
+  "style.voxel.rogue": {
+   "path": "voxel/rogue.glb",
+   "bytes": 209780,
+   "sha256": "12a7861263a57f8e1c260cdd747ecb1eae9586b4a71a59119ff5ccebbfaf2a1a",
+   "triangles": 2490,
+   "animations": 24
+  },
+  "style.voxel.rover": {
+   "path": "voxel/rover.glb",
+   "bytes": 9232,
+   "sha256": "e51ce1207707d12f09b433d79d8fbcfcf5b8bd7b706539d0cc395c3ea67773d7",
+   "triangles": 654,
+   "animations": 0
+  },
+  "style.voxel.satellite_dish": {
+   "path": "voxel/satellite_dish.glb",
+   "bytes": 43808,
+   "sha256": "2939cd0608cb39d17286d67f355533a975b960ce50ffcfc5f736f9ddbf3fca0d",
+   "triangles": 3738,
+   "animations": 0
+  },
+  "style.voxel.sedan": {
+   "path": "voxel/sedan.glb",
+   "bytes": 21180,
+   "sha256": "9b702bd28e8c505f59590b20b84fa576d4b60dba07e83936cb4d0b4abe80fc68",
+   "triangles": 1992,
+   "animations": 0
+  },
+  "style.voxel.sedan_sports": {
+   "path": "voxel/sedan_sports.glb",
+   "bytes": 25932,
+   "sha256": "99fd2aceb0e6247bebfc18f4f1c90cb8497b1e92b22eb7b266a768df0e04e1a5",
+   "triangles": 2192,
+   "animations": 0
+  },
+  "style.voxel.shiba": {
+   "path": "voxel/shiba.glb",
+   "bytes": 360604,
+   "sha256": "d9e2e84ae0a204b0b0048cee3ad0ca5a4ee2ce9a78cfa1bd971216bfc9be1483",
+   "triangles": 3932,
+   "animations": 24
+  },
+  "style.voxel.skeleton": {
+   "path": "voxel/skeleton.glb",
+   "bytes": 60120,
+   "sha256": "d72c46e1cdd70c9099dc866144c4978a7668d8601c7db68cd7b4ecee2cca27e9",
+   "triangles": 1466,
+   "animations": 5
+  },
+  "style.voxel.skeleton_crew": {
+   "path": "voxel/skeleton_crew.glb",
+   "bytes": 187444,
+   "sha256": "fe576828f77f335e26f28307157e34c3eec09ecaff200b0ef50576325fd0ebb1",
+   "triangles": 4910,
+   "animations": 15
+  },
+  "style.voxel.skeleton_grunt": {
+   "path": "voxel/skeleton_grunt.glb",
+   "bytes": 42520,
+   "sha256": "99deedcf0c8ded081b1223b901ec2b3520ffe73bf5ee8549cc0494d168b42bd6",
+   "triangles": 1304,
+   "animations": 7
+  },
+  "style.voxel.skull_hopper": {
+   "path": "voxel/skull_hopper.glb",
+   "bytes": 57512,
+   "sha256": "0da0946d63f08000b3be4b09543d8f69d0d19a2a38e6cabf612e5114ba512d08",
+   "triangles": 2826,
+   "animations": 10
+  },
+  "style.voxel.skyscraper_a": {
+   "path": "voxel/skyscraper_a.glb",
+   "bytes": 38464,
+   "sha256": "a6ea6e418a7c4d5b8b207ae4084949fda1d4619c89372037fa746e9bc5ba2292",
+   "triangles": 3270,
+   "animations": 0
+  },
+  "style.voxel.skyscraper_b": {
+   "path": "voxel/skyscraper_b.glb",
+   "bytes": 37052,
+   "sha256": "4ae16f8e1389af409fa43df56e446263821513116cec98578c1bc33911070e7a",
+   "triangles": 3004,
+   "animations": 0
+  },
+  "style.voxel.skyscraper_c": {
+   "path": "voxel/skyscraper_c.glb",
+   "bytes": 25188,
+   "sha256": "bdfcb2ca3206778d42e60f64d9a88a109892ef7ac8d4880be5d76102b363ba1b",
+   "triangles": 2168,
+   "animations": 0
+  },
+  "style.voxel.slime_drop": {
+   "path": "voxel/slime_drop.glb",
+   "bytes": 69088,
+   "sha256": "1b1131317d108ba4da2be0e3e90bed9d641f8c8c59dc68e42d7ee3d2077a0318",
+   "triangles": 4158,
+   "animations": 4
+  },
+  "style.voxel.slime_green": {
+   "path": "voxel/slime_green.glb",
+   "bytes": 37160,
+   "sha256": "e9e1956b0869677a614aace7411bebb60ab1375126325dd095de879ad591bfcf",
+   "triangles": 2098,
+   "animations": 9
+  },
+  "style.voxel.slime_horned": {
+   "path": "voxel/slime_horned.glb",
+   "bytes": 64888,
+   "sha256": "1c709e817a0a36695f1b0110cf0c9624c42ef6039fa41b1300cb98ec30864078",
+   "triangles": 2534,
+   "animations": 10
+  },
+  "style.voxel.slime_pink": {
+   "path": "voxel/slime_pink.glb",
+   "bytes": 43292,
+   "sha256": "2d899c174a9c194aa55204911c173f96fb469056a8ec90e6d8c3f4575f0ba86e",
+   "triangles": 2106,
+   "animations": 9
+  },
+  "style.voxel.slime_spiky": {
+   "path": "voxel/slime_spiky.glb",
+   "bytes": 57584,
+   "sha256": "84f0208f886f83c42837eb078cf6c4d2cfebf6e3bdf78d9d7f94cced6cf04e10",
+   "triangles": 3320,
+   "animations": 9
+  },
+  "style.voxel.soldier": {
+   "path": "voxel/soldier.glb",
+   "bytes": 198420,
+   "sha256": "e74592a9719a2cd1f934459c84fdb511ae84746f993a7c4f869830c8eeb54dd1",
+   "triangles": 6636,
+   "animations": 14
+  },
+  "style.voxel.speeder_a": {
+   "path": "voxel/speeder_a.glb",
+   "bytes": 21740,
+   "sha256": "2741583949d140395a4dea277a4d1783dad4626d648d925a9cd911580704a717",
+   "triangles": 2040,
+   "animations": 0
+  },
+  "style.voxel.speeder_b": {
+   "path": "voxel/speeder_b.glb",
+   "bytes": 29896,
+   "sha256": "7feb3d20addc31d13766867cf9aed5046705aeacb5a1cf0582df1f3296ea94f3",
+   "triangles": 2988,
+   "animations": 0
+  },
+  "style.voxel.speeder_c": {
+   "path": "voxel/speeder_c.glb",
+   "bytes": 23760,
+   "sha256": "b5f424a198dc3c19f6614267047886e496d58ea208b8c963e44068ec952d1e73",
+   "triangles": 2252,
+   "animations": 0
+  },
+  "style.voxel.stag": {
+   "path": "voxel/stag.glb",
+   "bytes": 314724,
+   "sha256": "35196557e764c20af7445b526f5ac5b8825d7bd6b30d32d1f6966af8275d0bd9",
+   "triangles": 3532,
+   "animations": 26
+  },
+  "style.voxel.stump": {
+   "path": "voxel/stump.glb",
+   "bytes": 12792,
+   "sha256": "8ecddae736441221cc82021c91aa843f955bf1388ccb38319298b878e09ce7cd",
+   "triangles": 938,
+   "animations": 0
+  },
+  "style.voxel.sushi": {
+   "path": "voxel/sushi.glb",
+   "bytes": 15352,
+   "sha256": "a292717a2c0b7ca8a82ad081ef1f4a3de824b59a116545c01c1bc2c80f7248b4",
+   "triangles": 1198,
+   "animations": 0
+  },
+  "style.voxel.suv": {
+   "path": "voxel/suv.glb",
+   "bytes": 29124,
+   "sha256": "4d97ccd1471f6119263127ac60033307ee6a4a32a1490d596e6f383524fe135c",
+   "triangles": 2334,
+   "animations": 0
+  },
+  "style.voxel.suv_luxury": {
+   "path": "voxel/suv_luxury.glb",
+   "bytes": 23788,
+   "sha256": "543e07c1f03134101ba16d97e5067cabd263e80f7756956fe7ddf65d35debf12",
+   "triangles": 1968,
+   "animations": 0
+  },
+  "style.voxel.sword": {
+   "path": "voxel/sword.glb",
+   "bytes": 3768,
+   "sha256": "603480054e13ecac88653f2f63f1459b7ab0c438788a392a5a9575c22e49220a",
+   "triangles": 112,
+   "animations": 0
+  },
+  "style.voxel.taco": {
+   "path": "voxel/taco.glb",
+   "bytes": 13344,
+   "sha256": "630bb1546af3ed4d8551565578a7646263d8fcb1896c3229e20f12608c00dacd",
+   "triangles": 934,
+   "animations": 0
+  },
+  "style.voxel.tank": {
+   "path": "voxel/tank.glb",
+   "bytes": 103324,
+   "sha256": "9905bf8792bd475e0d42729c284e8cf796964e9f7b31d22cbfa0cc168f0a4356",
+   "triangles": 5038,
+   "animations": 4
+  },
+  "style.voxel.tank_heavy": {
+   "path": "voxel/tank_heavy.glb",
+   "bytes": 77972,
+   "sha256": "84cced98be8e5c648c1287b3d67990fd857f2e6bfac1eb23af43166b10b3abe9",
+   "triangles": 2430,
+   "animations": 4
+  },
+  "style.voxel.target": {
+   "path": "voxel/target.glb",
+   "bytes": 10116,
+   "sha256": "32fd821afa05892b9a93c6e04633c199fbaf891f23d5153f6fa630b38178d9a4",
+   "triangles": 644,
+   "animations": 0
+  },
+  "style.voxel.taxi": {
+   "path": "voxel/taxi.glb",
+   "bytes": 23188,
+   "sha256": "3554129021bb2a238dc0470470f4f1e14d335c71e486ae773a38660f4a086cfc",
+   "triangles": 1794,
+   "animations": 0
+  },
+  "style.voxel.tent": {
+   "path": "voxel/tent.glb",
+   "bytes": 21124,
+   "sha256": "69f3bac049c3df6d1042683dbb82b5fdd7771eeb50b6068743140fca943e5d29",
+   "triangles": 1900,
+   "animations": 0
+  },
+  "style.voxel.tractor": {
+   "path": "voxel/tractor.glb",
+   "bytes": 26644,
+   "sha256": "7dce33769ba29b6a594a5fa8fce2adc2cf0c73919c8d8277786393304128346f",
+   "triangles": 2160,
+   "animations": 0
+  },
+  "style.voxel.tree_autumn": {
+   "path": "voxel/tree_autumn.glb",
+   "bytes": 19820,
+   "sha256": "b2be0e20854e5bcbe10c8053bf03f055953357c9e62f9937535d79af9da600e4",
+   "triangles": 1474,
+   "animations": 0
+  },
+  "style.voxel.tree_dark": {
+   "path": "voxel/tree_dark.glb",
+   "bytes": 11036,
+   "sha256": "79bb88f852adad47e18f540ffa57016aefac5dfc4d4661baddaea70e2f35f272",
+   "triangles": 828,
+   "animations": 0
+  },
+  "style.voxel.tree_fat": {
+   "path": "voxel/tree_fat.glb",
+   "bytes": 25208,
+   "sha256": "28ef4767b22a86886e99d394cf8fc96acd34af43517b01221c9629ac70588400",
+   "triangles": 2250,
+   "animations": 0
+  },
+  "style.voxel.tree_oak": {
+   "path": "voxel/tree_oak.glb",
+   "bytes": 18064,
+   "sha256": "ffb6aab9021f04756cdaa01ec44f3209cba132f8fdfd74cd1cbc0396620c9f6d",
+   "triangles": 1492,
+   "animations": 0
+  },
+  "style.voxel.tree_palm": {
+   "path": "voxel/tree_palm.glb",
+   "bytes": 10300,
+   "sha256": "fe9d875370524b5595f103c5cee135b8ac43cd1f18041de8c9f7a163e29c040b",
+   "triangles": 810,
+   "animations": 0
+  },
+  "style.voxel.tree_pine": {
+   "path": "voxel/tree_pine.glb",
+   "bytes": 12876,
+   "sha256": "b7257b2e929f46e92afaf3aea529d621eea955b5da4b80f83d4532ef8ec15933",
+   "triangles": 920,
+   "animations": 0
+  },
+  "style.voxel.tree_pine_tall": {
+   "path": "voxel/tree_pine_tall.glb",
+   "bytes": 7984,
+   "sha256": "fadfcd2de131405c18e4f2eac96ecfbe187e1d89215a7e9533ecdc731cde1f40",
+   "triangles": 548,
+   "animations": 0
+  },
+  "style.voxel.trex": {
+   "path": "voxel/trex.glb",
+   "bytes": 222756,
+   "sha256": "d90a4f15377849feac5b0a92be4d728d64e9d2d21b01cec631f59f7339a82167",
+   "triangles": 11014,
+   "animations": 6
+  },
+  "style.voxel.triceratops": {
+   "path": "voxel/triceratops.glb",
+   "bytes": 220816,
+   "sha256": "7ff3c4fd39becfa2d948f0904da049807a017a885a3c42260a0895662760083b",
+   "triangles": 9800,
+   "animations": 6
+  },
+  "style.voxel.truck": {
+   "path": "voxel/truck.glb",
+   "bytes": 24952,
+   "sha256": "b0cf6a15a2aa4df41ba91922c3f139494b246a3f3e1e04f1e7394407689fda88",
+   "triangles": 2064,
+   "animations": 0
+  },
+  "style.voxel.truck_flat": {
+   "path": "voxel/truck_flat.glb",
+   "bytes": 26120,
+   "sha256": "4b0d4fc3d5e2710e40182f99cca42794d6e8be907d6b1809c97633a90a02d2d3",
+   "triangles": 2234,
+   "animations": 0
+  },
+  "style.voxel.turret": {
+   "path": "voxel/turret.glb",
+   "bytes": 10200,
+   "sha256": "f77c72e64bf25f414f90ba2436c6bc023ebfbb0bc0297116761695dd9afe3784",
+   "triangles": 782,
+   "animations": 0
+  },
+  "style.voxel.turret_double": {
+   "path": "voxel/turret_double.glb",
+   "bytes": 13180,
+   "sha256": "4893f5b28c92efbb7baed0e76742c3df01dd8e70fe1bf97fe2e05add1196efbc",
+   "triangles": 1070,
+   "animations": 0
+  },
+  "style.voxel.van": {
+   "path": "voxel/van.glb",
+   "bytes": 26860,
+   "sha256": "709fc0ee0f605b93a7f8a2b3592e54c60aa665044a8582516f31e0a1fa0e4869",
+   "triangles": 2320,
+   "animations": 0
+  },
+  "style.voxel.watermelon": {
+   "path": "voxel/watermelon.glb",
+   "bytes": 17812,
+   "sha256": "54b2bd1444e7b93e6af366738c1833d1d419dd070dfa2e16b295aecc0be0a8ff",
+   "triangles": 1276,
+   "animations": 0
+  },
+  "style.voxel.wolf": {
+   "path": "voxel/wolf.glb",
+   "bytes": 408172,
+   "sha256": "634bbad51ed6a0caae21ec471adeb4fd66a01e3d10d7307b8c186485496fcce4",
+   "triangles": 4312,
+   "animations": 24
+  },
+  "style.voxel.wolf_cartoon": {
+   "path": "voxel/wolf_cartoon.glb",
+   "bytes": 50240,
+   "sha256": "7ba0131a4de4dd09271a6aafad5dae6f0397fa7a3418363460e895efb5a30e8e",
+   "triangles": 1830,
+   "animations": 8
+  },
+  "style.voxel.worker": {
+   "path": "voxel/worker.glb",
+   "bytes": 151432,
+   "sha256": "1467cd086a244b384173852748daea7c532af7078f461db1e1c83597adda6900",
+   "triangles": 1494,
+   "animations": 11
+  },
+  "style.voxel.wyvern": {
+   "path": "voxel/wyvern.glb",
+   "bytes": 131664,
+   "sha256": "da30820c350fa31fe5d4b968f234e076565176365866cafe152b29a6fb290cba",
+   "triangles": 5990,
+   "animations": 5
+  },
+  "style.voxel.yeti": {
+   "path": "voxel/yeti.glb",
+   "bytes": 190908,
+   "sha256": "91fc59c07b2e16bf0aa0c594ecbc1ea60111e4b07fea99ba4093d4abc5fac362",
+   "triangles": 5170,
+   "animations": 14
+  },
+  "style.voxel.zombie": {
+   "path": "voxel/zombie.glb",
+   "bytes": 328712,
+   "sha256": "bff514cf4b07fb34635f3d8706625f2a84fc02358f29ad8762f342712cdf2878",
+   "triangles": 5282,
+   "animations": 32
+  },
+  "style.voxel.zombie_grunt": {
+   "path": "voxel/zombie_grunt.glb",
+   "bytes": 42740,
+   "sha256": "58b146665f9e4758b24318eadcf6a84c8870a2827f6c3c491f689907a5ef2827",
+   "triangles": 1262,
+   "animations": 7
+  }
+ }
+}

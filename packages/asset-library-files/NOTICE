@@ -1,0 +1,52 @@
+@netnetcapital/asset-library-files
+Copyright (c) 2026 NetNet Capital Management (selection, optimization, index)
+
+The files in library/ are optimized copies (meshopt, resized textures) of
+third-party art under CC0 1.0 (public domain dedication), listed per pack
+below. The voxel and ps1 sets are made from the low-poly models and the
+Screaming Brain Studios textures below. Crediting is not required by CC0;
+we credit anyway. The CC0 1.0 legal code is in CC0-1.0.txt.
+
+Quaternius (https://quaternius.com), CC0 1.0
+- Animated characters, monsters (blob, flying and big bodies), animals,
+  dinosaurs, robots, tanks, weapons and props.
+- Files: per-model GLBs on Poly Pizza uploaded by Quaternius
+  (https://poly.pizza/u/Quaternius); each asset's model page is recorded
+  in manifest/lowpoly.json and states Public Domain (CC0). Quaternius's
+  pack pages (https://quaternius.com/packs/*) state "License CC0". Models
+  Poly Pizza lists under CC-BY are not used.
+
+Kenney (https://www.kenney.nl), CC0 1.0, each archive's License.txt reads
+"License: (Creative Commons Zero, CC0)"
+- Mini Characters 1.0      https://kenney.nl/assets/mini-characters
+- Blocky Characters 2.0    https://kenney.nl/assets/blocky-characters
+- Car Kit                  https://kenney.nl/assets/car-kit
+- Blaster Kit 2.1          https://kenney.nl/assets/blaster-kit
+- Nature Kit               https://kenney.nl/assets/nature-kit
+- Space Kit                https://kenney.nl/assets/space-kit
+- Food Kit                 https://kenney.nl/assets/food-kit
+- City Kit (Commercial) 2.1 https://kenney.nl/assets/city-kit-commercial
+- Tiny Dungeon             https://kenney.nl/assets/tiny-dungeon
+- Pixel Platformer         https://kenney.nl/assets/pixel-platformer
+- Pixel Vehicle Pack       https://kenney.nl/assets/pixel-vehicle-pack
+
+The CC0 1.0 legal code is in LICENSES/CC0-1.0.txt.
+
+Screaming Brain Studios (OpenGameArt), CC0 1.0, each archive's License.txt
+reads "released under the CC0/Public Domain License ... commercial or
+non-commercial, with no restrictions"
+- Tiny Texture Pack 1      https://opengameart.org/content/tiny-texture-pack-1
+- Synthetic Texture Pack   https://opengameart.org/content/synthetic-texture-pack
+- Base Material Texture Pack https://opengameart.org/content/base-material-texture-pack
+  The 128 px editions; the ps1 style's surface textures (manifest/ps1.json).
+
+Audio, CC0 1.0
+- Kenney sound packs, each archive's License.txt reads "Creative Commons
+  Zero, CC0": Impact Sounds (https://kenney.nl/assets/impact-sounds),
+  Interface Sounds (https://kenney.nl/assets/interface-sounds), RPG Audio
+  (https://kenney.nl/assets/rpg-audio), Sci-fi Sounds
+  (https://kenney.nl/assets/sci-fi-sounds), Digital Audio
+  (https://kenney.nl/assets/digital-audio).
+- "Battle Theme A" by cynicmusic, https://opengameart.org/content/battle-theme-a
+  (the page lists License(s): CC0; verified 2026-10-16).
+

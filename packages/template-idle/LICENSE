@@ -1,0 +1,11 @@
+LICENSE PENDING
+
+Copyright (c) 2026 NetNet Capital Management. All rights reserved until a
+license is published here.
+
+TODO(human): choose the license for the Net Forge engine packages (Q155,
+answered 2026-10-21): MIT, or a source-available license that allows use
+only with Net Forge. Replace this whole file with the chosen license text
+and set the "license" field in package.json to match (for example "MIT").
+Publishing is blocked (scripts/license-gate.mjs in packages/engine) while
+this file says LICENSE PENDING.

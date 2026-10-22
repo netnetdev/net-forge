@@ -1,0 +1,34 @@
+@netnetcapital/template-platformer (SKYLEDGE)
+Copyright (c) 2026 NetNet Capital Management
+
+An original game. No names, characters, maps, models, sounds or code from
+any other game or franchise.
+
+Art and sound
+- Models come from the per-style asset library
+  (@netnetcapital/asset-library): CC0 1.0 models by Quaternius (via Poly
+  Pizza: the climbers and the coin) and Kenney (Nature Kit: trees, rocks,
+  bushes), each pack listed with its
+  source URL and licence verification in that package's NOTICE and
+  manifest/packs.json. The files are fetched and built, never committed
+  here; the build copies only the models this game uses.
+- Blocks, ledges, thorns, springs, flags and the fallback climber
+  (client/scene.ts) are generated from three.js primitives; all textures
+  are drawn on a canvas at load. Sounds are the library's CC0 samples with
+  WebAudio-synthesized fallbacks (client/audio.ts).
+
+Dependencies (unmodified, via npm)
+- three.js 0.186.1 (https://github.com/mrdoob/three.js), MIT.
+- @netnetcapital/engine and @netnetcapital/engine-sim (this repository);
+  see their NOTICE files (bitECS MPL-2.0, Rapier Apache-2.0, Colyseus MIT,
+  zod MIT).
+
+Patterns (ideas only)
+- The platformer genre's general mechanics (run, jump, checkpoints, coins,
+  springs, moving platforms, a flag at the end, racing to it). Mechanics,
+  not expression; no level, character or text was copied from any game.
+- Jump feel (coyote time, jump buffering, variable jump height, apex hang,
+  fall gravity, corner correction) as described in public game-feel talks
+  and articles (e.g. "Math for Game Programmers: Building a Better Jump",
+  GDC 2016; Maddy Thorson's public notes on Celeste's forgiveness
+  mechanics). Implemented from scratch in engine-sim src/platform.ts.

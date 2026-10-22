@@ -1,0 +1,212 @@
+[
+  {
+    "id": "quaternius_poly_pizza",
+    "title": "Quaternius animated characters, monsters, animals, vehicles and props",
+    "author": "Quaternius (quaternius.com)",
+    "page": "https://poly.pizza/u/Quaternius",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "verified": { "on": "2026-10-16", "how": "Each model's Poly Pizza page (recorded per asset) is uploaded by Quaternius and states Public Domain (CC0); Quaternius's own pack pages (quaternius.com/packs/*) state License CC0. Models Poly Pizza lists as CC-BY 3.0 are excluded." },
+    "download": { "kind": "files", "host": "https://static.poly.pizza/", "note": "Per-model GLB files from Poly Pizza. The official Google Drive folders linked from quaternius.com refuse scripted downloads (quota exceeded), so the per-model files are used, each pinned by sha256." }
+  },
+  {
+    "id": "kenney_mini_characters",
+    "title": "Mini Characters 1.0",
+    "author": "Kenney (www.kenney.nl)",
+    "page": "https://kenney.nl/assets/mini-characters",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "verified": { "on": "2026-10-16", "how": "The pack page lists License: Creative Commons CC0; License.txt inside the archive says Creative Commons Zero, CC0." },
+    "download": { "kind": "zip", "url": "https://kenney.nl/media/pages/assets/mini-characters/bfc7e272b4-1774770718/kenney_mini-characters.zip", "sha256": "9e1d48e6d7b8479ebbe84df71eb5bd8e1b3f0da546dea641890dccc8a02d0999" }
+  },
+  {
+    "id": "kenney_blocky_characters",
+    "title": "Blocky Characters 2.0",
+    "author": "Kenney (www.kenney.nl)",
+    "page": "https://kenney.nl/assets/blocky-characters",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "verified": { "on": "2026-10-16", "how": "The pack page lists License: Creative Commons CC0; License.txt inside the archive says Creative Commons Zero, CC0." },
+    "download": { "kind": "zip", "url": "https://kenney.nl/media/pages/assets/blocky-characters/8369c0cf30-1749547469/kenney_blocky-characters_20.zip", "sha256": "5e123859aa0c1598342b600c6db197024a1d63eb9ec531398b310725f589887e" }
+  },
+  {
+    "id": "kenney_car_kit",
+    "title": "Car Kit",
+    "author": "Kenney (www.kenney.nl)",
+    "page": "https://kenney.nl/assets/car-kit",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "verified": { "on": "2026-10-16", "how": "The pack page lists License: Creative Commons CC0 (45 assets); License.txt inside the archive says CC0." },
+    "download": { "kind": "zip", "url": "https://kenney.nl/media/pages/assets/car-kit/1a312ec241-1775131960/kenney_car-kit.zip", "sha256": "fac7dacac5c7874348cf19729af3ef205f3d366493edaf0a827d93f4fdf3d0c4" }
+  },
+  {
+    "id": "kenney_blaster_kit",
+    "title": "Blaster Kit 2.1",
+    "author": "Kenney (www.kenney.nl)",
+    "page": "https://kenney.nl/assets/blaster-kit",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "verified": { "on": "2026-10-16", "how": "The pack page lists License: Creative Commons CC0 (40 assets); License.txt inside the archive says CC0." },
+    "download": { "kind": "zip", "url": "https://kenney.nl/media/pages/assets/blaster-kit/261d80a716-1753959510/kenney_blaster-kit_2.1.zip", "sha256": "91e3093e95427d59625e7e2ce2d0399b861600160fd0b4ada7714796b67cea8c" }
+  },
+  {
+    "id": "kenney_nature_kit",
+    "title": "Nature Kit",
+    "author": "Kenney (www.kenney.nl)",
+    "page": "https://kenney.nl/assets/nature-kit",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "verified": { "on": "2026-10-16", "how": "The pack page lists License: Creative Commons CC0 (330 assets); License.txt inside the archive says CC0." },
+    "download": { "kind": "zip", "url": "https://kenney.nl/media/pages/assets/nature-kit/37ac38a37b-1677698939/kenney_nature-kit.zip", "sha256": "fa7974a0d342bfe63c38664ba9f8ec1a4aab8ea25f099bdc56870e33588c4d9d" }
+  },
+  {
+    "id": "kenney_space_kit",
+    "title": "Space Kit",
+    "author": "Kenney (www.kenney.nl)",
+    "page": "https://kenney.nl/assets/space-kit",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "verified": { "on": "2026-10-16", "how": "The pack page lists License: Creative Commons CC0 (150 assets); License.txt inside the archive says CC0." },
+    "download": { "kind": "zip", "url": "https://kenney.nl/media/pages/assets/space-kit/20874c75ac-1677698978/kenney_space-kit.zip", "sha256": "d5d7cdf2635ed5a43a9187deaf409b6f47484e402321128341d3c3698e9ef4d9" }
+  },
+  {
+    "id": "kenney_food_kit",
+    "title": "Food Kit",
+    "author": "Kenney (www.kenney.nl)",
+    "page": "https://kenney.nl/assets/food-kit",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "verified": { "on": "2026-10-16", "how": "The pack page lists License: Creative Commons CC0 (200 assets); License.txt inside the archive says CC0." },
+    "download": { "kind": "zip", "url": "https://kenney.nl/media/pages/assets/food-kit/83086fa91c-1719418518/kenney_food-kit.zip", "sha256": "cdad90853682499b94c9fda2f87678b24bfd8f3264e0ed323f6b6a27fd7c6f6f" }
+  },
+  {
+    "id": "kenney_city_kit_commercial",
+    "title": "City Kit (Commercial) 2.1",
+    "author": "Kenney (www.kenney.nl)",
+    "page": "https://kenney.nl/assets/city-kit-commercial",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "verified": { "on": "2026-10-16", "how": "The pack page lists License: Creative Commons CC0 (50 assets); License.txt inside the archive says CC0." },
+    "download": { "kind": "zip", "url": "https://kenney.nl/media/pages/assets/city-kit-commercial/a742d900eb-1753115042/kenney_city-kit-commercial_2.1.zip", "sha256": "f8b09b081c2bb88bcc126e2dec1cb40fd0dad7e7e591b6c26aaefe96fb35276b" }
+  },
+  {
+    "id": "kenney_tiny_dungeon",
+    "title": "Tiny Dungeon",
+    "author": "Kenney (www.kenney.nl)",
+    "page": "https://kenney.nl/assets/tiny-dungeon",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "verified": { "on": "2026-10-16", "how": "The pack page lists License: Creative Commons CC0 (130 assets); License.txt inside the archive says CC0." },
+    "download": { "kind": "zip", "url": "https://kenney.nl/media/pages/assets/tiny-dungeon/f8422efb44-1674742415/kenney_tiny-dungeon.zip", "sha256": "c109438ab06f65fd80f9b2686a4cf9c7c11dc64444b47333ec71d602f8bb5fc7" }
+  },
+  {
+    "id": "kenney_pixel_platformer",
+    "title": "Pixel Platformer",
+    "author": "Kenney (www.kenney.nl)",
+    "page": "https://kenney.nl/assets/pixel-platformer",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "verified": { "on": "2026-10-16", "how": "The pack page lists License: Creative Commons CC0 (200 assets); License.txt inside the archive says CC0." },
+    "download": { "kind": "zip", "url": "https://kenney.nl/media/pages/assets/pixel-platformer/33bb4921eb-1696667883/kenney_pixel-platformer.zip", "sha256": "d01a196dbe3cc964e00d83ba3b987df62f332dc9260c9f941b4fbcc9047130f4" }
+  },
+  {
+    "id": "kenney_pixel_vehicle_pack",
+    "title": "Pixel Vehicle Pack",
+    "author": "Kenney (www.kenney.nl)",
+    "page": "https://kenney.nl/assets/pixel-vehicle-pack",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "verified": { "on": "2026-10-16", "how": "The pack page lists License: Creative Commons CC0 (50 assets); License.txt inside the archive says CC0." },
+    "download": { "kind": "zip", "url": "https://kenney.nl/media/pages/assets/pixel-vehicle-pack/570a4c9051-1677578609/kenney_pixel-vehicle-pack.zip", "sha256": "b582163a0f366d8d24821eb763892ac29ff780a011e9b7b42baf86d1f051803f" }
+  },
+  {
+    "id": "kenney_impact_sounds",
+    "title": "Impact Sounds 1.0",
+    "author": "Kenney (www.kenney.nl)",
+    "page": "https://kenney.nl/assets/impact-sounds",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "verified": { "on": "2026-10-16", "how": "The pack page lists License: Creative Commons CC0; License.txt inside the archive says Creative Commons Zero, CC0. Sound effects (Ogg Vorbis)." },
+    "download": { "kind": "zip", "url": "https://kenney.nl/media/pages/assets/impact-sounds/87b4ddecda-1677589768/kenney_impact-sounds.zip", "sha256": "029d734af1582474edf3a694d1b0cebc97c1c152f2f39fa34d4c2bafc5de77f8" }
+  },
+  {
+    "id": "kenney_interface_sounds",
+    "title": "Interface Sounds 1.0",
+    "author": "Kenney (www.kenney.nl)",
+    "page": "https://kenney.nl/assets/interface-sounds",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "verified": { "on": "2026-10-16", "how": "The pack page lists License: Creative Commons CC0; License.txt inside the archive says Creative Commons Zero, CC0. Sound effects (Ogg Vorbis)." },
+    "download": { "kind": "zip", "url": "https://kenney.nl/media/pages/assets/interface-sounds/fa43c1dd4d-1677589452/kenney_interface-sounds.zip", "sha256": "f2193d072726d6758a5f7871b2dcc54dcce0d5c35c6f0a62f92549b327c81232" }
+  },
+  {
+    "id": "kenney_rpg_audio",
+    "title": "RPG Audio",
+    "author": "Kenney (www.kenney.nl)",
+    "page": "https://kenney.nl/assets/rpg-audio",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "verified": { "on": "2026-10-16", "how": "The pack page lists License: Creative Commons CC0; License.txt inside the archive says Creative Commons Zero, CC0. Sound effects (Ogg Vorbis)." },
+    "download": { "kind": "zip", "url": "https://kenney.nl/media/pages/assets/rpg-audio/8e99002d76-1677590336/kenney_rpg-audio.zip", "sha256": "6dbeaf8544da958d8f2adcb4a4a4b76c1ade34a05f8ab9edccd327da7375f38b" }
+  },
+  {
+    "id": "kenney_sci_fi_sounds",
+    "title": "Sci-fi Sounds 1.0",
+    "author": "Kenney (www.kenney.nl)",
+    "page": "https://kenney.nl/assets/sci-fi-sounds",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "verified": { "on": "2026-10-16", "how": "The pack page lists License: Creative Commons CC0; License.txt inside the archive says Creative Commons Zero, CC0. Sound effects (Ogg Vorbis)." },
+    "download": { "kind": "zip", "url": "https://kenney.nl/media/pages/assets/sci-fi-sounds/6b296f9ecf-1677589334/kenney_sci-fi-sounds.zip", "sha256": "119340f351a5098ad814f78719438c0da355a9ce8a4c8a3af6a8d48aa3d49e04" }
+  },
+  {
+    "id": "kenney_digital_audio",
+    "title": "Digital Audio",
+    "author": "Kenney (www.kenney.nl)",
+    "page": "https://kenney.nl/assets/digital-audio",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "verified": { "on": "2026-10-16", "how": "The pack page lists License: Creative Commons CC0; License.txt inside the archive says Creative Commons Zero, CC0. Sound effects (Ogg Vorbis)." },
+    "download": { "kind": "zip", "url": "https://kenney.nl/media/pages/assets/digital-audio/216eac4753-1677590265/kenney_digital-audio.zip", "sha256": "24e6ce28b76a6d8c89cff4d331e0965ff5c3de8a73c612028e9d363cc64e4f06" }
+  },
+  {
+    "id": "opengameart_cynicmusic",
+    "title": "cynicmusic tracks on OpenGameArt",
+    "author": "cynicmusic (https://opengameart.org/users/cynicmusic)",
+    "page": "https://opengameart.org/users/cynicmusic",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "verified": { "on": "2026-10-16", "how": "Each track's OpenGameArt page (recorded per sound) lists License(s): CC0 only, linking creativecommons.org/publicdomain/zero/1.0, and its description reads \"CC0 Public Domain license is the best!\"." },
+    "download": { "kind": "files", "host": "https://opengameart.org/", "note": "Per-track files linked from each track's OpenGameArt page, each pinned by sha256." }
+  },
+  {
+    "id": "sbs_tiny_texture_pack_1",
+    "title": "Tiny Texture Pack 1 (128x128)",
+    "author": "Screaming Brain Studios (on OpenGameArt)",
+    "page": "https://opengameart.org/content/tiny-texture-pack-1",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "verified": { "on": "2026-10-17", "how": "The OpenGameArt page lists License(s): CC0, linking creativecommons.org/publicdomain/zero/1.0; License.txt inside the archive says all Screaming Brain Studios assets are released under CC0/Public Domain, usable in commercial projects with no restrictions. Procedurally made, seamless 128 px textures." },
+    "download": { "kind": "zip", "url": "https://opengameart.org/sites/default/files/sbs_-_tiny_texture_pack_-_128x128.zip", "sha256": "a4f1ff1a3c217f1d24e4bdb1c2b1c599df7cf783590803672911bddd5ef7e499" }
+  },
+  {
+    "id": "sbs_synthetic_texture_pack",
+    "title": "Synthetic Texture Pack (128x128)",
+    "author": "Screaming Brain Studios (on OpenGameArt)",
+    "page": "https://opengameart.org/content/synthetic-texture-pack",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "verified": { "on": "2026-10-17", "how": "The OpenGameArt page lists License(s): CC0, linking creativecommons.org/publicdomain/zero/1.0; License.txt inside the archive says all Screaming Brain Studios assets are released under CC0/Public Domain, usable in commercial projects with no restrictions. Tagged PS1 and low poly by the author." },
+    "download": { "kind": "zip", "url": "https://opengameart.org/sites/default/files/sbs_-_synthetic_texture_pack_-_128x128_0.zip", "sha256": "26d1b6219fcffb4e4934e660086e74952aef5610a9480e8bc3c77a90322e0e47" }
+  },
+  {
+    "id": "sbs_base_materials_pack",
+    "title": "Base Material Texture Pack (128x128)",
+    "author": "Screaming Brain Studios (on OpenGameArt)",
+    "page": "https://opengameart.org/content/base-material-texture-pack",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "verified": { "on": "2026-10-17", "how": "The OpenGameArt page lists License(s): CC0, linking creativecommons.org/publicdomain/zero/1.0, and describes the set as made for low-poly and PS1-style projects; License.txt inside the archive says all Screaming Brain Studios assets are released under CC0/Public Domain, usable in commercial projects with no restrictions." },
+    "download": { "kind": "zip", "url": "https://opengameart.org/sites/default/files/sbs_-_base_materials_pack_128x128.zip", "sha256": "ab1ede6102f140764ac47a24fa12a46360b808603de72ab6995a79b56b4b6631" }
+  }
+]

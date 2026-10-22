@@ -1,0 +1,54 @@
+{
+  "name": "@netnetcapital/engine-sim",
+  "version": "0.1.0",
+  "description": "NetNet game runtime shared simulation: ECS, Rapier physics, fixed tick and snapshots. Runs identically in the browser and on the room server.",
+  "license": "SEE LICENSE IN LICENSE",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "NOTICE",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/netnetdev/net-forge.git",
+    "directory": "packages/engine-sim"
+  },
+  "homepage": "https://github.com/netnetdev/net-forge/tree/main/packages/engine-sim#readme",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.test.json",
+    "test": "vitest run",
+    "bench": "vitest bench --run",
+    "prepublishOnly": "node ../engine/scripts/license-gate.mjs",
+    "prepack": "pnpm build"
+  },
+  "dependencies": {
+    "@dimforge/rapier3d-deterministic-compat": "0.21.0",
+    "bitecs": "0.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.1",
+    "typescript": "5.8.3",
+    "vitest": "3.2.7"
+  },
+  "bugs": {
+    "url": "https://github.com/netnetdev/net-forge/issues"
+  }
+}

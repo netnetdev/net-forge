@@ -1,0 +1,369 @@
+# EMBERWATCH: the survivor template (NetNet game runtime, Template 1)
+
+> A co-op survivor-like for 4 players and up to 2,000 enemies. You change
+> the game by editing src/game.ts only. The template already has waves,
+> weapons, XP gems, level-ups, bosses, co-op revive, netcode, rendering,
+> touch controls, earn and the store. Do not write renderers, netcode or
+> physics.
+
+## Files
+
+- src/game.ts: THE GAME. Declarations against @netnetcapital/engine:
+  game(), prefab(), weapon(), upgrade(), director(), system(), earn.rule(),
+  store.sku().
+- packages/engine/GAME-DESIGN.md: the design rules the playtest gate scores
+  (quiet opening, off-screen spawns, i-frames, telegraphs, fast levels).
+- client/names.ts: display names for weapon, upgrade and earn ids (labels).
+- Models come from the asset library (real CC0 models; the full list of ids is in your instructions). client/library.ts holds the fallback shapes drawn until a model loads.
+- Everything else is template machinery.
+
+## Rules the build enforces
+
+- Asset ids look like "style.lowpoly.ghost", never URLs or paths, and must be in the asset library.
+- game({ style }) is the art style the creator picked: lowpoly, toon, ps1, pixel, voxel or handdrawn. Keep it. The template draws everything in it, and a "style.lowpoly.<name>" id draws as that style's own model of the same name when the style has one.
+- Ids are lower_snake_case.
+- Every game declares at least one earn.rule (mandatory earn) and one earn.stake (the buy-in run).
+- A survivor game needs one enemy prefab, one weapon and players.weapon.
+- Drops must be pickup prefabs. At most 15 weapons (evolutions count) and 8 upgrades.
+- Run `pnpm --filter @netnetcapital/template-survivor test` (playtest bots).
+
+## Units
+
+Seconds, metres, metres per second, hit points. Tick rate 30 Hz. Keepers
+run at 7 m/s; keep chasers at 3-4 m/s and fast ones under 6.
+
+## Pacing: the spawn director
+
+The director spawns every enemy just off screen (never on it) on the run's
+clock. Curves are a number or [seconds, value] keyframes, linear between.
+
+director({
+  start: 8,                                     // enemies at 0:00
+  alive: [[0, 12], [60, 45], [180, 160], [300, 400], [540, 1600]],  // living target
+  rate: [[0, 0.8], [60, 2], [180, 6], [300, 14], [540, 60]],      // spawns per second
+  health: [[0, 1], [60, 1.4], [180, 2.4], [540, 5.7]],            // new enemies' health x
+  damage: [[0, 1], [180, 1.45], [540, 2.3]],
+  xp: [[0, 1], [540, 2]],
+  pool: [
+    { prefab: "shade", weight: 10 },
+    { prefab: "gnat", from: 45, weight: 2, group: [8, 12] },      // a stream from one side
+    { prefab: "husk", from: 90, weight: 3 },
+  ],
+  fade: { after: 260, weight: 0.3 },            // old enemy types thin out
+});
+
+speed: [[0, 1], [240, 1], [600, 1.6]] makes every non-boss enemy faster late
+in the run, so endless kiting stops working.
+More players raise alive and rate by perPlayer (0.6 each); a living boss
+halves the rate (whileBoss). At the cap new spawns get tougher instead of
+adding bodies (crowded). Enemies left far behind are moved back ahead of
+the players (recycle). ahead (0.35) is the share spawned where you are going.
+
+## Common changes
+
+### Make it harder or easier
+Raise or lower the director's alive, rate, health or damage keyframes after
+the first minute; keep 0:00 quiet. Easier also: players.hitIframes (0.5 s),
+players.magnet (4 m), a longer starting weapon range.
+
+### Add an enemy
+prefab("wisp", { model: "style.lowpoly.bat", health: 8, speed: 5, radius: 0.25, damage: 4, ai: "chase", drops: ["ember_small"] });
+then add it to the director's pool from the minute it should join:
+{ prefab: "wisp", from: 150, weight: 3 }
+or spawn a set piece from a system, just off screen:
+after(240, () => spawnEdge("wisp", { count: 60, side: "north" }));
+ai is the enemy's role. Every big hit is telegraphed on the ground first:
+- "chase" (default), "tank" (a chaser; give it mass), "idle"/"none" (stands still)
+- "runner": aims where you will be. Fast, fragile.
+- "charger": stops inside 6 m, shows a lane 0.55 s, then charges along it.
+- "ranged": keeps its distance, shows an aim line, fires a slow dodgeable shot
+  (only with a clear line: pillars are cover).
+- "bomber": walks up, arms a 1 s fuse circle, explodes (hurts enemies too).
+- "shielder" / "healer": every few seconds shields or heals nearby allies.
+- "summoner": keeps away and calls adds: attack: { summon: "gnat", count: 2 }.
+- "flee", "wander".
+Tune a role with attack: { damage, range, windup, cooldown, speed, radius, summon, count }:
+prefab("spitter", { model: "style.lowpoly.frog", health: 20, speed: 2.8, ai: "ranged", attack: { damage: 8, range: 10, speed: 7 }, drops: ["ember_small"] });
+A splitter bursts into smaller enemies on death:
+prefab("brood", { model: "style.lowpoly.slime_green", health: 40, speed: 3, split: { into: "shade", count: 3 }, drops: ["ember_small"] });
+
+### Add elites
+director({ ..., elites: { from: 90, every: [45, 60] } }) spawns an elite from the
+current pool: x6 health, x1.5 damage, x5 XP, a gold rim. From a system:
+spawnEdge("husk", { count: 1, elite: true }).
+
+### Add a weapon
+weapon("frost_ring", {
+  kind: "nova", damage: 6, cooldown: 0.8, range: 5, knockback: 8,
+  levels: [{ damage: "+30%" }, { range: "+15%" }, { cooldown: "-15%" }, { damage: "+30%" }, { knockback: 3 }],
+});
+kinds:
+- "nova": a burst in range; "aura": a field that burns what is inside, every cooldown
+- "bolt": count projectiles at the nearest enemy (speed, pierce)
+- "orbit": count blades at range metres, speed rad/s
+- "cone": a sweep of spread degrees where the keeper faces (360: all around)
+- "chain": strikes the nearest, then jumps count times, each within speed m
+- "meteor": count circles of blast m land on enemies in range, 0.6 s after showing
+- "boomerang": flies out range m and back, hitting everything both ways
+levels: what each level changes from the one before (5-8 levels). A number
+adds (count: 1, pierce: 2, cooldown: -0.1 s), a percent scales ("+40%").
+Cards show these changes ("+1 projectile, -20% cooldown"). It is offered at
+level-up automatically. Add a label in client/names.ts.
+
+### Add an evolution
+weapon("frost_ring", { ..., evolve: { into: "blizzard", requires: "iron_skin" } });
+weapon("blizzard", { kind: "nova", damage: 20, cooldown: 0.6, range: 9, knockback: 12 });
+At max level, with the passive "iron_skin" taken, the "blizzard" card always
+shows; it replaces frost_ring in its slot. Evolutions are never offered on
+their own. Give them about x1.7 damage and a new shape (360 degrees, double
+radius, more count). Pair each base weapon with a different passive.
+
+### Add a passive
+upgrade("iron_skin", { stat: "armor", step: 1, maxLevel: 4 });
+stats: speed, maxHealth, magnet, might, haste, regen, armor, area (bigger
+novas, auras, cones, meteors and orbits), amount (more projectiles, blades,
+jumps and meteors). Up to 8. maxLevel caps how often it is offered.
+
+### Add pickups and loot
+prefab("hearth_meal", { model: "style.lowpoly.cell_heal", health: 1, speed: 0, kind: "pickup", pickup: { effect: "heal", amount: 0.3 } });
+A boss's hoard: pickup: { effect: "chest", amount: 3, evolve: true }. Bosses
+drop it instead of the plain chest. If the player holds a weapon and already
+has its paired passive, that weapon jumps to max level, so its evolution is
+on the cards.
+effects: heal (amount: fraction of max health, or hit points above 1),
+vacuum (every gem on the floor comes to you), bomb (clears the screen's
+non-boss enemies), chest (amount card picks; a ready evolution shows first).
+Drop them with a chance: drops: ["ember_small", { id: "hearth_meal", chance: 0.012 }].
+Elites always drop the game's chest; bosses drop a heal, a vacuum and a chest.
+Above 300 gems on the floor, new gems merge into the nearest one.
+
+### Add props (breakables)
+prefab("ember_urn", { model: "style.lowpoly.barrel", health: 25, speed: 0, radius: 0.5, prop: true, drops: ["ember_mid", { id: "hearth_meal", chance: 0.3 }] });
+then scatter("ember_urn", 45) from a system. Props never move, never hurt
+and never count as enemies.
+
+### A bigger field
+game({ ..., field: { halfSize: 100, pillars: [[14, 14, 2], [32, 0, 3], ...] } })
+(20-120 m; pillars are [x, z, radius]).
+
+### Add events and moments
+system("events", ({ every, after, announce, spawnEdge, xpBoost, surge, clear, bossAlive, random }) => {
+  after(240, () => every(75, () => {
+    if (bossAlive()) return;                       // events wait for bosses
+    announce("THE TIDE RISES", { tone: "danger" }); // a big banner for everyone
+    spawnEdge("shade", { count: 220, side: "north", spread: 80 });
+    surge(1.5, 20);                                 // or xpBoost(2, 30), pauseDirector(10)
+  }));
+});
+Never fire the same event twice in a row. announce tones: info, danger,
+reward. Off-screen bosses get an edge arrow automatically. Game events you
+can key on (and earn rules too): miniboss.killed, boss.killed,
+player.evolved, heal.collected, vacuum.collected, bomb.collected,
+chest.collected. clear("lantern_thief") removes a prefab at once (an event
+ends) with no kills or drops.
+
+### Cards
+Weighted: an owned weapon's next level 8, a new weapon 10 (while a slot is
+free), a passive 4 (7 once weapon slots are full); a ready evolution always
+shows. players.rerolls (default 1) rerolls per run (R); Skip (X) trades the
+cards for a small heal. When everything is maxed, a level heals and gives
+teammates a little XP.
+
+### Add a boss
+prefab("lantern_eater", {
+  model: "style.lowpoly.trex", appearance: { tint: "#c2410c", scale: 1.2 }, health: 30000, speed: 2, radius: 2, damage: 40,
+  boss: { attacks: ["slam", "ring", "dash", "summon"], summon: "shade", enrageAt: 0.5 },
+  drops: ["ember_large"],
+});
+after(480, () => spawnEdge("lantern_eater", { count: 1 })) from a system;
+on("boss.killed", () => end("won")).
+Attacks (all telegraphed): slam (circle around it), dash (11 m lane), leap
+(lands on a circle at you), rain (circles near players), ring (14 shots
+outward), fan (7 shots at you), summon (adds). It switches near and far
+modes every 4-9 s; below enrageAt health it is faster and throws more.
+A mini-boss: boss: { attacks: [...], rank: "mini" } raises "miniboss.killed"
+(not "boss.killed", so it never ends the run). Boss health scales with
+players present (players.bossHealthPerPlayer, 0.55); every boss gets a HUD
+bar and drops a burst of gems worth 1-2 levels.
+
+### Change pacing
+The director's curves set the crowd; BOSS_AT sets the boss. A wave on the
+HUD is a minute: the run system emits wave.cleared every 60 s (earn rules
+count it). The XP curve is players.xp { base, growth, exponent }: XP to go
+from L to L+1 is base + growth x (L - 1)^exponent. Aim for level 2 within
+10 s, level 5 at 1:00, level 10 at 3:00.
+
+### Add an earn rule
+earn.rule("survivor_5", { when: "wave.cleared", n: 5, pay: 10, oncePer: "run" });
+Events: wave.cleared (you emit it), enemy.killed (credits the killer),
+boss.killed (everyone present), player.downed, player.revived (credits the
+reviver), player.levelup, run.won, run.lost, and anything you emit().
+Each rule pays once per run per player, in coins; the room server is the referee.
+
+### The buy-in run (required)
+earn.stake({ min: 20, max: 200, multiple: 2 });
+Every game declares one, on one top-level line; a game without it does not
+build. A player stakes coins at the start of a run (the Kit spends them as
+coins.spend(amount, "stake"), then the client calls conn.stake()). The room
+fixes the stake when the next run starts. A staked run pays its normal earn
+plus a share of stake x multiple: the share is the part of the run's most
+earn the player makes. What it does not win back stays in the reward pool.
+multiple is 1 to 2. "stake" is reserved: never a SKU or meta upgrade id.
+
+### Losable gear (optional)
+store.sku("ember_charm", { coins: 150, grants: { gear: "kindling", loseBelow: 0.25 } });
+Gear is owned in the player's profile and sells for coins only. It brings one
+level of its declared upgrade into every staked run, and is lost when that run
+makes less than loseBelow of its most earn. Its coins stay in the reward pool.
+
+### Coins: earn and the store
+
+Every game has coins: 1 coin = 1 of the game's own token, and players see
+them under the token's own name, symbol and logo (never "coins" or "tokens"
+as a label). Earn rules pay coins (`pay` is whole coins). The recommended
+coin model (the default, no declaration) sells cosmetics, unlocks and
+in-run consumables, never permanent stat power:
+
+store.sku("revive", { coins: 50 });                                   // in-run: used while downed
+store.sku("skin_aurora", { coins: 300, grants: { cosmetic: 1 } });    // a look, owned for good
+
+Keep both exactly: the client is wired to them (price and look id). Owned
+looks and unlocks are saved on the room server in the player's profile. Players spend
+earned coins first (instantly, no wallet prompt), then their wallet. Before
+the game launches coins are play money; the Kit switches by itself, so
+nothing in game.ts depends on it. Price in coins against what a run pays
+(the four rules here pay up to 80 a run): a revive is under a run, a
+cosmetic a few runs.
+
+### Sell a keeper unlock (a character, a starting loadout, a sidegrade)
+keeper("tinker", { name: "Tinker", text: "Turrets and a wide glass.", weapon: "spark_bolt", passive: "lantern_glass" });   // no unlock
+store.sku("unlock_tinker", { coins: 400, grants: { keeper: "tinker" } });
+A keeper is earned (unlock: an achievement) or bought (a SKU), never both:
+the build refuses a sold keeper that also declares an unlock. Never sell
+the first keeper (everyone's free default). An unlock is a different way to
+play, never more power. Before launch coins are play money and buy only
+in-run items; looks and unlocks open at launch.
+
+### Cosmetics only ("no pay to win")
+economy({ store: "cosmetics" });
+Then every SKU must be a look (grants: { cosmetic: n }); drop revive.
+
+### Permanent upgrades for coins (opt-in meta upgrades)
+economy({ metaUpgrades: true });
+metaUpgrade("hearth", { stat: "maxHealth", step: 0.05, levels: 3, cost: 120, growth: 2 });  // 120, 240, 480 coins
+metaUpgrade("stride", { stat: "speed", step: 0.03, levels: 3, cost: 100, growth: 1.8 });
+Only when the creator asks for permanent upgrades. Stats: speed, maxHealth,
+magnet, might, haste, area. The engine refuses more than +15% to one stat
+or +30% in all, more than 5 levels, or growth under 1.5, and applies a
+player's levels at the start of every run. The store shows each level.
+
+### Add a keeper (a playable character)
+keeper("sparkwright", { name: "Sparkwright", text: "Bolts at range, and quicker hands.", model: "style.lowpoly.rogue", tint: "#7ad7ff", weapon: "spark_bolt", passive: "bellows", unlock: "five_minutes" });
+A keeper starts every run with its weapon and its passive at level 1;
+players pick one before their first level and on the end screen. At most
+15; the first declared keeper is everyone's default, and at least one
+keeper has no unlock (declare a free one first). Keepers unlock with
+achievements, or with coins through a SKU with grants: { keeper }. The room
+server checks every pick against the player's saved unlocks.
+With keepers declared, players.weapon is optional.
+
+### Add achievements, daily goals and end-screen titles
+achievement("evolver", { title: "Evolved", text: "Evolve a weapon.", when: "player.evolved" });
+mission("elite", { text: "Kill an elite", when: "elite.killed" });
+title("butcher", { text: "The Butcher", most: "kills" });
+Achievements and missions count a game event per player in one run (n
+times) and pay nothing (coins come only from earn rules). The room server
+grants them from the run and saves them per player (wallet, or guest until
+sign-in), so they follow the player to every device. The HUD shows
+three missions a day. Titles rank players at the end of a run by most or
+least of: kills, damage, revives, downs, level, pickups. Events to count:
+anything you emit ("tide.survived"), "<prefab>.killed"
+("lantern_thief.killed"), "elite.killed", "player.evolved",
+"player.revived", "chest.collected", "miniboss.killed", "boss.killed",
+"wave.cleared".
+
+### Co-op that feels shared
+players: { share: "nearby" }        // default: half of each gem to teammates within 20 m
+players: { share: "all" }           // or "collector", or { mode, fraction, radius }
+players: { reviveBuff: { seconds: 5, damage: 1.3, speed: 1.15 } }  // the reviver burns hotter
+players: { downed: { seconds: 10, crawl: 0.35, selfRevives: 1, respawn: 5 } }  // the default: a short down, a crawl, one free get-up (Space), back in 5 s beside a teammate
+players: { lateJoinBehind: 2 }      // a late joiner starts 2 levels under the team, cards waiting
+players: { crit: { chance: 0.08, multiplier: 2 } }  // crits show as gold numbers
+The end screen votes "Play again" (everyone ready starts the next run; it
+starts by itself after 10 s) and shows each keeper's build, damage per
+weapon, what downed them, coins and titles.
+
+### Make co-op 8 players
+players.max: 8, and the room template's instance cap (apps/rooms
+src/world/templates.ts, human ruling E-3).
+
+## Models and appearances (the asset library)
+
+Every model is a real CC0 model from the asset library, by id. Enemies are
+drawn about 3.2 hit radii tall, keepers 1.8 m; animated ones walk, run and
+die by themselves. An appearance dresses a model into your own original:
+appearance: { tint: "#rrggbb", accent: "#rrggbb", scale: 0.4 to 3, parts: up to 4 }.
+
+### Make enemies look like slimes
+prefab("shade", { model: "style.lowpoly.slime_green", ... });
+prefab("husk", { model: "style.lowpoly.slime_spiky", ... });
+prefab("brute", { model: "style.lowpoly.slime_pink", appearance: { scale: 1.3 }, ... });
+
+### Add a monster truck (or any vehicle)
+prefab("crusher", { model: "style.lowpoly.monster_truck", health: 400, speed: 3, radius: 1.2, damage: 20, ai: "chase", mass: 10, drops: ["ember_mid"] });
+
+### A hero described by the creator
+players: { prefab: "style.lowpoly.worker", appearance: { tint: "#2e7d32", accent: "#3b2a1a", parts: ["mustache", "hat_cap"] }, ... }
+Name it something new in names.json. A creature the library lacks: the
+nearest base plus parts, e.g. model "style.lowpoly.shiba" with
+appearance { tint: "#5ec8ff", parts: ["antenna", "tail_bolt"] }.
+
+## Look and feel (engine render stack and feel kit)
+
+How the game looks and how hits feel are declarations too. They are
+presentation only (never the simulation), so tune them freely. The full
+reference is packages/engine/llms.txt.
+
+### Change the look
+game({ ..., look: { preset: "dusk", bloom: 1.4, fog: 0.3, tint: "#ffd9a0" } });
+presets: "night" (default), "dusk", "day", "studio". Also shadows (off here unless
+look.shadows is true), outline,
+exposure, saturation, contrast, vignette.
+
+### Make a death or a hit feel bigger
+prefab("brute", { ..., feel: { particles: "burst", decal: "scorch", sound: "boom", shake: 0.5, hitStop: 0.06, color: "#ff4d5e" } });
+Without feel, big enemies (bosses, radius 0.5 m or more) burst, scorch and
+shake, and small ones burst, splat and crunch.
+
+### Make a weapon's impacts feel different
+weapon("frost_ring", { ..., feel: { particles: "magic", decal: "ring", color: "#7ad7ff", shake: 0.1 } });
+Novas use it when they go off; bolts and lances when they hit.
+
+### Heavier or lighter knockback
+weapon knockback (m/s) pushes enemies, divided by their mass. Knocked
+enemies stagger, slide, bounce off pillars and shove the enemies behind
+them. Bolts stop at pillars.
+
+## Systems API
+
+every(seconds, n => ...), after(seconds, fn), onTick(fn), spawn(prefab, [x,y,z], { elite? }),
+spawnPickup(prefab, [x,y,z]), announce(text, { tone }), bossAlive(),
+pauseDirector(seconds), surge(multiplier, seconds), xpBoost(multiplier, seconds),
+scatter(prefab, count), clear(prefab), upcoming(label, seconds) (a HUD countdown:
+upcoming("THE BELL WARDEN", 240)),
+spawnEdge(prefab, { count, around?, side?, spread?, scale? }) (just off screen;
+side: "any" | "ahead" | "behind" | "north" | "south" | "east" | "west"),
+spawnRing(prefab, { count, radius, around? }), alive(prefab?), players(),
+emit(event), on(event, players => ...), respawnDead(), end("won" | "lost"),
+random(), tick(), time().
+
+## Test
+
+engine.test.run({ ticks: 30 * 180, bots: 4, assert: [...] }) plays the game
+on the server sim with bots and reports kills, wave, maxLevel, earned by
+rule, deaths, runs won and lost, softlock and ms per tick. With
+bot: "human" a human-like bot plays (200 ms reactions, kiting, a second per
+card) and report.fun has the fun metrics: first threat, first level,
+level at 1/3/6/9 minutes, downs before 1:00, enemies on screen at 0:30,
+touches in minute 1, spawns on screen, survival. Net Forge's gate scores
+them; `pnpm --filter @netnetcapital/template-survivor fun` prints the table.

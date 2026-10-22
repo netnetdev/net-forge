@@ -1,0 +1,66 @@
+# @netnetcapital/kit
+
+> The NetNet Cabinet Kit adds a game token, a store, payments in dollars (USDG) and a mandatory earn mechanism to an existing browser game on Robinhood Chain. This file is written for AI coding agents. Follow the steps in order and the integration passes `kit doctor` on the first try. The full reference is llms-full.txt in the same package.
+
+## The six steps
+
+1. In the game's folder, run `npx @netnetcapital/kit add --earn <event_id>`. Pick an event id for the moment the player earns, in lowercase snake case (for example `wave_cleared`, `level_complete`, `boss_down`). The command detects the framework and writes three things: `netnet.config.json`, a bootstrap module named `netnet.ts` or `netnet.js` next to the game's entry, and two lines at the top of the entry (or one script tag in `index.html` for a static page).
+2. Install dependencies with the project's package manager (`npm install`, `pnpm install`). A static HTML page needs no install, because its bootstrap loads the Kit from a CDN.
+3. Report the earn event at the exact moment the player earns it. This is mandatory. Every game must pay its own token for play, and `kit doctor` fails without it.
+   - Bundled projects (Vite, React, Phaser, three.js): add `import { earn } from "./netnet";` to the file, then call `earn("wave_cleared");` where it happens.
+   - Static HTML, Godot, Unity and Emscripten exports: call `window.netnetEarn("wave_cleared");`.
+4. Show and spend the game's coins with `kit.coins` (below). Every game has coins: 1 coin = 1 game token, shown under the token's own name, symbol and logo (`kit.coins.name()`, `kit.coins.symbol()`, `kit.coins.logo()`). Never write a generic "COIN" or "tokens" label.
+5. Optional: add store items with `npx @netnetcapital/kit add-item skin_gold --label "Gold skin" --usdg 1.00 --kind permanent`, then use them with `kit.store.owns("skin_gold")` and `await kit.store.buy("skin_gold")`.
+6. Run `npx @netnetcapital/kit doctor` and fix every ERROR line. Each line carries a one-line fix. Repeat until it prints PASS.
+
+## Run with no chain
+
+Open the page with `?kit=mock`, or set `VITE_NETNET_KIT_MOCK=1` in a Vite project. Mock mode has a funded in-memory wallet, the store from `netnet.config.json`, and a referee that grants one coin per earn event (held, spendable at once). It makes zero network calls.
+
+## The API in one screen
+
+```ts
+import { earn, kit } from "./netnet"; // the bootstrap re-exports the Kit
+
+// Reads are synchronous and free. Call them every frame if you like.
+kit.coins.balance();          // whole coins: earned (unclaimed) + wallet. Before launch: play money
+kit.coins.symbol();           // the token's own symbol, e.g. "EMBER" (never "COIN")
+kit.coins.logo();             // the token's logo URL from its metadata, or null
+kit.coins.earned();           // earned, unclaimed coins (spendable now, no wallet prompt)
+kit.token.priceUsd();         // dollars per coin (the curve price before graduation)
+kit.store.owns("skin_gold");  // boolean
+kit.store.count("revive");    // how many held
+kit.getState();               // everything above as one object
+
+// Actions prompt the wallet (plus an approval when needed), then refresh once.
+await kit.wallet.connect();              // call from a click handler
+await kit.coins.spend(50, "revive");     // earned coins first (off chain, no prompt), then the wallet (one confirmation)
+await kit.coins.spend(20, "stake");      // the buy-in run: a stake the room takes at the next run start (room games; reason "stake" is reserved)
+await kit.coins.spend(20, "pot");        // a PvP pot entry (arena room games): the round splits the pot by earn
+await kit.profile.buy("ember_charm");   // losable gear: brought into staked runs, lost when one makes under its loseBelow share
+await kit.store.buy("skin_gold", { pay: "coins" }); // a SKU priced in coins; default pays in dollars
+await kit.coins.buy(5);                  // spend $5 on coins (USDG through the zap)
+earn("wave_cleared");                    // report to the referee, which decides the payout (coins, held)
+await kit.coins.claim();                 // move earned coins to the wallet (one transaction)
+await kit.coins.cashOut(100);            // turn 100 wallet coins into dollars
+kit.profile.get();                       // saved progress (achievements, unlocks, goals, settings), kept by the referee per wallet
+await kit.profile.buy("unlock_ranger");  // a look or an unlock owned for good, paid in coins (never permanent power by default)
+```
+
+## Rewards need a verified build
+
+**Rewards need a verified build.** NetNet's referee pays tokens only for runs it can check. It replays every run of a game built on the NetNet engine. A Kit game on its own engine or its own server (Phaser, Godot, Unity, a custom backend) is unverified. Games not built through Net Forge earn no reward-pool tokens: once the token is live, `earn()` grants none. The token still trades and the creator fee is unchanged. NetNet decides this on its server from how the game was built and launched; nothing in the game or its config can change it. Coins before launch, the store, spends, cosmetics and saves all keep working. `kit.earn.report` then answers `{ granted: false, rewards: "unverified", notice: "Rewards need a verified build." }`; show the notice as is.
+
+## Rules that `kit doctor` enforces
+
+- At least one earn rule in `netnet.config.json`, and game code that reports it.
+- No polling. Never put `kit.refresh()`, `kit.init()` or any chain read inside `setInterval`, `setTimeout` or a frame loop. The Kit reads once when the game opens and once after each of the player's own transactions.
+- No direct chain reads in game code (no `createPublicClient`, `readContract` or ethers providers). Everything the game needs is in the Kit's one snapshot.
+- No `0x` contract addresses anywhere in game code or config. The Kit resolves every contract from the game slug.
+- Never show or mention `wsNET` in game code or UI. Players see dollars and the game's coins (under the token's own name and logo) only.
+- Every SKU id and earn id used in code exists in `netnet.config.json`.
+
+## Optional
+
+- [Full reference](llms-full.txt): every function's contract, the errors, one example per engine, the MCP server.
+- MCP server: `npx @netnetcapital/kit mcp` (stdio). Tools: get_integration_guide, add_kit, add_store_item, add_earn_event, run_doctor.

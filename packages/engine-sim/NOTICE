@@ -1,0 +1,20 @@
+@netnetcapital/engine-sim
+Copyright (c) 2026 NetNet Capital Management
+
+This package depends on, or takes patterns from, the following works.
+No source was copied from copyleft (GPL/AGPL) projects.
+
+Dependencies
+- bitECS 0.4.0 (https://github.com/NateTheGreatt/bitECS), MPL-2.0.
+  Used unmodified as an npm dependency; no bitECS source is vendored here.
+- Rapier, @dimforge/rapier3d-deterministic-compat 0.21.0
+  (https://github.com/dimforge/rapier), Apache-2.0. Used unmodified.
+
+Code and patterns
+- mulberry32 PRNG (src/rng.ts), by Tommy Ettinger, public domain.
+- Fixed-timestep accumulator (src/stepper.ts) after Glenn Fiedler,
+  "Fix Your Timestep!" (gafferongames.com); idea only.
+- Snapshot delta compression against an acknowledged baseline
+  (src/snapshot.ts) after Glenn Fiedler's "Snapshot Compression" and the
+  Quake 3 network model; ideas only, no code.
+- Zigzag varints after Protocol Buffers' encoding (BSD-3-Clause); idea only.

@@ -1,0 +1,579 @@
+Net Forge
+Copyright (c) 2026 NetNet Capital Management
+
+This repository collects the Net Forge engine packages. Each package keeps
+its own LICENSE and NOTICE; they are reproduced below. The 3D models,
+sprites, textures and sounds in packages/asset-library-files/library are
+third-party works dedicated to the public domain under CC0 1.0 (see
+packages/asset-library-files/CC0-1.0.txt); their authors and sources are
+credited in the asset-library and asset-library-files notices below.
+
+==============================================================================
+packages/asset-library-files (@netnetcapital/asset-library-files)
+==============================================================================
+
+@netnetcapital/asset-library-files
+Copyright (c) 2026 NetNet Capital Management (selection, optimization, index)
+
+The files in library/ are optimized copies (meshopt, resized textures) of
+third-party art under CC0 1.0 (public domain dedication), listed per pack
+below. The voxel and ps1 sets are made from the low-poly models and the
+Screaming Brain Studios textures below. Crediting is not required by CC0;
+we credit anyway. The CC0 1.0 legal code is in CC0-1.0.txt.
+
+Quaternius (https://quaternius.com), CC0 1.0
+- Animated characters, monsters (blob, flying and big bodies), animals,
+  dinosaurs, robots, tanks, weapons and props.
+- Files: per-model GLBs on Poly Pizza uploaded by Quaternius
+  (https://poly.pizza/u/Quaternius); each asset's model page is recorded
+  in manifest/lowpoly.json and states Public Domain (CC0). Quaternius's
+  pack pages (https://quaternius.com/packs/*) state "License CC0". Models
+  Poly Pizza lists under CC-BY are not used.
+
+Kenney (https://www.kenney.nl), CC0 1.0, each archive's License.txt reads
+"License: (Creative Commons Zero, CC0)"
+- Mini Characters 1.0      https://kenney.nl/assets/mini-characters
+- Blocky Characters 2.0    https://kenney.nl/assets/blocky-characters
+- Car Kit                  https://kenney.nl/assets/car-kit
+- Blaster Kit 2.1          https://kenney.nl/assets/blaster-kit
+- Nature Kit               https://kenney.nl/assets/nature-kit
+- Space Kit                https://kenney.nl/assets/space-kit
+- Food Kit                 https://kenney.nl/assets/food-kit
+- City Kit (Commercial) 2.1 https://kenney.nl/assets/city-kit-commercial
+- Tiny Dungeon             https://kenney.nl/assets/tiny-dungeon
+- Pixel Platformer         https://kenney.nl/assets/pixel-platformer
+- Pixel Vehicle Pack       https://kenney.nl/assets/pixel-vehicle-pack
+
+The CC0 1.0 legal code is in LICENSES/CC0-1.0.txt.
+
+Screaming Brain Studios (OpenGameArt), CC0 1.0, each archive's License.txt
+reads "released under the CC0/Public Domain License ... commercial or
+non-commercial, with no restrictions"
+- Tiny Texture Pack 1      https://opengameart.org/content/tiny-texture-pack-1
+- Synthetic Texture Pack   https://opengameart.org/content/synthetic-texture-pack
+- Base Material Texture Pack https://opengameart.org/content/base-material-texture-pack
+  The 128 px editions; the ps1 style's surface textures (manifest/ps1.json).
+
+Audio, CC0 1.0
+- Kenney sound packs, each archive's License.txt reads "Creative Commons
+  Zero, CC0": Impact Sounds (https://kenney.nl/assets/impact-sounds),
+  Interface Sounds (https://kenney.nl/assets/interface-sounds), RPG Audio
+  (https://kenney.nl/assets/rpg-audio), Sci-fi Sounds
+  (https://kenney.nl/assets/sci-fi-sounds), Digital Audio
+  (https://kenney.nl/assets/digital-audio).
+- "Battle Theme A" by cynicmusic, https://opengameart.org/content/battle-theme-a
+  (the page lists License(s): CC0; verified 2026-10-16).
+
+==============================================================================
+packages/asset-library (@netnetcapital/asset-library)
+==============================================================================
+
+@netnetcapital/asset-library
+Copyright (c) 2026 NetNet Capital Management
+
+The code in this package is NetNet's. The models and sprites the manifest
+lists are third-party art under CC0 1.0 (public domain dedication), listed
+per pack below with where each licence was verified. No art file is
+committed to this repository except the small fixture subset in
+fixtures/ (three files, CC0, from the packs below). Everything else is
+fetched from each pack's source by scripts/fetch.ts and optimized by the
+assets service.
+
+Crediting is not required by CC0; we credit anyway.
+
+Quaternius (https://quaternius.com), CC0 1.0
+- Animated characters, monsters (blob, flying and big bodies), animals,
+  dinosaurs, robots, tanks, weapons and props.
+- Files: per-model GLBs on Poly Pizza uploaded by Quaternius
+  (https://poly.pizza/u/Quaternius); each asset's model page is recorded
+  in manifest/lowpoly.json and states Public Domain (CC0). Quaternius's
+  pack pages (https://quaternius.com/packs/*) state "License CC0". Models
+  Poly Pizza lists under CC-BY are not used.
+
+Kenney (https://www.kenney.nl), CC0 1.0, each archive's License.txt reads
+"License: (Creative Commons Zero, CC0)"
+- Mini Characters 1.0      https://kenney.nl/assets/mini-characters
+- Blocky Characters 2.0    https://kenney.nl/assets/blocky-characters
+- Car Kit                  https://kenney.nl/assets/car-kit
+- Blaster Kit 2.1          https://kenney.nl/assets/blaster-kit
+- Nature Kit               https://kenney.nl/assets/nature-kit
+- Space Kit                https://kenney.nl/assets/space-kit
+- Food Kit                 https://kenney.nl/assets/food-kit
+- City Kit (Commercial) 2.1 https://kenney.nl/assets/city-kit-commercial
+- Tiny Dungeon             https://kenney.nl/assets/tiny-dungeon
+- Pixel Platformer         https://kenney.nl/assets/pixel-platformer
+- Pixel Vehicle Pack       https://kenney.nl/assets/pixel-vehicle-pack
+
+The CC0 1.0 legal code is in LICENSES/CC0-1.0.txt.
+
+Screaming Brain Studios (OpenGameArt), CC0 1.0, each archive's License.txt
+reads "released under the CC0/Public Domain License ... commercial or
+non-commercial, with no restrictions"
+- Tiny Texture Pack 1      https://opengameart.org/content/tiny-texture-pack-1
+- Synthetic Texture Pack   https://opengameart.org/content/synthetic-texture-pack
+- Base Material Texture Pack https://opengameart.org/content/base-material-texture-pack
+  The 128 px editions; the ps1 style's surface textures (manifest/ps1.json).
+
+Audio, CC0 1.0
+- Kenney sound packs, each archive's License.txt reads "Creative Commons
+  Zero, CC0": Impact Sounds (https://kenney.nl/assets/impact-sounds),
+  Interface Sounds (https://kenney.nl/assets/interface-sounds), RPG Audio
+  (https://kenney.nl/assets/rpg-audio), Sci-fi Sounds
+  (https://kenney.nl/assets/sci-fi-sounds), Digital Audio
+  (https://kenney.nl/assets/digital-audio).
+- "Battle Theme A" by cynicmusic, https://opengameart.org/content/battle-theme-a
+  (the page lists License(s): CC0; verified 2026-10-16).
+
+Dependencies (unmodified, via npm)
+- three.js 0.186.1 (MIT), zod 4.4.3 (MIT), fflate 0.8.3 (MIT).
+- The assets service's library build adds @gltf-transform/core,
+  /extensions and /functions 4.4.2 (MIT) and meshoptimizer 1.1.1 (MIT).
+
+==============================================================================
+packages/engine-sim (@netnetcapital/engine-sim)
+==============================================================================
+
+@netnetcapital/engine-sim
+Copyright (c) 2026 NetNet Capital Management
+
+This package depends on, or takes patterns from, the following works.
+No source was copied from copyleft (GPL/AGPL) projects.
+
+Dependencies
+- bitECS 0.4.0 (https://github.com/NateTheGreatt/bitECS), MPL-2.0.
+  Used unmodified as an npm dependency; no bitECS source is vendored here.
+- Rapier, @dimforge/rapier3d-deterministic-compat 0.21.0
+  (https://github.com/dimforge/rapier), Apache-2.0. Used unmodified.
+
+Code and patterns
+- mulberry32 PRNG (src/rng.ts), by Tommy Ettinger, public domain.
+- Fixed-timestep accumulator (src/stepper.ts) after Glenn Fiedler,
+  "Fix Your Timestep!" (gafferongames.com); idea only.
+- Snapshot delta compression against an acknowledged baseline
+  (src/snapshot.ts) after Glenn Fiedler's "Snapshot Compression" and the
+  Quake 3 network model; ideas only, no code.
+- Zigzag varints after Protocol Buffers' encoding (BSD-3-Clause); idea only.
+
+==============================================================================
+packages/engine (@netnetcapital/engine)
+==============================================================================
+
+@netnetcapital/engine
+Copyright (c) 2026 NetNet Capital Management
+
+This package depends on, or takes patterns from, the following works.
+No source was copied from copyleft (GPL/AGPL) projects. The demo uses
+only generated primitives; no third-party art, models, sounds or fonts.
+
+Dependencies (unmodified, via npm)
+- three.js 0.186.1 (https://github.com/mrdoob/three.js), MIT. Includes the
+  GLTFLoader, KTX2Loader and meshopt decoder addons it ships.
+- meshoptimizer decoder (bundled with three.js addons), MIT, Arseny Kapoulkine.
+- Basis Universal transcoder (bundled with three.js addons), Apache-2.0, Binomial LLC.
+- nipplejs 1.0.4 (https://github.com/yoannmoinet/nipplejs), MIT.
+- zod 4.4.3 (https://github.com/colinhacks/zod), MIT.
+- @colyseus/sdk 0.18.5 (https://github.com/colyseus/colyseus), MIT, Endel Dreyer.
+  Used by src/net/room-client.ts.
+- @netnetcapital/engine-sim (this repository); see its NOTICE for bitECS
+  (MPL-2.0) and Rapier (Apache-2.0).
+
+Patterns
+- src/net (moved from apps/rooms): client prediction and server
+  reconciliation after Gabriel Gambetta's articles; snapshot interpolation
+  and delta compression after Valve's Source networking write-ups, Glenn
+  Fiedler's snapshot compression articles and the Quake 3 model (GPL,
+  ideas only, no code); clock sync for one-input-per-tick play after the
+  Overwatch GDC netcode talk (idea only).
+- Render interpolation between fixed ticks after Glenn Fiedler, "Fix Your
+  Timestep!"; idea only.
+- Writing instance matrices directly into InstancedMesh.instanceMatrix
+  follows the three.js instancing examples (MIT).
+
+==============================================================================
+packages/kit-play (@netnetcapital/kit-play)
+==============================================================================
+
+@netnetcapital/kit-play
+Copyright (c) 2026 NetNet Capital Management
+
+Dependencies (unmodified, via npm)
+- @colyseus/core 0.18.18 and @colyseus/ws-transport 0.18.4 (https://github.com/colyseus/colyseus), MIT, Endel Dreyer.
+- vite 6.4.3 (https://github.com/vitejs/vite), MIT.
+- esbuild 0.25.12 (https://github.com/evanw/esbuild), MIT.
+- The Net Forge engine packages (@netnetcapital/engine, -sim, asset-library,
+  asset-library-files, tabletop, template-*); see each package's NOTICE.
+
+The local host (src/host) is written for this package on the engine's open
+netcode (@netnetcapital/engine/net). It holds no code from the hosted room
+server or the referee.
+
+==============================================================================
+packages/tabletop (@netnetcapital/tabletop)
+==============================================================================
+
+@netnetcapital/tabletop
+Copyright (c) 2026 NetNet Capital Management
+
+Dependencies (unmodified, via npm)
+- three.js 0.186.1 (https://github.com/mrdoob/three.js), MIT.
+- @netnetcapital/engine and @netnetcapital/asset-library (this repository); see their NOTICE files.
+
+==============================================================================
+packages/template-arena (@netnetcapital/template-arena)
+==============================================================================
+
+@netnetcapital/template-arena (VOLTYARD)
+Copyright (c) 2026 NetNet Capital Management
+
+An original game. No names, characters, maps, models, sounds or code from
+any other game or franchise.
+
+Art and sound
+- Models come from the per-style asset library
+  (@netnetcapital/asset-library): CC0 1.0 models by Kenney (Mini
+  Characters, Blaster Kit, Space Kit, Car Kit), each pack listed with its
+  source URL and licence verification in that package's NOTICE and
+  manifest/packs.json. The files are fetched and built, never committed
+  here; the build copies only the models this game uses.
+- Fallback shapes (client/library.ts) are generated from three.js
+  primitives; all textures are drawn on a canvas at load; all sounds are
+  synthesized with WebAudio oscillators (client/audio.ts).
+
+Dependencies (unmodified, via npm)
+- three.js 0.186.1 (https://github.com/mrdoob/three.js), MIT.
+- nipplejs 1.0.4 (https://github.com/yoannmoinet/nipplejs), MIT.
+- @netnetcapital/engine and @netnetcapital/engine-sim (this repository);
+  see their NOTICE files (bitECS MPL-2.0, Rapier Apache-2.0, Colyseus MIT,
+  zod MIT).
+
+Patterns (ideas only)
+- The arena shooter genre's general mechanics (twin-stick aim, weapon
+  loadouts, respawns, frag limits, health drops, a scoreboard). Mechanics,
+  not expression; no level, weapon, character or text was copied from any
+  game.
+- Lag compensation for hitscan as described in Valve's public Source
+  multiplayer networking write-up (ideas only; implemented in apps/rooms
+  src/netcode/rewind.ts and engine-sim's arena seam).
+- Hit-stop, screen shake and damage numbers as described in common
+  game-feel talks and articles (e.g. "Juice it or lose it", GDC 2012).
+
+==============================================================================
+packages/template-cards (@netnetcapital/template-cards)
+==============================================================================
+
+@netnetcapital/template-cards (INKWRIT)
+Copyright (c) 2026 NetNet Capital Management
+
+An original game. No names, characters, maps, models, sounds or code from
+any other game or franchise.
+
+Art and sound
+- Models come from the per-style asset library
+  (@netnetcapital/asset-library): CC0 1.0 models by Kenney and
+  Quaternius (monsters, animals, props), each pack listed with its
+  source URL and licence verification in that package's NOTICE and
+  manifest/packs.json. The files are fetched and built, never committed
+  here; the build copies only the models this game uses.
+- Fallback shapes (@netnetcapital/tabletop stage.ts) are generated from three.js
+  primitives; all textures are drawn on a canvas at load; sounds are the
+  library's CC0 samples with WebAudio synth fallbacks.
+
+Dependencies (unmodified, via npm)
+- three.js 0.186.1 (https://github.com/mrdoob/three.js), MIT.
+- @netnetcapital/engine and @netnetcapital/engine-sim (this repository);
+  see their NOTICE files (bitECS MPL-2.0, Rapier Apache-2.0, Colyseus MIT,
+  zod MIT).
+
+Patterns (ideas only)
+- The collectible card battler genre's general mechanics (mana that rises
+  each turn, units and spells, guards, drafting between matches). Mechanics, not
+  expression; no card, rule text, character or art was copied from any
+  game.
+
+==============================================================================
+packages/template-collector (@netnetcapital/template-collector)
+==============================================================================
+
+@netnetcapital/template-collector (MOSSBOUND)
+Copyright (c) 2026 NetNet Capital Management
+
+An original game. No names, characters, maps, models, sounds or code from
+any other game or franchise.
+
+Art and sound
+- Models come from the per-style asset library
+  (@netnetcapital/asset-library): CC0 1.0 models by Kenney and
+  Quaternius (animals, monsters, Nature Kit), each pack listed with its
+  source URL and licence verification in that package's NOTICE and
+  manifest/packs.json. The files are fetched and built, never committed
+  here; the build copies only the models this game uses.
+- Fallback shapes (@netnetcapital/tabletop stage.ts) are generated from three.js
+  primitives; all textures are drawn on a canvas at load; sounds are the
+  library's CC0 samples with WebAudio synth fallbacks.
+
+Dependencies (unmodified, via npm)
+- three.js 0.186.1 (https://github.com/mrdoob/three.js), MIT.
+- @netnetcapital/engine and @netnetcapital/engine-sim (this repository);
+  see their NOTICE files (bitECS MPL-2.0, Rapier Apache-2.0, Colyseus MIT,
+  zod MIT).
+
+Patterns (ideas only)
+- The creature-collecting RPG genre's general mechanics (meeting creatures
+  in tall grass, turn-based battles, a small team, catching, levels).
+  Mechanics, not expression: the creatures, names, elements, items, map
+  and text are original, and no creature, design, type chart or item was
+  copied from any game.
+
+==============================================================================
+packages/template-dungeon (@netnetcapital/template-dungeon)
+==============================================================================
+
+@netnetcapital/template-dungeon (CRYPTWICK)
+Copyright (c) 2026 NetNet Capital Management
+
+An original game. No names, characters, sprites, models, sounds or code
+from any other game or franchise. Nothing from PokéSurvivor (its code and
+sprites are non-commercial) or SpriteCollab was used or consulted for code.
+
+Art and sound
+- Models come from the per-style asset library
+  (@netnetcapital/asset-library): CC0 1.0 models by Quaternius (wickbearers,
+  the dead) and Kenney (columns, crates and rocks), each pack listed
+  with its source URL and licence verification in that package's NOTICE and
+  manifest/packs.json. The files are fetched and built, never committed
+  here; the build copies only the models this game uses.
+- Fallback shapes (client/library.ts) are generated from three.js
+  primitives; textures are drawn on a canvas at load.
+
+Dependencies (unmodified, via npm)
+- three.js 0.186.1 (https://github.com/mrdoob/three.js), MIT.
+- nipplejs 1.0.4 (https://github.com/yoannmoinet/nipplejs), MIT.
+- @netnetcapital/engine and @netnetcapital/engine-sim (this repository);
+  see their NOTICE files (bitECS MPL-2.0, Rapier Apache-2.0, Colyseus MIT,
+  zod MIT).
+
+Patterns (ideas only)
+- The dungeon-crawl and survivor-like genres' general mechanics (rooms
+  joined by corridors, rooms that wake as you near them, loot in cleared
+  rooms, permadeath runs, auto-firing weapons, pick-one-of-three
+  level-ups, a boss in the deepest room). Mechanics, not expression; no
+  level, item, enemy or text was copied from any game. The floor plan is
+  generated by our own code (engine dungeon.ts) from a seed.
+- Flow-field pathing (a breadth-first distance field steered down its
+  gradient), a textbook technique, implemented in engine-sim walls.ts.
+- Hit-stop, screen shake and damage numbers as described in common
+  game-feel talks and articles (e.g. "Juice it or lose it", GDC 2012).
+
+==============================================================================
+packages/template-idle (@netnetcapital/template-idle)
+==============================================================================
+
+@netnetcapital/template-idle (BRINEWORKS)
+Copyright (c) 2026 NetNet Capital Management
+
+An original game. No names, characters, maps, models, sounds or code from
+any other game or franchise.
+
+Art and sound
+- Models come from the per-style asset library
+  (@netnetcapital/asset-library): CC0 1.0 models by Kenney and
+  Quaternius (Space Kit, Nature Kit, ships), each pack listed with its
+  source URL and licence verification in that package's NOTICE and
+  manifest/packs.json. The files are fetched and built, never committed
+  here; the build copies only the models this game uses.
+- Fallback shapes (@netnetcapital/tabletop stage.ts) are generated from three.js
+  primitives; all textures are drawn on a canvas at load; sounds are the
+  library's CC0 samples with WebAudio synth fallbacks.
+
+Dependencies (unmodified, via npm)
+- three.js 0.186.1 (https://github.com/mrdoob/three.js), MIT.
+- @netnetcapital/engine and @netnetcapital/engine-sim (this repository);
+  see their NOTICE files (bitECS MPL-2.0, Rapier Apache-2.0, Colyseus MIT,
+  zod MIT).
+
+Patterns (ideas only)
+- The idle and incremental genre's general mechanics (producers bought
+  and levelled with rising costs, a click action, a production chain).
+  Mechanics, not expression; no names, art or text were copied.
+
+==============================================================================
+packages/template-party (@netnetcapital/template-party)
+==============================================================================
+
+@netnetcapital/template-party (ROMPHOUSE)
+Copyright (c) 2026 NetNet Capital Management
+
+An original game. No names, characters, sprites, models, sounds or code
+from any other game or franchise. Nothing from PokéSurvivor (its code and
+sprites are non-commercial) or SpriteCollab was used or consulted for code.
+
+Art and sound
+- Models come from the per-style asset library
+  (@netnetcapital/asset-library): CC0 1.0 models by Quaternius (party-goers,
+  the party crowd) and Kenney (crates, chests and pickups), each pack listed
+  with its source URL and licence verification in that package's NOTICE and
+  manifest/packs.json. The files are fetched and built, never committed
+  here; the build copies only the models this game uses.
+- Fallback shapes (client/library.ts) are generated from three.js
+  primitives; textures are drawn on a canvas at load.
+
+Dependencies (unmodified, via npm)
+- three.js 0.186.1 (https://github.com/mrdoob/three.js), MIT.
+- nipplejs 1.0.4 (https://github.com/yoannmoinet/nipplejs), MIT.
+- @netnetcapital/engine and @netnetcapital/engine-sim (this repository);
+  see their NOTICE files (bitECS MPL-2.0, Rapier Apache-2.0, Colyseus MIT,
+  zod MIT).
+
+Patterns (ideas only)
+- The party-game genre's general mechanics (short rounds of different
+  minigames, a shared team goal per round, a show that is won by winning
+  most rounds) and the survivor-like's auto-firing weapons and
+  pick-one-of-three level-ups. Mechanics, not expression; no minigame,
+  character, level or text was copied from any game.
+- Hit-stop, screen shake and damage numbers as described in common
+  game-feel talks and articles (e.g. "Juice it or lose it", GDC 2012).
+
+==============================================================================
+packages/template-platformer (@netnetcapital/template-platformer)
+==============================================================================
+
+@netnetcapital/template-platformer (SKYLEDGE)
+Copyright (c) 2026 NetNet Capital Management
+
+An original game. No names, characters, maps, models, sounds or code from
+any other game or franchise.
+
+Art and sound
+- Models come from the per-style asset library
+  (@netnetcapital/asset-library): CC0 1.0 models by Quaternius (via Poly
+  Pizza: the climbers and the coin) and Kenney (Nature Kit: trees, rocks,
+  bushes), each pack listed with its
+  source URL and licence verification in that package's NOTICE and
+  manifest/packs.json. The files are fetched and built, never committed
+  here; the build copies only the models this game uses.
+- Blocks, ledges, thorns, springs, flags and the fallback climber
+  (client/scene.ts) are generated from three.js primitives; all textures
+  are drawn on a canvas at load. Sounds are the library's CC0 samples with
+  WebAudio-synthesized fallbacks (client/audio.ts).
+
+Dependencies (unmodified, via npm)
+- three.js 0.186.1 (https://github.com/mrdoob/three.js), MIT.
+- @netnetcapital/engine and @netnetcapital/engine-sim (this repository);
+  see their NOTICE files (bitECS MPL-2.0, Rapier Apache-2.0, Colyseus MIT,
+  zod MIT).
+
+Patterns (ideas only)
+- The platformer genre's general mechanics (run, jump, checkpoints, coins,
+  springs, moving platforms, a flag at the end, racing to it). Mechanics,
+  not expression; no level, character or text was copied from any game.
+- Jump feel (coyote time, jump buffering, variable jump height, apex hang,
+  fall gravity, corner correction) as described in public game-feel talks
+  and articles (e.g. "Math for Game Programmers: Building a Better Jump",
+  GDC 2016; Maddy Thorson's public notes on Celeste's forgiveness
+  mechanics). Implemented from scratch in engine-sim src/platform.ts.
+
+==============================================================================
+packages/template-racer (@netnetcapital/template-racer)
+==============================================================================
+
+@netnetcapital/template-racer (TORQUEBAY)
+Copyright (c) 2026 NetNet Capital Management
+
+An original game. No names, characters, maps, models, sounds or code from
+any other game or franchise.
+
+Art and sound
+- Models come from the per-style asset library
+  (@netnetcapital/asset-library): CC0 1.0 models by Kenney (Car Kit: the
+  karts and trucks; Nature Kit: trees; City Kit Commercial: buildings;
+  Space Kit: barrels) and Quaternius
+  (via Poly Pizza: the coin), each pack listed with its
+  source URL and licence verification in that package's NOTICE and
+  manifest/packs.json. The files are fetched and built, never committed
+  here; the build copies only the models this game uses.
+- The road, kerbs, barriers, boost pads, the start line and the fallback
+  kart (client/scene.ts) are generated from three.js primitives; all textures
+  are drawn on a canvas at load. Sounds are the library's CC0 samples with
+  WebAudio-synthesized fallbacks (client/audio.ts).
+
+Dependencies (unmodified, via npm)
+- three.js 0.186.1 (https://github.com/mrdoob/three.js), MIT.
+- @netnetcapital/engine and @netnetcapital/engine-sim (this repository);
+  see their NOTICE files (bitECS MPL-2.0, Rapier Apache-2.0, Colyseus MIT,
+  zod MIT).
+
+Patterns (ideas only)
+- The kart racing genre's general mechanics (laps, drifting to charge a
+  boost, boost pads, coins, a grid of rivals). Mechanics, not expression;
+  no track, vehicle, character or text was copied from any game.
+- Arcade vehicle handling (forward and sideways velocity, grip, drift) as
+  described in common public write-ups on arcade car physics. Implemented
+  from scratch in engine-sim src/kart.ts.
+
+==============================================================================
+packages/template-survivor (@netnetcapital/template-survivor)
+==============================================================================
+
+@netnetcapital/template-survivor (EMBERWATCH)
+Copyright (c) 2026 NetNet Capital Management
+
+An original game. No names, characters, sprites, models, sounds or code
+from any other game or franchise. Nothing from PokéSurvivor (its code and
+sprites are non-commercial) or SpriteCollab was used or consulted for code.
+
+Art and sound
+- Models come from the per-style asset library
+  (@netnetcapital/asset-library): CC0 1.0 models by Quaternius (keepers,
+  enemies) and Kenney (Nature Kit trees, rocks and stumps), each pack listed
+  with its source URL and licence verification in that package's NOTICE and
+  manifest/packs.json. The files are fetched and built, never committed
+  here; the build copies only the models this game uses.
+- Fallback shapes (client/library.ts) are generated from three.js
+  primitives; textures are drawn on a canvas at load.
+
+Dependencies (unmodified, via npm)
+- three.js 0.186.1 (https://github.com/mrdoob/three.js), MIT.
+- nipplejs 1.0.4 (https://github.com/yoannmoinet/nipplejs), MIT.
+- @netnetcapital/engine and @netnetcapital/engine-sim (this repository);
+  see their NOTICE files (bitECS MPL-2.0, Rapier Apache-2.0, Colyseus MIT,
+  zod MIT).
+
+Patterns (ideas only)
+- The survivor-like genre's general mechanics (auto-firing weapons, XP
+  gems, pick-one-of-three level-ups, waves, a boss). Mechanics, not
+  expression; no level, item, enemy or text was copied from any game.
+- Hit-stop, screen shake and damage numbers as described in common
+  game-feel talks and articles (e.g. "Juice it or lose it", GDC 2012).
+
+==============================================================================
+packages/template-tower (@netnetcapital/template-tower)
+==============================================================================
+
+@netnetcapital/template-tower (COGSPIRE)
+Copyright (c) 2026 NetNet Capital Management
+
+An original game. No names, characters, maps, models, sounds or code from
+any other game or franchise.
+
+Art and sound
+- Models come from the per-style asset library
+  (@netnetcapital/asset-library): CC0 1.0 models by Kenney and
+  Quaternius (Space Kit turrets, Nature Kit, monsters, robots), each pack listed with its
+  source URL and licence verification in that package's NOTICE and
+  manifest/packs.json. The files are fetched and built, never committed
+  here; the build copies only the models this game uses.
+- Fallback shapes (@netnetcapital/tabletop stage.ts) are generated from three.js
+  primitives; all textures are drawn on a canvas at load; sounds are the
+  library's CC0 samples with WebAudio synth fallbacks.
+
+Dependencies (unmodified, via npm)
+- three.js 0.186.1 (https://github.com/mrdoob/three.js), MIT.
+- @netnetcapital/engine and @netnetcapital/engine-sim (this repository);
+  see their NOTICE files (bitECS MPL-2.0, Rapier Apache-2.0, Colyseus MIT,
+  zod MIT).
+
+Patterns (ideas only)
+- The tower defense genre's general mechanics (a fixed road, waves, towers
+  that target and upgrade, a bounty economy, lives). Mechanics, not
+  expression; no map, tower, creep, character or text was copied from any
+  game.

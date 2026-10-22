@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.turbo/
+.cache/
+.library/
+.netnet/
+*.tgz
+.env*
+.DS_Store

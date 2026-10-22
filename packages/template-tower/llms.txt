@@ -1,0 +1,129 @@
+# COGSPIRE: the tower defense template (NetNet game runtime, board genre)
+
+> A co-op tower defense for up to 4 players on one shared board. Creeps
+> walk a fixed road in waves toward the spire; players build and upgrade
+> towers beside the road with their own gold. Every kill pays its tower's
+> builder a bounty and the rest of the team a share; the team shares the
+> spire's bells (lives). Clear every wave to win the run.
+> You change the game by editing src/game.ts only. The template already has
+> the board, the road, waves, targeting, splash, slow and chain shots,
+> gold, upgrades, selling, calling a wave early, co-op, netcode, rendering,
+> touch controls, earn and the store. Do not write renderers, netcode or
+> bot AI.
+
+## Files
+
+- src/game.ts: THE GAME. Declarations against @netnetcapital/engine:
+  game(), towerBoard(), tower(), prefab() (the creeps), waves(), upgrade(),
+  earn.rule(), earn.stake(), store.sku().
+- src/names.json: the title and every label players read. Towers go in
+  "weapons" ({ name, line }), creeps in "enemies", plus upgrades, earn
+  rules and store items.
+- Everything else is template machinery.
+
+## Rules the build enforces
+
+- game({ template: "tower-defense", style, places, players: { prefab, max } }).
+  players.max is at most 4 (one board, four builders).
+- Exactly one towerBoard(...) and one waves(...); 1 to 8 tower(...)s.
+- The road: towerBoard path is tile waypoints; each step changes x or y,
+  never both; it starts and ends on the board's edge. blocked tiles are
+  rocks nobody builds on.
+- Every waves group names a declared prefab (a creep, not a pickup).
+- Tower kinds are "bolt", "splash", "frost" or "chain".
+- Upgrades read four stats only: might (tower damage), haste (fire rate),
+  area (tower range) and maxHealth (bells for the team).
+- No weapon(...): a tower defense game declares tower(...).
+- Asset ids look like "style.lowpoly.turret", never URLs or paths, and must
+  be in the asset library. game({ style }) is the art style the creator
+  picked (lowpoly, toon, ps1, pixel, voxel or handdrawn); keep it.
+- 4 playtest players must kill creeps, clear wave 3 and fire an earn rule
+  in 4 minutes, and must not lose the spire before wave 4.
+
+## Units
+
+A tile is 2 m. Board size, road, range and radius are in tiles; creep
+speed is metres a second; rate is shots a second; gold is the run's own
+money (never coins). Tick rate 30 Hz.
+
+## The loop
+
+Before wave 1 everyone gets towerBoard.prep seconds to build. A wave
+spawns its groups along the road; it is cleared when the last creep dies
+or leaks. Then there is a breather of towerBoard.breather seconds, which
+everyone pressing Ready (Space) skips for a little gold. A leak costs the
+creep's damage in bells; at zero bells the run is lost. Clearing the last
+wave wins. Towers aim at the creep furthest along the road in range.
+More builders make tougher creeps (+30% health a player past the first).
+
+## Common changes
+
+### A different road
+towerBoard({ size: [20, 12], path: [[0, 5], [6, 5], [6, 1], [13, 1], [13, 10], [19, 10]], lives: 20, gold: 100 });
+Longer roads with more turns give towers more time; a straight road is hard.
+
+### Tune a tower
+tower("bolt_post", { model: "style.lowpoly.turret", kind: "bolt", cost: 40, damage: 8, rate: 1.5, range: 3,
+  levels: [{ cost: 45, damage: 14 }, { cost: 80, damage: 24, range: 3.5 }] });
+Each level is one upgrade: its gold cost and the stats it changes.
+
+### Add a tower
+tower("sky_harpoon", { model: "style.lowpoly.rocket", kind: "bolt", cost: 120, damage: 60, rate: 0.4, range: 6 });
+splash: radius (tiles) around the target; frost: slow (0..0.9) for
+slowSeconds; chain: chains (jumps), 30% weaker each jump.
+Add its label to names.json weapons. The bar shows towers in order (keys 1-8).
+
+### Add a creep
+prefab("ironclad", { model: "style.lowpoly.robot_walker", health: 160, speed: 0.9, value: 14, damage: 3 });
+value is the gold bounty, damage the bells a leak costs. Then bring it in:
+waves({ ..., groups: [..., { prefab: "ironclad", from: 8, count: 2, grow: 0.5, gap: 2 }] });
+
+### A boss
+prefab("boilerback", { model: "style.lowpoly.robot_large", health: 1800, speed: 0.7, value: 80, damage: 5, boss: true });
+{ prefab: "boilerback", from: 10, every: 10, count: 1, delay: 8 } (a boss every tenth wave).
+Bosses get a health bar at the top of the screen.
+
+### Harder or easier
+Raise waves health (growth a wave), counts and grow, or lower gold and
+lives. "More waves": waves total. "Faster": shorter prep and breather.
+
+### Add an earn rule
+earn.rule("clean_sweep", { when: "wave.cleared", n: 15, pay: 30, oncePer: "run" });
+Events: enemy.killed (credits the tower's builder), boss.killed and
+wave.cleared and run.won (everyone on the board), tower.built and
+tower.upgraded (credits the builder). Each rule pays once per run per
+player, in coins; the room server is the referee. A player who joins a run
+in progress is never paid for waves cleared before they joined.
+
+### The buy-in run (required)
+earn.stake({ min: 20, max: 200, multiple: 2 });
+One top-level line; a game without it does not build. A staked run pays
+its normal earn plus a share of stake x multiple, by how much of the run's
+most earn the player made. "stake" is reserved.
+
+### Coins: earn and the store
+Every game has coins: 1 coin = 1 of the game's own token, shown under the
+token's own name, symbol and logo.
+store.sku("overclock", { coins: 40 });                               // one level of the "overclock" upgrade for the run
+store.sku("skin_gilt", { coins: 500, grants: { cosmetic: 2 } });     // a finish for your tinker, owned for good
+store.sku("brass_gear", { coins: 150, grants: { gear: "tempered_brass", loseBelow: 0.25 } }); // losable gear
+A store item named after a declared upgrade is a run upgrade on the
+buyer's own towers. Keep the SKUs the client is wired to (overclock,
+tempered_brass, spyglass, spare_bell, skin_verdigris, skin_gilt,
+brass_gear) at their prices. Gear brings one level of its upgrade into
+every staked run and is lost when that run makes less than loseBelow of
+its most earn. Price against what a run pays (the four rules here pay up
+to 80).
+
+### Change the look
+players.prefab is your tinker (a real CC0 character). Tower and creep
+models are library ids: turret, turret_double, satellite_dish, generator,
+rocket, crystal_rock for towers; slime_*, crab, bee, frog, bat,
+robot_walker, robot_large, skeleton_grunt for creeps.
+
+## Test
+
+engine.test.run({ ticks: 30 * 240, bots: 4 }) plays the board with 4
+builders and reports kills, wave reached, runs won and lost, leaks (as
+deaths), earned by rule, softlock, ms per tick, and the genre's own
+checks under rules.checks.

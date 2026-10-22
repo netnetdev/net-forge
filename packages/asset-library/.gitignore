@@ -1,0 +1,5 @@
+# Fetched pack archives and the optimized library: never committed (see README).
+.cache/
+.library/
+# The built brand page (src/brand/node.ts builds it on first use).
+.brand/

@@ -1,0 +1,13 @@
+@netnetcapital/kit-play
+Copyright (c) 2026 NetNet Capital Management
+
+Dependencies (unmodified, via npm)
+- @colyseus/core 0.18.18 and @colyseus/ws-transport 0.18.4 (https://github.com/colyseus/colyseus), MIT, Endel Dreyer.
+- vite 6.4.3 (https://github.com/vitejs/vite), MIT.
+- esbuild 0.25.12 (https://github.com/evanw/esbuild), MIT.
+- The Net Forge engine packages (@netnetcapital/engine, -sim, asset-library,
+  asset-library-files, tabletop, template-*); see each package's NOTICE.
+
+The local host (src/host) is written for this package on the engine's open
+netcode (@netnetcapital/engine/net). It holds no code from the hosted room
+server or the referee.

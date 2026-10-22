@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+    <title>Voltyard</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --ink: #e9f3ff;
+        --dim: #8b98ad;
+        --cyan: #16e0ff;
+        --pink: #ff4fd8;
+        --amber: #ffb020;
+        --panel: rgba(8, 12, 22, 0.78);
+        --line: rgba(22, 224, 255, 0.22);
+        --bad: #ff5a4f;
+        font-family: "Avenir Next", "Segoe UI", system-ui, -apple-system, sans-serif;
+      }
+      html, body { margin: 0; height: 100%; background: #0b1020; color: var(--ink); overflow: hidden; touch-action: none; -webkit-user-select: none; user-select: none; }
+      #game { position: fixed; inset: 0; cursor: none; }
+      #game canvas { display: block; width: 100%; height: 100%; }
+      .hud { position: fixed; z-index: 5; pointer-events: none; font-variant-numeric: tabular-nums; }
+      .hud button, .hud .slot { pointer-events: auto; }
+      button { font: inherit; color: var(--ink); background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 7px 11px; cursor: pointer; }
+      button:disabled { opacity: 0.45; cursor: default; }
+      button:active { transform: scale(0.97); }
+
+      #top-left { top: max(12px, env(safe-area-inset-top)); left: 12px; width: min(300px, 40vw); }
+      #title { font-weight: 800; letter-spacing: 0.24em; font-size: 12px; color: var(--cyan); }
+      .bar { position: relative; height: 12px; border-radius: 3px; background: rgba(255, 255, 255, 0.08); overflow: hidden; margin-top: 6px; transform: skewX(-12deg); }
+      .bar > div { position: absolute; inset: 0; transform-origin: left; transition: transform 90ms linear; }
+      #hp-fill { background: linear-gradient(90deg, #ff4fd8, #16e0ff); }
+      #hp-text { position: absolute; right: 8px; top: -1px; font-size: 10px; font-weight: 800; color: #fff; text-shadow: 0 1px 2px #000; transform: skewX(12deg); }
+      #buffs { margin-top: 5px; font-size: 10px; letter-spacing: 0.16em; color: var(--amber); text-transform: uppercase; min-height: 12px; }
+
+      #slots { position: fixed; left: 50%; bottom: max(14px, env(safe-area-inset-bottom)); transform: translateX(-50%); display: flex; gap: 8px; z-index: 5; }
+      .slot { width: min(150px, 28vw); padding: 8px 10px 9px; border-radius: 8px; background: var(--panel); border: 1px solid rgba(255, 255, 255, 0.1); text-align: left; display: grid; gap: 2px; opacity: 0.62; transition: opacity 120ms, border-color 120ms, transform 120ms; }
+      .slot.on { opacity: 1; border-color: var(--cyan); transform: translateY(-3px); box-shadow: 0 0 18px rgba(22, 224, 255, 0.25); }
+      .slot kbd { font: 700 10px ui-monospace, monospace; color: var(--cyan); }
+      .slot b { font-size: 13px; letter-spacing: 0.04em; }
+      .slot span { font-size: 11px; color: var(--dim); }
+      .slot .cd { display: block; height: 3px; background: rgba(255, 255, 255, 0.08); border-radius: 2px; overflow: hidden; margin-top: 3px; }
+      .slot .cd > i { display: block; height: 100%; background: var(--amber); transform-origin: left; transform: scaleX(0); }
+
+      #top-center { top: max(8px, env(safe-area-inset-top)); left: 50%; transform: translateX(-50%); text-align: center; }
+      #timer { font-size: 30px; font-weight: 800; letter-spacing: 0.06em; text-shadow: 0 0 14px rgba(22, 224, 255, 0.5); }
+      #timer.low { color: var(--pink); }
+      #goal { font-size: 10px; letter-spacing: 0.24em; color: var(--dim); }
+
+      #top-right { top: max(10px, env(safe-area-inset-top)); right: 12px; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; width: min(240px, 46vw); }
+      #top-right .row { display: flex; gap: 6px; }
+      /* The coin sits on its own dark plate, so the arena's hazard lines never run through it. */
+      #coin-box { display: flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 8px; background: rgba(8, 12, 22, 0.88); border: 1px solid var(--line); font-weight: 700; white-space: nowrap; }
+      #coin-box.guest #coin-balance { color: var(--dim); font-weight: 600; }
+      /* Play money: a second line inside the plate, so the plate (and the Store row under it) makes room for it. */
+      #coin-box.play { display: block; text-align: right; }
+      #coin-box.play #coin-logo { vertical-align: middle; margin-right: 6px; }
+      #coin-box.play::after { content: "play money"; display: block; margin-top: 1px; font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim); }
+      #end-earned li.guest { color: var(--dim); }
+      #coin-logo { border-radius: 50%; }
+      #board { list-style: none; padding: 6px 8px; margin: 0; width: 100%; box-sizing: border-box; background: var(--panel); border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 8px; font-size: 12px; }
+      #board { width: auto; min-width: 150px; }
+      #board:empty { display: none; }
+      #board-full { list-style: none; margin: 0; display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(420px, 90vw); box-sizing: border-box; font-size: 14px; padding: 14px 16px; z-index: 9; background: rgba(8, 12, 22, 0.94); border: 1px solid var(--line); border-radius: 10px; }
+      #board-full.open { display: block; }
+      #board li, #board-full li { display: flex; align-items: center; gap: 6px; padding: 2px 0; }
+      #board-full li { padding: 4px 0; }
+      #board-full li.head { color: var(--dim); font-size: 9px; letter-spacing: 0.18em; }
+      #board li.me, #board-full li.me { color: var(--cyan); font-weight: 700; }
+      #board em, #board-full em { font-style: normal; color: var(--dim); width: 14px; }
+      #board .dot, #board-full .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--c, transparent); }
+      #board b, #board-full b { margin-left: auto; min-width: 22px; text-align: right; }
+      #board-full small { min-width: 20px; text-align: right; color: var(--dim); }
+      #board-full i.bot { font-style: normal; font-size: 9px; letter-spacing: 0.14em; color: var(--dim); border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 4px; padding: 0 4px; }
+      #arrows { inset: 0; }
+      #arrows i { position: absolute; left: 0; top: 0; width: 0; height: 0; margin: -9px 0 0 -6px; border-top: 9px solid transparent; border-bottom: 9px solid transparent; border-left: 16px solid var(--c); filter: drop-shadow(0 0 6px var(--c)); transform-origin: 6px 9px; }
+      #feed { list-style: none; padding: 0; margin: 0; font-size: 12px; font-weight: 700; text-align: right; }
+      #feed li { padding: 2px 6px; margin-top: 3px; background: rgba(8, 12, 22, 0.6); border-radius: 5px; }
+      #feed i { font-style: normal; color: var(--dim); margin: 0 6px; }
+
+      #tags .tag { position: absolute; left: 0; top: 0; text-align: center; font-size: 10px; font-weight: 800; letter-spacing: 0.08em; color: var(--c); text-shadow: 0 1px 2px #000; }
+      #tags .tag > i { display: block; width: 44px; height: 4px; margin: 2px auto 0; background: rgba(0, 0, 0, 0.55); border-radius: 2px; overflow: hidden; }
+      #tags .tag > i > i { display: block; height: 100%; background: var(--c); transform-origin: left; }
+
+      #crosshair { left: 0; top: 0; width: 0; height: 0; }
+      #crosshair .ring { position: absolute; left: -13px; top: -13px; width: 26px; height: 26px; border: 2px solid var(--cyan); border-radius: 50%; box-sizing: border-box; opacity: 0.9; }
+      #crosshair .ring::after { content: ""; position: absolute; left: 50%; top: 50%; width: 4px; height: 4px; margin: -2px 0 0 -2px; background: var(--pink); border-radius: 50%; }
+      #crosshair.fire .ring { border-color: var(--pink); }
+      #crosshair .mark { position: absolute; left: 0; top: 0; opacity: 0; }
+      #crosshair .mark b { position: absolute; left: -1.5px; top: -5px; width: 3px; height: 10px; border-radius: 1px; background: #fff; box-shadow: 0 0 6px rgba(255, 255, 255, 0.9); }
+      #crosshair .mark b:nth-child(1) { transform: rotate(45deg) translateY(-13px); }
+      #crosshair .mark b:nth-child(2) { transform: rotate(135deg) translateY(-13px); }
+      #crosshair .mark b:nth-child(3) { transform: rotate(225deg) translateY(-13px); }
+      #crosshair .mark b:nth-child(4) { transform: rotate(315deg) translateY(-13px); }
+      #crosshair.kill .mark b { background: #ff3b5c; box-shadow: 0 0 10px rgba(255, 59, 92, 0.95); height: 14px; top: -7px; }
+
+      #down { inset: 0; display: none; place-items: center; background: radial-gradient(circle, transparent 35%, rgba(40, 0, 30, 0.55)); }
+      #down.show { display: grid; }
+      #down .box { text-align: center; }
+      #down-title { font-size: 36px; font-weight: 900; letter-spacing: 0.2em; color: var(--pink); }
+      #down-sub { color: var(--dim); font-size: 14px; letter-spacing: 0.2em; }
+
+      #end { inset: 0; display: none; place-items: center; background: rgba(4, 6, 12, 0.74); }
+      #end.show { display: grid; }
+      #end .box { width: min(420px, 90vw); padding: 22px; border-radius: 14px; background: rgba(10, 14, 26, 0.96); border: 1px solid var(--line); text-align: center; }
+      #end-title { font-size: 24px; font-weight: 900; letter-spacing: 0.14em; color: var(--cyan); }
+      #end-board { list-style: none; padding: 0; margin: 14px 0; text-align: left; font-size: 14px; }
+      #end-board li { display: flex; gap: 8px; padding: 4px 0; border-top: 1px solid rgba(255, 255, 255, 0.06); }
+      #end-board li.me { color: var(--cyan); font-weight: 700; }
+      #end-board em { font-style: normal; color: var(--dim); width: 16px; }
+      #end-board b { margin-left: auto; }
+      #end-board small { width: 24px; text-align: right; color: var(--dim); }
+      #end-earned { list-style: none; padding: 0; margin: 0 0 12px; text-align: left; font-size: 14px; }
+      #end-earned li { display: flex; justify-content: space-between; padding: 6px 0; border-top: 1px solid var(--line); }
+      #end-earned b { color: var(--amber); }
+      #end-next { color: var(--dim); font-size: 12px; letter-spacing: 0.12em; }
+
+      #store { top: 0; right: 0; bottom: 0; width: min(330px, 88vw); background: rgba(8, 11, 20, 0.97); border-left: 1px solid var(--line); padding: 18px; box-sizing: border-box; transform: translateX(100%); transition: transform 220ms ease; pointer-events: auto; overflow-y: auto; z-index: 8; }
+      #store.show { transform: none; }
+      #store h2 { margin: 0 0 2px; font-size: 15px; letter-spacing: 0.2em; }
+      #store h3 { margin: 16px 0 0; font-size: 10px; letter-spacing: 0.24em; color: var(--dim); font-weight: 600; }
+      #store .item { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 11px 0; border-top: 1px solid rgba(255, 255, 255, 0.06); }
+      #store .item > div { display: flex; align-items: center; gap: 10px; }
+      #store .swatch { width: 26px; height: 26px; border-radius: 7px; flex: none; }
+      #store small { color: var(--dim); }
+      #store button { min-width: 88px; }
+      #store-close { margin-top: 16px; }
+
+      .dmg { position: fixed; left: 0; top: 0; z-index: 4; pointer-events: none; font: 800 15px "Avenir Next", system-ui, sans-serif; color: #fff; text-shadow: 0 1px 0 #000, 0 0 8px rgba(255, 79, 216, 0.8); opacity: 0; will-change: transform, opacity; }
+      .dmg.big { font-size: 20px; color: var(--pink); }
+
+      #toast { left: 50%; top: 74px; transform: translate(-50%, -10px); padding: 8px 14px; border-radius: 999px; background: rgba(8, 12, 22, 0.92); border: 1px solid var(--amber); font-weight: 700; opacity: 0; transition: opacity 200ms, transform 200ms; white-space: nowrap; }
+      #toast.show { opacity: 1; transform: translate(-50%, 0); }
+      #hurt { inset: 0; background: radial-gradient(circle, transparent 45%, rgba(255, 40, 120, 0.45)); opacity: 0; }
+      #stats { left: 12px; bottom: 90px; font: 11px/1.4 ui-monospace, monospace; color: var(--dim); white-space: pre; display: none; }
+      #stats.show { display: block; }
+      #help { left: 12px; bottom: max(14px, env(safe-area-inset-bottom)); font-size: 10px; letter-spacing: 0.08em; color: var(--dim); }
+      #banner { left: 50%; top: 50%; transform: translate(-50%, -50%); text-align: center; font-size: 14px; color: var(--dim); letter-spacing: 0.12em; }
+      #banner b { display: block; font-size: 44px; letter-spacing: 0.3em; color: var(--cyan); margin-bottom: 8px; text-shadow: 0 0 22px rgba(22, 224, 255, 0.6); }
+
+      .stick-zone { position: fixed; top: 80px; bottom: 90px; width: 50%; z-index: 3; touch-action: none; }
+      .stick-zone.left { left: 0; }
+      .stick-zone.right { right: 0; }
+      .touch-button { position: fixed; z-index: 6; width: 70px; height: 70px; border-radius: 50%; font-weight: 800; letter-spacing: 0.08em; font-size: 12px; }
+      .touch-button.dash { right: 18px; bottom: max(100px, env(safe-area-inset-bottom)); border: 2px solid var(--cyan); background: rgba(22, 224, 255, 0.14); }
+      .touch-button.swap { right: 98px; bottom: max(100px, env(safe-area-inset-bottom)); border: 2px solid var(--amber); background: rgba(255, 176, 32, 0.14); }
+      /* Framed by Net Forge: the host's own Invite replaces this one. */
+      html[data-host="netnet"] #invite { display: none; }
+      /* A phone held sideways: Swap and Dash drop to the bottom corner, clear of the
+         kill feed (two lines), and stay right of the weapon slots. */
+      @media (pointer: coarse) and (max-height: 500px) {
+        #feed li:nth-child(n + 3) { display: none; }
+        .touch-button.dash, .touch-button.swap { bottom: max(14px, env(safe-area-inset-bottom)); }
+      }
+      @media (pointer: coarse) {
+        #help, #crosshair { display: none; }
+        #game { cursor: auto; }
+        .slot span { display: none; }
+      }
+      @media (max-width: 560px) {
+        #board li:nth-child(n + 5) { display: none; }
+        #timer { font-size: 22px; }
+        #goal { display: none; }
+        #top-left { width: 34vw; }
+        #top-right { top: max(52px, calc(env(safe-area-inset-top) + 42px)); width: 62vw; }
+        #top-right button { padding: 5px 8px; font-size: 12px; white-space: nowrap; }
+        #board, #feed { font-size: 11px; }
+        .slot { width: 30vw; padding: 6px 8px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="game"></div>
+    <div id="hurt" class="hud"></div>
+    <div id="tags" class="hud" style="inset: 0"></div>
+    <div id="arrows" class="hud"></div>
+
+    <div id="top-left" class="hud">
+      <div id="title">VOLTYARD</div>
+      <div class="bar"><div id="hp-fill"></div><span id="hp-text"></span></div>
+      <div id="buffs"></div>
+    </div>
+    <div id="top-center" class="hud">
+      <div id="timer">3:00</div>
+      <div id="goal"></div>
+    </div>
+    <div id="top-right" class="hud">
+      <div id="coin-box"><img id="coin-logo" alt="" width="18" height="18" hidden /><span id="coin-balance"></span></div>
+      <div class="row"><button id="invite">Invite</button><button id="store-btn">Store</button><button id="sound">Sound off</button></div>
+      <ul id="board"></ul>
+      <ul id="feed"></ul>
+    </div>
+
+    <div id="slots"></div>
+    <div id="crosshair" class="hud"><i class="ring"></i><i class="mark"><b></b><b></b><b></b><b></b></i></div>
+
+    <div id="down" class="hud"><div class="box"><div id="down-title">DOWN</div><div id="down-sub"></div></div></div>
+
+    <div id="end" class="hud">
+      <div class="box">
+        <div id="end-title"></div>
+        <ul id="end-board"></ul>
+        <ul id="end-earned"></ul>
+        <div id="end-next"></div>
+      </div>
+    </div>
+
+    <aside id="store" class="hud">
+      <h2>STORE</h2>
+      <small id="coin-name"></small>
+      <h3>THIS ROUND</h3>
+      <div id="store-upgrades"></div>
+      <h3>FINISHES</h3>
+      <div id="store-finishes"></div>
+      <div class="item" id="gear-row"><div style="display: block"><span id="gear-name"></span><br /><small id="gear-line"></small></div><button id="gear-buy" style="white-space: nowrap"></button></div>
+      <div class="item" id="pot-row"><div style="display: block">Round pot<br /><small id="pot-line"></small></div><button id="pot-go" style="white-space: nowrap"></button></div>
+      <div class="item" id="stake-row"><div style="display: block">Stake a run<br /><small id="stake-line"></small></div><span style="white-space: nowrap"><input id="stake-amount" type="number" aria-label="Stake" style="width: 56px" /> <button id="stake-go" style="min-width: 0">Stake</button></span></div>
+      <small id="store-note"></small>
+      <br /><button id="store-close">Close</button>
+    </aside>
+
+    <ul id="board-full" class="hud"></ul>
+    <div id="toast" class="hud"></div>
+    <div id="stats" class="hud"></div>
+    <div id="help" class="hud">WASD move &middot; mouse aim &middot; click fire &middot; 1 2 3 or Q weapon &middot; Space dash &middot; Tab board</div>
+    <div id="banner" class="hud"><b>VOLTYARD</b><span id="banner-text">Charging the yard</span></div>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

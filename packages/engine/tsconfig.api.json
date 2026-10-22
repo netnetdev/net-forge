@@ -1,0 +1,7 @@
+{
+  // The model-facing API (src/api, src/index.ts) also runs on the room
+  // server and in the build's validator, so it must compile with no DOM.
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "lib": ["ES2022"], "noEmit": true },
+  "include": ["src/index.ts", "src/api", "src/game", "src/rules"]
+}

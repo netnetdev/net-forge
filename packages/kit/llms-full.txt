@@ -1,0 +1,499 @@
+# @netnetcapital/kit: full reference
+
+> The NetNet Cabinet Kit adds a game token, a store, payments in dollars (USDG) and a mandatory earn mechanism to an existing browser game on Robinhood Chain (chain id 4663). Written for AI coding agents first. Read "Quick start" and "Rules", then the section for the game's engine. Every function below states what it reads, what it costs in chain calls, and what it throws.
+
+## Quick start
+
+1. Run `npx @netnetcapital/kit add --earn <event_id>` in the game's folder.
+2. Install with the project's package manager. Static pages need no install.
+3. Call `earn("<event_id>")` (bundled) or `window.netnetEarn("<event_id>")` (static page or engine export) at the moment the player earns it.
+4. Run `npx @netnetcapital/kit doctor` until it prints PASS.
+
+What `kit add` writes:
+
+- `netnet.config.json`: the game slug, the earn rules and the store items. Plain JSON. No addresses ever go in it.
+- `netnet.ts` or `netnet.js` next to the entry module: the bootstrap. It exports `startKit()`, `earn(event, n)`, the `kit` object and, between `// <kit:generated>` markers, the slug and the typed ids. `kit sync` rewrites only the generated block, so edit freely outside it.
+- Two lines at the top of the entry (bundled projects): `import { startKit } from "./netnet"; // netnet-kit` and `void startKit(); // netnet-kit`.
+- One script tag in `index.html` (static pages): `<script type="module" src="./netnet.js"></script>`. That bootstrap also sets `window.kit` and `window.netnetEarn` for classic scripts and engine bridges.
+- `@netnetcapital/kit` as an exact-pinned dependency in `package.json` (bundled projects).
+
+Running `kit add` twice changes nothing the second time.
+
+## Rules
+
+These are the rules the protocol depends on. `kit doctor` checks each one.
+
+1. **Every game earns.** At least one earn rule must exist in `netnet.config.json`, and game code must report it. Earn is the reason a player holds the token. The referee decides every payout from what the player actually did; the browser only reports events.
+2. **Never poll.** The Kit reads the chain once when the game opens and once after each of the player's own transactions. All getters are synchronous over that snapshot, so reading balances every frame costs nothing. Never call `kit.refresh()`, `kit.init()` or any chain read from `setInterval`, `setTimeout` or `requestAnimationFrame`.
+3. **No direct chain reads.** Game code never builds its own RPC client. The Kit's one Multicall3 call already covers the balances, the store, the entitlements and the price; the referee's coin ledger comes with it as one HTTP request.
+4. **No addresses.** Never write a `0x` contract address in game code or config. The Kit resolves the game's contracts from its slug and the NetNet registry.
+5. **Players see dollars and the game's coins.** Every game has coins: 1 coin = 1 game token, shown under the token's own name, symbol and logo from its metadata (`kit.coins.name()`, `symbol()`, `logo()`), never a generic "COIN". Never show or mention wsNET. Prices and cash-out are in dollars. Only claiming and cashing out need to say the coin is the token.
+6. **Nothing loads before it is looked at.** Call `startKit()` when the game opens. If the game sits behind a menu or inside a window that may stay closed, call it when that opens instead of at page load. A game that never calls it makes zero chain calls.
+7. **Money logic never lives in game code.** Prices live on the game's vault, payouts live with the referee, and the Kit handles approvals, quotes and slippage.
+
+## Config: netnet.config.json
+
+```json
+{
+  "game": "comet-sweep",
+  "name": "Comet Sweep",
+  "referee": "https://rooms.example/comet-sweep",
+  "store": [
+    { "id": "revive", "label": "Revive", "kind": "consumable", "priceUsdg": "0.25", "priceToken": "5" },
+    { "id": "skin_gold", "label": "Gold ship", "kind": "permanent", "priceUsdg": "1.00" }
+  ],
+  "earn": [
+    { "id": "wave_cleared", "label": "Clear a wave", "description": "All sparks in the wave collected" }
+  ]
+}
+```
+
+- `game`: the slug on GameFactory and in `play.netnet.capital/g/<slug>`. Lowercase letters, digits and dashes, 3 to 32 characters.
+- `referee` (optional until launch): the endpoint that verifies earn events and signs attestations. Engine games use their room server. Live earn needs it; mock mode does not.
+- `store[]`: `id` is lowercase snake case, at most 31 characters; on chain the SKU id is `keccak256(bytes(id))`. `kind` is `consumable` (can be bought again, e.g. revives), `permanent` (owned once, e.g. skins) or `pass` (runs for `duration` seconds; buying again extends it). At least one of `priceUsdg` (dollars) and `priceToken` (game tokens), as decimal strings.
+- `earn[]`: `id` is lowercase snake case, at most 31 characters; `label` is the plain-language rule shown on the game's store page.
+
+Edit the config with the CLI or the MCP tools so the bootstrap stays in sync. After a hand edit, run `npx @netnetcapital/kit sync`.
+
+## Init
+
+```ts
+await kit.init(options: KitInitOptions): Promise<KitState>
+```
+
+The bootstrap's `startKit()` calls this for you with the slug from the config. Options:
+
+- `game` (required): the slug.
+- `mock`: run with no chain. The bootstrap sets it from `?kit=mock` or `VITE_NETNET_KIT_MOCK=1`.
+- `referee`: the referee endpoint. The bootstrap passes it from the config.
+- `provider`: an EIP-1193 provider to use straight away (Privy's embedded wallet, for example). Otherwise call `kit.wallet.connect()` from a click.
+- `rpcUrl`: a keyed RPC for reads. The public Robinhood Chain RPC is always kept as the fallback.
+- `slippageBps`: slippage for buy and cash-out quotes. Default 100 (1%).
+- `store`: the SKUs from the config (the bootstrap passes them). Live mode reads exactly these from the vault; mock mode sells them.
+- `mockBalances`: mock mode only.
+
+Cost: one `eth_call` (a Multicall3 aggregate3 carrying every read). Finding the game costs nothing: its contracts sit at CREATE3 addresses the Kit derives from the factory and the slug, and the same call checks the factory's own record (`gameOfToken(token).token == token`) before trusting them. The very first open in a browser makes one extra call to learn the two pool addresses, which never change and are cached for good.
+
+Calling `init` again for the same game returns the same promise (safe under React StrictMode). Calling it for a different game throws `ALREADY_INITIALIZED`.
+
+## State
+
+```ts
+kit.getState(): KitState      // synchronous, no RPC
+kit.subscribe(listener): () => void
+```
+
+`KitState` fields:
+
+- `status`: `"idle" | "loading" | "ready" | "error"`.
+- `mode`: `"live" | "mock"`.
+- `account`: the connected address or `null`.
+- `token`: `{ symbol, decimals, balance (raw bigint), priceUsd, taxBps, graduated, curve }`. `curve` is `{ progress, raisedUsd, targetUsd, walletCapUsd, walletRoomUsd, feeBps }` while the bonding curve runs, null once graduated.
+- `coin`: `{ name, symbol, logo, decimals }`, the token's own metadata.
+- `coins`: `{ mode, earned, claimable, returning, reserved, purchases }` from the referee (raw bigints; `mode` is `"live"`, `"prelaunch"` or null with no referee).
+- `usdg`: the wallet's dollars, raw bigint with 6 decimals.
+- `skus`: `{ id, priceUsdg, priceToken, consumable, active, owned }[]`, raw bigints.
+- `storeHalted`, `pendingRewards`, `updatedAt`, `error`.
+
+`subscribe` fires on every change and is shaped for React's `useSyncExternalStore`. In React, use `useKit()` from `@netnetcapital/kit/react`.
+
+`kit.refresh(): Promise<KitState>` reads again (one call). Use it only after something outside the game changed the wallet, behind a button the player presses. Never on a timer. Concurrent calls share one read.
+
+## Wallet
+
+```ts
+await kit.wallet.connect(provider?): Promise<Address>   // call from a click
+kit.wallet.disconnect(): void
+kit.wallet.address(): Address | null
+await kit.wallet.available(): Promise<WalletOption[]>  // installed wallets via EIP-6963, for a picker; no RPC
+```
+
+`connect()` with no argument uses the first wallet that announces itself (EIP-6963), then `window.ethereum`. Pass a provider to pick one: a `WalletOption.provider` from `available()`, Privy's provider, or a WalletConnect provider. Connecting reads once. Switching accounts in the wallet reads once. On the first write the Kit asks the wallet to switch to Robinhood Chain and adds the chain if the wallet lacks it.
+
+Mock mode connects a mock wallet automatically.
+
+## Store
+
+```ts
+kit.store.list(): KitSku[]                  // sync, no RPC
+kit.store.get(id): KitSku | undefined       // sync, no RPC
+kit.store.owns(id): boolean                 // sync, no RPC
+kit.store.count(id): number                 // sync, no RPC
+await kit.store.buy(id, { pay?: "usdg" | "token" | "coins" }): Promise<KitSku>
+```
+
+`buy` pays in dollars by default when the item has a dollar price, otherwise in the token. `{ pay: "coins" }` buys at the item's token price with `kit.coins.spend` (earned coins first, off chain, then the wallet), and the referee records the purchase: `owns` and `count` include items bought with coins. It checks the balance before prompting, approves the exact price when the allowance is short (one extra prompt), sends `GameVault.buy`, waits for the receipt and reads once. Buying a permanent item the wallet already owns returns without a transaction. Throws `NO_WALLET`, `UNKNOWN_SKU`, `SKU_NOT_PRICED`, `SKU_INACTIVE`, `STORE_HALTED`, `INSUFFICIENT_BALANCE`, `USER_REJECTED` or `TX_REVERTED`.
+
+Prices are set on the game's vault by the creator. The config's prices are what gets registered at launch, and what mock mode sells at.
+
+Gate a cosmetic:
+
+```ts
+const gold = kit.store.owns("skin_gold");
+ship.color = gold ? "#ffd166" : "#7ad7f0";
+```
+
+## Coins
+
+Every game has coins. 1 coin = 1 game token, wei for wei; the supply is 10M per token. A coin is shown under the token's OWN name, symbol and logo from its metadata (ERC-7572 `contractURI`), never a generic "COIN". This is how a game should show and spend its token.
+
+```ts
+kit.coins.name(): string                 // the token's name from its metadata, sync
+kit.coins.symbol(): string               // the token's symbol, sync
+kit.coins.logo(): string | null          // logo URL from the metadata (ipfs:// resolved), sync
+kit.coins.balance(): number              // earned (unclaimed) + wallet, whole coins, sync
+kit.coins.balanceRaw(): bigint
+kit.coins.earned(): number               // earned, unclaimed: spendable off chain now
+kit.coins.claimable(): number            // signed for a claim, not yet claimed
+kit.coins.mode(): "live" | "prelaunch" | null
+kit.coins.purchases(reason): number      // times `reason` was bought with coins
+kit.coins.format(raw, digits?): string
+await kit.coins.spend(amount, reason): Promise<{ fromEarned, onChain, coins, key }>
+await kit.coins.buy(usd): Promise<{ tokenOut, tokens, route }>
+await kit.coins.claim(): Promise<number>
+kit.coins.quoteCashOut(amount): { usdgOut, usd, route: "market" }
+await kit.coins.cashOut(amount): Promise<{ usdgOut, usd, route }>
+```
+
+- `spend(amount, reason)` spends EARNED coins first, off chain: the referee deducts them from the player's unclaimed rewards (no wallet prompt, no gas). Spent coins are never paid out, so they stay in the reward pool for other players. If earned coins are short, the referee reserves them and the Kit pays only the remainder from the wallet on chain (a GameVault tip with `reason` as the memo, one confirmation), then commits; if the player declines, the reservation is cancelled and nothing is lost. `reason` is an id like `"revive"`.
+- A room (NetNet room server) accepts a spend's `key` once as proof of a paid command whose name is the spend's `reason`: `room.send("command", { name: "revive", proof: key })`.
+- `buy(usd)` turns dollars (USDG) into coins in one transaction through the GameZap. The quote includes pool fees and the token's transfer tax.
+- `claim()` moves every earned coin to the wallet: the referee signs them, then one RewardVault transaction. Once signed, those coins are no longer spendable off chain; if the player declines the claim, the Kit hands the signatures back and the coins return after they lapse (about 25 minutes).
+- `cashOut(amount)` sells wallet coins for dollars into the pool through GameZap.sellToken (one transaction, plus an approval the first time). There is no redemption route. Show `quoteCashOut(amount).usd` first.
+- **Before launch** (`mode() === "prelaunch"`, or the token has not graduated), coins are play money. `balance()` and `spend()` work the same, against the game's points; `buy`, `claim`, `cashOut` and their quotes throw `PRELAUNCH`. Write the game once; the Kit handles the switch.
+- Reads cost nothing. Opening the game makes one chain call plus one referee request (and one metadata fetch per session). A spend covered by earned coins is one referee request and no chain call.
+- The referee needs the player's session. The Kit signs in once (one SIWE signature, no gas) the first time it needs one; call `await kit.wallet.signIn()` from a click to choose when that prompt shows, or pass `session` to `kit.init` if the page already signed in.
+
+Revive for coins:
+
+```ts
+async function revive() {
+  if (kit.coins.balance() < 50) return showBuyCoins();
+  await kit.coins.spend(50, "revive");
+  player.alive = true;
+}
+```
+
+Buy-in run (every Net Forge game has one; room games declare `earn.stake({ min, max, multiple })` in game.ts):
+
+```ts
+// Spend the stake (earned coins first), then tell the room. It takes the stake at the next run start.
+await kit.coins.spend(20, "stake");
+conn.stake();
+conn.onStake((m) => showStake(m)); // "live" | "waiting" | "closed" (m.paid came back) | "refused"
+```
+
+A staked run pays its normal earn plus a share of stake x multiple, by how much of the run's earn the player makes. What it does not win back stays in the reward pool. The reason "stake" is reserved; a stake outside the game's terms is refused before anything is spent. Bring-your-own games that report earn over HTTP cannot take stakes yet.
+
+HUD:
+
+```ts
+hud.innerHTML = `<img src="${kit.coins.logo() ?? ""}" alt=""> ${kit.coins.format(kit.coins.balanceRaw())} ${kit.coins.symbol()}`;
+```
+
+## Profile (saves)
+
+Every player's progress is saved by the referee, not the browser: the same
+on every device they sign in on. Until a player signs in, it is kept under
+this browser's guest id (`kit.profile.guestId()`), and `kit.wallet.signIn()`
+merges it into the wallet's profile. Achievements, daily goals and titles
+are granted by the server (engine games: from the authoritative run); a
+game never writes them. A game writes only its own settings and the display
+name, and buys permanent items with coins.
+
+```ts
+const p = kit.profile.get();            // null until loaded; the first read starts the one load
+kit.profile.subscribe((p) => draw(p));  // called when it lands and on every change
+kit.profile.achieved("evolver");        // boolean
+kit.profile.owns("skin_gold");          // a look or an unlock owned for good
+kit.profile.level("hearth");            // a meta upgrade's level (opt-in games only)
+kit.profile.store();                    // permanent items with each next price in coins
+await kit.profile.buy("unlock_ranger"); // spends coins (earned first), then the referee makes it owned
+await kit.profile.setSettings({ keeper: "ranger", sound: false });   // at most 4 KB of JSON
+await kit.profile.setName("Nova");
+```
+
+The coin model (ruled 2026-10-16): by default coins buy cosmetics, unlocks
+(characters, starting loadouts, sidegrades) and in-run consumables, never
+permanent stat power. Permanent stat upgrades are opt-in per game and capped
+by the engine at +15% a stat and +30% in all. Prices come from the game's
+manifest on the server; the browser never sets a price. Before launch coins
+are play money and buy only in-run items: `kit.profile.buy` answers
+PRELAUNCH until the game launches. `buy` reads the price fresh, runs one
+purchase per item at a time, and if the network drops after the spend it
+retries the same spend on the next call; a purchase the referee cannot apply
+(already owned, price moved) is refunded, any part it cannot hold again
+becoming store credit (`kit.profile.get().credit`) that the next buy uses.
+
+## Token (wallet only)
+
+```ts
+kit.token.symbol(): string
+kit.token.balance(): number                         // whole tokens in the wallet, sync
+kit.token.balanceRaw(): bigint
+kit.token.priceUsd(): number | null                 // pool mid price (curve price before graduation), sync
+kit.token.graduated(): boolean                      // true once the bonding curve graduated, sync
+kit.token.curve(): { progress, raisedUsd, targetUsd, walletCapUsd, walletRoomUsd, feeBps } | null  // sync
+kit.token.valueUsd(): number | null                 // balance x price, sync
+kit.token.quoteBuy(usd): { tokenOut, tokens, route }  // sync, no RPC; route "curve" or "market"
+await kit.token.buy(usd): Promise<{ tokenOut, tokens, route }>
+await kit.token.spend(amount, reason): Promise<void> // wallet only, on chain; prefer kit.coins.spend
+kit.token.quoteCashOut(amount): { usdgOut, usd, route }   // sync, no RPC
+await kit.token.cashOut(amount): Promise<{ usdgOut, usd, route }>
+```
+
+- Amounts are whole units as a number or decimal string (`10`, `"0.5"`), or a bigint of raw units.
+- `kit.token` is the wallet's side of the coins. Game UI should use `kit.coins`.
+- Every transfer of a game token pays the creator's tax. The quotes include it.
+- Before graduation the token trades on its bonding curve: `kit.token.buy` goes through GameZap.buyOnCurve and `kit.token.cashOut` through GameZap.sellOnCurve, with `route: "curve"`. Each wallet may put at most the curve's cap in (`curve().walletRoomUsd`); a larger buy throws `WALLET_CAP` before any prompt. After graduation both use the game's pool (GameZap.buyToken / sellToken), `route: "market"`.
+
+## Earn
+
+```ts
+earn(event, n = 1)                                        // bootstrap helper; never throws
+await kit.earn.report({ event, n?, runId?, data? }, { claim? }): Promise<{ granted, amount, tokens }>  // amount: coins granted (held)
+kit.earn.accept(attestations): number                     // from the room server's "attest" message
+await kit.earn.collect(): Promise<number>                 // leftovers kept by the referee for this wallet
+kit.earn.pending(): KitPendingReward[]
+await kit.earn.claim(reward?): Promise<number>            // whole tokens claimed
+await kit.earn.claimAll(): Promise<number>                // one RewardVault.claimBatch transaction
+```
+
+- Earning is mandatory: every game has at least one earn rule, and game code reports it.
+- The referee decides every payout from server state, and the game's RewardVault enforces the signer, the nonce, the expiry, the per-rule, per-wallet and vault daily caps and the budget. The browser never decides a payout.
+- Engine games (the NetNet room server): earn events come from the authoritative simulation. Pass what the room sends to `kit.earn.accept(...)`: `room.onMessage("attest", (list) => kit.earn.accept(list))`. After a player leaves a room, `await kit.earn.collect()` fetches what the referee kept for them.
+- Bring-your-own games: `report` sends the event to the referee with the player's session (`Authorization: Bearer`). The referee answers with the coins it granted. They are held: spendable at once with `kit.coins.spend`, claimable with `kit.coins.claim()`.
+- Rewards need a verified build. The referee replays every run of a game built on the NetNet engine before it pays. It cannot replay a game on its own engine or its own server, so that game is unverified: before launch a report credits play money as usual, and once the token is live a report grants no tokens and answers `{ granted: false, amount: 0n, tokens: 0, rewards: "unverified", notice: "Rewards need a verified build." }`. Games not built through Net Forge never earn from the reward pool; their token still trades and the creator fee is unchanged. The class is decided on NetNet's server from how the game was built and launched; nothing the game sends, its config, its own backend's signature or its build record can change it. The store, spends, cosmetics and saves keep working either way. Show `notice` to the player as is.
+- Engine games: a "claim" message to the room releases the held coins and the room sends the signed attestations back ("attest").
+- `pending()` lists signed attestations not yet claimed. `claimAll()` (same as `kit.coins.claim()`) asks the referee to sign every held coin and submits them in one transaction. Pass `{ claim: true }` to `report` to claim at once, which suits gasless wallets.
+- The Kit only ever sends a verified attestation to this game's RewardVault, for the connected wallet, before its expiry. Anything else is dropped.
+- `kit.rewards` is the same object as `kit.earn`.
+- The bootstrap's `earn()` catches errors and logs them, so a missing wallet never crashes the game loop. Earning needs a connected wallet, so show a connect button somewhere the player sees it.
+- Put the call at the exact moment the player earns: when the wave is cleared, the level is finished, the boss falls. Never on a timer and never on page load.
+
+Referee protocol (for anyone running one), matched to the room server (`apps/rooms`):
+
+- `GET <referee>/referee/claims/:wallet` returns a JSON array of signed (issued) attestations not yet claimed.
+- `POST <referee>/referee/report` (session) with `{ game, wallet, rule, units, runId, data }` returns `{ granted, attestations: [] }`; `granted` is coin wei, held.
+- `GET <referee>/referee/coins/:game/:wallet` returns `{ mode, earned, claimable, returning, reserved, purchases }`.
+- `POST <referee>/referee/spend` (session) `{ game, wallet, amount, reason, key, remainder }`, then `/referee/spend/commit` `{ key, txHash }` or `/referee/spend/cancel` `{ key }` when a remainder was paid on chain.
+- `POST <referee>/referee/claims/release` (session) signs every held coin; `/referee/claims/return` hands unused signatures back.
+- `GET <referee>/auth/nonce` and `POST <referee>/auth/sign-in` `{ message, signature }` (SIWE) mint the session.
+- An attestation is `{ vault, rule, runId, player, ruleId, amount, nonce, paidEntry, expiry, verified, signature }`: the signed `Reward(address player,uint32 ruleId,uint256 amount,bytes32 nonce,bool paidEntry,uint64 expiry,bool verified)` with `amount` and `expiry` as decimal strings. RewardVault reverts `NotVerified()` unless `verified` is true, and one unverified item sinks a whole `claimBatch`, so the Kit drops any attestation whose `verified` is not true.
+
+## Metadata
+
+```ts
+kit.metadata(): { name, contractURI, metadataHash } | null   // sync, no RPC
+```
+
+The game's ERC-7572 record, read in the same open call from the token's `contractURI()` and `metadataHash()`. Null in mock mode.
+
+## Format
+
+```ts
+kit.format.usd(0.0612)        // "$0.061"
+kit.format.token(raw, 2)      // "12.5"
+```
+
+## Errors
+
+Every failure is a `KitError` with `code`, `message` and `fix`. The `fix` is one line telling you what to change.
+
+- `NOT_INITIALIZED`: call `startKit()` (or `kit.init`) before anything else.
+- `ALREADY_INITIALIZED`: one game per page.
+- `BAD_GAME_SLUG`: use the slug from the config.
+- `PLACEHOLDER_ADDRESS`: a NetNet contract is not deployed yet. Run in mock mode.
+- `GAME_NOT_FOUND`: the slug is not registered on GameFactory yet. Run in mock mode until it launches.
+- `NO_WALLET`: call `kit.wallet.connect()` from a click first.
+- `WRONG_CHAIN`, `USER_REJECTED`: the player declined in the wallet. Show the action again; never retry automatically.
+- `UNKNOWN_SKU`, `SKU_NOT_PRICED`, `SKU_INACTIVE`, `STORE_HALTED`.
+- `INSUFFICIENT_BALANCE`: offer `kit.coins.buy(usd)` or a smaller amount.
+- `PRELAUNCH`: coins are play money until launch; hide buy, claim and cash out until `kit.coins.mode()` is `"live"`.
+- `BAD_AMOUNT`: amounts are positive numbers, decimal strings or raw bigints.
+- `NO_LIQUIDITY`: no price is known yet (empty pools).
+- `WALLET_CAP`: the curve's per-wallet cap is reached; buy less.
+- `NO_REFEREE`, `REFEREE_REJECTED`, `NOTHING_TO_CLAIM`.
+- `TX_REVERTED`, `RPC_ERROR`: show a retry button that calls `kit.refresh()`; never retry on a timer.
+
+## Mock mode
+
+Open the page with `?kit=mock`, or set `VITE_NETNET_KIT_MOCK=1` in a Vite project. The mock wallet starts with 100 coins and $25, the store sells what `netnet.config.json` lists, the pools price the coin at about $0.06, and the referee grants one coin per earn event (held, spendable at once). `mockCoin: { name, symbol, logo }` names the coin as its metadata will; `mockMode: "prelaunch"` runs it as play money. Every call behaves like the live one, including the typed errors. Mock mode makes zero network calls.
+
+## Plain HTML
+
+`kit add` writes `netnet.js` next to `index.html` and adds one module script tag. The bootstrap loads the Kit from the CDN, starts it, and sets `window.kit` and `window.netnetEarn`.
+
+```html
+<script type="module" src="./netnet.js"></script>
+<script src="game.js"></script>
+```
+
+```js
+// game.js (a classic script)
+function levelComplete() {
+  if (window.netnetEarn) window.netnetEarn("level_complete");
+}
+document.getElementById("skin").onclick = async () => {
+  await window.kit.wallet.connect();
+  await window.kit.store.buy("skin_gold");
+};
+```
+
+Module scripts run after classic scripts, so guard `window.netnetEarn` the first time, or call it from events that happen after load.
+
+## Vite and plain canvas (TypeScript)
+
+```ts
+// src/main.ts
+import { startKit } from "./netnet"; // netnet-kit
+void startKit(); // netnet-kit
+import { earn, kit } from "./netnet";
+
+function onWaveCleared() {
+  earn("wave_cleared");
+  wave += 1;
+}
+
+function drawHud() {
+  ctx.fillText(`${kit.coins.format(kit.coins.balanceRaw())} ${kit.coins.symbol()}`, 12, 40); // free every frame
+}
+```
+
+The generated `EarnEvent` and `SkuId` types turn a misspelled id into a compile error.
+
+## React
+
+```tsx
+// src/main.tsx gets the two kit lines from kit add.
+import { useKit } from "@netnetcapital/kit/react";
+import { earn, kit } from "./netnet";
+
+export function Hud() {
+  const s = useKit(); // re-renders on every Kit change, no RPC
+  return (
+    <div>
+      <span>{kit.format.token(s.token.balance)} {s.token.symbol}</span>
+      {s.account ? null : <button onClick={() => kit.wallet.connect()}>Connect</button>}
+      <button disabled={!s.account} onClick={() => kit.store.buy("skin_gold")}>Gold skin</button>
+    </div>
+  );
+}
+
+function onMilestone() {
+  earn("milestone");
+}
+```
+
+## Phaser
+
+```js
+// src/main.js (kit add put the two kit lines at the top)
+import Phaser from "phaser";
+import { earn, kit } from "./netnet";
+
+class Run extends Phaser.Scene {
+  finishStage() {
+    earn("stage_finished");
+  }
+  update() {
+    this.coins.setText(String(Math.floor(kit.coins.balance()))); // sync, free
+  }
+}
+```
+
+Do not call `kit.refresh()` from `update()`. The Kit updates itself after the player's transactions and `update()` reads the snapshot for free.
+
+## three.js
+
+```ts
+import * as THREE from "three";
+import { earn, kit } from "./netnet";
+
+function onCheckpoint() {
+  earn("checkpoint");
+}
+
+renderer.setAnimationLoop(() => {
+  hud.textContent = `${kit.coins.balance().toFixed(0)} ${kit.coins.symbol()}`; // free every frame
+  renderer.render(scene, camera);
+});
+```
+
+## Godot, Unity and Emscripten exports
+
+Run `kit add` in the folder with the exported `index.html`. It is wired like a static page.
+
+- Godot 4: `JavaScriptBridge.eval("netnetEarn('wave_cleared')")`.
+- Unity WebGL: add `Assets/Plugins/NetNet.jslib` with `mergeInto(LibraryManager.library, { NetNetEarn: function (id) { window.netnetEarn(UTF8ToString(id)); } });` and call it from C# through `[DllImport("__Internal")] static extern void NetNetEarn(string id);`.
+- Emscripten: `EM_ASM({ window.netnetEarn(UTF8ToString($0)); }, "wave_cleared");`.
+
+Run `kit doctor` on the engine's source project too, so it can see the earn call in `.gd`, `.cs` or `.jslib` files.
+
+## Doctor
+
+`npx @netnetcapital/kit doctor [dir] [--json]` lints offline. Exit code 1 on any error.
+
+- `CONFIG_MISSING`, `CONFIG_INVALID`: run `kit add` or fix the JSON.
+- `EARN_RULE_MISSING`: add one with `kit add-earn <id> --label "..."`.
+- `EARN_NOT_WIRED`: call `earn("<id>")` where the player earns.
+- `EARN_EVENT_UNKNOWN`: the code reports an id the config lacks.
+- `KIT_NOT_INSTALLED`, `KIT_NOT_LOADED`: the package or the script tag is missing.
+- `INIT_MISSING`, `INIT_GAME_MISMATCH`: start the Kit once with the config's slug (`kit sync` fixes the bootstrap).
+- `STORE_SKU_UNKNOWN`: the code uses a SKU the config lacks.
+- `POLLING_LOOP`: a timer or frame loop refreshes or reads the chain.
+- `DIRECT_CHAIN_READ`, `MULTICALL_MISSING`: game code reads the chain itself.
+- `HARDCODED_ADDRESS`: a `0x` address in game code or config.
+- `WSNET_IN_UI`: game code mentions wsNET.
+- Warnings: `EARN_RULE_UNUSED`, `STORE_EMPTY`.
+
+## CLI
+
+```
+npx @netnetcapital/kit add [dir] [--game <slug>] [--earn <id>] [--framework <name>] [--entry <file>] [--json]
+npx @netnetcapital/kit init [dir] [--game <slug>] [--earn <id>]
+npx @netnetcapital/kit doctor [dir] [--json]
+npx @netnetcapital/kit sync [dir]
+npx @netnetcapital/kit add-item <id> --label "..." [--usdg 0.50] [--token 10] [--kind consumable|permanent|pass] [--duration <seconds>] [--dir <dir>]
+npx @netnetcapital/kit add-earn <id> --label "..." [--description "..."] [--dir <dir>]
+npx @netnetcapital/kit guide [topic]
+npx @netnetcapital/kit mcp
+```
+
+Frameworks: `plain-html`, `vite`, `react`, `phaser`, `three`, `bundler` (any other bundled project), `godot`, `unity`, `emscripten`.
+
+## MCP server
+
+Add it to an agent (Claude Code, Cursor and others that speak MCP over stdio):
+
+```json
+{ "mcpServers": { "netnet-kit": { "command": "npx", "args": ["-y", "@netnetcapital/kit", "mcp"] } } }
+```
+
+Tools:
+
+- `get_integration_guide({ topic? })`: this file, or one section of it.
+- `add_kit({ projectDir?, game?, earnEvent?, framework?, entry? })`: runs `kit add` and returns the changes and next steps.
+- `add_store_item({ projectDir?, id, label, kind?, priceUsdg?, priceToken? })`: adds a SKU and returns the call to write.
+- `add_earn_event({ projectDir?, id, label, description? })`: adds an earn rule and returns the call to place.
+- `run_doctor({ projectDir?, json? })`: returns every finding with its fix.
+
+The tools change files only. None touches the chain or spends anything.
+
+## RPC budget
+
+Per player session:
+
+- Opening the game: 1 `eth_call` (2 on the first open in a browser, which learns the immutable pool addresses).
+- Every getter, quote and format call: 0.
+- Each purchase, spend, buy, market cash-out or claim: 1 simulate `eth_call` (skipped when an approval goes first), receipt polling for the player's own transaction at 1 second intervals (usually 1 or 2 calls on Robinhood Chain), then 1 `eth_call` to refresh. Coins add HTTP, not RPC: one referee GET on open (with the snapshot), one metadata fetch per session, and one referee POST per off-chain spend, claim or report.
+- `kit.earn.collect()` and `report()`: 0 chain calls (one HTTP request to the referee).
+- `kit.profile`: 0 chain calls. One referee GET the first time the game reads it (none if it never does), one after a sign-in (the guest merge) and each purchase.
+- Idle: 0, forever. The Kit has no timers.
+
+## What the Kit never does
+
+- It never polls, never reads before `init`, and never reads on behalf of a closed game.
+- It never shows or returns a wsNET amount.
+- It never ships an address that is not in the NetNet registry, and a registry placeholder throws instead of reading a zero address.
+- It never decides a reward in the browser.

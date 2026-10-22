@@ -1,0 +1,1209 @@
+{
+ "style": "pixel",
+ "dimension": "2d",
+ "palette": [
+  "#140c1c",
+  "#442434",
+  "#30346d",
+  "#4e4a4e",
+  "#854c30",
+  "#346524",
+  "#d04648",
+  "#757161",
+  "#597dce",
+  "#d27d2c",
+  "#8595a1",
+  "#6daa2c",
+  "#d2aa99",
+  "#6dc2ca",
+  "#dad45e",
+  "#deeed6"
+ ],
+ "assets": [
+  {
+   "id": "style.pixel.wizard",
+   "kind": "character",
+   "plan": "biped",
+   "source": {
+    "pack": "kenney_tiny_dungeon",
+    "path": "Tiles/tile_0084.png"
+   },
+   "height": 1,
+   "line": "purple-robed wizard",
+   "tags": [
+    "wizard",
+    "mage",
+    "hero"
+   ],
+   "aliases": [
+    "style.pixel.mini_female_c"
+   ],
+   "sprite": {
+    "outline": "#3f2631"
+   }
+  },
+  {
+   "id": "style.pixel.villager",
+   "kind": "character",
+   "plan": "biped",
+   "source": {
+    "pack": "kenney_tiny_dungeon",
+    "path": "Tiles/tile_0085.png"
+   },
+   "height": 1,
+   "line": "villager",
+   "tags": [
+    "villager",
+    "person",
+    "npc"
+   ],
+   "aliases": [
+    "style.pixel.fox"
+   ],
+   "sprite": {
+    "outline": "#3f2631"
+   }
+  },
+  {
+   "id": "style.pixel.dwarf",
+   "kind": "character",
+   "plan": "biped",
+   "source": {
+    "pack": "kenney_tiny_dungeon",
+    "path": "Tiles/tile_0087.png"
+   },
+   "height": 1,
+   "line": "horned-helmet warrior",
+   "tags": [
+    "dwarf",
+    "viking",
+    "warrior",
+    "hero"
+   ],
+   "aliases": [],
+   "sprite": {
+    "outline": "#3f2631"
+   }
+  },
+  {
+   "id": "style.pixel.knight",
+   "kind": "character",
+   "plan": "biped",
+   "source": {
+    "pack": "kenney_tiny_dungeon",
+    "path": "Tiles/tile_0096.png"
+   },
+   "height": 1,
+   "line": "armored knight",
+   "tags": [
+    "knight",
+    "hero",
+    "warrior",
+    "armor"
+   ],
+   "aliases": [
+    "style.pixel.monarch"
+   ],
+   "sprite": {
+    "outline": "#3f2631"
+   }
+  },
+  {
+   "id": "style.pixel.knight_visor",
+   "kind": "character",
+   "plan": "biped",
+   "source": {
+    "pack": "kenney_tiny_dungeon",
+    "path": "Tiles/tile_0097.png"
+   },
+   "height": 1,
+   "line": "knight with a visor",
+   "tags": [
+    "knight",
+    "guard",
+    "armor"
+   ],
+   "aliases": [],
+   "sprite": {
+    "outline": "#3f2631"
+   }
+  },
+  {
+   "id": "style.pixel.princess",
+   "kind": "character",
+   "plan": "biped",
+   "source": {
+    "pack": "kenney_tiny_dungeon",
+    "path": "Tiles/tile_0099.png"
+   },
+   "height": 1,
+   "line": "royal in a gown",
+   "tags": [
+    "princess",
+    "royal",
+    "noble"
+   ],
+   "aliases": [
+    "style.pixel.hooded_adventurer"
+   ],
+   "sprite": {
+    "outline": "#3f2631"
+   }
+  },
+  {
+   "id": "style.pixel.sage",
+   "kind": "character",
+   "plan": "biped",
+   "source": {
+    "pack": "kenney_tiny_dungeon",
+    "path": "Tiles/tile_0100.png"
+   },
+   "height": 1,
+   "line": "grey-haired sage",
+   "tags": [
+    "sage",
+    "elder",
+    "wizard"
+   ],
+   "aliases": [
+    "style.pixel.blob_wizard"
+   ],
+   "sprite": {
+    "outline": "#3f2631"
+   }
+  },
+  {
+   "id": "style.pixel.thief",
+   "kind": "character",
+   "plan": "biped",
+   "source": {
+    "pack": "kenney_tiny_dungeon",
+    "path": "Tiles/tile_0111.png"
+   },
+   "height": 1,
+   "line": "hooded thief",
+   "tags": [
+    "thief",
+    "rogue",
+    "hooded"
+   ],
+   "aliases": [],
+   "sprite": {
+    "outline": "#3f2631"
+   }
+  },
+  {
+   "id": "style.pixel.ranger",
+   "kind": "character",
+   "plan": "biped",
+   "source": {
+    "pack": "kenney_tiny_dungeon",
+    "path": "Tiles/tile_0112.png"
+   },
+   "height": 1,
+   "line": "ranger with a headband",
+   "tags": [
+    "ranger",
+    "archer",
+    "hero"
+   ],
+   "aliases": [
+    "style.pixel.rogue"
+   ],
+   "sprite": {
+    "outline": "#3f2631"
+   }
+  },
+  {
+   "id": "style.pixel.slime",
+   "kind": "creature",
+   "plan": "blob",
+   "source": {
+    "pack": "kenney_tiny_dungeon",
+    "path": "Tiles/tile_0108.png"
+   },
+   "height": 1,
+   "line": "green slime",
+   "tags": [
+    "slime",
+    "blob",
+    "goo",
+    "enemy"
+   ],
+   "aliases": [
+    "style.pixel.slime_green"
+   ],
+   "sprite": {
+    "outline": "#3f2631"
+   }
+  },
+  {
+   "id": "style.pixel.cyclops",
+   "kind": "creature",
+   "plan": "biped",
+   "source": {
+    "pack": "kenney_tiny_dungeon",
+    "path": "Tiles/tile_0109.png"
+   },
+   "height": 1,
+   "line": "one-eyed brute",
+   "tags": [
+    "cyclops",
+    "brute",
+    "ogre",
+    "enemy"
+   ],
+   "aliases": [
+    "style.pixel.orc_brute"
+   ],
+   "sprite": {
+    "outline": "#3f2631"
+   }
+  },
+  {
+   "id": "style.pixel.crab",
+   "kind": "creature",
+   "plan": "biped",
+   "source": {
+    "pack": "kenney_tiny_dungeon",
+    "path": "Tiles/tile_0110.png"
+   },
+   "height": 1,
+   "line": "red crab",
+   "tags": [
+    "crab",
+    "enemy"
+   ],
+   "aliases": [
+    "style.pixel.dragon"
+   ],
+   "sprite": {
+    "outline": "#3f2631"
+   }
+  },
+  {
+   "id": "style.pixel.bat",
+   "kind": "creature",
+   "plan": "flyer",
+   "source": {
+    "pack": "kenney_tiny_dungeon",
+    "path": "Tiles/tile_0120.png"
+   },
+   "height": 1,
+   "line": "bat",
+   "tags": [
+    "bat",
+    "flyer",
+    "enemy"
+   ],
+   "aliases": [
+    "style.pixel.bee"
+   ],
+   "sprite": {
+    "outline": "#3f2631"
+   }
+  },
+  {
+   "id": "style.pixel.ghost",
+   "kind": "creature",
+   "plan": "flyer",
+   "source": {
+    "pack": "kenney_tiny_dungeon",
+    "path": "Tiles/tile_0121.png"
+   },
+   "height": 1,
+   "line": "ghost",
+   "tags": [
+    "ghost",
+    "spirit",
+    "enemy"
+   ],
+   "aliases": [],
+   "sprite": {
+    "outline": "#3f2631"
+   }
+  },
+  {
+   "id": "style.pixel.spider",
+   "kind": "creature",
+   "plan": "biped",
+   "source": {
+    "pack": "kenney_tiny_dungeon",
+    "path": "Tiles/tile_0122.png"
+   },
+   "height": 1,
+   "line": "spider",
+   "tags": [
+    "spider",
+    "bug",
+    "enemy"
+   ],
+   "aliases": [
+    "style.pixel.frog"
+   ],
+   "sprite": {
+    "outline": "#3f2631"
+   }
+  },
+  {
+   "id": "style.pixel.chest",
+   "kind": "prop",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_tiny_dungeon",
+    "path": "Tiles/tile_0089.png"
+   },
+   "height": 1,
+   "line": "treasure chest",
+   "tags": [
+    "chest",
+    "treasure",
+    "loot"
+   ],
+   "aliases": [],
+   "sprite": {
+    "outline": "#3f2631"
+   }
+  },
+  {
+   "id": "style.pixel.mimic",
+   "kind": "creature",
+   "plan": "biped",
+   "source": {
+    "pack": "kenney_tiny_dungeon",
+    "path": "Tiles/tile_0092.png"
+   },
+   "height": 1,
+   "line": "chest with teeth",
+   "tags": [
+    "mimic",
+    "chest",
+    "enemy"
+   ],
+   "aliases": [
+    "style.pixel.mushroom_king"
+   ],
+   "sprite": {
+    "outline": "#3f2631"
+   }
+  },
+  {
+   "id": "style.pixel.sword",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_tiny_dungeon",
+    "path": "Tiles/tile_0104.png"
+   },
+   "height": 1,
+   "line": "short sword",
+   "tags": [
+    "sword",
+    "blade",
+    "weapon"
+   ],
+   "aliases": [],
+   "sprite": {
+    "outline": "#3f2631"
+   }
+  },
+  {
+   "id": "style.pixel.flame_sword",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_tiny_dungeon",
+    "path": "Tiles/tile_0107.png"
+   },
+   "height": 1,
+   "line": "fiery sword",
+   "tags": [
+    "sword",
+    "fire",
+    "weapon"
+   ],
+   "aliases": [],
+   "sprite": {
+    "outline": "#3f2631"
+   }
+  },
+  {
+   "id": "style.pixel.hammer",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_tiny_dungeon",
+    "path": "Tiles/tile_0117.png"
+   },
+   "height": 1,
+   "line": "war hammer",
+   "tags": [
+    "hammer",
+    "weapon"
+   ],
+   "aliases": [],
+   "sprite": {
+    "outline": "#3f2631"
+   }
+  },
+  {
+   "id": "style.pixel.axe",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_tiny_dungeon",
+    "path": "Tiles/tile_0118.png"
+   },
+   "height": 1,
+   "line": "double axe",
+   "tags": [
+    "axe",
+    "weapon"
+   ],
+   "aliases": [],
+   "sprite": {
+    "outline": "#3f2631"
+   }
+  },
+  {
+   "id": "style.pixel.spear",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_tiny_dungeon",
+    "path": "Tiles/tile_0131.png"
+   },
+   "height": 1,
+   "line": "spear",
+   "tags": [
+    "spear",
+    "weapon"
+   ],
+   "aliases": [],
+   "sprite": {
+    "outline": "#3f2631"
+   }
+  },
+  {
+   "id": "style.pixel.staff",
+   "kind": "weapon",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_tiny_dungeon",
+    "path": "Tiles/tile_0129.png"
+   },
+   "height": 1,
+   "line": "purple staff",
+   "tags": [
+    "staff",
+    "wand",
+    "weapon",
+    "magic"
+   ],
+   "aliases": [],
+   "sprite": {
+    "outline": "#3f2631"
+   }
+  },
+  {
+   "id": "style.pixel.potion_green",
+   "kind": "pickup",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_tiny_dungeon",
+    "path": "Tiles/tile_0114.png"
+   },
+   "height": 1,
+   "line": "green potion",
+   "tags": [
+    "potion",
+    "pickup",
+    "green"
+   ],
+   "aliases": [
+    "style.pixel.grenade"
+   ],
+   "sprite": {
+    "outline": "#3f2631"
+   }
+  },
+  {
+   "id": "style.pixel.potion_red",
+   "kind": "pickup",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_tiny_dungeon",
+    "path": "Tiles/tile_0115.png"
+   },
+   "height": 1,
+   "line": "red potion",
+   "tags": [
+    "potion",
+    "health",
+    "pickup",
+    "red"
+   ],
+   "aliases": [],
+   "sprite": {
+    "outline": "#3f2631"
+   }
+  },
+  {
+   "id": "style.pixel.potion_blue",
+   "kind": "pickup",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_tiny_dungeon",
+    "path": "Tiles/tile_0116.png"
+   },
+   "height": 1,
+   "line": "blue potion",
+   "tags": [
+    "potion",
+    "mana",
+    "pickup",
+    "blue"
+   ],
+   "aliases": [],
+   "sprite": {
+    "outline": "#3f2631"
+   }
+  },
+  {
+   "id": "style.pixel.shield",
+   "kind": "pickup",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_tiny_dungeon",
+    "path": "Tiles/tile_0102.png"
+   },
+   "height": 1,
+   "line": "round shield",
+   "tags": [
+    "shield",
+    "armor",
+    "pickup"
+   ],
+   "aliases": [],
+   "sprite": {
+    "outline": "#3f2631"
+   }
+  },
+  {
+   "id": "style.pixel.gravestone",
+   "kind": "prop",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_tiny_dungeon",
+    "path": "Tiles/tile_0065.png"
+   },
+   "height": 1,
+   "line": "gravestone",
+   "tags": [
+    "grave",
+    "tombstone",
+    "prop"
+   ],
+   "aliases": [],
+   "sprite": {
+    "outline": "#3f2631"
+   }
+  },
+  {
+   "id": "style.pixel.bookshelf",
+   "kind": "prop",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_tiny_dungeon",
+    "path": "Tiles/tile_0075.png"
+   },
+   "height": 1,
+   "line": "bookshelf",
+   "tags": [
+    "bookshelf",
+    "books",
+    "prop"
+   ],
+   "aliases": [],
+   "sprite": {
+    "outline": "#3f2631"
+   }
+  },
+  {
+   "id": "style.pixel.anvil",
+   "kind": "prop",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_tiny_dungeon",
+    "path": "Tiles/tile_0074.png"
+   },
+   "height": 1,
+   "line": "anvil",
+   "tags": [
+    "anvil",
+    "forge",
+    "prop"
+   ],
+   "aliases": [],
+   "sprite": {
+    "outline": "#3f2631"
+   }
+  },
+  {
+   "id": "style.pixel.astro_green",
+   "kind": "character",
+   "plan": "biped",
+   "source": {
+    "pack": "kenney_pixel_platformer",
+    "path": "Tiles/Characters/tile_0000.png"
+   },
+   "height": 1,
+   "line": "green astronaut",
+   "tags": [
+    "astronaut",
+    "hero",
+    "green"
+   ],
+   "aliases": [],
+   "sprite": {
+    "outline": "#434a5f"
+   }
+  },
+  {
+   "id": "style.pixel.astro_blue",
+   "kind": "character",
+   "plan": "biped",
+   "source": {
+    "pack": "kenney_pixel_platformer",
+    "path": "Tiles/Characters/tile_0002.png"
+   },
+   "height": 1,
+   "line": "blue astronaut",
+   "tags": [
+    "astronaut",
+    "hero",
+    "blue"
+   ],
+   "aliases": [],
+   "sprite": {
+    "outline": "#434a5f"
+   }
+  },
+  {
+   "id": "style.pixel.astro_pink",
+   "kind": "character",
+   "plan": "biped",
+   "source": {
+    "pack": "kenney_pixel_platformer",
+    "path": "Tiles/Characters/tile_0004.png"
+   },
+   "height": 1,
+   "line": "pink one-eyed astronaut",
+   "tags": [
+    "astronaut",
+    "hero",
+    "pink",
+    "cyclops"
+   ],
+   "aliases": [],
+   "sprite": {
+    "outline": "#434a5f"
+   }
+  },
+  {
+   "id": "style.pixel.astro_yellow",
+   "kind": "character",
+   "plan": "biped",
+   "source": {
+    "pack": "kenney_pixel_platformer",
+    "path": "Tiles/Characters/tile_0006.png"
+   },
+   "height": 1,
+   "line": "yellow astronaut",
+   "tags": [
+    "astronaut",
+    "hero",
+    "yellow"
+   ],
+   "aliases": [],
+   "sprite": {
+    "outline": "#434a5f"
+   }
+  },
+  {
+   "id": "style.pixel.spike_ball",
+   "kind": "creature",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_pixel_platformer",
+    "path": "Tiles/Characters/tile_0008.png"
+   },
+   "height": 1,
+   "line": "spiked ball",
+   "tags": [
+    "spike",
+    "mine",
+    "hazard",
+    "enemy"
+   ],
+   "aliases": [
+    "style.pixel.slime_pink"
+   ],
+   "sprite": {
+    "outline": "#434a5f"
+   }
+  },
+  {
+   "id": "style.pixel.angry_block",
+   "kind": "creature",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_pixel_platformer",
+    "path": "Tiles/Characters/tile_0011.png"
+   },
+   "height": 1,
+   "line": "angry block",
+   "tags": [
+    "block",
+    "crusher",
+    "enemy"
+   ],
+   "aliases": [
+    "style.pixel.trex"
+   ],
+   "sprite": {
+    "outline": "#434a5f"
+   }
+  },
+  {
+   "id": "style.pixel.flame_sprite",
+   "kind": "creature",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_pixel_platformer",
+    "path": "Tiles/Characters/tile_0013.png"
+   },
+   "height": 1,
+   "line": "little flame creature",
+   "tags": [
+    "fire",
+    "flame",
+    "sprite",
+    "enemy"
+   ],
+   "aliases": [
+    "style.pixel.campfire"
+   ],
+   "sprite": {
+    "glow": true,
+    "outline": "#434a5f"
+   }
+  },
+  {
+   "id": "style.pixel.drill_bot",
+   "kind": "creature",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_pixel_platformer",
+    "path": "Tiles/Characters/tile_0015.png"
+   },
+   "height": 1,
+   "line": "drill robot",
+   "tags": [
+    "robot",
+    "drill",
+    "enemy"
+   ],
+   "aliases": [],
+   "sprite": {
+    "outline": "#434a5f"
+   }
+  },
+  {
+   "id": "style.pixel.tank_bot",
+   "kind": "creature",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_pixel_platformer",
+    "path": "Tiles/Characters/tile_0021.png"
+   },
+   "height": 1,
+   "line": "blue tank robot",
+   "tags": [
+    "robot",
+    "tank",
+    "enemy",
+    "big"
+   ],
+   "aliases": [
+    "style.pixel.mech"
+   ],
+   "sprite": {
+    "outline": "#434a5f"
+   }
+  },
+  {
+   "id": "style.pixel.bat_bot",
+   "kind": "creature",
+   "plan": "flyer",
+   "source": {
+    "pack": "kenney_pixel_platformer",
+    "path": "Tiles/Characters/tile_0024.png"
+   },
+   "height": 1,
+   "line": "flying robot",
+   "tags": [
+    "robot",
+    "flyer",
+    "bat",
+    "enemy"
+   ],
+   "aliases": [
+    "style.pixel.imp"
+   ],
+   "sprite": {
+    "outline": "#434a5f"
+   }
+  },
+  {
+   "id": "style.pixel.car",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "pack": "kenney_pixel_vehicle_pack",
+    "path": "PNG/Cars/sedan.png"
+   },
+   "height": 1,
+   "line": "car, side view",
+   "tags": [
+    "car",
+    "sedan",
+    "vehicle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.pixel.sports_car",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "pack": "kenney_pixel_vehicle_pack",
+    "path": "PNG/Cars/sports_red.png"
+   },
+   "height": 1,
+   "line": "red sports car, side view",
+   "tags": [
+    "car",
+    "sports car",
+    "vehicle",
+    "fast"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.pixel.taxi",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "pack": "kenney_pixel_vehicle_pack",
+    "path": "PNG/Cars/taxi.png"
+   },
+   "height": 1,
+   "line": "taxi, side view",
+   "tags": [
+    "taxi",
+    "car",
+    "vehicle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.pixel.police_car",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "pack": "kenney_pixel_vehicle_pack",
+    "path": "PNG/Cars/police.png"
+   },
+   "height": 1,
+   "line": "police car, side view",
+   "tags": [
+    "police",
+    "car",
+    "vehicle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.pixel.truck",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "pack": "kenney_pixel_vehicle_pack",
+    "path": "PNG/Cars/truck.png"
+   },
+   "height": 1,
+   "line": "truck, side view",
+   "tags": [
+    "truck",
+    "vehicle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.pixel.firetruck",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "pack": "kenney_pixel_vehicle_pack",
+    "path": "PNG/Cars/firetruck.png"
+   },
+   "height": 1,
+   "line": "fire engine, side view",
+   "tags": [
+    "firetruck",
+    "truck",
+    "vehicle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.pixel.bus",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "pack": "kenney_pixel_vehicle_pack",
+    "path": "PNG/Cars/bus.png"
+   },
+   "height": 1,
+   "line": "bus, side view",
+   "tags": [
+    "bus",
+    "vehicle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.pixel.tractor",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "pack": "kenney_pixel_vehicle_pack",
+    "path": "PNG/Cars/tractor.png"
+   },
+   "height": 1,
+   "line": "tractor, side view",
+   "tags": [
+    "tractor",
+    "farm",
+    "vehicle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.pixel.kart",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "pack": "kenney_pixel_vehicle_pack",
+    "path": "PNG/Cars/kart.png"
+   },
+   "height": 1,
+   "line": "go-kart, side view",
+   "tags": [
+    "kart",
+    "racer",
+    "vehicle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.pixel.buggy",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "pack": "kenney_pixel_vehicle_pack",
+    "path": "PNG/Cars/buggy.png"
+   },
+   "height": 1,
+   "line": "dune buggy, side view",
+   "tags": [
+    "buggy",
+    "monster truck",
+    "vehicle",
+    "off-road"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.pixel.military_suv",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "pack": "kenney_pixel_vehicle_pack",
+    "path": "PNG/Cars/suv_military.png"
+   },
+   "height": 1,
+   "line": "military jeep, side view",
+   "tags": [
+    "jeep",
+    "military",
+    "army",
+    "tank",
+    "vehicle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.pixel.ambulance",
+   "kind": "vehicle",
+   "plan": "wheeled",
+   "source": {
+    "pack": "kenney_pixel_vehicle_pack",
+    "path": "PNG/Cars/ambulance.png"
+   },
+   "height": 1,
+   "line": "ambulance, side view",
+   "tags": [
+    "ambulance",
+    "vehicle"
+   ],
+   "aliases": []
+  },
+  {
+   "id": "style.pixel.rat",
+   "kind": "creature",
+   "plan": "quadruped",
+   "source": {
+    "pack": "kenney_tiny_dungeon",
+    "path": "Tiles/tile_0123.png"
+   },
+   "height": 1,
+   "line": "brown rat",
+   "tags": [
+    "rat",
+    "vermin",
+    "critter"
+   ],
+   "aliases": [
+    "style.pixel.triceratops"
+   ],
+   "sprite": {
+    "outline": "#3f2631"
+   }
+  },
+  {
+   "id": "style.pixel.barrel",
+   "kind": "prop",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_tiny_dungeon",
+    "path": "Tiles/tile_0082.png"
+   },
+   "height": 1,
+   "line": "wooden barrel",
+   "tags": [
+    "barrel",
+    "urn",
+    "container"
+   ],
+   "aliases": [
+    "style.pixel.stump"
+   ],
+   "sprite": {
+    "outline": "#3f2631"
+   }
+  },
+  {
+   "id": "style.pixel.rubble",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_tiny_dungeon",
+    "path": "Tiles/tile_0024.png"
+   },
+   "height": 1,
+   "line": "grey rubble stones",
+   "tags": [
+    "rock",
+    "rubble",
+    "stones"
+   ],
+   "aliases": [
+    "style.pixel.rock_large"
+   ],
+   "sprite": {
+    "key": "#763b36"
+   }
+  },
+  {
+   "id": "style.pixel.pine",
+   "kind": "nature",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_pixel_platformer",
+    "path": "Tiles/tile_0126.png"
+   },
+   "height": 1,
+   "line": "small pine tree",
+   "tags": [
+    "tree",
+    "pine",
+    "forest"
+   ],
+   "aliases": [
+    "style.pixel.tree_dark",
+    "style.pixel.tree_pine",
+    "style.pixel.tree_pine_tall"
+   ],
+   "sprite": {
+    "outline": "#434a5f"
+   }
+  },
+  {
+   "id": "style.pixel.mushroom",
+   "kind": "creature",
+   "plan": "blob",
+   "source": {
+    "pack": "kenney_pixel_platformer",
+    "path": "Tiles/tile_0128.png"
+   },
+   "height": 1,
+   "line": "red-capped mushroom",
+   "tags": [
+    "mushroom",
+    "fungus",
+    "toadstool"
+   ],
+   "aliases": [
+    "style.pixel.mushroom_imp"
+   ],
+   "sprite": {
+    "outline": "#434a5f"
+   }
+  },
+  {
+   "id": "style.pixel.gem",
+   "kind": "pickup",
+   "plan": "static",
+   "source": {
+    "pack": "kenney_pixel_platformer",
+    "path": "Tiles/tile_0067.png"
+   },
+   "height": 1,
+   "line": "blue gem",
+   "tags": [
+    "gem",
+    "diamond",
+    "crystal"
+   ],
+   "aliases": [
+    "style.pixel.crystal"
+   ],
+   "sprite": {
+    "glow": true,
+    "outline": "#434a5f"
+   }
+  }
+ ]
+}

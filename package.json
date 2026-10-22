@@ -1,0 +1,14 @@
+{
+  "name": "net-forge",
+  "private": true,
+  "description": "Net Forge: the open game engine, templates and local play tools behind NetNet games.",
+  "packageManager": "pnpm@10.33.2",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "pnpm --filter @netnetcapital/engine-sim --filter @netnetcapital/engine --filter @netnetcapital/kit-play --filter @netnetcapital/kit run build",
+    "typecheck": "pnpm -r run typecheck",
+    "test": "pnpm -r --workspace-concurrency=1 run test"
+  }
+}

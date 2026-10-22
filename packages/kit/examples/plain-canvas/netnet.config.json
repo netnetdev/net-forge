@@ -1,0 +1,25 @@
+{
+  "$schema": "https://cdn.jsdelivr.net/npm/@netnetcapital/kit@0.1.0/netnet.config.schema.json",
+  "game": "comet-sweep",
+  "name": "Comet Sweep",
+  "store": [
+    {
+      "id": "skin_gold",
+      "label": "Gold ship",
+      "kind": "permanent",
+      "priceUsdg": "1.00"
+    }
+  ],
+  "earn": [
+    {
+      "id": "wave_cleared",
+      "label": "Clear a wave",
+      "description": "Every spark in the wave collected"
+    },
+    {
+      "id": "wave_flawless",
+      "label": "Clear a wave without a crash",
+      "description": "The wave was cleared without spending a revive"
+    }
+  ]
+}

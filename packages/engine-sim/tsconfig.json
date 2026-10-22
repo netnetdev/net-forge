@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    // No "DOM": the sim runs in the browser and on the room server (Node/Bun),
+    // so it must compile with no browser globals in scope.
+    "lib": ["ES2022"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "declaration": true,
+    "outDir": "dist",
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "types": []
+  },
+  // Tests live in test/ and are covered by tsconfig.test.json, the only
+  // config here that sees node globals.
+  "include": ["src"]
+}

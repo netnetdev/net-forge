@@ -1,0 +1,70 @@
+# Publishes the Net Forge packages to npm when a tag named engine-v* is
+# pushed. Needs the NPM_TOKEN repository secret: an npm granular access token
+# with publish rights on the @netnetcapital scope.
+#
+# Refuses to run while any engine package's LICENSE still says LICENSE
+# PENDING (the license is not chosen yet), and refuses to publish the Kit
+# while its address registry holds a PLACEHOLDER. Packages go out in
+# dependency order, so none is ever on npm before what it needs, each with an
+# npm provenance attestation tying it to this repository and commit. A
+# version that is already on npm is skipped, so a failed run can be re-run.
+name: publish
+on:
+  push:
+    tags: ["engine-v*"]
+permissions:
+  contents: read
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      PACKAGES: >-
+        engine-sim engine asset-library asset-library-files tabletop
+        template-arena template-cards template-collector template-dungeon template-idle
+        template-party template-platformer template-racer template-survivor template-tower
+        kit-play kit
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+      - run: npm install -g npm@11
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - run: pnpm typecheck
+      - run: pnpm test
+      # The license gate. The packages' own prepublishOnly hooks do not run on
+      # a tarball publish, so every one is checked here, and this step cannot
+      # be skipped.
+      - name: license gate
+        run: |
+          for p in $PACKAGES; do
+            if [ "$p" = kit ]; then continue; fi
+            (cd "packages/$p" && node ../engine/scripts/license-gate.mjs)
+          done
+          if grep -l "LICENSE PENDING" packages/*/LICENSE; then echo "license still pending"; exit 1; fi
+      - name: kit registry gate
+        run: node packages/kit/scripts/check-registry.mjs
+      - name: pack
+        run: |
+          mkdir -p "$RUNNER_TEMP/packs"
+          for p in $PACKAGES; do
+            (cd "packages/$p" && pnpm pack --pack-destination "$RUNNER_TEMP/packs/$p")
+          done
+      - name: publish
+        run: |
+          for p in $PACKAGES; do
+            name=$(node -p "require('./packages/$p/package.json').name")
+            version=$(node -p "require('./packages/$p/package.json').version")
+            if npm view "$name@$version" version >/dev/null 2>&1; then
+              echo "$name@$version is already on npm"; continue
+            fi
+            npm publish "$RUNNER_TEMP/packs/$p"/*.tgz --provenance --access public
+          done
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
