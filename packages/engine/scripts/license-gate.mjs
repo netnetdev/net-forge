@@ -1,7 +1,7 @@
 // prepublishOnly guard for the Net Forge engine packages: refuses to publish
-// while the package's LICENSE still says the license is pending. The human
-// picks the license (Q155, 2026-10-21) and replaces every LICENSE file and
-// "license" field; until then `npm publish` / `pnpm publish` stop here.
+// while the package's LICENSE still says the license is pending, so a
+// package whose LICENSE file and "license" field have not been set to the
+// chosen license cannot reach npm.
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 

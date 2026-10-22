@@ -1,4 +1,4 @@
-// Server cost at the 2,000-enemy hold (game-runtime.md §0): 4 bots, the
+// Server cost at the 2,000-enemy hold: 4 bots, the
 // game's own director plus a held crowd, several repeats. Prints mean and
 // p99 ms per tick for each repeat.
 //

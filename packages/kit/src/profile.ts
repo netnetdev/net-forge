@@ -1,4 +1,4 @@
-// Universal saves (cabinet-launcher Q146, ruled 2026-10-16): the player's
+// Universal saves: the player's
 // profile is kept by the referee (the rooms server), keyed by the signed-in
 // wallet or by a guest id, never by the browser. Pure helpers shared by the
 // live and mock backends; no I/O here. Profile calls are HTTP to the

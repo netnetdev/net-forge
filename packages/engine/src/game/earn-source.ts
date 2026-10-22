@@ -1,17 +1,17 @@
 /**
  * Earn rules as source text: read and rewrite the `earn.rule(...)` lines of a
- * game's src/game.ts (cabinet-launcher.md §0.2, §8).
+ * game's src/game.ts.
  *
  * game.ts is the single source of truth for what a game pays. The room
  * server's referee pays the compiled module's `pay`, and the launch
  * registers one RewardVault rule per `earn.rule`, in declaration order
- * (vault rule ids 1, 2, 3...; apps/rooms `earnRulesFromManifest`). So the
+ * (vault rule ids 1, 2, 3...). So the
  * Launch panel never keeps its own copy of a payout: an edit there is a
  * rewrite of game.ts, which goes through the same gate and build as any
  * other change, and what launches is what the build declares.
  *
- * Pure, no imports: apps/generator (server), apps/launcher (browser, by
- * relative path) and the tests share it.
+ * Pure, no imports, so the Net Forge server, the Net Forge site and the
+ * tests can all share it.
  */
 
 export type OncePer = "run" | "day" | "lifetime";
@@ -305,7 +305,7 @@ export function sameEarnRules(a: readonly SourceEarnRule[], b: readonly SourceEa
 
 /**
  * The buy-in run, `earn.stake({ min, max, multiple })` (the mandatory sink
- * loop, ruled 2026-10-19), read and rewritten the same way: one top-level
+ * loop), read and rewritten the same way: one top-level
  * line in game.ts, so the Launch panel shows exactly what the build pays.
  */
 export interface SourceEarnStake {
@@ -317,7 +317,7 @@ export interface SourceEarnStake {
   readonly multiple: number;
 }
 
-/** PLACEHOLDER (Q148 a): the engine's cap on the multiple (api/schemas.ts STAKE_MAX_MULTIPLE). */
+/** PLACEHOLDER: the engine's cap on the multiple (api/schemas.ts STAKE_MAX_MULTIPLE). */
 export const MAX_STAKE_MULTIPLE = 2;
 /** The engine's cap on one stake, in coins (api/schemas.ts STAKE_MAX_COINS). */
 export const MAX_STAKE_COINS = 1_000_000;
@@ -425,7 +425,7 @@ export interface SourceEarnPot {
   readonly entry: number;
   /** Share of every pot that stays in the reward pool. */
   readonly recycle: number;
-  /** Pots are off by default until the R-16 legal review: true only when the line says `enabled: true`. */
+  /** Pots are off by default until a legal review: true only when the line says `enabled: true`. */
   readonly enabled?: boolean;
 }
 

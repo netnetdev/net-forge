@@ -17,7 +17,6 @@ client kit is `@netnetcapital/tabletop`.
 | `src/manifest.ts` | Loads it; `collectorAdapter()` for the room server and client. Room template `collector`. |
 | `src/store.ts` | Coin prices the client is wired to, the template's own coin (MOSS). |
 | `client/` | The browser client: the marsh, keepers, companions, the battle panel, the starter pick. |
-| `scripts/measure.ts` | Room server + node clients + headless Chrome: frame, network and server numbers, screenshots per art style. |
 | `test/` | Playtest bots through `engine.test.run`, and the store. |
 | `llms.txt` | How to change the game (for agents). |
 
@@ -37,15 +36,15 @@ client kit is `@netnetcapital/tabletop`.
 
 ## Run it
 
-```sh
-pnpm --filter @netnetcapital/engine-sim build && pnpm --filter @netnetcapital/engine build
-ROOMS_STORE_MODE=mock PORT=2960 pnpm --filter @netnet/rooms start
-pnpm --filter @netnetcapital/template-collector dev        # http://localhost:6060/?server=http://localhost:2960
-```
-
-## Measure
+This template runs on your own computer with play money through
+`kit play` (`@netnetcapital/kit-play`). From the repository root:
 
 ```sh
-pnpm --filter @netnetcapital/template-collector build
-CHROME_BIN=/path/to/chrome pnpm --filter @netnetcapital/template-collector measure -- --seconds 40 --humans 4 --styles lowpoly,toon,ps1,pixel,voxel,handdrawn
+pnpm install --frozen-lockfile && pnpm build
+mkdir -p play-collector/src && cp packages/template-collector/src/game.ts play-collector/src/
+echo '{"template":"collector"}' > play-collector/netnet.json
+node packages/kit-play/dist/cli.js play-collector       # opens http://127.0.0.1:4663
 ```
+
+Edit `play-collector/src/game.ts` and run it again to try a change. Real-token
+earning, stakes and claims run only on the hosted Net Forge server.

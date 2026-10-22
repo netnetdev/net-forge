@@ -1,5 +1,5 @@
 /**
- * Headless test harness (game-runtime.md §12): run a game on the server sim
+ * Headless test harness: run a game on the server sim
  * with bot players and report what happened.
  *
  * When a game module has been declared (game(), prefabs, weapons, systems,

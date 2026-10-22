@@ -2,7 +2,7 @@
   "name": "@netnetcapital/template-platformer",
   "version": "0.1.0",
   "description": "SKYLEDGE: a platformer template of the NetNet game runtime, a race to the flag over cliffside courses with coyote time, jump buffering, variable jumps, dashes, springs and moving platforms. The game module, its browser client and its playtest bots.",
-  "license": "SEE LICENSE IN LICENSE",
+  "license": "MIT",
   "type": "module",
   "exports": {
     ".": "./src/manifest.ts",

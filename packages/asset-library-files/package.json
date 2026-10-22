@@ -2,7 +2,7 @@
   "name": "@netnetcapital/asset-library-files",
   "version": "0.1.0",
   "description": "The built NetNet game asset library (optimized models, sprites, textures and sounds, all third-party CC0 art) that kit play serves to a game running on your own computer.",
-  "license": "SEE LICENSE IN LICENSE",
+  "license": "MIT",
   "type": "module",
   "exports": {
     "./package.json": "./package.json"

@@ -131,7 +131,7 @@ async function main(): Promise<void> {
   const friendRoomId = params.get("room") ?? undefined;
   const place = params.get("place") ?? PLACE;
   const joinStart = performance.now();
-  // Saves (owned finishes, settings) live on the room server under the signed-in wallet or this browser's guest id (Q146).
+  // Saves (owned finishes, settings) live on the room server under the signed-in wallet or this browser's guest id.
   const session = savedSession(endpoint);
   const conn: RoomConnection<EngineRoomWorld, InputCommand> = await joinRoom(adapter, {
     endpoint,

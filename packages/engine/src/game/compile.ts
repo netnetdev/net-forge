@@ -2,7 +2,7 @@
  * Compile a game manifest (what the model declared through the API) into
  * engine-sim content: enemy types, weapons, passives and progression. This
  * is how prefabs and weapons stop being validated-only and start running in
- * the sim (game-runtime.md §12).
+ * the sim.
  */
 import type { ContentConfig, EnemyAi, EnemyTypeDef, SimConfig, StatDef, WeaponDef as SimWeaponDef, WeaponLevelStats } from "@netnetcapital/engine-sim";
 import type { GameManifest } from "../api/registry.js";

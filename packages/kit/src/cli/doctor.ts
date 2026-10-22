@@ -2,7 +2,7 @@
 //
 // Errors (exit 1):
 //   CONFIG_MISSING / CONFIG_INVALID   netnet.config.json absent or malformed
-//   EARN_RULE_MISSING                 no earn rule: mandatory (cabinet-launcher.md §0.2)
+//   EARN_RULE_MISSING                 no earn rule: mandatory
 //   EARN_NOT_WIRED                    no game code reports an earn event
 //   EARN_EVENT_UNKNOWN                game code reports an event the config lacks
 //   KIT_NOT_INSTALLED / KIT_NOT_LOADED the package or the bootstrap script is missing

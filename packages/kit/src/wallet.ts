@@ -1,4 +1,4 @@
-// Wallet seam, the same approach as the NetNet apps (packages/sdk/src/wallet.ts):
+// Wallet seam, the same approach as the NetNet apps:
 // EIP-6963 discovery so the player picks among installed wallets, a legacy
 // `window.ethereum` door only when nothing announces, and any EIP-1193
 // provider accepted directly (Privy's embedded wallet, WalletConnect).

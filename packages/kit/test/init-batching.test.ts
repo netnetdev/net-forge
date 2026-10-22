@@ -289,7 +289,8 @@ describe("earn: the room server's attestations", () => {
 
   it("accepts attestations from the room socket and claims them with RewardVault.claim(Reward, sig)", async () => {
     const { kit, chain } = await opened();
-    expect(kit.earn.accept([att(chain), { junk: true }])).toBe(1);
+    const sent = att(chain); // one expiry, so a second boundary mid-test cannot change it
+    expect(kit.earn.accept([sent, { junk: true }])).toBe(1);
     expect(kit.earn.accept([att(chain)])).toBe(0); // same nonce
     chain.reset();
     expect(await kit.earn.claim()).toBe(3);
@@ -297,7 +298,7 @@ describe("earn: the room server's attestations", () => {
     expect(tx.to.toLowerCase()).toBe(chain.game.rewardVault.toLowerCase());
     const d = decodeFunctionData({ abi: rewardVaultAbi, data: tx.data });
     expect(d.functionName).toBe("claim");
-    expect(d.args?.[0]).toEqual({ player: getAddress(A.player), ruleId: 7, amount: 3n * E18, nonce: `0x${"01".repeat(32)}`, paidEntry: false, expiry: BigInt(att(chain).expiry), verified: true });
+    expect(d.args?.[0]).toEqual({ player: getAddress(A.player), ruleId: 7, amount: 3n * E18, nonce: `0x${"01".repeat(32)}`, paidEntry: false, expiry: BigInt(sent.expiry), verified: true });
     expect(kit.earn.pending()).toHaveLength(0);
   });
 

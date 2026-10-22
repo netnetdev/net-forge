@@ -1,5 +1,5 @@
 // Shape check for attestations from the referee: untrusted JSON, matched
-// to apps/rooms/src/referee/referee.ts attestationToJson.
+// to the JSON the Net Forge room server's referee sends.
 
 import type { Address, KitAttestation } from "./types.js";
 

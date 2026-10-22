@@ -1,5 +1,5 @@
 // Public types. Every amount a game sees is in the game's token or in
-// dollars (USDG). The pair asset never appears here (cabinet-launcher.md §6.2).
+// dollars (USDG). The pair asset never appears here.
 
 import type { KitError } from "./errors.js";
 import type { Amount } from "./units.js";
@@ -91,8 +91,7 @@ export interface KitTokenState {
   curve: KitCurveState | null;
 }
 
-/** The bonding curve as players see it, in dollars (cabinet-launcher.md,
- *  launch model revised 2026-10-15). The pair asset never appears. */
+/** The bonding curve as players see it, in dollars. The pair asset never appears. */
 export interface KitCurveState {
   /** 0..1: how far the raise is to graduation. */
   progress: number;
@@ -118,7 +117,7 @@ export interface KitPendingReward {
 }
 
 /** A signed RewardVault.Reward exactly as the room server's referee sends
- *  it (apps/rooms/src/referee/referee.ts attestationToJson): over the room
+ *  it: over the room
  *  socket as "attest", or from GET /referee/claims/:wallet. */
 export interface KitAttestation {
   vault: Address;
@@ -204,7 +203,7 @@ export interface KitProfileStoreItem {
 
 /**
  * The player's saved progress in this game, kept by the referee (rooms
- * server), the same on every device the player signs in on (Q146).
+ * server), the same on every device the player signs in on.
  * Achievements, goals and titles are granted by the server from the
  * authoritative sim, never by the browser.
  */

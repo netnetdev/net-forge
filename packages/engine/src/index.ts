@@ -1,6 +1,5 @@
 /**
- * @netnetcapital/engine: the API a game is written against
- * (specs/game-runtime.md §12).
+ * @netnetcapital/engine: the API a game is written against.
  *
  * This entry point is all a generated game may import. It is declarative
  * and typed (Zod-validated): game, prefab, system, earn, store, and the
@@ -89,7 +88,7 @@ export type { MarshDef, MarshInput, CreatureDef, CreatureInput, MoveDef, MoveInp
 export type { TowerBoardDef, TowerBoardInput, TowerDef, TowerInput, WavesDef, WavesInput } from "./api/tower.js";
 export { card, cardTable, CARD_STATS, EFFECT_KINDS, EFFECT_TARGETS } from "./api/cards.js";
 export type { CardDef, CardInput, CardTableDef, CardTableInput } from "./api/cards.js";
-// Asset library: model appearances (game-runtime.md §10).
+// Asset library: model appearances.
 export { APPEARANCE_PARTS, appearanceSchema } from "./api/appearance.js";
 export type { AppearanceDef, AppearanceInput, AppearancePart } from "./api/appearance.js";
 export type { FunMetrics, HarnessAssertion, HarnessOptions, HarnessReport } from "./api/harness.js";

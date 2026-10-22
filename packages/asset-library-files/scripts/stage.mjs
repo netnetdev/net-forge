@@ -1,5 +1,5 @@
 // Copies the built asset library (packages/asset-library/.library, made by
-// `pnpm --filter @netnet/assets library`) into ./library before packing.
+// the Net Forge asset pipeline) into ./library before packing.
 // Only the files index.json lists are copied, plus index.json: never
 // published.json or anything else the build left next to them.
 //
@@ -47,7 +47,7 @@ if (!existsSync(index)) {
     console.log(`kept the staged library: ${n} files match index.json`);
     process.exit(0);
   }
-  console.error(`No built asset library at ${src}. Build it first: pnpm --filter @netnet/assets library`);
+  console.error(`No built asset library at ${src}. Build it first with the Net Forge asset pipeline, or set ASSET_LIBRARY_DIR.`);
   process.exit(1);
 }
 rmSync(out, { recursive: true, force: true });

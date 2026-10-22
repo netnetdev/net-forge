@@ -12,7 +12,7 @@ import "./game.js";
 /** Content version: bump with any change to game.ts (hot swap compares it). */
 export const GAME_VERSION = "inkwrit-0.1.0";
 export const GAME_NAME = "inkwrit";
-/** Room template (apps/rooms world/templates.ts) and place used by the client and the bots. */
+/** Room template (as the Net Forge room server names it) and place used by the client and the bots. */
 export const TEMPLATE = "cards";
 export const PLACE = "study";
 

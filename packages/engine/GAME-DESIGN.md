@@ -146,7 +146,7 @@ opening wall.
 Every game has coins (1 coin = 1 of the game's own token). How they are
 spent decides whether the game stays fair to the player who never pays, and
 whether a token holder can buy a win. The engine ships one recommended
-model (ruled 2026-10-16) and makes the alternatives declarations, so a
+model and makes the alternatives declarations, so a
 change request is a one-line change, never new code.
 
 **The default (no declaration; every template uses it).** Coins buy:

@@ -2,7 +2,7 @@
   "name": "@netnetcapital/tabletop",
   "version": "0.1.0",
   "description": "The client kit the board-style templates share (tower defense, idle, card battler, monster collector): the room connection and input clock for rules genres, the styled 3D stage, the Kit store, stake and gear wiring, and the HUD shell.",
-  "license": "SEE LICENSE IN LICENSE",
+  "license": "MIT",
   "type": "module",
   "exports": {
     ".": "./src/index.ts"

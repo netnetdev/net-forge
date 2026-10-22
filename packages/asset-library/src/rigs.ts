@@ -1,5 +1,5 @@
 /**
- * Shared rigs and the common clip set (game-runtime.md §10: "all humanoids
+ * Shared rigs and the common clip set ("all humanoids
  * in a style use one skeleton, so any animation plays on any character").
  *
  * Every animated asset names a rig. A rig maps the runtime's canonical

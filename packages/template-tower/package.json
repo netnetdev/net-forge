@@ -2,7 +2,7 @@
   "name": "@netnetcapital/template-tower",
   "version": "0.1.0",
   "description": "COGSPIRE: the tower defense template of the NetNet game runtime, a co-op board for up to four with waves, build and upgrade, shared lives. The game module, its browser client and its playtest bots.",
-  "license": "SEE LICENSE IN LICENSE",
+  "license": "MIT",
   "type": "module",
   "exports": {
     ".": "./src/manifest.ts",

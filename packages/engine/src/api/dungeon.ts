@@ -1,6 +1,6 @@
 /**
- * dungeon(...): a procedural dungeon floor from a seed (game-runtime.md §8,
- * "dungeon layouts can be generated from a seed on both sides").
+ * dungeon(...): a procedural dungeon floor from a seed
+ * ("dungeon layouts can be generated from a seed on both sides").
  *
  * Rooms sit on a grid of cells, grown from the start room as a random
  * tree, with a few extra doors that make loops. Neighbouring rooms are

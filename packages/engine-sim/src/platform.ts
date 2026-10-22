@@ -13,7 +13,7 @@
  * state depends only on their own inputs, the static level and the tick:
  * client prediction replays exactly.
  *
- * Jump feel (game-runtime.md §13): coyote time, a jump buffer, variable jump
+ * Jump feel: coyote time, a jump buffer, variable jump
  * height (releasing Jump while rising cuts the rise), a lighter apex while
  * Jump is held, a heavier fall, a terminal velocity, ground and air
  * acceleration, ceiling corner nudges, one-way ledges you can drop through,

@@ -43,7 +43,7 @@ export interface Backend {
   /** RewardVault.claim for one, claimBatch for several: one transaction. */
   claim(account: Address, rewards: KitPendingReward[]): Promise<Hex[]>;
 
-  // ---- Coins: the referee's off-chain ledger (apps/rooms referee/coins.ts). No chain calls. ----
+  // ---- Coins: the referee's off-chain ledger on the Net Forge room server. No chain calls. ----
 
   /** True when a referee is configured (live) or always (mock). */
   readonly hasReferee: boolean;
@@ -59,7 +59,7 @@ export interface Backend {
   returnClaims(account: Address, game: string, nonces: Hex[]): Promise<void>;
   /** The coin's logo (and name) from the token's contractURI JSON. One fetch, cached by hash. */
   coinMetadata(meta: KitGameMeta): Promise<{ name: string | null; logo: string | null }>;
-  // ---- Profiles: the referee's saves (apps/rooms profile/service.ts). HTTP, no chain calls. ----
+  // ---- Profiles: the referee's saves on the Net Forge room server. HTTP, no chain calls. ----
 
   /** GET /profile/game/:game as the signed-in wallet (when a session exists) or the guest. */
   profile(game: string, guest: string): Promise<KitProfile>;

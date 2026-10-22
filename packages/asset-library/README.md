@@ -1,17 +1,21 @@
 # @netnetcapital/asset-library
 
-The per-style asset library of the game runtime (`specs/game-runtime.md` §10):
-real CC0 characters, creatures, vehicles, weapons, props and sprites,
-addressed by library id (`style.lowpoly.truck`), never by URL.
+The per-style asset library of the Net Forge game engine: real CC0
+characters, creatures, vehicles, weapons, props and sprites, addressed by
+library id (`style.lowpoly.truck`), never by URL.
 
 ```sh
-pnpm --filter @netnet/assets library              # fetch once, then optimize into packages/asset-library/.library
-pnpm --filter @netnet/assets library -- --offline  # rebuild from the cache, no network
-pnpm --filter @netnet/assets library -- --publish  # pin and mirror to the hosted CDN; prints VITE_LIBRARY_URL
+pnpm --filter @netnetcapital/asset-library fetch-packs   # download every pack from its official source into .cache
 pnpm --filter @netnetcapital/asset-library test
 pnpm --filter @netnetcapital/asset-library viewer  # contact sheets at http://localhost:5480/?style=lowpoly
 CHROME_BIN=... pnpm --filter @netnetcapital/asset-library shoot -- thumbs   # gallery thumbnails
 ```
+
+The optimized library (`.glb`/`.png` files, thumbnails and `index.json`) is
+built by the Net Forge asset pipeline, which is not part of this package.
+The built files ship as `@netnetcapital/asset-library-files`; copy its
+`library/` folder to `packages/asset-library/.library` to use the viewer and
+`shoot` here, or pass that folder as `dir` to the Vite plugin.
 
 ## What is in git, and what is not
 
@@ -20,7 +24,7 @@ CHROME_BIN=... pnpm --filter @netnetcapital/asset-library shoot -- thumbs   # ga
   three-file fixture subset in `fixtures/`.
 - Not in git: `.cache/` (pack archives and source files) and `.library/`
   (optimized `.glb`/`.png`, thumbnails, `index.json`). Both are gitignored.
-  After one fetch everything builds and runs offline.
+  After one fetch the asset pipeline rebuilds the library with no network.
 
 ## Stock today
 
@@ -68,33 +72,3 @@ entry's `gain` is its default mix level.
   clips into VAT crowds (`bakeVertexAnimation`) is the next step.
 - **Build plugin** (`src/vite.ts`): serves `.library` at `./library` in dev
   and copies only the models a game uses into its build.
-
-## Brand: token logos and covers (`./brand`)
-
-Every game gets a coin logo and a 3:4 cover drawn from its own library art, with no image vendor. `src/brand/` plans them (pure JSON, deterministic per seed), the page in `brand/` draws them in headless Chrome, and `./brand/node` drives that page over a DevTools pipe (no port, a throwaway profile, every request answered from memory).
-
-```ts
-import { brandInputFromGame, checkUpload, shownBrand, withGenerated, withUpload } from "@netnetcapital/asset-library/brand";
-import { BrandRenderer, generateGameBrand, regenerateBrand } from "@netnetcapital/asset-library/brand/node";
-
-const input = brandInputFromGame(gameTs, { title, ticker, prompt, names });
-const r = await BrandRenderer.open({ chromeBin: process.env.CHROME_BIN! });
-const { logo, cover } = await generateGameBrand(r, input);          // the defaults (seed 0)
-const next = await regenerateBrand(r, input, "logo", logo.choice);  // the next option; pinned template or subject kept
-await r.close();
-```
-
-Net Forge stores the files, keeps a `GameBrandState` per game and shows `shownBrand(state, kind)`: an upload (checked with `checkUpload`) always wins over the generated asset until the creator removes it. `brandOptions(input)` lists the templates and subjects for a regenerate menu. Each art style plugs in through one row of `STYLE_BRAND` in `src/brand/styles.ts`; a style without stock falls back to lowpoly models under its own treatment.
-
-Proof sheet: `CHROME_BIN=... pnpm --filter @netnetcapital/asset-library brand -- --out <dir>` writes every logo size, every cover and `contact-sheet.png`.
-
-### Key art (`planKeyArt`, `src/brand/draw/keyart.ts`)
-
-Covers, hero banners and the art-style cards are key art, not gameplay frames: a staged scene planned from the game's own game.ts (the playable hero up front in an action pose, the signature foe beside them, the crowd charging out of the fog, the boss or the place's landmarks behind, its scenery and lights around them), rendered through the engine's own render stack in the plan's art style (that style's lighting, fog, grade, bloom and post, exactly as its games draw), then finished in 2D with atmosphere and the title lockup. Deterministic per seed; `planKeyArt(input, { style })` re-renders the same scene in another style.
-
-```sh
-CHROME_BIN=... pnpm --filter @netnetcapital/asset-library keyart -- --out <dir> --gpu          # proof set: hero, cover and card per game
-CHROME_BIN=... pnpm --filter @netnetcapital/asset-library keyart -- --launcher --gpu --ss 2    # the Launcher's featured art and style cards, in place
-```
-
-`drawBrand(r, input, "cover" | "hero", choice)` draws a draft's key art (900x1200 and 1920x1080) for the generator.

@@ -1,6 +1,6 @@
 # @netnetcapital/engine
 
-The client side of the NetNet game runtime (`specs/game-runtime.md`).
+The client side of the Net Forge game engine.
 
 Two entry points, on purpose:
 
@@ -9,7 +9,7 @@ Two entry points, on purpose:
 | `@netnetcapital/engine` | generated game code (the model) | `game`, `prefab`, `system`, `earn`, `store`, `engine.test.run`: declarative, Zod-validated, no DOM, no renderer, no netcode |
 | `@netnetcapital/engine/runtime` | templates, the Net Forge shell, the demo | three.js renderer (WebGPU, WebGL2 fallback), `InstancedCrowd`, `CameraRig`, `InputController` (keyboard/mouse, nipplejs touch), `AssetLoader` (glTF + meshopt + KTX2), `ArenaClient`, `SystemScheduler`, `collectManifest` |
 
-A game module never reaches the renderer, netcode or physics (spec §12).
+A game module never reaches the renderer, netcode or physics.
 Bad declarations throw `GameDefinitionError` with one actionable line per
 issue, e.g. `model: reference assets by library id (e.g. "style.lowpoly.bat"), never by URL or path`.
 
@@ -24,8 +24,8 @@ issue, e.g. `model: reference assets by library id (e.g. "style.lowpoly.bat"), n
   `SimAdapter` (`engineSimAdapter`, wire schema `engineSchema`) and a
   playtest bot. `engine.test.run` plays the declared game when there is one
   (kills, waves, levels, earn by rule, softlock, ms/tick).
-- `@netnetcapital/engine/net` is the client half of the netcode, moved here
-  from apps/rooms: prediction and reconciliation, interpolation, delta
+- `@netnetcapital/engine/net` is the client half of the netcode (the server
+  half runs in the hosted Net Forge room server): prediction and reconciliation, interpolation, delta
   snapshots with per-kind fields, input packets, client clock adjustment
   for one-input-per-tick sims, the wire protocol and the Colyseus room client.
 - `AssetLoader` is built but no template uses it yet (Template 1 art is
@@ -69,7 +69,7 @@ the stake and losable gear are the ones every template uses.
   (what that player may see: hidden hands stay hidden), `entities` (moving
   things, interpolated on the client) and the genre's own bot.
 - `rulesAdapter(genre, manifest)`: earn rules per player per run
-  (`EarnTracker`), seat bots that never earn, unpaid events, the S-2 rule
+  (`EarnTracker`), seat bots that never earn, unpaid events, the late-start rule
   (world progress never pays a run that started after the world began),
   store upgrades and gear as recorded room commands capped at maxLevel,
   cosmetics, the end screen and `run.reset`. Each player's avatar (a cursor,
@@ -82,7 +82,7 @@ the stake and losable gear are the ones every template uses.
   board genre through `playRules` and reports its own checks under
   `rules.checks`.
 
-## Game feel kit (`runtime/feel`, spec §13)
+## Game feel kit (`runtime/feel`)
 
 One-line components every template uses. `FeelKit` wraps them:
 `hit`, `kill`, `hurt`, `levelUp`, `land`, `dash` and `footstep`, with the
@@ -101,7 +101,7 @@ presets `subtle`, `default` and `heavy`. The parts work alone too:
 clamped lead and a dead zone. Its old `shake(amplitude, seconds)` still
 works.
 
-## Render pipeline (`runtime/render`, spec §5)
+## Render pipeline (`runtime/render`)
 
 `createRenderStack(handle, scene, camera, { preset, quality, bloom, outline })`
 returns the whole pipeline. Call `stack.frame(dt, focus)` in place of

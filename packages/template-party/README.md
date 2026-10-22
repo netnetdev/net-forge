@@ -5,8 +5,7 @@ round is a minigame with one goal for the whole team: pop the party
 poppers before the timer, crash every gift box, catch the runaway pup, hold
 the floor against a tide, and as the finale burst the Big Balloon. Win
 three and the show is a hit. Weapons fire by themselves, so every round is
-about where you stand and who you help up. cabinet-launcher.md §2 ("party
-co-op").
+about where you stand and who you help up.
 
 | Path | What |
 |---|---|
@@ -14,7 +13,6 @@ co-op").
 | `src/manifest.ts` | Loads and compiles it; `partyAdapter()` for the room server and client. Room template `party`. |
 | `src/store.ts` | Store hooks on the Kit's API names (`kit.coins.*`, `kit.store.*`): a revive (50 coins), a cosmetic (300 coins) and the lucky charm (losable gear, 150 coins), shown under the token's own symbol and logo; mock until the token is live. |
 | `client/` | The browser client: three.js scene, the playroom (`client/stage.ts`: a checkered dance floor, candy-striped walls, a ring of party lights, an x-ray cut so a wall never hides you), HUD (ROUND n and the round's clock), input (keys, gamepad, touch), game feel. |
-| `scripts/measure.ts` | Room server + node bots + headless Chrome; frame, network and server numbers, screenshots. |
 | `test/` | Playtest bots through `engine.test.run`, and the store. |
 | `llms.txt` | How to change the game (for agents). |
 
@@ -35,11 +33,18 @@ co-op").
 
 ## Run it
 
+This template runs on your own computer with play money through
+`kit play` (`@netnetcapital/kit-play`). From the repository root:
+
 ```sh
-pnpm --filter @netnetcapital/engine-sim build && pnpm --filter @netnetcapital/engine build
-ROOMS_STORE_MODE=mock pnpm --filter @netnet/rooms start            # room server on :2567
-pnpm --filter @netnetcapital/template-party dev                      # http://localhost:5350
+pnpm install --frozen-lockfile && pnpm build
+mkdir -p play-party/src && cp packages/template-party/src/game.ts play-party/src/
+echo '{"template":"party"}' > play-party/netnet.json
+node packages/kit-play/dist/cli.js play-party       # opens http://127.0.0.1:4663
 ```
+
+Edit `play-party/src/game.ts` and run it again to try a change. Real-token
+earning, stakes and claims run only on the hosted Net Forge server.
 
 Open the Invite link in another tab or on a phone on the same network to
 play together (`?room=<id>`). Keys: WASD or arrows, Space dash, 1 2 3 pick.

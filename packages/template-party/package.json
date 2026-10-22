@@ -2,7 +2,7 @@
   "name": "@netnetcapital/template-party",
   "version": "0.1.0",
   "description": "ROMPHOUSE: a party co-op template on the NetNet game runtime: 2 to 8 friends in one playroom, five quick minigame rounds a show. The game module, its browser client and its playtest bots.",
-  "license": "SEE LICENSE IN LICENSE",
+  "license": "MIT",
   "type": "module",
   "exports": {
     ".": "./src/manifest.ts",

@@ -1,5 +1,5 @@
 // Standard external interfaces the Kit reads (not NetNet game contracts, so
-// not generated from contracts/abi/games): the Uniswap v2 pair and Multicall3.
+// not generated from the NetNet contracts' ABIs): the Uniswap v2 pair and Multicall3.
 
 export const uniswapV2PairAbi = [
   {

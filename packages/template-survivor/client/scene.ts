@@ -1,6 +1,5 @@
 /**
- * The EMBERWATCH scene, on the engine's render stack and feel kit
- * (game-runtime.md §5, §13):
+ * The EMBERWATCH scene, on the engine's render stack and feel kit:
  *  - lighting with a following sun shadow, sky, fog, bloom, colour grade
  *    and tone mapping from `createRenderStack` (the game's `look`);
  *  - one animated instanced draw per enemy type (bob, waddle, lean, hit

@@ -2,7 +2,7 @@
   "name": "@netnetcapital/kit-play",
   "version": "0.1.0",
   "description": "kit play: run a game downloaded from Net Forge on your own computer with play money. Builds the template client with your game module and runs a local room host from the engine's open simulation. No wallet, no chain, no Net Forge servers.",
-  "license": "SEE LICENSE IN LICENSE",
+  "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

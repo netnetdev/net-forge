@@ -2,7 +2,7 @@
  * The TORQUEBAY scene: a chase camera over a harbour circuit in three.js
  * (WebGPU with WebGL2 fallback, the engine render stack in every art style).
  *
- * The track streams (game-runtime.md §8): it is cut into chunks of about
+ * The track streams: it is cut into chunks of about
  * 40 m of road, and only the chunks near the camera are built (road ribbon,
  * grass verges, kerbs, barriers and the scenery past them); chunks behind
  * the camera are dropped. At most two chunks build a frame, nearest first,

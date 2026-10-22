@@ -1,5 +1,5 @@
 /**
- * 2D sprites in the 3D scene (the pixel art style, game-runtime.md §10).
+ * 2D sprites in the 3D scene (the pixel art style).
  * A sprite is an upright plane with its feet at y = 0, built in metres at
  * SPRITE_TEXEL metres per source pixel. Drawn as a billboard it always
  * faces the camera, mirrors to face where it walks, and is resized by

@@ -1,6 +1,6 @@
 # @netnetcapital/engine-sim
 
-The shared simulation of the NetNet game runtime (`specs/game-runtime.md` §4).
+The shared simulation of the Net Forge game engine.
 One TypeScript module that runs the same way in the browser (client
 prediction) and on the room server (authority): a bitECS world, Rapier
 physics (the deterministic WebAssembly build), a fixed tick, a kinematic
@@ -34,7 +34,7 @@ const { tick, events } = step(world, new Map([[1, { seq: 1, tick: 0, moveX: 0, m
 ### Ticks
 
 - `step(world, inputs)` advances exactly one fixed tick of `1 / tickRate`
-  seconds. It never reads a clock. Systems run in the spec's order: input,
+  seconds. It never reads a clock. Systems run in a fixed order: input,
   AI, physics, combat, pickups, spawners, game rules, lifetime.
 - `FixedStepper` turns wall-clock deltas into a tick count plus a render
   `alpha`. It is clock-free too, so the client drives it from
@@ -77,7 +77,7 @@ renderer interpolates with the stepper's `alpha` without touching the ECS.
 
 ## Determinism
 
-Practical, as the spec asks (§4): the same module and the same Rapier
+Practical: the same module and the same Rapier
 build (`@dimforge/rapier3d-deterministic-compat`, cross-platform
 determinism enabled) on both sides, entity iteration in `netId` order, a
 seeded PRNG in the state, and state quantized every tick. On one engine

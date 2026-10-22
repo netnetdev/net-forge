@@ -2,7 +2,7 @@
  * The VOLTYARD scene: three.js (WebGPU with WebGL2 fallback, via the engine
  * runtime). The yard is one floor, one fence and three merged draws for all
  * the transformers; projectiles, heal cells and sparks are instanced; each
- * wirejack is a few meshes. Game feel (game-runtime.md §13) that lives in
+ * wirejack is a few meshes. Game feel that lives in
  * the world: muzzle flashes, beams, hit flashes, death bursts, spawn
  * shields, camera lead toward the aim and shake.
  */

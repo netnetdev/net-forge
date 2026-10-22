@@ -8,7 +8,7 @@
  *
  *   pnpm --filter @netnetcapital/asset-library exec tsx scripts/voxel-manifest.ts
  *
- * Then rebuild the library: pnpm --filter @netnet/assets library -- --style voxel
+ * Then rebuild the voxel style with the Net Forge asset pipeline.
  */
 import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";

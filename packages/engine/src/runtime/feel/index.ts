@@ -1,5 +1,5 @@
 /**
- * The game-feel kit (game-runtime.md §13): one-line components every
+ * The game-feel kit: one-line components every
  * template uses. See kit.ts for the FeelKit facade.
  */
 export { FeelKit, FEEL_PRESETS } from "./kit.js";

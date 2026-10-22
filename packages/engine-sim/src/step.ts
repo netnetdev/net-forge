@@ -29,7 +29,7 @@ const NEUTRAL: InputCommand = { seq: 0, tick: 0, moveX: 0, moveZ: 0, yaw: 0, but
 /**
  * THE API: advance the world exactly one fixed tick.
  *
- * Systems run in the spec's fixed order (game-runtime.md §4): input, AI,
+ * Systems run in a fixed order: input, AI,
  * physics, combat, pickups, spawners, game rules, lifetime. Every loop that
  * touches floats walks entities in netId order, so a world restored from a
  * snapshot steps exactly like the one it was captured from.

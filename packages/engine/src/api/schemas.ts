@@ -3,7 +3,7 @@ import { z } from "zod";
 import { appearanceSchema } from "./appearance.js";
 
 /**
- * Zod schemas for everything a game declares (game-runtime.md §12: "Everything
+ * Zod schemas for everything a game declares ("Everything
  * is typed with Zod schemas, so a bad prefab fails at build with a message
  * the agent can act on"). Messages are written for the agent that reads them.
  */
@@ -45,7 +45,7 @@ export const DECAL_PRESETS = ["none", "scorch", "splat", "ring"] as const;
 export const SOUND_CUES = ["none", "hit", "crunch", "boom", "zap", "chime", "thud"] as const;
 
 /**
- * How the game looks (the engine's render stack, game-runtime.md §5):
+ * How the game looks (the engine's render stack):
  * one preset sets lighting, shadows, sky, fog and colour grading; the
  * other fields fine-tune it. Quality tiers still scale everything down on
  * slow devices, so turning things on here never breaks the frame-rate bar.
@@ -74,7 +74,7 @@ export const lookSchema = z
   .strict();
 
 /**
- * Game feel (game-runtime.md §13) for a prefab or a weapon. On a prefab it
+ * Game feel for a prefab or a weapon. On a prefab it
  * is what its death and its hits look and sound like; on a weapon, its
  * impacts. Everything is client-side presentation: it never changes the
  * simulation, so it is safe to tune freely.
@@ -669,8 +669,8 @@ export const earnRuleSchema = z
   .strict();
 
 /**
- * Buy-in runs, the mandatory sink loop (cabinet-launcher.md, ruled
- * 2026-10-19: "the sink loop is a stake"). Earning above free play needs a
+ * Buy-in runs, the mandatory sink loop (the sink loop is a
+ * stake). Earning above free play needs a
  * stake of the game's coins at run start. The referee fixes the stake when
  * the run starts (server state, never the client). A staked run pays its
  * free earn as usual plus a share of `stake x multiple`: the share is the
@@ -679,7 +679,7 @@ export const earnRuleSchema = z
  * players. Every game declares one, on one line in game.ts:
  * `earn.stake({ min: 20, max: 200, multiple: 2 });`
  */
-/** PLACEHOLDER (Q148 a): the most a stake's payout ceiling may be, as a multiple of the stake. */
+/** PLACEHOLDER: the most a stake's payout ceiling may be, as a multiple of the stake. */
 export const STAKE_MAX_MULTIPLE = 2;
 /** Highest stake one run may take, in coins (the source reader's bound too). */
 export const STAKE_MAX_COINS = 1_000_000;
@@ -699,7 +699,7 @@ export const earnStakeSchema = z
   .refine((s) => Math.round(s.multiple * 100) / 100 === s.multiple, "multiple has up to 2 decimals");
 
 /**
- * PvP pots (the sink loop, ruled 2026-10-19 point 3), for player-versus-
+ * PvP pots (the sink loop), for player-versus-
  * player games (the arena template). Each player who wants in pays the
  * same `entry` in coins before a round; at the round's end the pot, less
  * the `recycle` share that stays in the reward pool, is split by how much
@@ -713,8 +713,8 @@ export const earnPotSchema = z
     /** Share of every pot that stays in the reward pool (0.01 to 0.5). */
     recycle: z.number().min(0.01).max(0.5),
     /**
-     * Pots are OFF by default (ruled 2026-10-20: until the R-16 legal
-     * review). A declared pot runs only with `enabled: true`; without it the
+     * Pots are OFF by default until a legal review clears
+     * them. A declared pot runs only with `enabled: true`; without it the
      * terms are kept for later and no room takes an entry.
      */
     enabled: z.boolean().default(false),
@@ -722,8 +722,7 @@ export const earnPotSchema = z
   .strict();
 
 /**
- * What buying a SKU gives (the recommended coin model, ruled 2026-10-16,
- * cabinet-launcher Q145). Leave `grants` out for an in-run consumable: a
+ * What buying a SKU gives (the recommended coin model). Leave `grants` out for an in-run consumable: a
  * room command applied once ("revive", or a run upgrade named after a
  * declared passive). `{ cosmetic: n }` is a look the player owns for good
  * (cosmetic id n, drawn by the client). `{ keeper: id }` unlocks a keeper
@@ -735,7 +734,7 @@ export const skuGrantSchema = z.union([
   z.object({ cosmetic: z.number().int().min(1, "cosmetic 0 is the default look; number owned looks from 1").max(255) }).strict(),
   z.object({ keeper: z.string().regex(/^[a-z][a-z0-9_]{0,31}$/, "a keeper id") }).strict(),
   /**
-   * Losable gear (the sink loop, ruled 2026-10-19 point 2): owned in the
+   * Losable gear (the sink loop): owned in the
    * profile, it brings one level of the named run upgrade into every
    * STAKED run, and is lost when that run makes less than `loseBelow` of
    * its most earn (0 to 1). Its coins stayed in the reward pool when it
@@ -778,7 +777,7 @@ export const skuSchema = z
   }));
 
 /**
- * The game's coin model (ruled 2026-10-16, cabinet-launcher Q145). The
+ * The game's coin model. The
  * default needs no declaration: coins buy cosmetics, unlocks (keepers,
  * starting loadouts, sidegrades) and in-run consumables (a revive), and
  * never permanent stat power.

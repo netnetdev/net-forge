@@ -363,7 +363,7 @@ export function engineSimAdapter(opts: EngineAdapterOptions): SimAdapter<EngineR
       return false;
     },
 
-    // Lag compensation (game-runtime.md §6): arena beams from human players.
+    // Lag compensation: arena beams from human players.
     ...(arena
       ? {
           hitscans(w: EngineRoomWorld, player: PlayerId, input: InputCommand): HitscanRequest | null {

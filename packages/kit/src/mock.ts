@@ -39,7 +39,7 @@ const MOCK_CURVE: CurvePool = {
 export function createMockBackend(opts: KitInitOptions): Backend {
   let token = toRaw(opts.mockBalances?.token ?? 100, TOKEN_DECIMALS);
   let usdg = toRaw(opts.mockBalances?.usdg ?? 25, USDG_DECIMALS);
-  // The mock referee's coin ledger, as apps/rooms referee/coins.ts keeps it.
+  // The mock referee's coin ledger, as the room server's referee keeps it.
   const prelaunch = opts.mockMode === "prelaunch";
   let earned = opts.mockBalances?.earned ? toRaw(opts.mockBalances.earned, TOKEN_DECIMALS) : 0n;
   const issued = new Map<Hex, KitAttestation>();

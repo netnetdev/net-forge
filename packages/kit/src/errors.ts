@@ -1,5 +1,5 @@
 // Every Kit failure is a KitError with a stable code and a one-line fix,
-// written for an AI coding agent to read and act on (cabinet-launcher.md §3).
+// written for an AI coding agent to read and act on.
 
 export const KIT_ERRORS = {
   NOT_INITIALIZED: "Call `await kit.init({ game: \"<slug>\" })` once when the game opens, before any other kit call.",

@@ -1,6 +1,6 @@
 # NetNet game engine: physics, game feel and rendering (llms.txt)
 
-> The engine every Net Forge game runs on (specs/game-runtime.md). Two
+> The engine every Net Forge game runs on. Two
 > layers matter here:
 >  1. Game code (src/game.ts) only DECLARES how things look and feel, with
 >     `look` on game() and `feel` on prefab() and weapon(). Templates draw it.

@@ -2,7 +2,7 @@
   "name": "@netnetcapital/engine",
   "version": "0.1.0",
   "description": "NetNet game runtime client: the typed game API the model writes against, and the three.js runtime (WebGPU with WebGL2 fallback) that plays it.",
-  "license": "SEE LICENSE IN LICENSE",
+  "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

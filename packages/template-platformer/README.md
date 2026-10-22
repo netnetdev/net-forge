@@ -4,8 +4,7 @@ Up to eight climbers race along cliffside courses to the flag: run, jump
 (hold for height, tap for a hop), dash across gaps, ride moving platforms,
 bounce off springs and stay off the thorns. Each climber collects their own
 coins. A round is one course; the next round runs the next course. Seat bots
-fill empty places, so one person alone still has a race. Play style
-"platformer" in `specs/cabinet-launcher.md` §2.
+fill empty places, so one person alone still has a race.
 
 | Path | What |
 |---|---|
@@ -13,7 +12,6 @@ fill empty places, so one person alone still has a race. Play style
 | `src/manifest.ts` | Loads and compiles it; `platformerAdapter()` for the room server and the client. Room template `platformer`. |
 | `src/store.ts` | Store hooks on the Kit's API names: three round upgrades (40, 40, 60 coins), two outfits (300, 500), shield charm gear (120); mock until the token is live. |
 | `client/` | The browser client: side-view three.js scene in every art style, HUD, input (keys, gamepad, touch), game feel. |
-| `scripts/measure.ts` | Room server + headless Chrome on autopilot; frame, network and server numbers, screenshots. |
 | `scripts/plan.ts` | The route planner on every course (how long a good run takes). |
 | `test/` | Playtest bots through `engine.test.run`, the race rules, prediction, the store. |
 | `llms.txt` | How to change the game (for agents). |
@@ -40,18 +38,18 @@ fill empty places, so one person alone still has a race. Play style
 
 ## Run it
 
+This template runs on your own computer with play money through
+`kit play` (`@netnetcapital/kit-play`). From the repository root:
+
 ```sh
-pnpm --filter @netnetcapital/engine-sim build && pnpm --filter @netnetcapital/engine build
-ROOMS_STORE_MODE=mock pnpm --filter @netnet/rooms start          # room server on :2567
-pnpm --filter @netnetcapital/template-platformer dev             # http://localhost:5360
+pnpm install --frozen-lockfile && pnpm build
+mkdir -p play-platformer/src && cp packages/template-platformer/src/game.ts play-platformer/src/
+echo '{"template":"platformer"}' > play-platformer/netnet.json
+node packages/kit-play/dist/cli.js play-platformer       # opens http://127.0.0.1:4663
 ```
+
+Edit `play-platformer/src/game.ts` and run it again to try a change. Real-token
+earning, stakes and claims run only on the hosted Net Forge server.
 
 Keys: A D or arrows run, Space W or Up jump, Shift dash, Down + Jump drops
 through a ledge, R or Enter readies the next course. ` shows stats.
-
-## Measure
-
-```sh
-pnpm --filter @netnetcapital/template-platformer build
-CHROME_BIN=/path/to/chrome pnpm --filter @netnetcapital/template-platformer measure -- --seconds 40 --backend webgpu
-```

@@ -1,5 +1,5 @@
 /**
- * The HUD: plain DOM over the canvas (game-runtime.md §3: Preact or plain
+ * The HUD: plain DOM over the canvas (Preact or plain
  * DOM). Text updates are throttled; bars move every frame with transforms.
  * Copy is labels, not sentences.
  */

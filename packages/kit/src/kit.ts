@@ -1,6 +1,6 @@
 // The public Kit: one object an AI coding agent writes against.
 //
-// Contract (cabinet-launcher.md §3, §10):
+// Contract:
 //   - kit.init() reads once (one Multicall3 eth_call). Every getter after
 //     that is synchronous over the snapshot, so a game loop can read
 //     balances every frame for free.
@@ -12,7 +12,7 @@
 //   - kit.profile is the player's saved progress (achievements, unlocks,
 //     goals, titles, owned looks and meta levels, settings), kept by the
 //     referee per wallet (or per guest id until sign-in), never in the
-//     browser (Q146). One HTTP GET the first time the game reads it, and
+//     browser. One HTTP GET the first time the game reads it, and
 //     after a sign-in or a purchase; a game that never reads it makes no
 //     call. No chain reads, no timers.
 //   - kit.coins is how a game should show and spend the token: 1 coin = 1
@@ -121,7 +121,7 @@ export interface KitCoins {
 }
 
 /**
- * The player's saves in this game (ruled 2026-10-16, Q146): the same on every
+ * The player's saves in this game: the same on every
  * device the player signs in on. A guest's progress is kept under this
  * browser's guest id and merges into the wallet at kit.wallet.signIn().
  * Reads are sync over the last load; the first read starts the one load

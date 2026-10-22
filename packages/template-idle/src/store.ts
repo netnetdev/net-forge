@@ -1,5 +1,5 @@
 /**
- * Store hooks (cabinet-launcher.md §7, "Coins" ruled 2026-10-15). BRINEWORKS
+ * Store hooks (the Coins model). BRINEWORKS
  * sells three shift upgrades (a store command named after the upgrade grants
  * one level for the rest of the shift), two finishes and one piece of
  * losable gear, all priced in coins. The Kit bridge lives in @netnetcapital/tabletop.

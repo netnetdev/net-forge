@@ -1,6 +1,5 @@
 /**
- * MOSSBOUND: the monster collector template (cabinet-launcher §2 play-style
- * cards: monster-collector RPG).
+ * MOSSBOUND: the monster collector template (play style: monster-collector RPG).
  *
  * Fen spirits live in the tall grass of a flooded marsh. Each keeper picks
  * one of three starters at camp, walks the reeds, meets wild spirits in the
@@ -81,13 +80,13 @@ upgrade("mossmail", { stat: "armor", step: 0.15, maxLevel: 1 });
 upgrade("spare_snares", { stat: "amount", step: 3, maxLevel: 1 });
 upgrade("fen_tonic", { stat: "regen", step: 0.03, maxLevel: 1 });
 
-// Earn (mandatory, cabinet-launcher §0.2). Pays the game's coins (1 coin = 1 token), once per run each. Values are PLACEHOLDER (Q148, Q160).
+// Earn (mandatory). Pays the game's coins (1 coin = 1 token), once per run each. Values are PLACEHOLDER.
 earn.rule("first_snare", { when: "creature.caught", n: 1, pay: 5, oncePer: "run" });
 earn.rule("full_lantern", { when: "creature.caught", n: 3, pay: 20, oncePer: "run" });
 earn.rule("warden_breaker", { when: "warden.defeated", n: 1, pay: 50, oncePer: "run" });
 earn.rule("seasoned", { when: "level.five", n: 1, pay: 5, oncePer: "run" });
 // Buy-in run (the mandatory sink loop): stake coins at run start to earn above free play.
-// A staked run also pays up to stake x multiple, by the share of this run's earn the player makes. Values are PLACEHOLDER (Q148, Q160).
+// A staked run also pays up to stake x multiple, by the share of this run's earn the player makes. Values are PLACEHOLDER.
 earn.stake({ min: 20, max: 200, multiple: 2 });
 
 // Store (the Kit), priced in coins: four run upgrades and two keeper finishes owned for good (kept in the profile).
@@ -98,5 +97,5 @@ store.sku("fen_tonic", { coins: 50 });
 store.sku("skin_lichen", { coins: 300, grants: { cosmetic: 1 } });
 store.sku("skin_amber", { coins: 500, grants: { cosmetic: 2 } });
 // Losable gear: owned for good until lost. It brings one level of its upgrade into every staked run,
-// and is lost when that run makes less than loseBelow of its most earn. Values are PLACEHOLDER (Q150).
+// and is lost when that run makes less than loseBelow of its most earn. Values are PLACEHOLDER.
 store.sku("lucky_reed", { coins: 150, grants: { gear: "thornbark", loseBelow: 0.25 } });

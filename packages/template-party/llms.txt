@@ -300,9 +300,8 @@ starts by itself after 10 s) and shows each keeper's build, damage per
 weapon, what downed them, coins and titles.
 
 ### Players per room
-players.max is 8 here, the party room's instance cap (apps/rooms
-src/world/templates.ts, E-3's co-op range). Fewer is fine; more needs a
-human ruling on the cap.
+players.max is 8 here, the most the hosted Net Forge room server seats
+in a party room. Fewer is fine; more is refused.
 
 ## Models and appearances (the asset library)
 

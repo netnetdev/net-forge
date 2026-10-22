@@ -23,7 +23,7 @@
 //
 // CHAIN LAYER: every contract this file touches is behind the Backend
 // interface (load, buySku, spend, buyToken, cashOut, claim). The launch
-// model (cabinet-launcher.md, revised 2026-10-15): a bonding curve until
+// model: a bonding curve until
 // graduation (buys and sells through GameZap.buyOnCurve / sellOnCurve),
 // then the game's v2 pool (GameZap.buyToken / sellToken). There is no
 // floor and no redemption route.
@@ -68,7 +68,7 @@ interface Step {
   data: Hex;
 }
 
-/** Why a token payment waits (GameVault refuses it before graduation, audit 5 L-3). */
+/** Why a token payment waits (GameVault refuses it before graduation). */
 const PRELAUNCH_TOKEN_PAYMENT = "Coins are play money until the game launches; wallet coins can be spent in the store from launch.";
 
 /** Registry lookup with init-time overrides. Placeholders throw. */
@@ -542,7 +542,7 @@ export function createLiveBackend(game: string, opts: KitInitOptions): Backend {
     async buySku(account, sku, inToken, snap) {
       const price = inToken ? sku.priceToken : sku.priceUsdg;
       if (price === null) throw new KitError("SKU_NOT_PRICED");
-      // The store takes token payments only after graduation (audit 5 L-3);
+      // The store takes token payments only after graduation;
       // say so before the wallet prompts, never as a raw NotGraduated revert.
       if (inToken && !snap.graduated) throw new KitError("PRELAUNCH", PRELAUNCH_TOKEN_PAYMENT);
       const steps: Step[] = [];
@@ -558,9 +558,9 @@ export function createLiveBackend(game: string, opts: KitInitOptions): Backend {
 
     async spend(account, amount, memo, snap) {
       // A spend is a token tip: the tokens go to the vault's tokenSink (the
-      // game's RewardVault, R-12). A transfer into the RewardVault is untaxed
-      // (review S-5), so the pool receives the whole amount. The store takes
-      // token tips only after graduation (audit 5 L-3).
+      // game's RewardVault). A transfer into the RewardVault is untaxed, so
+      // the pool receives the whole amount. The store takes token tips only
+      // after graduation.
       if (!snap.graduated) throw new KitError("PRELAUNCH", PRELAUNCH_TOKEN_PAYMENT);
       const steps: Step[] = [];
       // Approve up to what the wallet holds, so the next spend is one confirmation.

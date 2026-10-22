@@ -1,4 +1,4 @@
-// The browser side of universal saves (Q146, ruled 2026-10-16): a guest id,
+// The browser side of universal saves: a guest id,
 // wallet sign-in (SIWE over any EIP-1193 wallet) and the room server's
 // profile routes. Progress lives on the server, keyed by the signed-in
 // wallet or by the guest id; the browser keeps only the guest id and the

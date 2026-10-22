@@ -1,5 +1,5 @@
-// Review 7 of PR #830 (sink fixes), S-2 residual: "a staked run starts from
-// zero progress" (ruling 2026-10-20). The fix resets the player's earn
+// The rule: "a staked run starts from
+// zero progress". The fix resets the player's earn
 // COUNTS at a run start and keeps "round.top" from paying a run that started
 // mid-round (runner.ts lateStart), but "boss.killed" credits every present
 // player, so a run started moments before a boss dies (a guest who signs in
@@ -55,7 +55,7 @@ async function play(startRunAt: number | null): Promise<{ killTick: number; awar
   return { killTick, awards };
 }
 
-describe("S-2 residual (review 7): a run that starts as the boss dies is paid for the whole fight", () => {
+describe("the late-start rule: a run that starts as the boss dies is paid for the whole fight", () => {
   it("a referee run started one tick before the boss falls is not paid the boss rule", async () => {
     const base = await play(null);
     expect(base.killTick).toBeGreaterThan(30); // the fight took real time

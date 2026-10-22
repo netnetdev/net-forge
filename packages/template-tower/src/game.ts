@@ -1,6 +1,5 @@
 /**
- * COGSPIRE: the tower defense template (cabinet-launcher §2 play-style
- * cards: tower defense).
+ * COGSPIRE: the tower defense template (play style: tower defense).
  *
  * A brass clockwork spire stands at the end of an old rail road across the
  * moor. Rust swarms crawl the road toward it in waves. Up to four tinkers
@@ -128,13 +127,13 @@ upgrade("tempered_brass", { stat: "might", step: 0.15, maxLevel: 1 });
 upgrade("spyglass", { stat: "area", step: 0.12, maxLevel: 1 });
 upgrade("spare_bell", { stat: "maxHealth", step: 5, maxLevel: 1 });
 
-// Earn (mandatory, cabinet-launcher §0.2). Pays the game's coins (1 coin = 1 token), once per run each. Values are PLACEHOLDER (Q148, Q156).
+// Earn (mandatory). Pays the game's coins (1 coin = 1 token), once per run each. Values are PLACEHOLDER.
 earn.rule("first_gear", { when: "wave.cleared", n: 3, pay: 5, oncePer: "run" });
 earn.rule("long_shift", { when: "wave.cleared", n: 10, pay: 20, oncePer: "run" });
 earn.rule("boiler_breaker", { when: "boss.killed", n: 1, pay: 50, oncePer: "run" });
 earn.rule("scrap_heap", { when: "enemy.killed", n: 60, pay: 5, oncePer: "run" });
 // Buy-in run (the mandatory sink loop): stake coins at run start to earn above free play.
-// A staked run also pays up to stake x multiple, by the share of this run's earn the player makes. Values are PLACEHOLDER (Q148, Q156).
+// A staked run also pays up to stake x multiple, by the share of this run's earn the player makes. Values are PLACEHOLDER.
 earn.stake({ min: 20, max: 200, multiple: 2 });
 
 // Store (the Kit), priced in coins: four run upgrades and two cosmetic finishes owned for good (kept in the profile).
@@ -145,5 +144,5 @@ store.sku("spare_bell", { coins: 50 });
 store.sku("skin_verdigris", { coins: 300, grants: { cosmetic: 1 } });
 store.sku("skin_gilt", { coins: 500, grants: { cosmetic: 2 } });
 // Losable gear: owned for good until lost. It brings one level of its upgrade into every staked run,
-// and is lost when that run makes less than loseBelow of its most earn. Values are PLACEHOLDER (Q150).
+// and is lost when that run makes less than loseBelow of its most earn. Values are PLACEHOLDER.
 store.sku("brass_gear", { coins: 150, grants: { gear: "tempered_brass", loseBelow: 0.25 } });

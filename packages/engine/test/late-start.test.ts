@@ -1,5 +1,5 @@
-// (Fix PR, after review 7.) Companion to sink-progress.review7.test.ts. Review 7 of PR #830 (sink fixes), S-2 residual: "a staked run starts from
-// zero progress" (ruling 2026-10-20). The fix resets the player's earn
+// Companion to sink-progress.review7.test.ts. The rule: "a staked run starts from
+// zero progress". The fix resets the player's earn
 // COUNTS at a run start and keeps "round.top" from paying a run that started
 // mid-round (runner.ts lateStart), but "boss.killed" credits every present
 // player, so a run started moments before a boss dies (a guest who signs in
@@ -56,7 +56,7 @@ async function play(startRunAt: number | null): Promise<{ killTick: number; awar
   return { killTick, awards };
 }
 
-describe("a late-started run (fix PR, review 7 S-2 residual)", () => {
+describe("a late-started run", () => {
   it("is still paid for its own acts (the kill it lands after it started); a run started at the world's start is paid the boss", async () => {
     const base = await play(null);
     const late = await play(base.killTick - 1);

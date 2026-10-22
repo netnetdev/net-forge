@@ -2,8 +2,8 @@
  * Public types of @netnetcapital/engine-sim.
  *
  * The sim is the one TypeScript module that runs identically in the browser
- * (client prediction) and on the room server (authority), per
- * specs/game-runtime.md §2 and §4. Everything a caller needs is in this file;
+ * (client prediction) and on the room server (authority).
+ * Everything a caller needs is in this file;
  * the ECS and Rapier internals stay behind `SimWorld`.
  *
  * THE API is `step(world, inputs)`. Around it:

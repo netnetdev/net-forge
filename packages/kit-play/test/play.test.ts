@@ -129,9 +129,10 @@ describe("local profiles", () => {
 });
 
 describe("the published package", () => {
-  it("is not publishable while its license is pending", () => {
+  it("is MIT licensed, and the license gate still runs before a publish", () => {
     const pkg = JSON.parse(readFileSync(join(__dirname, "..", "package.json"), "utf8")) as { license: string; scripts: Record<string, string> };
-    expect(pkg.license).toBe("SEE LICENSE IN LICENSE");
+    expect(pkg.license).toBe("MIT");
+    expect(readFileSync(join(__dirname, "..", "LICENSE"), "utf8")).toMatch(/^MIT License/);
     expect(pkg.scripts.prepublishOnly).toContain("license-gate");
   });
 });

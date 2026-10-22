@@ -28,7 +28,7 @@ Patterns (ideas only)
   not expression; no level, weapon, character or text was copied from any
   game.
 - Lag compensation for hitscan as described in Valve's public Source
-  multiplayer networking write-up (ideas only; implemented in apps/rooms
-  src/netcode/rewind.ts and engine-sim's arena seam).
+  multiplayer networking write-up (ideas only; implemented in the Net Forge
+  room server and engine-sim's arena seam).
 - Hit-stop, screen shake and damage numbers as described in common
   game-feel talks and articles (e.g. "Juice it or lose it", GDC 2012).

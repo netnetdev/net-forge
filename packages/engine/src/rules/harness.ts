@@ -1,5 +1,5 @@
 /**
- * The headless playtest for board genres (game-runtime.md §12): the game
+ * The headless playtest for board genres: the game
  * runs on the same adapter the room server steps, with playtest players
  * driven by the genre's own bot, and reports in HarnessReport terms. A run
  * that ends is rebuilt the way the room does it (a fresh world, every

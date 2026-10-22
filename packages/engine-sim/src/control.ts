@@ -162,7 +162,7 @@ export function revivePlayer(world: SimWorld, playerId: PlayerId): boolean {
   return true;
 }
 
-/** Hard ceilings on a meta bonus, whatever a caller passes: +15% per stat, +30% across stats (cabinet-launcher Q145). */
+/** Hard ceilings on a meta bonus, whatever a caller passes: +15% per stat, +30% across stats. */
 export const META_MAX_PER_STAT = 0.15;
 export const META_MAX_TOTAL = 0.3;
 

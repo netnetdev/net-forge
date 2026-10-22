@@ -1,5 +1,5 @@
 /**
- * BRINEWORKS: the idle template (cabinet-launcher §2 play-style cards: idle).
+ * BRINEWORKS: the idle template (play style: idle).
  *
  * A white salt flat under a hot sky. Up to eight players each run a works on
  * the flat: pumps draw brine, pans boil it into salt, kilns cut salt into
@@ -49,12 +49,12 @@ upgrade("bellows", { stat: "might", step: 0.15, maxLevel: 1 });
 upgrade("long_rake", { stat: "amount", step: 0.3, maxLevel: 1 });
 upgrade("quick_hands", { stat: "haste", step: 0.25, maxLevel: 1 });
 
-// Earn (mandatory, cabinet-launcher §0.2). Pays the game's coins (1 coin = 1 token), once a shift each. Values are PLACEHOLDER (Q148, Q158).
+// Earn (mandatory). Pays the game's coins (1 coin = 1 token), once a shift each. Values are PLACEHOLDER.
 earn.rule("first_crate", { when: "salt.packed", n: 30, pay: 5, oncePer: "run" });
 earn.rule("long_haul", { when: "salt.packed", n: 300, pay: 20, oncePer: "run" });
 earn.rule("full_hold", { when: "contract.filled", n: 1, pay: 50, oncePer: "run" });
 earn.rule("cutter", { when: "crystal.cut", n: 30, pay: 5, oncePer: "run" });
-// Buy-in run (the mandatory sink loop): stake coins at shift start to earn above free play. Values are PLACEHOLDER (Q148, Q158).
+// Buy-in run (the mandatory sink loop): stake coins at shift start to earn above free play. Values are PLACEHOLDER.
 earn.stake({ min: 20, max: 200, multiple: 2 });
 
 // Store (the Kit), priced in coins: three shift upgrades, two finishes owned for good, one piece of losable gear.
@@ -64,5 +64,5 @@ store.sku("quick_hands", { coins: 60 });
 store.sku("skin_saltwhite", { coins: 300, grants: { cosmetic: 1 } });
 store.sku("skin_rust", { coins: 500, grants: { cosmetic: 2 } });
 // Losable gear: owned for good until lost. It brings one level of its upgrade into every staked shift,
-// and is lost when that shift makes less than loseBelow of its most earn. Values are PLACEHOLDER (Q150).
+// and is lost when that shift makes less than loseBelow of its most earn. Values are PLACEHOLDER.
 store.sku("brass_bellows", { coins: 150, grants: { gear: "bellows", loseBelow: 0.25 } });

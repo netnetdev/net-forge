@@ -1,5 +1,5 @@
 /**
- * Shared shapes of the game-feel kit (game-runtime.md §13). Kept free of
+ * Shared shapes of the game-feel kit. Kept free of
  * three.js and the DOM so the kit imports anywhere, including node tests.
  */
 

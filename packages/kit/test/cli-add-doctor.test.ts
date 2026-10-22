@@ -1,4 +1,4 @@
-// The spec's acceptance test, approximated (cabinet-launcher.md §11 step 3):
+// The acceptance test for `kit add`, approximated:
 // from a clean copy of a game without the Kit, `kit add` wires it, the one
 // edit llms.txt tells the agent to make (report an earn event) is applied,
 // and `kit doctor` passes. Run for every framework the CLI detects.

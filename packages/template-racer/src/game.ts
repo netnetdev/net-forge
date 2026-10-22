@@ -1,5 +1,5 @@
 /**
- * TORQUEBAY: the racer template (game-runtime.md §14, play style "racer").
+ * TORQUEBAY: the racer template (play style "racer").
  * Up to eight karts race laps around harbour circuits: hold the throttle,
  * drift through the bends to charge a mini-turbo (release for the boost),
  * hit the boost pads, collect coins (every coin you hold adds 1% top speed,
@@ -77,13 +77,13 @@ system("clean_line", ({ on, emit }) => {
   });
 });
 
-// Earn (mandatory, cabinet-launcher §0.2). Pays the game's coins (1 coin = 1 token), once per race each.
-// Seat bots never earn, and winning a field of bots pays nothing extra. Values are PLACEHOLDER (Q157).
+// Earn (mandatory). Pays the game's coins (1 coin = 1 token), once per race each.
+// Seat bots never earn, and winning a field of bots pays nothing extra. Values are PLACEHOLDER.
 earn.rule("hot_lap", { when: "drift.boosted", n: 3, pay: 4, oncePer: "run" });
 earn.rule("chequered", { when: "player.finished", n: 1, pay: 10, oncePer: "run" });
 earn.rule("clean_line", { when: "race.clean", n: 1, pay: 12, oncePer: "run" });
 earn.rule("pole_to_flag", { when: "race.won", n: 1, pay: 25, oncePer: "run" });
-// Buy-in run (the mandatory sink loop). PLACEHOLDER (Q148).
+// Buy-in run (the mandatory sink loop). PLACEHOLDER.
 earn.stake({ min: 10, max: 100, multiple: 2 });
 
 // Store (the Kit), priced in coins: round upgrades and two paint jobs owned for good.
@@ -92,5 +92,5 @@ store.sku("tuned_engine", { coins: 40 });
 store.sku("soft_tyres", { coins: 60 });
 store.sku("skin_flame", { coins: 300, grants: { cosmetic: 1 } });
 store.sku("skin_chrome", { coins: 500, grants: { cosmetic: 2 } });
-// Losable gear: bumpers in every staked race, lost when that race makes less than loseBelow of its most earn. PLACEHOLDER (Q150).
+// Losable gear: bumpers in every staked race, lost when that race makes less than loseBelow of its most earn. PLACEHOLDER.
 store.sku("bumper_kit", { coins: 120, grants: { gear: "bumpers", loseBelow: 0.25 } });

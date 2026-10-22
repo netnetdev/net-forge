@@ -294,8 +294,8 @@ starts by itself after 10 s) and shows each keeper's build, damage per
 weapon, what downed them, coins and titles.
 
 ### Make co-op 8 players
-players.max: 8, and the room template's instance cap (apps/rooms
-src/world/templates.ts, human ruling E-3).
+players.max: 8. The hosted Net Forge room server seats at most 8 in a
+co-op room, so 8 is the most a game can ask for.
 
 ## Models and appearances (the asset library)
 

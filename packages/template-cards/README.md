@@ -14,7 +14,6 @@ SimAdapter seam, drawn with `@netnetcapital/tabletop`.
 | `src/manifest.ts` | Loads it; `cardsAdapter()` for the room server and client. Room template `cards` (two seats). |
 | `src/store.ts` | Coin prices the client is wired to, the template's own coin (INK). |
 | `client/` | The desk, creatures on their cards, piles, quills, the hand, targeting, the draft. |
-| `scripts/measure.ts` | Room server + headless Chrome: frame, network, server numbers and screenshots per art style (`--humans 0` plays the browser alone against the AI). |
 | `test/` | Playtest bots and the store. |
 | `llms.txt` | How to change the game (for agents). |
 
@@ -26,7 +25,7 @@ SimAdapter seam, drawn with `@netnetcapital/tabletop`.
 - Hidden information: the room shuffles from its seeded PRNG and keeps
   the deck order to itself; a hand and a draft offer go only to their
   owner (`SimAdapter.infoFor`). Snapshots carry the quills only.
-  `apps/rooms/src/sim/cards.test.ts` checks it every few ticks of a run.
+  The room server's tests check it every few ticks of a run.
 - A person alone for 3 s gets a seat bot (an AI scribe of the gauntlet's
   tier); it leaves when a second person joins (that duel is called off).
 - Earn (the room is the referee): duels won against a person (never a
@@ -34,8 +33,15 @@ SimAdapter seam, drawn with `@netnetcapital/tabletop`.
 
 ## Run it
 
+This template runs on your own computer with play money through
+`kit play` (`@netnetcapital/kit-play`). From the repository root:
+
 ```sh
-pnpm --filter @netnetcapital/engine-sim build && pnpm --filter @netnetcapital/engine build
-ROOMS_STORE_MODE=mock PORT=2941 pnpm --filter @netnet/rooms start
-pnpm --filter @netnetcapital/template-cards dev        # http://localhost:6040/?server=http://localhost:2941
+pnpm install --frozen-lockfile && pnpm build
+mkdir -p play-cards/src && cp packages/template-cards/src/game.ts play-cards/src/
+echo '{"template":"cards"}' > play-cards/netnet.json
+node packages/kit-play/dist/cli.js play-cards       # opens http://127.0.0.1:4663
 ```
+
+Edit `play-cards/src/game.ts` and run it again to try a change. Real-token
+earning, stakes and claims run only on the hosted Net Forge server.

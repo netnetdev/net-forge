@@ -1,5 +1,4 @@
-// Coins: the game's token as players meet it in play (cabinet-launcher.md
-// "Coins", ruled 2026-10-15). 1 coin = 1 token. A coin is always shown under
+// Coins: the game's token as players meet it in play. 1 coin = 1 token. A coin is always shown under
 // the token's OWN name, symbol and logo (its metadata), never a generic
 // "COIN". Pure helpers shared by the live and mock backends; no I/O here.
 

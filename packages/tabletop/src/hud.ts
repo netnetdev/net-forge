@@ -1,6 +1,6 @@
 /**
- * The HUD shell the board templates share: plain DOM over the canvas
- * (game-runtime.md §3). The coin box, Invite, Store and Sound, toasts, the
+ * The HUD shell the board templates share: plain DOM over the canvas.
+ * The coin box, Invite, Store and Sound, toasts, the
  * end screen with what the run paid, the store sheet (run upgrades,
  * finishes, losable gear and the stake), the earn goals, the stats overlay
  * and the loading banner. Each template themes it with its own colours and

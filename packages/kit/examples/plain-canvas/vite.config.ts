@@ -1,4 +1,4 @@
-// Inside the monorepo the example runs against the Kit's source. A copy of
+// Inside this repository the example runs against the Kit's source. A copy of
 // this folder outside the repo installs @netnetcapital/kit from npm instead
 // and can drop the alias.
 import { fileURLToPath } from "node:url";

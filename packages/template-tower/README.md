@@ -17,7 +17,6 @@ are the ones every template uses. The client kit is `@netnetcapital/tabletop`.
 | `src/manifest.ts` | Loads it; `towerAdapter()` for the room server and client. Room template `tower`. |
 | `src/store.ts` | Coin prices the client is wired to, the template's own coin (COG). |
 | `client/` | The browser client: the board, towers, creeps, tracers, the build bar and tower panel. |
-| `scripts/measure.ts` | Room server + node clients + headless Chrome: frame, network and server numbers, screenshots per art style. |
 | `test/` | Playtest bots through `engine.test.run`, and the store. |
 | `llms.txt` | How to change the game (for agents). |
 
@@ -33,23 +32,23 @@ are the ones every template uses. The client kit is `@netnetcapital/tabletop`.
   The end screen shows what the run paid, then a fresh run starts.
 - Earn (the room is the referee): three waves, ten waves, the first boss,
   sixty kills. A player who joins mid-run is not paid for waves cleared
-  before their run started (S-2).
+  before their run started.
 
 ## Run it
 
+This template runs on your own computer with play money through
+`kit play` (`@netnetcapital/kit-play`). From the repository root:
+
 ```sh
-pnpm --filter @netnetcapital/engine-sim build && pnpm --filter @netnetcapital/engine build
-ROOMS_STORE_MODE=mock PORT=2901 pnpm --filter @netnet/rooms start
-pnpm --filter @netnetcapital/template-tower dev        # http://localhost:6010/?server=http://localhost:2901
+pnpm install --frozen-lockfile && pnpm build
+mkdir -p play-tower/src && cp packages/template-tower/src/game.ts play-tower/src/
+echo '{"template":"tower-defense"}' > play-tower/netnet.json
+node packages/kit-play/dist/cli.js play-tower       # opens http://127.0.0.1:4663
 ```
+
+Edit `play-tower/src/game.ts` and run it again to try a change. Real-token
+earning, stakes and claims run only on the hosted Net Forge server.
 
 Click a tile to build the tower picked in the bar (1-4), click a tower to
 upgrade or sell it, Space calls the next wave. Touch: tap a tile to aim,
 tap again to build. ` shows stats.
-
-## Measure
-
-```sh
-pnpm --filter @netnetcapital/template-tower build
-CHROME_BIN=/path/to/chrome pnpm --filter @netnetcapital/template-tower measure -- --seconds 40 --humans 4 --styles lowpoly,toon,ps1,pixel,voxel,handdrawn
-```

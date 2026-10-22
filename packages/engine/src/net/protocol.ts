@@ -58,7 +58,7 @@ export interface StakeTermsView {
  * Client -> server ('stake'): the player spent a stake (the Kit's
  * coins.spend(amount, "stake"), committed). The room fixes the stake from
  * its own ledger when a run starts: always the NEXT run (sign-in or the
- * next round; a run in progress never restarts, ruled 2026-10-20), and a
+ * next round; a run in progress never restarts), and a
  * staked run starts from zero earn progress. `amount` (whole coins) is read only
  * by a room whose store runs in mock mode (local play).
  */
@@ -132,8 +132,7 @@ export interface ProfileStoreItem {
 }
 
 /**
- * A player's saved progress in one game, kept by the room server (Q146,
- * ruled 2026-10-16): the same on every device the player signs in on.
+ * A player's saved progress in one game, kept by the room server: the same on every device the player signs in on.
  * Achievements, goals and titles come from the authoritative sim only.
  */
 export interface GameProfile {

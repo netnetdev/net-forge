@@ -2,7 +2,7 @@
   "name": "@netnetcapital/template-dungeon",
   "version": "0.1.0",
   "description": "CRYPTWICK: Template 3 of the NetNet game runtime, a co-op dungeon crawl for 4 players: procedural rooms, loot and permadeath runs. The game module, its browser client and its playtest bots.",
-  "license": "SEE LICENSE IN LICENSE",
+  "license": "MIT",
   "type": "module",
   "exports": {
     ".": "./src/manifest.ts",

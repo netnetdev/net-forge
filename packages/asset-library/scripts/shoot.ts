@@ -5,7 +5,7 @@
  *   CHROME_BIN=... pnpm --filter @netnetcapital/asset-library shoot -- thumbs               gallery thumbnails into .library/thumbs
  *
  * Chrome runs with a throwaway profile, --use-mock-keychain and
- * --password-store=basic. Needs the built library (pnpm --filter @netnet/assets library).
+ * --password-store=basic. Needs the built library in .library (see the README).
  */
 import { spawn, type ChildProcess } from "node:child_process";
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";

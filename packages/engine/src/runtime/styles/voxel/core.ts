@@ -1,5 +1,5 @@
 /**
- * The voxel style's core (game-runtime.md §10, voxel): a voxel grid, a
+ * The voxel style's core (voxel): a voxel grid, a
  * triangle voxelizer, interior fill, and a greedy mesher that bakes ambient
  * occlusion per voxel face. Pure TypeScript with no three.js and no DOM, so
  * the same code runs in the asset library build (Node: library models are

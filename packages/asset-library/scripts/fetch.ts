@@ -9,9 +9,8 @@
  * Archives and files are checked against the sha256 in the manifest; a
  * mismatch stops the fetch (a pack changed upstream: re-verify its licence
  * and update the manifest by hand). Nothing fetched is ever committed: the
- * cache lives in packages/asset-library/.cache (gitignored). The assets
- * service turns the cache into the optimized library
- * (`pnpm --filter @netnet/assets library`).
+ * cache lives in packages/asset-library/.cache (gitignored). The Net Forge
+ * asset pipeline turns the cache into the optimized library.
  */
 import { createHash } from "node:crypto";
 import { existsSync } from "node:fs";

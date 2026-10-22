@@ -1,5 +1,5 @@
 /**
- * VOLTYARD: the arena shooter template (game-runtime.md §14, week 9).
+ * VOLTYARD: the arena shooter template.
  *
  * Wirejacks duel at night in a yard of humming transformers. Move with one
  * hand, aim with the other, swap between a rifle, a scatter coil and a rail
@@ -91,18 +91,18 @@ system("streaks", ({ on, emit }) => {
   });
 });
 
-// Earn (mandatory, cabinet-launcher §0.2). Pays the game's coins (1 coin = 1 token), once per round each. Bots never earn; bot kills and a board of bots pay nothing.
+// Earn (mandatory). Pays the game's coins (1 coin = 1 token), once per round each. Bots never earn; bot kills and a board of bots pay nothing.
 earn.rule("live_wire", { when: "opponent.killed", n: 3, pay: 4, oncePer: "run" });
 earn.rule("long_shift", { when: "opponent.killed", n: 12, pay: 10, oncePer: "run" });
 earn.rule("overload", { when: "streak.five", n: 1, pay: 12, oncePer: "run" });
 earn.rule("top_of_the_yard", { when: "round.top", n: 1, pay: 25, oncePer: "run" });
 // Buy-in run (the mandatory sink loop): stake coins at run start to earn above free play.
 // A staked run also pays up to stake x multiple, by the share of this run's earn the player makes.
-// What it does not win back stays in the reward pool. Values are PLACEHOLDER (Q148).
+// What it does not win back stays in the reward pool. Values are PLACEHOLDER.
 earn.stake({ min: 10, max: 100, multiple: 2 });
 // PvP pot: each entrant pays the entry before a round; the round splits the pot by the earn each entrant
-// makes, and the recycle share stays in the reward pool. Values are PLACEHOLDER (Q148 c).
-// Off until the R-16 legal review (ruled 2026-10-20): declared, not enabled, so no room takes an entry.
+// makes, and the recycle share stays in the reward pool. Values are PLACEHOLDER.
+// Off until a legal review: declared, not enabled, so no room takes an entry.
 earn.pot({ entry: 20, recycle: 0.05 });
 
 // Store (the Kit), priced in coins (the default coin model): three round upgrades
@@ -113,5 +113,5 @@ store.sku("capacitor", { coins: 60 });
 store.sku("skin_neon", { coins: 300, grants: { cosmetic: 1 } });
 store.sku("skin_chrome", { coins: 500, grants: { cosmetic: 2 } });
 // Losable gear: owned for good until lost. It brings one level of its upgrade into every staked run,
-// and is lost when that run makes less than loseBelow of its most earn. Values are PLACEHOLDER (Q150).
+// and is lost when that run makes less than loseBelow of its most earn. Values are PLACEHOLDER.
 store.sku("plating_kit", { coins: 120, grants: { gear: "plating", loseBelow: 0.25 } });

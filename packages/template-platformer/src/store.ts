@@ -1,5 +1,5 @@
 /**
- * Store hooks (cabinet-launcher.md §7, "Coins" ruled 2026-10-15): every
+ * Store hooks (the Coins model): every
  * game has coins, 1 coin = 1 game token, shown under the token's own name,
  * symbol and logo. SKYLEDGE sells three round upgrades (a store command
  * named after the upgrade grants one level for the rest of the round) and

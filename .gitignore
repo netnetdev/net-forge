@@ -4,6 +4,7 @@ dist/
 .cache/
 .library/
 .netnet/
+play-*/
 *.tgz
 .env*
 .DS_Store

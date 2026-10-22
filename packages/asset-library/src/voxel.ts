@@ -1,5 +1,5 @@
 /**
- * The voxel style in the library (game-runtime.md §10). Voxel models are
+ * The voxel style in the library. Voxel models are
  * other library entries rebuilt as voxels at library build time (source
  * `{ voxelize, res }`), so every voxel id has the same name as its low-poly
  * base and a prompt maps to the same names in either style. The voxel core

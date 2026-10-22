@@ -1,5 +1,4 @@
-// Universal saves and the coin model (cabinet-launcher Q145 and Q146,
-// ruled 2026-10-16): the declarations, their caps, the runner's progress
+// Universal saves and the coin model: the declarations, their caps, the runner's progress
 // for profiles, the adapter's keeper check and meta command.
 import { beforeAll, beforeEach, describe, expect, it } from "vitest";
 import { addPlayer, createWorld, destroyWorld, initSim, keeperButtons, listPlayers, metaBonusOf, playerBuild, setMetaBonus, step } from "@netnetcapital/engine-sim";

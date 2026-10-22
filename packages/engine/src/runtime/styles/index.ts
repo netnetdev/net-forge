@@ -1,5 +1,5 @@
 /**
- * Art styles (game-runtime.md §10): what a game declared with
+ * Art styles: what a game declared with
  * `style: "<name>"` draws with, beyond its library models. Each style lives
  * in its own folder and registers one entry in STYLE_KITS (the one
  * registry). createRenderStack({ style }) applies a kit's render hooks

@@ -1,5 +1,5 @@
 /**
- * EMBERWATCH: the survivor-like co-op template (game-runtime.md §14, week 5).
+ * EMBERWATCH: the survivor-like co-op template.
  *
  * One lantern against the dark, growing into a bonfire. Four keepers hold
  * a field at night. The opening is a handful of shades; the swarm grows by
@@ -335,14 +335,14 @@ title("medic", { text: "Field Medic", most: "revives" });
 title("untouchable", { text: "Untouchable", least: "downs" });
 title("magpie", { text: "Magpie", most: "pickups" });
 
-// Earn (mandatory, cabinet-launcher §0.2). Pays the game's coins (1 coin = 1 token), once per run each.
+// Earn (mandatory). Pays the game's coins (1 coin = 1 token), once per run each.
 earn.rule("first_light", { when: "wave.cleared", n: 2, pay: 5, oncePer: "run" });
 earn.rule("night_watch", { when: "wave.cleared", n: 7, pay: 20, oncePer: "run" });
 earn.rule("bell_breaker", { when: "boss.killed", n: 1, pay: 50, oncePer: "run" });
 earn.rule("swarm_breaker", { when: "enemy.killed", n: 500, pay: 5, oncePer: "run" });
 // Buy-in run (the mandatory sink loop): stake coins at run start to earn above free play.
 // A staked run also pays up to stake x multiple, by the share of this run's earn the player makes.
-// What it does not win back stays in the reward pool. Values are PLACEHOLDER (Q148).
+// What it does not win back stays in the reward pool. Values are PLACEHOLDER.
 earn.stake({ min: 20, max: 200, multiple: 2 });
 
 // Store (the Kit), priced in coins (the default coin model): a revive used while
@@ -350,5 +350,5 @@ earn.stake({ min: 20, max: 200, multiple: 2 });
 store.sku("revive", { coins: 50 });
 store.sku("skin_aurora", { coins: 300, grants: { cosmetic: 1 } });
 // Losable gear: owned for good until lost. It brings one level of its upgrade into every staked run,
-// and is lost when that run makes less than loseBelow of its most earn. Values are PLACEHOLDER (Q150).
+// and is lost when that run makes less than loseBelow of its most earn. Values are PLACEHOLDER.
 store.sku("ember_charm", { coins: 150, grants: { gear: "kindling", loseBelow: 0.25 } });

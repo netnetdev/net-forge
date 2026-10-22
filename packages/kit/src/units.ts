@@ -117,7 +117,7 @@ export function usdPerPairAsset(dollar: Pools["dollar"]): number | null {
   return fromRaw(dollar.usdg, USDG_DECIMALS) / fromRaw(dollar.pairAsset, PAIR_ASSET_DECIMALS);
 }
 
-// ---- The bonding curve (contracts/src/games/GameCurve.sol), mirrored exactly ----
+// ---- The bonding curve (GameCurve.sol in the NetNet contracts), mirrored exactly ----
 
 /** The curve numbers the quotes need, in pair-asset wei and token wei. */
 export interface CurvePool {

@@ -12,7 +12,7 @@ import "./game.js";
 /** Content version: bump with any change to game.ts (hot swap compares it). */
 export const GAME_VERSION = "brineworks-0.1.0";
 export const GAME_NAME = "brineworks";
-/** Room template (apps/rooms world/templates.ts) and place used by the client and the bots. */
+/** Room template (as the Net Forge room server names it) and place used by the client and the bots. */
 export const TEMPLATE = "idle";
 export const PLACE = "flat";
 

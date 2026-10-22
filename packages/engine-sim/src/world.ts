@@ -117,7 +117,7 @@ export interface InternalWorld extends SimWorld {
 
 /**
  * A player's permanent stat bonus from meta upgrades bought with coins
- * (opt-in per game, cabinet-launcher Q145). Fractions: 0.05 is +5%.
+ * (opt-in per game). Fractions: 0.05 is +5%.
  * speed, might and area multiply; haste cuts cooldowns; maxHealth and
  * magnet add that fraction of the base value.
  */

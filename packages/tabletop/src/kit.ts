@@ -1,6 +1,6 @@
 /**
  * The Kit's store and coins as a board template's client calls them
- * (cabinet-launcher.md §7, "Coins" ruled 2026-10-15): every game has coins,
+ * (the Coins model): every game has coins,
  * 1 coin = 1 game token, shown under the token's own name, symbol and logo.
  *
  * `KitStoreBridge` is the slice of @netnetcapital/kit's `Kit` the clients

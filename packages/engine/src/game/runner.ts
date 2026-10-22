@@ -641,7 +641,7 @@ export class GameRunner {
   /** Earn credits humans only: bots fill seats, they never earn, and an unpaid event (a bot's death, a board of bots topped) pays no one. */
   private record(ev: GameEvent): EarnAward[] {
     if (ev.unpaid) return [];
-    // World or fight progress (anything not the player's own act) never pays a run that started after this world began (S-2).
+    // World or fight progress (anything not the player's own act) never pays a run that started after this world began.
     const late = ev.own === true || this.lateStart.size === 0 ? null : this.lateStart;
     const paid = ev.players.filter((p) => !isBot(p) && !(late?.has(p) ?? false));
     return paid.length === ev.players.length ? this.earn.record(ev) : this.earn.record({ name: ev.name, players: paid });

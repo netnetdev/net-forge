@@ -1,6 +1,6 @@
 /**
  * Earn rules from the game module, counted per player from authoritative
- * game events (cabinet-launcher.md §0.2, §8; game-runtime.md §11). The room
+ * game events. The room
  * server turns each award into an EarnEvent for its referee, which signs.
  *
  * A rule `{ when, n, oncePer }` pays once when a player's count of `when`
@@ -25,7 +25,7 @@ export interface GameEvent {
    * fight progress (a boss down, a wave cleared, a round topped, a run won,
    * anything a system emits): it never pays a player whose earning run
    * started after this world began (GameRunner.startRun), since the
-   * progress was made before the run existed (S-2, review 7).
+   * progress was made before the run existed.
    */
   readonly own?: true;
 }

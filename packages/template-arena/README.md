@@ -5,7 +5,6 @@ with one hand, aim with the other, hold fire. Swap between an arc rifle, a
 scatter coil and a rail lance. Every kill drops a heal cell. Rounds last
 three minutes or end at 25 kills; the top of the board takes the round.
 Bots fill empty seats, so one player alone still gets a fight.
-`specs/game-runtime.md` §14 week 9.
 
 | Path | What |
 |---|---|
@@ -13,7 +12,6 @@ Bots fill empty seats, so one player alone still gets a fight.
 | `src/manifest.ts` | Loads and compiles it; `arenaAdapter()` for the room server and client. Room template `shooter`. |
 | `src/store.ts` | Store hooks on the Kit's API names (`kit.coins.*`, `kit.store.*`): three round upgrades (40, 40, 60 coins) and two finishes (300, 500 coins), shown under the token's own symbol and logo; mock until the token is live. |
 | `client/` | The browser client: three.js scene, HUD, twin-stick input (keys and mouse, gamepad, touch), game feel. |
-| `scripts/measure.ts` | Room server + node clients + headless Chrome; frame, network and server numbers, screenshots. |
 | `test/` | Playtest bots through `engine.test.run`, and the store. |
 | `llms.txt` | How to change the game (for agents). |
 
@@ -41,26 +39,26 @@ Bots fill empty seats, so one player alone still gets a fight.
   earns per round, which alone with bots is nothing.
 - Earn: kills of people (3 and 12 in a round), a five-kill streak, and
   topping the board with another person in the round. Bot kills and a board
-  of bots pay nothing (ruling 2026-10-16), enforced by the engine's
+  of bots pay nothing, enforced by the engine's
   `GameRunner` for every arena game. The room server is the referee; before graduation earn is credited
   as points, after it the game's own coins under its own name.
 
 ## Run it
 
+This template runs on your own computer with play money through
+`kit play` (`@netnetcapital/kit-play`). From the repository root:
+
 ```sh
-pnpm --filter @netnetcapital/engine-sim build && pnpm --filter @netnetcapital/engine build
-ROOMS_STORE_MODE=mock pnpm --filter @netnet/rooms start          # room server on :2567
-pnpm --filter @netnetcapital/template-arena dev                  # http://localhost:5330
+pnpm install --frozen-lockfile && pnpm build
+mkdir -p play-arena/src && cp packages/template-arena/src/game.ts play-arena/src/
+echo '{"template":"arena"}' > play-arena/netnet.json
+node packages/kit-play/dist/cli.js play-arena       # opens http://127.0.0.1:4663
 ```
+
+Edit `play-arena/src/game.ts` and run it again to try a change. Real-token
+earning, stakes and claims run only on the hosted Net Forge server.
 
 Open the Invite link in another tab or on a phone on the same network to
 play together (`?room=<id>`). Keys: WASD, mouse aim, click fire, 1 2 3 or Q
 weapon, Space dash, Tab board. Touch: left stick moves, right stick aims and
 fires, SWAP and DASH buttons. ` shows stats.
-
-## Measure
-
-```sh
-pnpm --filter @netnetcapital/template-arena build
-CHROME_BIN=/path/to/chrome pnpm --filter @netnetcapital/template-arena measure -- --seconds 40 --humans 3 --backend webgpu
-```

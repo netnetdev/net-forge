@@ -6,7 +6,7 @@
  * way GameRunner does for the action templates:
  *  - earn rules counted per player per run (EarnTracker), seat bots never
  *    earn, unpaid events pay nobody, and world progress never pays a run
- *    that started after this world began (S-2);
+ *    that started after this world began;
  *  - store upgrades and losable gear as recorded room commands (a replay
  *    applies them at the same tick), capped at each upgrade's maxLevel;
  *  - cosmetics on the avatar;
@@ -33,7 +33,7 @@ export interface RulesWorld<S = unknown> {
   outcome: RunOutcome | null;
   endTick: number;
   readonly earn: EarnTracker | null;
-  /** Players whose referee run started after this world made progress (S-2). */
+  /** Players whose referee run started after this world made progress. */
   readonly late: Set<PlayerId>;
   /** World or fight progress (any event that is not a player's own act) has happened in this world. */
   progressed: boolean;
@@ -73,7 +73,7 @@ export function rulesAdapter<S>(genre: RulesGenre<S>, manifest: GameManifest, op
     isBot: (p) => isRulesBot(p),
   });
 
-  /** Earn credits people only; unpaid events pay nobody; world progress skips late runs (S-2). */
+  /** Earn credits people only; unpaid events pay nobody; world progress skips late runs. */
   const record = (w: RulesWorld<S>, ev: GameEvent, out: SimEvent[]): void => {
     if (!w.earn) return;
     if (ev.own !== true && !ev.unpaid) w.progressed = true;
@@ -263,7 +263,7 @@ export function rulesAdapter<S>(genre: RulesGenre<S>, manifest: GameManifest, op
     startRun(w, player) {
       w.earn?.forget(player);
       w.paid.delete(player);
-      // S-2: a run that starts after the world made progress is never paid for that progress. A run that starts
+      // A run that starts after the world made progress is never paid for that progress. A run that starts
       // before any (the first player's sign-in lands a few ticks after the world begins) is not late.
       if (w.progressed) w.late.add(player);
     },

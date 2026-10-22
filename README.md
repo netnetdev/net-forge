@@ -8,7 +8,7 @@ money.
 | Package | What it is |
 |---|---|
 | [`@netnetcapital/asset-library-files`](packages/asset-library-files) | The built NetNet game asset library (optimized models, sprites, textures and sounds, all third-party CC0 art) that kit play serves to a game running on your own computer. |
-| [`@netnetcapital/asset-library`](packages/asset-library) | The per-style asset library of the NetNet game runtime (game-runtime.md §10): a manifest of CC0 models and sprites addressed by library id, shared rigs and clip sets, the look composer, the example gallery, and the three.js loader the templates draw with. |
+| [`@netnetcapital/asset-library`](packages/asset-library) | The per-style asset library of the Net Forge game engine: a manifest of CC0 models and sprites addressed by library id, shared rigs and clip sets, the look composer, the example gallery, and the three.js loader the templates draw with. |
 | [`@netnetcapital/engine-sim`](packages/engine-sim) | NetNet game runtime shared simulation: ECS, Rapier physics, fixed tick and snapshots. Runs identically in the browser and on the room server. |
 | [`@netnetcapital/engine`](packages/engine) | NetNet game runtime client: the typed game API the model writes against, and the three.js runtime (WebGPU with WebGL2 fallback) that plays it. |
 | [`@netnetcapital/kit-play`](packages/kit-play) | kit play: run a game downloaded from Net Forge on your own computer with play money. Builds the template client with your game module and runs a local room host from the engine's open simulation. No wallet, no chain, no Net Forge servers. |
@@ -49,11 +49,26 @@ pnpm typecheck
 pnpm test
 ```
 
+## Play a template from this repository
+
+After `pnpm build`, any template plays locally the same way a downloaded
+game does. This plays EMBERWATCH, the survivor-like template:
+
+```sh
+mkdir -p play-survivor/src && cp packages/template-survivor/src/game.ts play-survivor/src/
+echo '{"template":"survivor"}' > play-survivor/netnet.json
+node packages/kit-play/dist/cli.js play-survivor
+```
+
+Each template's README has the same steps with its own template name.
+
 ## What is not here
 
 The hosted room server, the referee that decides real payouts, the studio
-and its generator, and the on-chain contracts are not part of this
-repository. Games built here run with play money only.
+and its generator, the asset pipeline that builds the library, and the
+on-chain contracts are not part of this repository. Games built here run
+with play money only. Real-token earning, stakes and claims run only on
+the hosted Net Forge server.
 
 ## Source and releases
 
@@ -67,7 +82,4 @@ named `engine-v*` is pushed, dependencies first, with npm provenance.
 
 ## License
 
-The license of the engine packages has not been chosen yet. Until it is,
-each of those packages' `LICENSE` file says LICENSE PENDING and the publish
-workflow refuses to run. `@netnetcapital/kit` is MIT. The library assets are
-CC0 (see `NOTICE`).
+Every package is MIT licensed. The library assets are CC0 (see `NOTICE`).

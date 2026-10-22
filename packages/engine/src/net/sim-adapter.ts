@@ -49,8 +49,7 @@ export interface RunResetEvent {
 }
 
 /**
- * The sim says a player reached something their profile keeps (cabinet-
- * launcher Q146, ruled 2026-10-16): an achievement, one of today's goals,
+ * The sim says a player reached something their profile keeps: an achievement, one of today's goals,
  * or an end-screen title. The room writes it to the player's profile on
  * the server; the browser never grants these.
  */

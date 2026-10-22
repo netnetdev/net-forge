@@ -50,7 +50,7 @@ export interface KitProjectConfig {
   referee?: string;
   /** Store items (SKUs). Prices register on the game's GameVault at launch. */
   store: StoreItemConfig[];
-  /** Earn rules. At least one is mandatory (cabinet-launcher.md §0.2). */
+  /** Earn rules. At least one is mandatory. */
   earn: EarnRuleConfig[];
 }
 

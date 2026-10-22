@@ -1,5 +1,5 @@
 /**
- * ROMPHOUSE: the party co-op template (cabinet-launcher §2 "party co-op").
+ * ROMPHOUSE: the party co-op template ("party co-op").
  *
  * Two to eight friends in one big playroom, five quick rounds a show. Each
  * round is a different minigame with one goal for the whole team: pop the
@@ -309,18 +309,18 @@ title("good_friend", { text: "Good Friend", most: "revives" });
 title("on_their_feet", { text: "On Their Feet", least: "downs" });
 title("snacker", { text: "Snacker", most: "pickups" });
 
-// Earn (mandatory, cabinet-launcher §0.2). Pays the game's coins (1 coin = 1 token), once per show each.
-// Pay amounts copy EMBERWATCH's (5, 20, 50, 5) until ROMPHOUSE's own are ruled: PLACEHOLDER (Q161).
+// Earn (mandatory). Pays the game's coins (1 coin = 1 token), once per show each.
+// Pay amounts copy EMBERWATCH's (5, 20, 50, 5) until ROMPHOUSE's own are set: PLACEHOLDER.
 earn.rule("first_win", { when: "round.won", n: 1, pay: 5, oncePer: "run" });
 earn.rule("crowd_favourite", { when: "round.won", n: 4, pay: 20, oncePer: "run" });
 earn.rule("full_house", { when: "show.perfect", n: 1, pay: 50, oncePer: "run" });
 earn.rule("confetti_storm", { when: "enemy.killed", n: 70, pay: 5, oncePer: "run" });
 // Buy-in run (the mandatory sink loop): stake coins at the start of a show to earn above free play.
-// Values are PLACEHOLDER (Q148).
+// Values are PLACEHOLDER.
 earn.stake({ min: 20, max: 200, multiple: 2 });
 
-// Store (the Kit), priced in coins (the default coin model). Prices copy EMBERWATCH's: PLACEHOLDER (Q161).
+// Store (the Kit), priced in coins (the default coin model). Prices copy EMBERWATCH's: PLACEHOLDER.
 store.sku("revive", { coins: 50 });
 store.sku("skin_disco", { coins: 300, grants: { cosmetic: 1 } });
-// Losable gear: owned for good until lost in a staked show that makes less than loseBelow of its most earn (Q150).
+// Losable gear: owned for good until lost in a staked show that makes less than loseBelow of its most earn.
 store.sku("lucky_charm", { coins: 150, grants: { gear: "lucky_sock", loseBelow: 0.25 } });

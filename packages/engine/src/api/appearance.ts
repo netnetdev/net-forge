@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 /**
- * APPEARANCE (game-runtime.md §10, asset library section). An appearance
+ * APPEARANCE (asset library section). An appearance
  * dresses a library model so one base makes many distinct originals: a
  * body colour, an accent colour, a size, and up to four attachments from a
  * fixed list. The model writes appearances; it never writes geometry. The

@@ -2,7 +2,7 @@
   "name": "@netnetcapital/template-cards",
   "version": "0.1.0",
   "description": "INKWRIT: the card battler template of the NetNet game runtime, one against one or against the AI, a gauntlet of duels with a draft between them, server-side shuffle and hidden hands. The game module, its browser client and its playtest bots.",
-  "license": "SEE LICENSE IN LICENSE",
+  "license": "MIT",
   "type": "module",
   "exports": {
     ".": "./src/manifest.ts",

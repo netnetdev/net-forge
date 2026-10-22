@@ -1,6 +1,6 @@
 /**
  * Arena mode: the genre machinery of the arena shooter template
- * (game-runtime.md §12, "loadouts, respawn, scoreboard for arena").
+ * ("loadouts, respawn, scoreboard for arena").
  * Enabled by `content.arena.enabled`.
  *
  *  - Twin-stick control: `moveX`/`moveZ` move in the world frame (yaw 0:
@@ -589,7 +589,7 @@ function respawn(w: InternalWorld, eid: number, pid: PlayerId): void {
 
 // ------------------------------------------------------------ lag compensation seam
 
-/** A human's beam this tick, for the room's rewind (game-runtime.md §6). */
+/** A human's beam this tick, for the room's rewind. */
 export interface BeamShot {
   readonly shooter: PlayerId;
   readonly x: number;

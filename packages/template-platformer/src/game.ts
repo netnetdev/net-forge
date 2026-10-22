@@ -1,5 +1,5 @@
 /**
- * SKYLEDGE: the platformer template (game-runtime.md §14, play style
+ * SKYLEDGE: the platformer template (play style
  * "platformer"). Up to eight climbers race along cliffside courses to the
  * flag: run, jump (hold for height, tap for a hop), dash across gaps, ride
  * moving platforms, bounce off springs and stay off the thorns. Coins hang
@@ -134,14 +134,14 @@ system("clean_climb", ({ on, emit }) => {
   });
 });
 
-// Earn (mandatory, cabinet-launcher §0.2). Pays the game's coins (1 coin = 1 token), once per round each.
-// Seat bots never earn, and winning a field of bots pays nothing extra. Values are PLACEHOLDER (Q157).
+// Earn (mandatory). Pays the game's coins (1 coin = 1 token), once per round each.
+// Seat bots never earn, and winning a field of bots pays nothing extra. Values are PLACEHOLDER.
 earn.rule("pocketful", { when: "coin.collected", n: 12, pay: 4, oncePer: "run" });
 earn.rule("summit", { when: "player.finished", n: 1, pay: 10, oncePer: "run" });
 earn.rule("clean_climb", { when: "climb.clean", n: 1, pay: 12, oncePer: "run" });
 earn.rule("first_flag", { when: "race.won", n: 1, pay: 25, oncePer: "run" });
 // Buy-in run (the mandatory sink loop): stake coins at run start to earn above free play.
-// A staked run also pays up to stake x multiple, by the share of this run's earn the player makes. PLACEHOLDER (Q148).
+// A staked run also pays up to stake x multiple, by the share of this run's earn the player makes. PLACEHOLDER.
 earn.stake({ min: 10, max: 100, multiple: 2 });
 
 // Store (the Kit), priced in coins: three round upgrades and two cosmetic outfits owned for good.
@@ -150,5 +150,5 @@ store.sku("sprint", { coins: 40 });
 store.sku("shield", { coins: 60 });
 store.sku("skin_sunset", { coins: 300, grants: { cosmetic: 1 } });
 store.sku("skin_frost", { coins: 500, grants: { cosmetic: 2 } });
-// Losable gear: one shield into every staked run, lost when that run makes less than loseBelow of its most earn. PLACEHOLDER (Q150).
+// Losable gear: one shield into every staked run, lost when that run makes less than loseBelow of its most earn. PLACEHOLDER.
 store.sku("shield_charm", { coins: 120, grants: { gear: "shield", loseBelow: 0.25 } });

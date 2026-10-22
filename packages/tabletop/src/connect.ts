@@ -18,7 +18,7 @@ export interface BoardJoin {
 
 export type BoardConnection<S> = RoomConnection<RulesWorld<S>, RulesInput>;
 
-/** Joins the room (saves under the signed-in wallet or this browser's guest id, Q146). */
+/** Joins the room (saves under the signed-in wallet or this browser's guest id). */
 export async function joinBoard<S>(adapter: SimAdapter<RulesWorld<S>, RulesInput>, j: BoardJoin): Promise<{ conn: BoardConnection<S>; joinMs: number }> {
   const t0 = performance.now();
   const session = savedSession(j.endpoint);

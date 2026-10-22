@@ -1,6 +1,6 @@
 /**
- * Content mode: the genre machinery templates build on (game-runtime.md §12,
- * "waves, weapons, upgrades, XP, bosses for survivor"). Enabled when the
+ * Content mode: the genre machinery templates build on
+ * ("waves, weapons, upgrades, XP, bosses for survivor"). Enabled when the
  * world's config lists weapons. Everything here is deterministic: integer
  * state, netId-ordered loops, and level-up offers drawn from a hash of
  * (seed, netId, level) rather than the world PRNG, so a predicting client

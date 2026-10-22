@@ -19,7 +19,7 @@ interface Req {
   body: Record<string, unknown> | null;
 }
 
-/** An in-memory referee speaking apps/rooms' coin routes, behind a fetch mock. */
+/** An in-memory referee speaking the room server's coin routes, behind a fetch mock. */
 function fakeReferee(chain: ReturnType<typeof createFakeChain>, init: { earned?: bigint; mode?: "live" | "prelaunch" } = {}) {
   const reqs: Req[] = [];
   const st = { earned: init.earned ?? 0n, mode: init.mode ?? "live", claimable: 0n, purchases: {} as Record<string, number>, reserved: new Map<string, bigint>(), returned: [] as string[], tokens: new Set<string>(["tok-1"]), status: {} as Record<string, number> };
@@ -184,7 +184,7 @@ describe("kit.coins: spend ordering (earned first, then the wallet on chain)", (
   });
 });
 
-describe("kit.coins: wallet coins before graduation (audit 5 L-3)", () => {
+describe("kit.coins: wallet coins before graduation", () => {
   it("a wallet spend and a token store buy throw PRELAUNCH before any prompt, never a raw NotGraduated revert", async () => {
     const game = slug();
     const chain = createFakeChain(game);
@@ -320,7 +320,7 @@ describe("the referee session", () => {
     expect(kit.coins.earned()).toBe(2);
   });
 
-  it("an unverified game (ruled 2026-10-20): the referee grants nothing and the Kit passes its notice on", async () => {
+  it("an unverified game: the referee grants nothing and the Kit passes its notice on", async () => {
     const { kit, ref } = await live();
     ref.spy.mockImplementationOnce(async () => new Response(JSON.stringify({ attestations: [], granted: "0", rewards: "unverified", notice: "Rewards need a verified build." }), { status: 200 }));
     const r = await kit.earn.report({ event: "wave_cleared", n: 2 });

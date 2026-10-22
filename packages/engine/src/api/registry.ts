@@ -407,7 +407,7 @@ export function metaUpgrade(id: string, def: MetaUpgradeInput): MetaUpgradeDef {
   return parsed;
 }
 
-/** Earn rules (cabinet-launcher.md §0.2: every game must have at least one). */
+/** Earn rules (every game must have at least one). */
 export const earn = {
   rule(id: string, def: EarnRuleInput): EarnRuleDef {
     unseal();
@@ -418,7 +418,7 @@ export const earn = {
     return parsed;
   },
   /**
-   * The buy-in run, the mandatory sink loop (ruled 2026-10-19): earning
+   * The buy-in run, the mandatory sink loop: earning
    * above free play takes a stake of the game's coins at run start. One per
    * game, written on one line so Net Forge's Launch panel can read and edit it.
    */
@@ -430,7 +430,7 @@ export const earn = {
     return parsed;
   },
   /**
-   * A PvP pot (ruled 2026-10-19 point 3), optional, for the arena
+   * A PvP pot, optional, for the arena
    * template: entrants pay `entry` coins before a round, the result splits
    * the pot, and `recycle` of it stays in the reward pool.
    */
@@ -462,8 +462,8 @@ export const store = {
 export function collectManifest(): GameManifest {
   const issues: string[] = [];
   if (!reg.game) issues.push("no game() declaration; export default game({...})");
-  if (reg.earnRules.size === 0) issues.push("every game needs at least one earn.rule(...) (cabinet-launcher.md §0.2)");
-  if (!reg.stake) issues.push("every game needs a buy-in run: earn.stake({ min, max, multiple }) (the sink loop, ruled 2026-10-19)");
+  if (reg.earnRules.size === 0) issues.push("every game needs at least one earn.rule(...)");
+  if (!reg.stake) issues.push("every game needs a buy-in run: earn.stake({ min, max, multiple }) (the sink loop)");
   if (reg.pot && reg.game && reg.game.template !== "arena") issues.push("earn.pot(...) is for player-versus-player games: the arena template");
   for (const id of [...reg.skus.keys(), ...reg.metaUpgrades.keys()]) if (id === POT_REASON) issues.push(`"${POT_REASON}" is the pot's coin spend reason; pick another id`);
   for (const id of reg.skus.keys()) if (id === STAKE_REASON) issues.push(`store.sku("${id}"): "${STAKE_REASON}" is the buy-in run's coin spend reason; pick another id`);
@@ -546,7 +546,7 @@ export const POT_REASON = "pot";
 /** A coin spend's reason (the SKU or meta upgrade id) must fit the referee's ledger. */
 const SPEND_REASON = /^[a-z][a-z0-9_]{1,30}$/;
 
-/** The coin model's cross-checks (cabinet-launcher Q145, ruled 2026-10-16). */
+/** The coin model's cross-checks. */
 function economyIssues(r: Registry): string[] {
   const issues: string[] = [];
   const e = r.economy ?? { store: "default" as const, metaUpgrades: false };

@@ -1,6 +1,5 @@
 /**
- * Universal saves and the coin model, as the engine declares them
- * (cabinet-launcher.md rulings 2026-10-16, Q145 and Q146).
+ * Universal saves and the coin model, as the engine declares them.
  *
  * A player's progress (achievements, unlocked keepers, today's goals,
  * titles, owned cosmetics and unlocks, meta upgrade levels, settings) is

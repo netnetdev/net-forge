@@ -1,5 +1,5 @@
 /**
- * CRYPTWICK: the co-op dungeon crawl template (game-runtime.md §14, template 3).
+ * CRYPTWICK: the co-op dungeon crawl template.
  *
  * Four wickbearers go down into a candle-lit crypt, room by room. Rooms
  * wake as you near them: their dead stir and come for your light through
@@ -307,22 +307,22 @@ title("chaplain", { text: "Chaplain", most: "revives" });
 title("unscathed", { text: "Unscathed", least: "downs" });
 title("magpie", { text: "Magpie", most: "pickups" });
 
-// Earn (mandatory, cabinet-launcher §0.2). Pays the game's coins (1 coin = 1 token), once per run each.
-// Pay amounts copy EMBERWATCH's (5, 20, 50, 5) until CRYPTWICK's own are ruled: PLACEHOLDER (Q162).
+// Earn (mandatory). Pays the game's coins (1 coin = 1 token), once per run each.
+// Pay amounts copy EMBERWATCH's (5, 20, 50, 5) until CRYPTWICK's own are set: PLACEHOLDER.
 earn.rule("first_doors", { when: "room.cleared", n: 2, pay: 5, oncePer: "run" });
 earn.rule("deep_delve", { when: "room.cleared", n: 7, pay: 20, oncePer: "run" });
 earn.rule("abbot_breaker", { when: "boss.killed", n: 1, pay: 50, oncePer: "run" });
 earn.rule("bone_breaker", { when: "enemy.killed", n: 60, pay: 5, oncePer: "run" });
 // Buy-in run (the mandatory sink loop): stake coins at run start to earn above free play.
 // A staked run also pays up to stake x multiple, by the share of this run's earn the player makes.
-// What it does not win back stays in the reward pool. Values are PLACEHOLDER (Q148).
+// What it does not win back stays in the reward pool. Values are PLACEHOLDER.
 earn.stake({ min: 20, max: 200, multiple: 2 });
 
 // Store (the Kit), priced in coins (the default coin model): a revive used while
 // downed, and a cosmetic wickbearer palette owned for good (kept in the profile).
-// Prices copy EMBERWATCH's until CRYPTWICK's own are ruled: PLACEHOLDER (Q162).
+// Prices copy EMBERWATCH's until CRYPTWICK's own are set: PLACEHOLDER.
 store.sku("revive", { coins: 50 });
 store.sku("skin_ossuary", { coins: 300, grants: { cosmetic: 1 } });
 // Losable gear: owned for good until lost. It brings one level of its upgrade into every staked run,
-// and is lost when that run makes less than loseBelow of its most earn. Values are PLACEHOLDER (Q150).
+// and is lost when that run makes less than loseBelow of its most earn. Values are PLACEHOLDER.
 store.sku("wick_charm", { coins: 150, grants: { gear: "tallow_oil", loseBelow: 0.25 } });

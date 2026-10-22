@@ -1,8 +1,8 @@
 {
   "name": "@netnetcapital/asset-library",
   "version": "0.1.0",
-  "description": "The per-style asset library of the NetNet game runtime (game-runtime.md §10): a manifest of CC0 models and sprites addressed by library id, shared rigs and clip sets, the look composer, the example gallery, and the three.js loader the templates draw with.",
-  "license": "SEE LICENSE IN LICENSE",
+  "description": "The per-style asset library of the Net Forge game engine: a manifest of CC0 models and sprites addressed by library id, shared rigs and clip sets, the look composer, the example gallery, and the three.js loader the templates draw with.",
+  "license": "MIT",
   "type": "module",
   "exports": {
     ".": "./src/index.ts",

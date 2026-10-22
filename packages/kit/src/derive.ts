@@ -1,7 +1,7 @@
 // Every game's five contracts (token, curve, buyback vault, reward vault,
 // store) sit at CREATE3 addresses that depend only on
-// the factory and the slug (contracts/src/games/Create3.sol and
-// GameFactory._addresses). The Kit derives them locally, so finding a game
+// the factory and the slug (Create3.sol and GameFactory._addresses in the
+// NetNet contracts). The Kit derives them locally, so finding a game
 // costs zero calls; the snapshot then checks the factory's own record
 // (gameOfToken(token).token == token, and the rest match) before trusting
 // any of them.

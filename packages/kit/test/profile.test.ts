@@ -1,5 +1,5 @@
-// kit.profile: the player's saves kept by the referee (Q146), the coin
-// model's permanent store (Q145), lazy loading (no read, no call), and the
+// kit.profile: the player's saves kept by the referee, the coin
+// model's permanent store, lazy loading (no read, no call), and the
 // guest merge at sign-in.
 
 import { afterEach, describe, expect, it, vi } from "vitest";

@@ -1,5 +1,5 @@
 /**
- * The pixel art style (game-runtime.md §10). The scene renders into a
+ * The pixel art style. The scene renders into a
  * low-resolution target, one pixel of it per sprite texel at the camera's
  * focus, and every pixel goes to the screen as a hard square block: no
  * filtering, no blur, one pixel scale for the whole picture. The colour is

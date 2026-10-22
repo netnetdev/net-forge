@@ -2,7 +2,7 @@
   "name": "@netnetcapital/template-arena",
   "version": "0.1.0",
   "description": "VOLTYARD: Template 2 of the NetNet game runtime, an arena shooter with lag-compensated beams, loadouts, rounds and seat-filling bots. The game module, its browser client and its playtest bots.",
-  "license": "SEE LICENSE IN LICENSE",
+  "license": "MIT",
   "type": "module",
   "exports": {
     ".": "./src/manifest.ts",

@@ -1,6 +1,4 @@
 import { describe, expect, it } from "vitest";
-import { existsSync } from "node:fs";
-import { join } from "node:path";
 import { validateConfig } from "../src/config.js";
 import { keccak256, stringToBytes } from "viem";
 import { fromRaw, memoKey, quoteBuy, quoteMarketSell, skuKey, toRaw, v2AmountOut } from "../src/units.js";
@@ -49,24 +47,8 @@ describe("config", () => {
   });
 });
 
-// The contracts live only in the NetNet monorepo; the public source export
-// has no contracts/ folder, so there the check has nothing to compare with.
-const abiDir = join(import.meta.dirname, "../../../contracts/abi/games");
-
-describe("generated ABIs", () => {
-  it.skipIf(!existsSync(abiDir))("src/abi.ts matches contracts/abi/games (run pnpm gen:abi if this fails)", async () => {
-    const { createHash } = await import("node:crypto");
-    const { readFileSync } = await import("node:fs");
-    const { ABI_SOURCE_SHA256 } = await import("../src/abi.js");
-    const dir = abiDir;
-    const h = createHash("sha256");
-    for (const n of ["GameFactory", "GameToken", "GameCurve", "BuybackVault", "GameVault", "RewardVault", "GameZap"]) h.update(readFileSync(join(dir, `${n}.json`), "utf8"));
-    expect(h.digest("hex")).toBe(ABI_SOURCE_SHA256);
-  });
-});
-
 describe("the bonding curve mirrors GameCurve", () => {
-  // The $8k template at $10 a pair-asset unit (PR #771): VA 400, target 800, VT 10,285,714.
+  // The $8k template at $10 a pair-asset unit: VA 400, target 800, VT 10,285,714.
   const c = { reserve: 0n, sold: 0n, target: 800n * E18, virtualAsset: 400n * E18, virtualToken: 10_285_714n * E18, feeBps: 100n, walletCap: 50n * E18 };
 
   it("the whole raise buys the curve's inventory; the graduating buy is clamped to the room left", async () => {

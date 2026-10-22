@@ -1,5 +1,5 @@
 /**
- * FeelKit: the game-feel kit of game-runtime.md §13 behind one-liners a
+ * FeelKit: the engine's game-feel kit behind one-liners a
  * template calls from game events:
  *
  *   const feel = new FeelKit({ camera: rig, particles, project, preset: "default" });

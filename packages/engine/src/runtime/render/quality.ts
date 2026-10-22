@@ -1,5 +1,5 @@
 /**
- * Quality tiers and dynamic resolution (game-runtime.md §5: "auto-detected
+ * Quality tiers and dynamic resolution ("auto-detected
  * low, medium or high (shadows, post-processing, resolution scale) with
  * dynamic resolution to hold the frame rate"). The decision logic is pure
  * so it is tested in node; `QualityManager` applies it to a renderer.

@@ -213,7 +213,7 @@ await kit.profile.setSettings({ keeper: "ranger", sound: false });   // at most 
 await kit.profile.setName("Nova");
 ```
 
-The coin model (ruled 2026-10-16): by default coins buy cosmetics, unlocks
+The coin model: by default coins buy cosmetics, unlocks
 (characters, starting loadouts, sidegrades) and in-run consumables, never
 permanent stat power. Permanent stat upgrades are opt-in per game and capped
 by the engine at +15% a stat and +30% in all. Prices come from the game's
@@ -271,7 +271,7 @@ await kit.earn.claimAll(): Promise<number>                // one RewardVault.cla
 - The bootstrap's `earn()` catches errors and logs them, so a missing wallet never crashes the game loop. Earning needs a connected wallet, so show a connect button somewhere the player sees it.
 - Put the call at the exact moment the player earns: when the wave is cleared, the level is finished, the boss falls. Never on a timer and never on page load.
 
-Referee protocol (for anyone running one), matched to the room server (`apps/rooms`):
+Referee protocol (for anyone running one), matched to the hosted Net Forge room server:
 
 - `GET <referee>/referee/claims/:wallet` returns a JSON array of signed (issued) attestations not yet claimed.
 - `POST <referee>/referee/report` (session) with `{ game, wallet, rule, units, runId, data }` returns `{ granted, attestations: [] }`; `granted` is coin wei, held.

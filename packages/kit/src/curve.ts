@@ -1,6 +1,5 @@
 // The bonding curve in dollars: what the Kit shows players before
-// graduation (cabinet-launcher.md, launch model revised 2026-10-15). Pure,
-// no RPC. The pair asset never leaves this file.
+// graduation. Pure, no RPC. The pair asset never leaves this file.
 
 import type { KitCurveState } from "./types.js";
 import { curvePriceWad, fromRaw, PAIR_ASSET_DECIMALS, usdPerPairAsset, type CurvePool, type Pools } from "./units.js";

@@ -1,6 +1,5 @@
 /**
- * Board-style genres (game-runtime.md §12, cabinet-launcher §2 play-style
- * cards): tower defense, idle, card battler, monster collector. They do not
+ * Board-style genres: tower defense, idle, card battler, monster collector. They do not
  * run on engine-sim's action world; each is a deterministic rules module the
  * room server steps on a fixed tick, behind the same SimAdapter seam, so the
  * netcode, the referee, run verification, the store and the stake are the

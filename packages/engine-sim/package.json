@@ -2,7 +2,7 @@
   "name": "@netnetcapital/engine-sim",
   "version": "0.1.0",
   "description": "NetNet game runtime shared simulation: ECS, Rapier physics, fixed tick and snapshots. Runs identically in the browser and on the room server.",
-  "license": "SEE LICENSE IN LICENSE",
+  "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

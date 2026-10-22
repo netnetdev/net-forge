@@ -1,5 +1,5 @@
 /**
- * The spawn director (game-runtime.md §12, GAME-DESIGN.md): the engine's
+ * The spawn director (GAME-DESIGN.md): the engine's
  * answer to "top the crowd up to N". It runs on the authoritative side next
  * to the systems, on the run clock, and is fully deterministic (the sim's
  * PRNG, tick counts, netId-ordered loops in the sim).

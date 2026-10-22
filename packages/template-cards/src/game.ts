@@ -1,5 +1,5 @@
 /**
- * INKWRIT: the card battler template (cabinet-launcher §2 play-style cards:
+ * INKWRIT: the card battler template (play style:
  * card battler).
  *
  * Scribes duel in a lamplit study. Every card is an inked creature or a
@@ -66,13 +66,13 @@ upgrade("sharp_nib", { stat: "might", step: 1, maxLevel: 1 });
 upgrade("quick_ink", { stat: "haste", step: 1, maxLevel: 1 });
 upgrade("spare_page", { stat: "amount", step: 1, maxLevel: 1 });
 
-// Earn (mandatory, cabinet-launcher §0.2). Pays the game's coins (1 coin = 1 token), once per run each. Values are PLACEHOLDER (Q148, Q159).
+// Earn (mandatory). Pays the game's coins (1 coin = 1 token), once per run each. Values are PLACEHOLDER.
 // duel.won counts duels won against a person (never against the AI, never a forfeit); ai.beaten counts gauntlet AI scribes beaten.
 earn.rule("first_ink", { when: "ai.beaten", n: 1, pay: 5, oncePer: "run" });
 earn.rule("full_gauntlet", { when: "ai.beaten", n: 4, pay: 20, oncePer: "run" });
 earn.rule("inked_duel", { when: "duel.won", n: 1, pay: 12, oncePer: "run" });
 earn.rule("signed_and_sealed", { when: "duel.won", n: 3, pay: 25, oncePer: "run" });
-// Buy-in run (the mandatory sink loop): stake coins at run start to earn above free play. Values are PLACEHOLDER (Q148, Q159).
+// Buy-in run (the mandatory sink loop): stake coins at run start to earn above free play. Values are PLACEHOLDER.
 earn.stake({ min: 10, max: 100, multiple: 2 });
 
 // Store (the Kit), priced in coins: four run upgrades and two finishes for your quill, owned for good.
@@ -82,5 +82,5 @@ store.sku("quick_ink", { coins: 40 });
 store.sku("spare_page", { coins: 50 });
 store.sku("skin_vermilion", { coins: 300, grants: { cosmetic: 1 } });
 store.sku("skin_gold_leaf", { coins: 500, grants: { cosmetic: 2 } });
-// Losable gear: one level of its upgrade in every staked run, lost when that run makes under loseBelow of its most earn. PLACEHOLDER (Q150).
+// Losable gear: one level of its upgrade in every staked run, lost when that run makes under loseBelow of its most earn. PLACEHOLDER.
 store.sku("bound_folio", { coins: 120, grants: { gear: "thick_vellum", loseBelow: 0.25 } });

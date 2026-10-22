@@ -113,7 +113,7 @@ if (bannerTitle) bannerTitle.textContent = (launcher.title ?? TITLE).toUpperCase
 const host = document.getElementById("game");
 
 /**
- * What this browser kept before saves moved to the server (Q146): read once,
+ * What this browser kept before saves moved to the server: read once,
  * imported into the guest profile, then left alone. Every access may fail.
  */
 const legacy = {
@@ -147,7 +147,7 @@ async function main(): Promise<void> {
   const friendRoomId = params.get("room") ?? undefined;
   const place = params.get("place") ?? PLACE;
   const joinStart = performance.now();
-  // Saves live on the room server (Q146): a guest id until the player signs in with a wallet.
+  // Saves live on the room server: a guest id until the player signs in with a wallet.
   let session = savedSession(endpoint);
   const conn: RoomConnection<EngineRoomWorld, InputCommand> = await joinRoom(adapter, {
     endpoint,

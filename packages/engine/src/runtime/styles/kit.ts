@@ -1,5 +1,5 @@
 /**
- * What an art style gives the runtime and a template (game-runtime.md §10).
+ * What an art style gives the runtime and a template.
  * One interface for every style, two halves, every member optional:
  *
  *  - render hooks, applied by createRenderStack({ style }) (render/stack.ts

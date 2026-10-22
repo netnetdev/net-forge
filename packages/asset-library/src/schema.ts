@@ -1,9 +1,9 @@
 /**
- * The library manifest's shape (game-runtime.md §10). The manifest is the
+ * The library manifest's shape. The manifest is the
  * only list of what a game can draw: every entry has a library id, the pack
  * it came from, and that pack's verified licence. Files are never in git;
  * `scripts/fetch.ts` downloads each pack from its official source and the
- * assets service optimizes and publishes them (apps/assets library build).
+ * Net Forge asset pipeline optimizes and publishes them.
  */
 import { appearanceSchema } from "@netnetcapital/engine";
 import { z } from "zod";
@@ -20,7 +20,7 @@ export type AssetKind = (typeof ASSET_KINDS)[number];
 export const BODY_PLANS = ["biped", "quadruped", "flyer", "blob", "wheeled", "static"] as const;
 export type BodyPlan = (typeof BODY_PLANS)[number];
 
-/** Licences we accept. Anything else is refused at load (game-runtime.md §1: permissive only). */
+/** Licences we accept. Anything else is refused at load (permissive only). */
 export const LICENSES = ["CC0-1.0"] as const;
 
 const NAME = /^[a-z][a-z0-9_]{0,47}$/;
@@ -82,7 +82,7 @@ const HEX = z.string().regex(/^#[0-9a-f]{6}$/);
  * How the library build cuts a pixel-style sprite out of its source file.
  * The build applies these, then snaps every pixel to the style's palette
  * with all-or-nothing alpha, so sprites from different packs read as one
- * game and stay crisp when the runtime scales them (apps/assets library/sprite.ts).
+ * game and stay crisp when the runtime scales them (in the Net Forge asset pipeline).
  */
 export const spriteSchema = z
   .object({

@@ -1,5 +1,5 @@
 /**
- * The fallback shapes (game-runtime.md §10). Every library id the game
+ * The fallback shapes. Every library id the game
  * references is drawn from the per-style asset library
  * (@netnetcapital/asset-library: real CC0 models, see scene.ts); these
  * primitives are what the scene shows until a model loads, and what it

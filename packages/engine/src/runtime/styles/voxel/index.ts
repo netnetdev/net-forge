@@ -1,5 +1,5 @@
 /**
- * The voxel art style (game-runtime.md §10): chunky cube-built worlds and
+ * The voxel art style: chunky cube-built worlds and
  * characters. Library models are rebuilt as voxels at library build time
  * (rigid parts on their bones, occlusion baked per face); this module is the
  * runtime half: the voxel core, voxel geometry and material, procedural

@@ -1,5 +1,5 @@
 /**
- * Footstep and impact audio hooks (game-runtime.md §13): named cues with a
+ * Footstep and impact audio hooks: named cues with a
  * throttle, a voice limit, pitch and gain variation, stereo pan from the
  * screen and distance falloff. Every cue has a procedural synth recipe by
  * default (no audio files); `addBuffer` swaps in a real CC0 sample later

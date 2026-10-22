@@ -27,16 +27,17 @@ client kit `@netnetcapital/tabletop`. Room template `idle` (cap 8).
 
 ## Run it
 
+This template runs on your own computer with play money through
+`kit play` (`@netnetcapital/kit-play`). From the repository root:
+
 ```sh
-ROOMS_STORE_MODE=mock PORT=2921 pnpm --filter @netnet/rooms start
-pnpm --filter @netnetcapital/template-idle dev     # http://localhost:6020/?server=http://localhost:2921
+pnpm install --frozen-lockfile && pnpm build
+mkdir -p play-idle/src && cp packages/template-idle/src/game.ts play-idle/src/
+echo '{"template":"idle"}' > play-idle/netnet.json
+node packages/kit-play/dist/cli.js play-idle       # opens http://127.0.0.1:4663
 ```
+
+Edit `play-idle/src/game.ts` and run it again to try a change. Real-token
+earning, stakes and claims run only on the hosted Net Forge server.
 
 Space rakes (or click your plot), 1-5 buy a plant, S ships crystals.
-
-## Measure
-
-```sh
-pnpm --filter @netnetcapital/template-idle build
-CHROME_BIN=... pnpm --filter @netnetcapital/template-idle measure -- --seconds 40 --humans 4 --styles lowpoly,toon,ps1,pixel,voxel,handdrawn
-```

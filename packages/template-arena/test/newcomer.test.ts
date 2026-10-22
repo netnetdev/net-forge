@@ -6,8 +6,8 @@
  * spawning, finish in the top half most rounds without winning every one,
  * and no bot may end the round. It also counts what the newcomer earns:
  * alone with bots that is nothing from kills and nothing from topping the
- * board (human ruling 2026-10-16: bot kills never pay, and "round.top" pays
- * only with another person in the round).
+ * board (bot kills never pay, and "round.top" pays only with another
+ * person in the round).
  */
 import { describe, expect, it } from "vitest";
 import { addPlayer, arenaSpawn, Button, createWorld, destroyWorld, initSim, listPlayers, step, BOT_PLAYER_BASE } from "@netnetcapital/engine-sim";

@@ -6,7 +6,6 @@ start room at the top and the Wax Abbot in the deepest one. Rooms wake as
 the party nears them and their dead come through the doors; a cleared room
 leaves a reliquary (pick an upgrade) and brings back anyone who fell. Runs
 are permadeath: if the whole party is down at once, the descent is over.
-`specs/game-runtime.md` §14 (template 3, co-op dungeon).
 
 | Path | What |
 |---|---|
@@ -14,7 +13,6 @@ are permadeath: if the whole party is down at once, the descent is over.
 | `src/manifest.ts` | Loads and compiles it; `dungeonAdapter()` for the room server and client. Room template `dungeon`. |
 | `src/store.ts` | Store hooks on the Kit's API names (`kit.coins.*`, `kit.store.*`): a revive (50 coins), a cosmetic (300 coins) and the wick charm (losable gear, 150 coins), shown under the token's own symbol and logo; mock until the token is live. |
 | `client/` | The browser client: three.js scene, the crypt's floors and walls (`client/crypt.ts`, with an x-ray cut so a wall never hides your wickbearer and a fog of war over rooms nobody has entered), HUD, input (keys, gamepad, touch), game feel. |
-| `scripts/measure.ts` | Room server + node bots + headless Chrome; frame, network and server numbers, screenshots. |
 | `test/` | Playtest bots through `engine.test.run`, and the store. |
 | `llms.txt` | How to change the game (for agents). |
 
@@ -39,19 +37,19 @@ are permadeath: if the whole party is down at once, the descent is over.
 
 ## Run it
 
+This template runs on your own computer with play money through
+`kit play` (`@netnetcapital/kit-play`). From the repository root:
+
 ```sh
-pnpm --filter @netnetcapital/engine-sim build && pnpm --filter @netnetcapital/engine build
-ROOMS_STORE_MODE=mock pnpm --filter @netnet/rooms start            # room server on :2567
-pnpm --filter @netnetcapital/template-dungeon dev                    # http://localhost:5340
+pnpm install --frozen-lockfile && pnpm build
+mkdir -p play-dungeon/src && cp packages/template-dungeon/src/game.ts play-dungeon/src/
+echo '{"template":"dungeon"}' > play-dungeon/netnet.json
+node packages/kit-play/dist/cli.js play-dungeon       # opens http://127.0.0.1:4663
 ```
+
+Edit `play-dungeon/src/game.ts` and run it again to try a change. Real-token
+earning, stakes and claims run only on the hosted Net Forge server.
 
 Open the Invite link in another tab or on a phone on the same network to
 play together (`?room=<id>`). Keys: WASD or arrows, Space dash, 1 2 3 pick.
 Touch: drag on the left half, DASH button, tap a card. ` shows stats.
-
-## Measure
-
-```sh
-pnpm --filter @netnetcapital/template-dungeon build
-CHROME_BIN=/path/to/chrome pnpm --filter @netnetcapital/template-dungeon measure -- --seconds 60 --backend webgpu
-```
