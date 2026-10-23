@@ -22,8 +22,8 @@ import {
   resetKart,
   setKartTrack,
   setKartsFrozen,
-} from "@netnetcapital/engine-sim";
-import type { InputCommand, Kart, KartStat, KartTrackDef, KartTuning, KartWorld } from "@netnetcapital/engine-sim";
+} from "@netforge/engine-sim";
+import type { InputCommand, Kart, KartStat, KartTrackDef, KartTuning, KartWorld } from "@netforge/engine-sim";
 import type { GameManifest } from "../api/registry.js";
 import type { EntitySchema, EntityState } from "../net/schema.js";
 import type { PlayerId, SimAdapter, SimCommand, SimEvent } from "../net/sim-adapter.js";

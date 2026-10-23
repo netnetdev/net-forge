@@ -3,8 +3,8 @@
  * ?autopilot=1 and the measure script's node clients play the works the
  * way the genre's bot does, from what the room sends them.
  */
-import { IdleAct, plotCenter } from "@netnetcapital/engine/rules";
-import type { RulesInput } from "@netnetcapital/engine/rules";
+import { IdleAct, plotCenter } from "@netforge/engine/rules";
+import type { RulesInput } from "@netforge/engine/rules";
 import { idleGame } from "./manifest.js";
 
 /** What the room sends one player (adapter infoFor over the genre's view). */

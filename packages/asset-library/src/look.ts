@@ -8,7 +8,7 @@
  * `resolveLook` is pure and deterministic: the same model id and look give
  * the same result on every client and in every test.
  */
-import { appearanceSchema, type AppearanceDef, type AppearancePart } from "@netnetcapital/engine";
+import { appearanceSchema, type AppearanceDef, type AppearancePart } from "@netforge/engine";
 import { assetById, baseAsset } from "./library.js";
 import type { AssetDef, BodyPlan } from "./schema.js";
 

@@ -46,7 +46,7 @@ Bots fill empty seats, so one player alone still gets a fight.
 ## Run it
 
 This template runs on your own computer with play money through
-`kit play` (`@netnetcapital/kit-play`). From the repository root:
+`kit play` (`@netforge/kit-play`). From the repository root:
 
 ```sh
 pnpm install --frozen-lockfile && pnpm build

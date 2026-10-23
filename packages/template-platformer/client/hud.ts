@@ -4,9 +4,9 @@
  * the standings, the results with what this round paid, the coin box and
  * toasts. Text updates are throttled to ten a second.
  */
-import { PF } from "@netnetcapital/engine/game";
-import type { CompiledGame, RaceInfo } from "@netnetcapital/engine/game";
-import { BOT_PLAYER_BASE, platformCoinCount } from "@netnetcapital/engine-sim";
+import { PF } from "@netforge/engine/game";
+import type { CompiledGame, RaceInfo } from "@netforge/engine/game";
+import { BOT_PLAYER_BASE, platformCoinCount } from "@netforge/engine-sim";
 import { RULE_NAMES } from "./names.js";
 import type { SceneEntity } from "./scene.js";
 import { climberColor } from "./scene.js";

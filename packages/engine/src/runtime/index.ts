@@ -1,5 +1,5 @@
 /**
- * @netnetcapital/engine/runtime: the client runtime. Used by templates and
+ * @netforge/engine/runtime: the client runtime. Used by templates and
  * the Launcher shell, never imported by generated game code (which sees
  * only the declarative API at the package root).
  */

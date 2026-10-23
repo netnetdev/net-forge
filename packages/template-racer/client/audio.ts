@@ -3,7 +3,7 @@
  * play the asset library's CC0 samples (KART_SAMPLES); the drift screech and
  * the countdown stay synthesized. Every cue keeps a synth fallback.
  */
-import type { FeelAudio } from "@netnetcapital/engine/runtime";
+import type { FeelAudio } from "@netforge/engine/runtime";
 
 /** Cue name -> library sound id (soundBank's `cues` overrides). */
 export const KART_SAMPLES: Readonly<Record<string, string>> = {

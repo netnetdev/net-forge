@@ -2,10 +2,10 @@
  * Store hooks (the Coins model). BRINEWORKS
  * sells three shift upgrades (a store command named after the upgrade grants
  * one level for the rest of the shift), two finishes and one piece of
- * losable gear, all priced in coins. The Kit bridge lives in @netnetcapital/tabletop.
+ * losable gear, all priced in coins. The Kit bridge lives in @netforge/tabletop.
  */
-export { mockKit } from "@netnetcapital/tabletop";
-export type { KitStoreBridge, MockKit, SkuPrice } from "@netnetcapital/tabletop";
+export { mockKit } from "@netforge/tabletop";
+export type { KitStoreBridge, MockKit, SkuPrice } from "@netforge/tabletop";
 
 /** Coin prices the client is wired to (they match store.sku(...) in game.ts; the generator's gate keeps them). */
 export const COIN_PRICES = { bellows: 40, long_rake: 40, quick_hands: 60, skin_saltwhite: 300, skin_rust: 500, brass_bellows: 150 } as const;

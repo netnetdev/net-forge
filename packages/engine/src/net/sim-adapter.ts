@@ -2,7 +2,7 @@
 //
 // The room server and the client both drive a SimAdapter: the server steps
 // the authoritative world, the client steps a local copy that holds only its
-// own predicted entity. Until `@netnetcapital/engine-sim` lands on main, the
+// own predicted entity. Until `@netforge/engine-sim` lands on main, the
 // room runs the built-in test sim (`src/sim/movers.ts`) behind this
 // interface; swapping in the shared sim is a change to `src/sim/index.ts`.
 //

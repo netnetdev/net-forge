@@ -21,7 +21,7 @@ import {
   SphereGeometry,
 } from "three/webgpu";
 import type { Scene } from "three/webgpu";
-import type { ThreatShape } from "@netnetcapital/engine/game";
+import type { ThreatShape } from "@netforge/engine/game";
 
 /** Danger reads warm and bright on the night palette; support reads cool. */
 const DANGER = new Color(0xff5a3c);

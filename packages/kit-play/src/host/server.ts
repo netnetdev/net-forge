@@ -9,7 +9,7 @@ import { createServer, type IncomingMessage, type ServerResponse } from "node:ht
 import { extname, normalize, resolve, sep } from "node:path";
 import { defineRoom, defineServer, matchMaker } from "@colyseus/core";
 import { WebSocketTransport } from "@colyseus/ws-transport";
-import { ROOM_NAME } from "@netnetcapital/engine/net";
+import { ROOM_NAME } from "@netforge/engine/net";
 import { LOCAL_ONLY, LocalRoom, setLocalGame, type LocalGame } from "./room.js";
 import { isGuestId } from "./profile.js";
 

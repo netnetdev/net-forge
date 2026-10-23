@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { PIXEL_PALETTE } from "@netnetcapital/engine/runtime";
+import { PIXEL_PALETTE } from "@netforge/engine/runtime";
 import { library, restyleId } from "../src/index.js";
 import { spriteMultiple } from "../src/three/index.js";
 

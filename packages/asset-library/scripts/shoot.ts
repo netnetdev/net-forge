@@ -1,8 +1,8 @@
 /**
  * Render library pictures in headless Chrome through the viewer:
  *
- *   CHROME_BIN=... pnpm --filter @netnetcapital/asset-library shoot -- sheets --out <dir>   contact sheets of every model
- *   CHROME_BIN=... pnpm --filter @netnetcapital/asset-library shoot -- thumbs               gallery thumbnails into .library/thumbs
+ *   CHROME_BIN=... pnpm --filter @netforge/asset-library shoot -- sheets --out <dir>   contact sheets of every model
+ *   CHROME_BIN=... pnpm --filter @netforge/asset-library shoot -- thumbs               gallery thumbnails into .library/thumbs
  *
  * Chrome runs with a throwaway profile, --use-mock-keychain and
  * --password-store=basic. Needs the built library in .library (see the README).

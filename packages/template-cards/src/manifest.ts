@@ -2,11 +2,11 @@
  * Loads the game module once per process and compiles it. The room server,
  * the client, the bots and the tests all start here.
  */
-import { collectManifest } from "@netnetcapital/engine/game";
-import type { GameManifest } from "@netnetcapital/engine";
-import { rulesAdapter, cardsGenre } from "@netnetcapital/engine/rules";
-import type { RulesInput, RulesWorld, CardsState } from "@netnetcapital/engine/rules";
-import type { SimAdapter } from "@netnetcapital/engine/net";
+import { collectManifest } from "@netforge/engine/game";
+import type { GameManifest } from "@netforge/engine";
+import { rulesAdapter, cardsGenre } from "@netforge/engine/rules";
+import type { RulesInput, RulesWorld, CardsState } from "@netforge/engine/rules";
+import type { SimAdapter } from "@netforge/engine/net";
 import "./game.js";
 
 /** Content version: bump with any change to game.ts (hot swap compares it). */

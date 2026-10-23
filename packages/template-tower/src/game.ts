@@ -8,11 +8,11 @@
  * shares the spire's bells (lives). Hold twenty waves to keep the spire.
  *
  * This file is the whole game as the model writes it: declarations only,
- * against the typed API in @netnetcapital/engine. The board, the waves,
+ * against the typed API in @netforge/engine. The board, the waves,
  * targeting, co-op, netcode, renderer and referee are the template's
  * machinery.
  */
-import { earn, game, prefab, store, tower, towerBoard, upgrade, waves } from "@netnetcapital/engine";
+import { earn, game, prefab, store, tower, towerBoard, upgrade, waves } from "@netforge/engine";
 
 export default game({
   template: "tower-defense",

@@ -1,5 +1,5 @@
 /**
- * @netnetcapital/engine/net: the client half of the netcode and everything
+ * @netforge/engine/net: the client half of the netcode and everything
  * the room server shares with it: the SimAdapter seam,
  * schema-driven bit-packed delta snapshots, sequence-numbered input packets,
  * prediction and reconciliation, interpolation, the server clock estimate,

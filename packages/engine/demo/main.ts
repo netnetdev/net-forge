@@ -1,5 +1,5 @@
-import { ArenaClient } from "@netnetcapital/engine/runtime";
-import type { ArenaStats } from "@netnetcapital/engine/runtime";
+import { ArenaClient } from "@netforge/engine/runtime";
+import type { ArenaStats } from "@netforge/engine/runtime";
 import { startFxDemo } from "./fx.js";
 import type { LookPreset, QualityTier } from "../src/runtime/render/index.js";
 

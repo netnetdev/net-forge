@@ -1,4 +1,4 @@
-// @netnetcapital/kit: a game token, a store, payments and earn for any
+// @netforge/kit: a game token, a store, payments and earn for any
 // browser game on Robinhood Chain. Start at llms.txt.
 
 import { createKit, type Kit } from "./kit.js";

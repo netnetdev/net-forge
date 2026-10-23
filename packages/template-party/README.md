@@ -34,7 +34,7 @@ about where you stand and who you help up.
 ## Run it
 
 This template runs on your own computer with play money through
-`kit play` (`@netnetcapital/kit-play`). From the repository root:
+`kit play` (`@netforge/kit-play`). From the repository root:
 
 ```sh
 pnpm install --frozen-lockfile && pnpm build

@@ -1,5 +1,5 @@
 {
-  "name": "@netnetcapital/template-arena",
+  "name": "@netforge/template-arena",
   "version": "0.1.0",
   "description": "VOLTYARD: Template 2 of the NetNet game runtime, an arena shooter with lag-compensated beams, loadouts, rounds and seat-filling bots. The game module, its browser client and its playtest bots.",
   "license": "MIT",
@@ -38,9 +38,9 @@
     "prepublishOnly": "node ../engine/scripts/license-gate.mjs"
   },
   "dependencies": {
-    "@netnetcapital/asset-library": "workspace:*",
-    "@netnetcapital/engine": "workspace:*",
-    "@netnetcapital/engine-sim": "workspace:*",
+    "@netforge/asset-library": "workspace:*",
+    "@netforge/engine": "workspace:*",
+    "@netforge/engine-sim": "workspace:*",
     "nipplejs": "1.0.4",
     "three": "0.186.1"
   },

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { initSim, PLAT_STATS } from "@netnetcapital/engine-sim";
-import { PF } from "@netnetcapital/engine/game";
+import { initSim, PLAT_STATS } from "@netforge/engine-sim";
+import { PF } from "@netforge/engine/game";
 import { COSMETICS, platformerAdapter, platformerGame } from "../src/manifest.js";
 import { COIN_PRICES, COSMETIC_SKUS, mockKit, PLUME_COIN, UPGRADE_SKUS } from "../src/store.js";
 

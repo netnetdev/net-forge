@@ -38,7 +38,7 @@ are permadeath: if the whole party is down at once, the descent is over.
 ## Run it
 
 This template runs on your own computer with play money through
-`kit play` (`@netnetcapital/kit-play`). From the repository root:
+`kit play` (`@netforge/kit-play`). From the repository root:
 
 ```sh
 pnpm install --frozen-lockfile && pnpm build

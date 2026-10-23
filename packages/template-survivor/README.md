@@ -19,12 +19,12 @@ ten waves and break the Bell Warden.
 It is a game, not engine code: Net Forge copies it as the starting repo
 for a generated game. The room server loads its game module and a browser
 bundle is its client, so it is its own package, depending on
-`@netnetcapital/engine` and `-sim`.
+`@netforge/engine` and `-sim`.
 
 ## Run it
 
 This template runs on your own computer with play money through
-`kit play` (`@netnetcapital/kit-play`). From the repository root:
+`kit play` (`@netforge/kit-play`). From the repository root:
 
 ```sh
 pnpm install --frozen-lockfile && pnpm build

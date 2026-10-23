@@ -4,7 +4,7 @@
  * is how prefabs and weapons stop being validated-only and start running in
  * the sim.
  */
-import type { ContentConfig, EnemyAi, EnemyTypeDef, SimConfig, StatDef, WeaponDef as SimWeaponDef, WeaponLevelStats } from "@netnetcapital/engine-sim";
+import type { ContentConfig, EnemyAi, EnemyTypeDef, SimConfig, StatDef, WeaponDef as SimWeaponDef, WeaponLevelStats } from "@netforge/engine-sim";
 import type { GameManifest } from "../api/registry.js";
 import { GameDefinitionError } from "../api/schemas.js";
 import type { PrefabDef, WeaponDef as ApiWeaponDef } from "../api/schemas.js";

@@ -4,10 +4,10 @@
  * symbol and logo. COGSPIRE sells four run upgrades (a store command named
  * after the upgrade grants one level for the rest of the run), two finishes
  * (permanent) and one piece of losable gear, all priced in coins. The Kit
- * bridge and its in-memory stand-in live in @netnetcapital/tabletop.
+ * bridge and its in-memory stand-in live in @netforge/tabletop.
  */
-export { mockKit } from "@netnetcapital/tabletop";
-export type { KitStoreBridge, MockKit, SkuPrice } from "@netnetcapital/tabletop";
+export { mockKit } from "@netforge/tabletop";
+export type { KitStoreBridge, MockKit, SkuPrice } from "@netforge/tabletop";
 
 /** Coin prices the client is wired to (they match store.sku(...) in game.ts; the generator's gate keeps them). */
 export const COIN_PRICES = { overclock: 40, tempered_brass: 40, spyglass: 60, spare_bell: 50, skin_verdigris: 300, skin_gilt: 500, brass_gear: 150 } as const;

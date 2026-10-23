@@ -1,9 +1,9 @@
-# @netnetcapital/kit
+# @netforge/kit
 
 The NetNet Cabinet Kit adds a game token, a store, payments in dollars and a mandatory earn mechanism to an existing browser game on Robinhood Chain. It is written for AI coding agents first: an agent that reads `llms.txt` can wire a game in one command and one edit.
 
 ```sh
-npx @netnetcapital/kit add --earn wave_cleared
+npx @netforge/kit add --earn wave_cleared
 ```
 
 Then report the earn event where the player earns it, and check the integration:
@@ -14,17 +14,17 @@ earn("wave_cleared");
 ```
 
 ```sh
-npx @netnetcapital/kit doctor
+npx @netforge/kit doctor
 ```
 
 ## For agents
 
 - `llms.txt`: the five steps, the API on one screen, and the rules `kit doctor` enforces.
 - `llms-full.txt`: every function's contract, the errors, one example per engine (plain HTML, Vite, React, Phaser, three.js, Godot, Unity, Emscripten), the CLI and the MCP server.
-- MCP server over stdio: `npx @netnetcapital/kit mcp`. Tools: `get_integration_guide`, `add_kit`, `add_store_item`, `add_earn_event`, `run_doctor`.
+- MCP server over stdio: `npx @netforge/kit mcp`. Tools: `get_integration_guide`, `add_kit`, `add_store_item`, `add_earn_event`, `run_doctor`.
 
 ```json
-{ "mcpServers": { "netnet-kit": { "command": "npx", "args": ["-y", "@netnetcapital/kit", "mcp"] } } }
+{ "mcpServers": { "netnet-kit": { "command": "npx", "args": ["-y", "@netforge/kit", "mcp"] } } }
 ```
 
 ## What it does

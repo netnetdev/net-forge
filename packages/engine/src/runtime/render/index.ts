@@ -1,5 +1,5 @@
 /**
- * @netnetcapital/engine/runtime render module: lighting
+ * @netforge/engine/runtime render module: lighting
  * with a following shadow, post-processing (bloom, grade, tone mapping,
  * FXAA, outline), atmosphere, quality tiers and dynamic resolution, GPU
  * particles, ground decals and rings, skinned and VAT-animated characters,

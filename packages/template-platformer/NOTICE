@@ -1,4 +1,4 @@
-@netnetcapital/template-platformer (SKYLEDGE)
+@netforge/template-platformer (SKYLEDGE)
 Copyright (c) 2026 NetNet Capital Management
 
 An original game. No names, characters, maps, models, sounds or code from
@@ -6,7 +6,7 @@ any other game or franchise.
 
 Art and sound
 - Models come from the per-style asset library
-  (@netnetcapital/asset-library): CC0 1.0 models by Quaternius (via Poly
+  (@netforge/asset-library): CC0 1.0 models by Quaternius (via Poly
   Pizza: the climbers and the coin) and Kenney (Nature Kit: trees, rocks,
   bushes), each pack listed with its
   source URL and licence verification in that package's NOTICE and
@@ -19,7 +19,7 @@ Art and sound
 
 Dependencies (unmodified, via npm)
 - three.js 0.186.1 (https://github.com/mrdoob/three.js), MIT.
-- @netnetcapital/engine and @netnetcapital/engine-sim (this repository);
+- @netforge/engine and @netforge/engine-sim (this repository);
   see their NOTICE files (bitECS MPL-2.0, Rapier Apache-2.0, Colyseus MIT,
   zod MIT).
 

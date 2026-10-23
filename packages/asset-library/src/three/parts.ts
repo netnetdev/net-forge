@@ -17,8 +17,8 @@ import {
   SphereGeometry,
   TorusGeometry,
 } from "three/webgpu";
-import type { AppearancePart } from "@netnetcapital/engine";
-import { voxel } from "@netnetcapital/engine/runtime";
+import type { AppearancePart } from "@netforge/engine";
+import { voxel } from "@netforge/engine/runtime";
 
 const mat = (color: number, emissive = 0, intensity = 1) =>
   new MeshStandardMaterial({ color: new Color(color), emissive: new Color(emissive), emissiveIntensity: intensity, roughness: 0.6, flatShading: true });

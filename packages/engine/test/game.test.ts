@@ -1,5 +1,5 @@
 import { beforeAll, beforeEach, describe, expect, it } from "vitest";
-import { initSim, quantizeInput } from "@netnetcapital/engine-sim";
+import { initSim, quantizeInput } from "@netforge/engine-sim";
 import { GameDefinitionError, earn, game, prefab, system, upgrade, weapon } from "../src/index.js";
 import { EarnTracker, F, GameRunner, collectManifest, compileGame, engineSimAdapter, resetRegistry } from "../src/game/index.js";
 import { BitReader, BitWriter, decodeSnapshot, encodeSnapshot, quantizeEntity } from "../src/net/index.js";
@@ -68,7 +68,7 @@ describe("GameRunner", () => {
   it("runs the systems: waves spawn, kills happen, wave.cleared fires, earn rules pay once per run", async () => {
     declareMini();
     const g = compileGame(collectManifest());
-    const { createWorld, addPlayer, step } = await import("@netnetcapital/engine-sim");
+    const { createWorld, addPlayer, step } = await import("@netforge/engine-sim");
     const w = createWorld({ ...g.sim, seed: 2 });
     addPlayer(w, 1);
     const r = new GameRunner(g, w, { godMode: true });
@@ -165,7 +165,7 @@ describe("snapshot codec: per-kind fields and repeated masks", () => {
 
 describe("engine SimAdapter crowd positions", () => {
   it("enemy x/z go on the wire at 1/16 m and come back within 1/32 m", async () => {
-    const { spawnEnemy } = await import("@netnetcapital/engine-sim");
+    const { spawnEnemy } = await import("@netforge/engine-sim");
     const sim = engineSimAdapter({ name: "t", version: "1", arena: {} });
     const w = sim.createWorld(1, "server");
     spawnEnemy(w.sim, 0, 12.34, -7.89);

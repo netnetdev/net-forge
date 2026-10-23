@@ -12,7 +12,7 @@
 
 ## Files
 
-- src/game.ts: THE GAME. Declarations against @netnetcapital/engine:
+- src/game.ts: THE GAME. Declarations against @netforge/engine:
   game(), cardTable(), card(), upgrade(), earn.rule(), earn.stake(), store.sku().
 - src/names.json: the title and every label players read. Cards go in
   "weapons" ({ name, line }), plus upgrades, earn rules and store items.

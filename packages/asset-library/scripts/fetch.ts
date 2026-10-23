@@ -3,8 +3,8 @@
  * (manifest/packs.json) into a local cache, once. After one fetch the
  * library builds and runs offline.
  *
- *   pnpm --filter @netnetcapital/asset-library fetch-packs     # everything
- *   pnpm --filter @netnetcapital/asset-library fetch-packs -- --style pixel
+ *   pnpm --filter @netforge/asset-library fetch-packs     # everything
+ *   pnpm --filter @netforge/asset-library fetch-packs -- --style pixel
  *
  * Archives and files are checked against the sha256 in the manifest; a
  * mismatch stops the fetch (a pack changed upstream: re-verify its licence

@@ -1,4 +1,4 @@
-# @netnetcapital/engine
+# @netforge/engine
 
 The client side of the Net Forge game engine.
 
@@ -6,8 +6,8 @@ Two entry points, on purpose:
 
 | Import | Who uses it | What it holds |
 |---|---|---|
-| `@netnetcapital/engine` | generated game code (the model) | `game`, `prefab`, `system`, `earn`, `store`, `engine.test.run`: declarative, Zod-validated, no DOM, no renderer, no netcode |
-| `@netnetcapital/engine/runtime` | templates, the Net Forge shell, the demo | three.js renderer (WebGPU, WebGL2 fallback), `InstancedCrowd`, `CameraRig`, `InputController` (keyboard/mouse, nipplejs touch), `AssetLoader` (glTF + meshopt + KTX2), `ArenaClient`, `SystemScheduler`, `collectManifest` |
+| `@netforge/engine` | generated game code (the model) | `game`, `prefab`, `system`, `earn`, `store`, `engine.test.run`: declarative, Zod-validated, no DOM, no renderer, no netcode |
+| `@netforge/engine/runtime` | templates, the Net Forge shell, the demo | three.js renderer (WebGPU, WebGL2 fallback), `InstancedCrowd`, `CameraRig`, `InputController` (keyboard/mouse, nipplejs touch), `AssetLoader` (glTF + meshopt + KTX2), `ArenaClient`, `SystemScheduler`, `collectManifest` |
 
 A game module never reaches the renderer, netcode or physics.
 Bad declarations throw `GameDefinitionError` with one actionable line per
@@ -18,13 +18,13 @@ issue, e.g. `model: reference assets by library id (e.g. "style.lowpoly.bat"), n
 - Declarations, validation, manifest cross-checks and the tick-based
   `SystemScheduler`, plus `weapon()`, `upgrade()`, pickup prefabs, bosses,
   and systems' `alive()`, `on(event)`, `respawnDead()`, `end(outcome)`.
-- `@netnetcapital/engine/game` runs a declared game on engine-sim:
+- `@netforge/engine/game` runs a declared game on engine-sim:
   `compileGame` (manifest to sim content), `GameRunner` (systems on a run
   clock, game events, run phases), `EarnTracker`, the engine-sim
   `SimAdapter` (`engineSimAdapter`, wire schema `engineSchema`) and a
   playtest bot. `engine.test.run` plays the declared game when there is one
   (kills, waves, levels, earn by rule, softlock, ms/tick).
-- `@netnetcapital/engine/net` is the client half of the netcode (the server
+- `@netforge/engine/net` is the client half of the netcode (the server
   half runs in the hosted Net Forge room server): prediction and reconciliation, interpolation, delta
   snapshots with per-kind fields, input packets, client clock adjustment
   for one-input-per-tick sims, the wire protocol and the Colyseus room client.
@@ -56,7 +56,7 @@ issue, e.g. `model: reference assets by library id (e.g. "style.lowpoly.bat"), n
 - The registry seals a game once its manifest is collected, so one process
   (the room server) can load several game modules in turn.
 
-## Board genres (`@netnetcapital/engine/rules`)
+## Board genres (`@netforge/engine/rules`)
 
 Tower defense, idle, card battler and monster collector do not run on
 engine-sim's action world. Each is a deterministic rules module (integer
@@ -131,16 +131,16 @@ Game code declares the look and feel it wants: `game({ look })`,
 ## Demo
 
 ```sh
-pnpm --filter @netnetcapital/engine-sim build
-pnpm --filter @netnetcapital/engine demo          # http://localhost:5310
+pnpm --filter @netforge/engine-sim build
+pnpm --filter @netforge/engine demo          # http://localhost:5310
 # ?enemies=2000  ?webgl=1 (force the WebGL2 backend)  ?autopilot=1 (scripted input)
 ```
 
 Measure in headless Chrome (raw CDP, no puppeteer dependency):
 
 ```sh
-pnpm --filter @netnetcapital/engine demo:build
-pnpm --filter @netnetcapital/engine exec vite preview --config demo/vite.config.ts --port 5311
+pnpm --filter @netforge/engine demo:build
+pnpm --filter @netforge/engine exec vite preview --config demo/vite.config.ts --port 5311
 CHROME_BIN=/path/to/chrome node packages/engine/scripts/measure-demo.mjs "http://localhost:5311/?autopilot=1" 20 --enable-unsafe-webgpu --use-angle=metal
 ```
 

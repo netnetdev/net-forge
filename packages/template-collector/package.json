@@ -1,5 +1,5 @@
 {
-  "name": "@netnetcapital/template-collector",
+  "name": "@netforge/template-collector",
   "version": "0.1.0",
   "description": "MOSSBOUND: the monster collector template of the NetNet game runtime, a shared marsh where keepers catch fen spirits, battle turn by turn with a team of three and bring down the warden before dusk. The game module, its browser client and its playtest bots.",
   "license": "MIT",
@@ -38,10 +38,10 @@
     "prepublishOnly": "node ../engine/scripts/license-gate.mjs"
   },
   "dependencies": {
-    "@netnetcapital/asset-library": "workspace:*",
-    "@netnetcapital/engine": "workspace:*",
-    "@netnetcapital/engine-sim": "workspace:*",
-    "@netnetcapital/tabletop": "workspace:*",
+    "@netforge/asset-library": "workspace:*",
+    "@netforge/engine": "workspace:*",
+    "@netforge/engine-sim": "workspace:*",
+    "@netforge/tabletop": "workspace:*",
     "three": "0.186.1"
   },
   "devDependencies": {

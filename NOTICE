@@ -9,10 +9,10 @@ packages/asset-library-files/CC0-1.0.txt); their authors and sources are
 credited in the asset-library and asset-library-files notices below.
 
 ==============================================================================
-packages/asset-library-files (@netnetcapital/asset-library-files)
+packages/asset-library-files (@netforge/asset-library-files)
 ==============================================================================
 
-@netnetcapital/asset-library-files
+@netforge/asset-library-files
 Copyright (c) 2026 NetNet Capital Management (selection, optimization, index)
 
 The files in library/ are optimized copies (meshopt, resized textures) of
@@ -65,10 +65,10 @@ Audio, CC0 1.0
   (the page lists License(s): CC0; verified 2026-10-16).
 
 ==============================================================================
-packages/asset-library (@netnetcapital/asset-library)
+packages/asset-library (@netforge/asset-library)
 ==============================================================================
 
-@netnetcapital/asset-library
+@netforge/asset-library
 Copyright (c) 2026 NetNet Capital Management
 
 The code in this package is NetNet's. The models and sprites the manifest
@@ -130,10 +130,10 @@ Dependencies (unmodified, via npm)
   /extensions and /functions 4.4.2 (MIT) and meshoptimizer 1.1.1 (MIT).
 
 ==============================================================================
-packages/engine-sim (@netnetcapital/engine-sim)
+packages/engine-sim (@netforge/engine-sim)
 ==============================================================================
 
-@netnetcapital/engine-sim
+@netforge/engine-sim
 Copyright (c) 2026 NetNet Capital Management
 
 This package depends on, or takes patterns from, the following works.
@@ -155,10 +155,10 @@ Code and patterns
 - Zigzag varints after Protocol Buffers' encoding (BSD-3-Clause); idea only.
 
 ==============================================================================
-packages/engine (@netnetcapital/engine)
+packages/engine (@netforge/engine)
 ==============================================================================
 
-@netnetcapital/engine
+@netforge/engine
 Copyright (c) 2026 NetNet Capital Management
 
 This package depends on, or takes patterns from, the following works.
@@ -174,7 +174,7 @@ Dependencies (unmodified, via npm)
 - zod 4.4.3 (https://github.com/colinhacks/zod), MIT.
 - @colyseus/sdk 0.18.5 (https://github.com/colyseus/colyseus), MIT, Endel Dreyer.
   Used by src/net/room-client.ts.
-- @netnetcapital/engine-sim (this repository); see its NOTICE for bitECS
+- @netforge/engine-sim (this repository); see its NOTICE for bitECS
   (MPL-2.0) and Rapier (Apache-2.0).
 
 Patterns
@@ -190,39 +190,39 @@ Patterns
   follows the three.js instancing examples (MIT).
 
 ==============================================================================
-packages/kit-play (@netnetcapital/kit-play)
+packages/kit-play (@netforge/kit-play)
 ==============================================================================
 
-@netnetcapital/kit-play
+@netforge/kit-play
 Copyright (c) 2026 NetNet Capital Management
 
 Dependencies (unmodified, via npm)
 - @colyseus/core 0.18.18 and @colyseus/ws-transport 0.18.4 (https://github.com/colyseus/colyseus), MIT, Endel Dreyer.
 - vite 6.4.3 (https://github.com/vitejs/vite), MIT.
 - esbuild 0.25.12 (https://github.com/evanw/esbuild), MIT.
-- The Net Forge engine packages (@netnetcapital/engine, -sim, asset-library,
+- The Net Forge engine packages (@netforge/engine, -sim, asset-library,
   asset-library-files, tabletop, template-*); see each package's NOTICE.
 
 The local host (src/host) is written for this package on the engine's open
-netcode (@netnetcapital/engine/net). It holds no code from the hosted room
+netcode (@netforge/engine/net). It holds no code from the hosted room
 server or the referee.
 
 ==============================================================================
-packages/tabletop (@netnetcapital/tabletop)
+packages/tabletop (@netforge/tabletop)
 ==============================================================================
 
-@netnetcapital/tabletop
+@netforge/tabletop
 Copyright (c) 2026 NetNet Capital Management
 
 Dependencies (unmodified, via npm)
 - three.js 0.186.1 (https://github.com/mrdoob/three.js), MIT.
-- @netnetcapital/engine and @netnetcapital/asset-library (this repository); see their NOTICE files.
+- @netforge/engine and @netforge/asset-library (this repository); see their NOTICE files.
 
 ==============================================================================
-packages/template-arena (@netnetcapital/template-arena)
+packages/template-arena (@netforge/template-arena)
 ==============================================================================
 
-@netnetcapital/template-arena (VOLTYARD)
+@netforge/template-arena (VOLTYARD)
 Copyright (c) 2026 NetNet Capital Management
 
 An original game. No names, characters, maps, models, sounds or code from
@@ -230,7 +230,7 @@ any other game or franchise.
 
 Art and sound
 - Models come from the per-style asset library
-  (@netnetcapital/asset-library): CC0 1.0 models by Kenney (Mini
+  (@netforge/asset-library): CC0 1.0 models by Kenney (Mini
   Characters, Blaster Kit, Space Kit, Car Kit), each pack listed with its
   source URL and licence verification in that package's NOTICE and
   manifest/packs.json. The files are fetched and built, never committed
@@ -242,7 +242,7 @@ Art and sound
 Dependencies (unmodified, via npm)
 - three.js 0.186.1 (https://github.com/mrdoob/three.js), MIT.
 - nipplejs 1.0.4 (https://github.com/yoannmoinet/nipplejs), MIT.
-- @netnetcapital/engine and @netnetcapital/engine-sim (this repository);
+- @netforge/engine and @netforge/engine-sim (this repository);
   see their NOTICE files (bitECS MPL-2.0, Rapier Apache-2.0, Colyseus MIT,
   zod MIT).
 
@@ -258,10 +258,10 @@ Patterns (ideas only)
   game-feel talks and articles (e.g. "Juice it or lose it", GDC 2012).
 
 ==============================================================================
-packages/template-cards (@netnetcapital/template-cards)
+packages/template-cards (@netforge/template-cards)
 ==============================================================================
 
-@netnetcapital/template-cards (INKWRIT)
+@netforge/template-cards (INKWRIT)
 Copyright (c) 2026 NetNet Capital Management
 
 An original game. No names, characters, maps, models, sounds or code from
@@ -269,18 +269,18 @@ any other game or franchise.
 
 Art and sound
 - Models come from the per-style asset library
-  (@netnetcapital/asset-library): CC0 1.0 models by Kenney and
+  (@netforge/asset-library): CC0 1.0 models by Kenney and
   Quaternius (monsters, animals, props), each pack listed with its
   source URL and licence verification in that package's NOTICE and
   manifest/packs.json. The files are fetched and built, never committed
   here; the build copies only the models this game uses.
-- Fallback shapes (@netnetcapital/tabletop stage.ts) are generated from three.js
+- Fallback shapes (@netforge/tabletop stage.ts) are generated from three.js
   primitives; all textures are drawn on a canvas at load; sounds are the
   library's CC0 samples with WebAudio synth fallbacks.
 
 Dependencies (unmodified, via npm)
 - three.js 0.186.1 (https://github.com/mrdoob/three.js), MIT.
-- @netnetcapital/engine and @netnetcapital/engine-sim (this repository);
+- @netforge/engine and @netforge/engine-sim (this repository);
   see their NOTICE files (bitECS MPL-2.0, Rapier Apache-2.0, Colyseus MIT,
   zod MIT).
 
@@ -291,10 +291,10 @@ Patterns (ideas only)
   game.
 
 ==============================================================================
-packages/template-collector (@netnetcapital/template-collector)
+packages/template-collector (@netforge/template-collector)
 ==============================================================================
 
-@netnetcapital/template-collector (MOSSBOUND)
+@netforge/template-collector (MOSSBOUND)
 Copyright (c) 2026 NetNet Capital Management
 
 An original game. No names, characters, maps, models, sounds or code from
@@ -302,18 +302,18 @@ any other game or franchise.
 
 Art and sound
 - Models come from the per-style asset library
-  (@netnetcapital/asset-library): CC0 1.0 models by Kenney and
+  (@netforge/asset-library): CC0 1.0 models by Kenney and
   Quaternius (animals, monsters, Nature Kit), each pack listed with its
   source URL and licence verification in that package's NOTICE and
   manifest/packs.json. The files are fetched and built, never committed
   here; the build copies only the models this game uses.
-- Fallback shapes (@netnetcapital/tabletop stage.ts) are generated from three.js
+- Fallback shapes (@netforge/tabletop stage.ts) are generated from three.js
   primitives; all textures are drawn on a canvas at load; sounds are the
   library's CC0 samples with WebAudio synth fallbacks.
 
 Dependencies (unmodified, via npm)
 - three.js 0.186.1 (https://github.com/mrdoob/three.js), MIT.
-- @netnetcapital/engine and @netnetcapital/engine-sim (this repository);
+- @netforge/engine and @netforge/engine-sim (this repository);
   see their NOTICE files (bitECS MPL-2.0, Rapier Apache-2.0, Colyseus MIT,
   zod MIT).
 
@@ -325,10 +325,10 @@ Patterns (ideas only)
   copied from any game.
 
 ==============================================================================
-packages/template-dungeon (@netnetcapital/template-dungeon)
+packages/template-dungeon (@netforge/template-dungeon)
 ==============================================================================
 
-@netnetcapital/template-dungeon (CRYPTWICK)
+@netforge/template-dungeon (CRYPTWICK)
 Copyright (c) 2026 NetNet Capital Management
 
 An original game. No names, characters, sprites, models, sounds or code
@@ -337,7 +337,7 @@ sprites are non-commercial) or SpriteCollab was used or consulted for code.
 
 Art and sound
 - Models come from the per-style asset library
-  (@netnetcapital/asset-library): CC0 1.0 models by Quaternius (wickbearers,
+  (@netforge/asset-library): CC0 1.0 models by Quaternius (wickbearers,
   the dead) and Kenney (columns, crates and rocks), each pack listed
   with its source URL and licence verification in that package's NOTICE and
   manifest/packs.json. The files are fetched and built, never committed
@@ -348,7 +348,7 @@ Art and sound
 Dependencies (unmodified, via npm)
 - three.js 0.186.1 (https://github.com/mrdoob/three.js), MIT.
 - nipplejs 1.0.4 (https://github.com/yoannmoinet/nipplejs), MIT.
-- @netnetcapital/engine and @netnetcapital/engine-sim (this repository);
+- @netforge/engine and @netforge/engine-sim (this repository);
   see their NOTICE files (bitECS MPL-2.0, Rapier Apache-2.0, Colyseus MIT,
   zod MIT).
 
@@ -365,10 +365,10 @@ Patterns (ideas only)
   game-feel talks and articles (e.g. "Juice it or lose it", GDC 2012).
 
 ==============================================================================
-packages/template-idle (@netnetcapital/template-idle)
+packages/template-idle (@netforge/template-idle)
 ==============================================================================
 
-@netnetcapital/template-idle (BRINEWORKS)
+@netforge/template-idle (BRINEWORKS)
 Copyright (c) 2026 NetNet Capital Management
 
 An original game. No names, characters, maps, models, sounds or code from
@@ -376,18 +376,18 @@ any other game or franchise.
 
 Art and sound
 - Models come from the per-style asset library
-  (@netnetcapital/asset-library): CC0 1.0 models by Kenney and
+  (@netforge/asset-library): CC0 1.0 models by Kenney and
   Quaternius (Space Kit, Nature Kit, ships), each pack listed with its
   source URL and licence verification in that package's NOTICE and
   manifest/packs.json. The files are fetched and built, never committed
   here; the build copies only the models this game uses.
-- Fallback shapes (@netnetcapital/tabletop stage.ts) are generated from three.js
+- Fallback shapes (@netforge/tabletop stage.ts) are generated from three.js
   primitives; all textures are drawn on a canvas at load; sounds are the
   library's CC0 samples with WebAudio synth fallbacks.
 
 Dependencies (unmodified, via npm)
 - three.js 0.186.1 (https://github.com/mrdoob/three.js), MIT.
-- @netnetcapital/engine and @netnetcapital/engine-sim (this repository);
+- @netforge/engine and @netforge/engine-sim (this repository);
   see their NOTICE files (bitECS MPL-2.0, Rapier Apache-2.0, Colyseus MIT,
   zod MIT).
 
@@ -397,10 +397,10 @@ Patterns (ideas only)
   Mechanics, not expression; no names, art or text were copied.
 
 ==============================================================================
-packages/template-party (@netnetcapital/template-party)
+packages/template-party (@netforge/template-party)
 ==============================================================================
 
-@netnetcapital/template-party (ROMPHOUSE)
+@netforge/template-party (ROMPHOUSE)
 Copyright (c) 2026 NetNet Capital Management
 
 An original game. No names, characters, sprites, models, sounds or code
@@ -409,7 +409,7 @@ sprites are non-commercial) or SpriteCollab was used or consulted for code.
 
 Art and sound
 - Models come from the per-style asset library
-  (@netnetcapital/asset-library): CC0 1.0 models by Quaternius (party-goers,
+  (@netforge/asset-library): CC0 1.0 models by Quaternius (party-goers,
   the party crowd) and Kenney (crates, chests and pickups), each pack listed
   with its source URL and licence verification in that package's NOTICE and
   manifest/packs.json. The files are fetched and built, never committed
@@ -420,7 +420,7 @@ Art and sound
 Dependencies (unmodified, via npm)
 - three.js 0.186.1 (https://github.com/mrdoob/three.js), MIT.
 - nipplejs 1.0.4 (https://github.com/yoannmoinet/nipplejs), MIT.
-- @netnetcapital/engine and @netnetcapital/engine-sim (this repository);
+- @netforge/engine and @netforge/engine-sim (this repository);
   see their NOTICE files (bitECS MPL-2.0, Rapier Apache-2.0, Colyseus MIT,
   zod MIT).
 
@@ -434,10 +434,10 @@ Patterns (ideas only)
   game-feel talks and articles (e.g. "Juice it or lose it", GDC 2012).
 
 ==============================================================================
-packages/template-platformer (@netnetcapital/template-platformer)
+packages/template-platformer (@netforge/template-platformer)
 ==============================================================================
 
-@netnetcapital/template-platformer (SKYLEDGE)
+@netforge/template-platformer (SKYLEDGE)
 Copyright (c) 2026 NetNet Capital Management
 
 An original game. No names, characters, maps, models, sounds or code from
@@ -445,7 +445,7 @@ any other game or franchise.
 
 Art and sound
 - Models come from the per-style asset library
-  (@netnetcapital/asset-library): CC0 1.0 models by Quaternius (via Poly
+  (@netforge/asset-library): CC0 1.0 models by Quaternius (via Poly
   Pizza: the climbers and the coin) and Kenney (Nature Kit: trees, rocks,
   bushes), each pack listed with its
   source URL and licence verification in that package's NOTICE and
@@ -458,7 +458,7 @@ Art and sound
 
 Dependencies (unmodified, via npm)
 - three.js 0.186.1 (https://github.com/mrdoob/three.js), MIT.
-- @netnetcapital/engine and @netnetcapital/engine-sim (this repository);
+- @netforge/engine and @netforge/engine-sim (this repository);
   see their NOTICE files (bitECS MPL-2.0, Rapier Apache-2.0, Colyseus MIT,
   zod MIT).
 
@@ -473,10 +473,10 @@ Patterns (ideas only)
   mechanics). Implemented from scratch in engine-sim src/platform.ts.
 
 ==============================================================================
-packages/template-racer (@netnetcapital/template-racer)
+packages/template-racer (@netforge/template-racer)
 ==============================================================================
 
-@netnetcapital/template-racer (TORQUEBAY)
+@netforge/template-racer (TORQUEBAY)
 Copyright (c) 2026 NetNet Capital Management
 
 An original game. No names, characters, maps, models, sounds or code from
@@ -484,7 +484,7 @@ any other game or franchise.
 
 Art and sound
 - Models come from the per-style asset library
-  (@netnetcapital/asset-library): CC0 1.0 models by Kenney (Car Kit: the
+  (@netforge/asset-library): CC0 1.0 models by Kenney (Car Kit: the
   karts and trucks; Nature Kit: trees; City Kit Commercial: buildings;
   Space Kit: barrels) and Quaternius
   (via Poly Pizza: the coin), each pack listed with its
@@ -498,7 +498,7 @@ Art and sound
 
 Dependencies (unmodified, via npm)
 - three.js 0.186.1 (https://github.com/mrdoob/three.js), MIT.
-- @netnetcapital/engine and @netnetcapital/engine-sim (this repository);
+- @netforge/engine and @netforge/engine-sim (this repository);
   see their NOTICE files (bitECS MPL-2.0, Rapier Apache-2.0, Colyseus MIT,
   zod MIT).
 
@@ -511,10 +511,10 @@ Patterns (ideas only)
   from scratch in engine-sim src/kart.ts.
 
 ==============================================================================
-packages/template-survivor (@netnetcapital/template-survivor)
+packages/template-survivor (@netforge/template-survivor)
 ==============================================================================
 
-@netnetcapital/template-survivor (EMBERWATCH)
+@netforge/template-survivor (EMBERWATCH)
 Copyright (c) 2026 NetNet Capital Management
 
 An original game. No names, characters, sprites, models, sounds or code
@@ -523,7 +523,7 @@ sprites are non-commercial) or SpriteCollab was used or consulted for code.
 
 Art and sound
 - Models come from the per-style asset library
-  (@netnetcapital/asset-library): CC0 1.0 models by Quaternius (keepers,
+  (@netforge/asset-library): CC0 1.0 models by Quaternius (keepers,
   enemies) and Kenney (Nature Kit trees, rocks and stumps), each pack listed
   with its source URL and licence verification in that package's NOTICE and
   manifest/packs.json. The files are fetched and built, never committed
@@ -534,7 +534,7 @@ Art and sound
 Dependencies (unmodified, via npm)
 - three.js 0.186.1 (https://github.com/mrdoob/three.js), MIT.
 - nipplejs 1.0.4 (https://github.com/yoannmoinet/nipplejs), MIT.
-- @netnetcapital/engine and @netnetcapital/engine-sim (this repository);
+- @netforge/engine and @netforge/engine-sim (this repository);
   see their NOTICE files (bitECS MPL-2.0, Rapier Apache-2.0, Colyseus MIT,
   zod MIT).
 
@@ -546,10 +546,10 @@ Patterns (ideas only)
   game-feel talks and articles (e.g. "Juice it or lose it", GDC 2012).
 
 ==============================================================================
-packages/template-tower (@netnetcapital/template-tower)
+packages/template-tower (@netforge/template-tower)
 ==============================================================================
 
-@netnetcapital/template-tower (COGSPIRE)
+@netforge/template-tower (COGSPIRE)
 Copyright (c) 2026 NetNet Capital Management
 
 An original game. No names, characters, maps, models, sounds or code from
@@ -557,18 +557,18 @@ any other game or franchise.
 
 Art and sound
 - Models come from the per-style asset library
-  (@netnetcapital/asset-library): CC0 1.0 models by Kenney and
+  (@netforge/asset-library): CC0 1.0 models by Kenney and
   Quaternius (Space Kit turrets, Nature Kit, monsters, robots), each pack listed with its
   source URL and licence verification in that package's NOTICE and
   manifest/packs.json. The files are fetched and built, never committed
   here; the build copies only the models this game uses.
-- Fallback shapes (@netnetcapital/tabletop stage.ts) are generated from three.js
+- Fallback shapes (@netforge/tabletop stage.ts) are generated from three.js
   primitives; all textures are drawn on a canvas at load; sounds are the
   library's CC0 samples with WebAudio synth fallbacks.
 
 Dependencies (unmodified, via npm)
 - three.js 0.186.1 (https://github.com/mrdoob/three.js), MIT.
-- @netnetcapital/engine and @netnetcapital/engine-sim (this repository);
+- @netforge/engine and @netforge/engine-sim (this repository);
   see their NOTICE files (bitECS MPL-2.0, Rapier Apache-2.0, Colyseus MIT,
   zod MIT).
 

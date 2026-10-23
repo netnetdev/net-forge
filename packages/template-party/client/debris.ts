@@ -12,8 +12,8 @@
 import { Color, InstancedMesh, Matrix4, MeshStandardMaterial, Quaternion, Vector3 } from "three/webgpu";
 import type { BufferGeometry, Material, Scene } from "three/webgpu";
 import { CylinderGeometry, DodecahedronGeometry } from "three/webgpu";
-import { Layer, createPhysics } from "@netnetcapital/engine-sim";
-import type { BodyId, PhysicsWorld, ResolvedSimConfig } from "@netnetcapital/engine-sim";
+import { Layer, createPhysics } from "@netforge/engine-sim";
+import type { BodyId, PhysicsWorld, ResolvedSimConfig } from "@netforge/engine-sim";
 
 const HZ = 60;
 const MAX_CHUNKS = 220;

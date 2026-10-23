@@ -3,11 +3,11 @@
  * that sends one input a tick (the server consumes one a tick), the avatar
  * predicted from it, and actions queued so each rides exactly one input.
  */
-import { guestId, joinRoom, savedSession } from "@netnetcapital/engine/net";
-import type { RoomConnection } from "@netnetcapital/engine/net";
-import type { RulesInput, RulesWorld } from "@netnetcapital/engine/rules";
-import { IDLE_INPUT } from "@netnetcapital/engine/rules";
-import type { SimAdapter } from "@netnetcapital/engine/net";
+import { guestId, joinRoom, savedSession } from "@netforge/engine/net";
+import type { RoomConnection } from "@netforge/engine/net";
+import type { RulesInput, RulesWorld } from "@netforge/engine/rules";
+import { IDLE_INPUT } from "@netforge/engine/rules";
+import type { SimAdapter } from "@netforge/engine/net";
 
 export interface BoardJoin {
   readonly endpoint: string;

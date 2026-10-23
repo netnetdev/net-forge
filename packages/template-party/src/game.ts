@@ -9,12 +9,12 @@
  * is about where you stand and who you help up.
  *
  * This file is the whole game as the model writes it: declarations only,
- * against the typed API in @netnetcapital/engine. The rounds are the "show"
+ * against the typed API in @netforge/engine. The rounds are the "show"
  * system below: a list of minigames, each a few lines of start, check and
  * finish. Everything else (sim, netcode, renderer, referee) is the
  * template's machinery. Design rules: packages/engine/GAME-DESIGN.md.
  */
-import { achievement, earn, game, keeper, mission, prefab, store, system, title, upgrade, weapon } from "@netnetcapital/engine";
+import { achievement, earn, game, keeper, mission, prefab, store, system, title, upgrade, weapon } from "@netforge/engine";
 
 /** The playroom: one 60 m room (its floor and four walls), with party tables to dodge round. */
 const ROOM = 30;

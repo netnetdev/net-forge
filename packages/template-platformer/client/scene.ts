@@ -35,14 +35,14 @@ import {
   Vector3,
 } from "three/webgpu";
 import type { Material, Object3D } from "three/webgpu";
-import { CameraRig, createRenderStack, styleKit } from "@netnetcapital/engine/runtime";
-import type { FeelKit, RenderStack, RendererHandle, StyleKit } from "@netnetcapital/engine/runtime";
-import { PF } from "@netnetcapital/engine/game";
-import type { CompiledPlatformer } from "@netnetcapital/engine/game";
-import { BOT_PLAYER_BASE, moverBox, PlatFlag, platformCoinTaken } from "@netnetcapital/engine-sim";
-import type { PlatformLevel } from "@netnetcapital/engine-sim";
-import type { CharacterAnimator, LibraryClient } from "@netnetcapital/asset-library/three";
-import { placeStatic } from "@netnetcapital/asset-library/three";
+import { CameraRig, createRenderStack, styleKit } from "@netforge/engine/runtime";
+import type { FeelKit, RenderStack, RendererHandle, StyleKit } from "@netforge/engine/runtime";
+import { PF } from "@netforge/engine/game";
+import type { CompiledPlatformer } from "@netforge/engine/game";
+import { BOT_PLAYER_BASE, moverBox, PlatFlag, platformCoinTaken } from "@netforge/engine-sim";
+import type { PlatformLevel } from "@netforge/engine-sim";
+import type { CharacterAnimator, LibraryClient } from "@netforge/asset-library/three";
+import { placeStatic } from "@netforge/asset-library/three";
 import { BACKDROP, BOT_MODEL, COIN_MODEL, PLAYER_HEIGHT } from "./decor.js";
 import { KEEPER_COLORS } from "./names.js";
 

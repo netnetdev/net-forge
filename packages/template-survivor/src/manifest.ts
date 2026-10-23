@@ -2,10 +2,10 @@
  * Loads the game module once per process and compiles it. The room server,
  * the client, the bots and the tests all start here.
  */
-import { collectManifest, compileGame, engineSimAdapter } from "@netnetcapital/engine/game";
-import type { CompiledGame, EngineRoomWorld, RunnerOptions } from "@netnetcapital/engine/game";
-import type { SimAdapter } from "@netnetcapital/engine/net";
-import type { InputCommand } from "@netnetcapital/engine-sim";
+import { collectManifest, compileGame, engineSimAdapter } from "@netforge/engine/game";
+import type { CompiledGame, EngineRoomWorld, RunnerOptions } from "@netforge/engine/game";
+import type { SimAdapter } from "@netforge/engine/net";
+import type { InputCommand } from "@netforge/engine-sim";
 import "./game.js";
 
 /** Content version: bump with any change to game.ts (hot swap compares it). */

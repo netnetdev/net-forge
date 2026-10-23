@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { BOT_PLAYER_BASE, initSim } from "@netnetcapital/engine-sim";
-import type { InputCommand } from "@netnetcapital/engine-sim";
-import { kartAutopilot } from "@netnetcapital/engine/game";
-import type { RaceInfo } from "@netnetcapital/engine/game";
-import type { SimEvent } from "@netnetcapital/engine/net";
+import { BOT_PLAYER_BASE, initSim } from "@netforge/engine-sim";
+import type { InputCommand } from "@netforge/engine-sim";
+import { kartAutopilot } from "@netforge/engine/game";
+import type { RaceInfo } from "@netforge/engine/game";
+import type { SimEvent } from "@netforge/engine/net";
 import { racerAdapter, racerGame } from "../src/manifest.js";
 
 type Sim = ReturnType<typeof racerAdapter>;

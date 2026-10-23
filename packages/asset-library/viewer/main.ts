@@ -10,8 +10,8 @@
 import { AmbientLight, Box3, Color, DirectionalLight, Group, HemisphereLight, InstancedMesh, PerspectiveCamera, Scene, Vector3 } from "three/webgpu";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { MeshoptDecoder } from "three/addons/libs/meshopt_decoder.module.js";
-import { createRenderer } from "@netnetcapital/engine/runtime";
-import type { AppearanceDef } from "@netnetcapital/engine";
+import { createRenderer } from "@netforge/engine/runtime";
+import type { AppearanceDef } from "@netforge/engine";
 import { galleryFor, idsForStyle, library, assetById } from "../src/index.js";
 import { LibraryClient } from "../src/three/index.js";
 

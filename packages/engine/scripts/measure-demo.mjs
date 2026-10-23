@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 // Measure the arena demo in headless Chrome over raw CDP (no puppeteer dependency).
 //
-//   pnpm --filter @netnetcapital/engine demo:build
-//   pnpm --filter @netnetcapital/engine exec vite preview --config demo/vite.config.ts --port 5311 &
+//   pnpm --filter @netforge/engine demo:build
+//   pnpm --filter @netforge/engine exec vite preview --config demo/vite.config.ts --port 5311 &
 //   CHROME_BIN=/path/to/chrome node scripts/measure-demo.mjs "http://localhost:5311/?autopilot=1" [seconds] [extra chrome flags...]
 //
 // Prints the page's window.__arena stats as JSON after warm-up, and saves a

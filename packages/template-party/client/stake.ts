@@ -5,7 +5,7 @@
  * then the room is told. The room fixes the stake from its own ledger when
  * the next run starts (or this one, if it only just began) and says so.
  */
-import type { StakeMessage, StakeTermsView } from "@netnetcapital/engine/net";
+import type { StakeMessage, StakeTermsView } from "@netforge/engine/net";
 import type { KitStoreBridge } from "../src/store.js";
 
 export interface StakeConn {

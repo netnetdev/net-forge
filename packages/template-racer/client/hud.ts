@@ -4,10 +4,10 @@
  * charge, the countdown, standings, results with what this race paid, the
  * coin box and toasts. Text updates are throttled to ten a second.
  */
-import { KF } from "@netnetcapital/engine/game";
-import type { CompiledGame, RaceInfo } from "@netnetcapital/engine/game";
-import { BOT_PLAYER_BASE, kartCoinCount } from "@netnetcapital/engine-sim";
-import type { KartTrack } from "@netnetcapital/engine-sim";
+import { KF } from "@netforge/engine/game";
+import type { CompiledGame, RaceInfo } from "@netforge/engine/game";
+import { BOT_PLAYER_BASE, kartCoinCount } from "@netforge/engine-sim";
+import type { KartTrack } from "@netforge/engine-sim";
 import { RULE_NAMES } from "./names.js";
 import type { SceneEntity } from "./scene.js";
 import { kartColor } from "./scene.js";

@@ -12,9 +12,9 @@
  * production, nothing for an idle tab.
  *
  * This file is the whole game as the model writes it: declarations only,
- * against the typed API in @netnetcapital/engine.
+ * against the typed API in @netforge/engine.
  */
-import { earn, game, plant, saltFlat, store, upgrade } from "@netnetcapital/engine";
+import { earn, game, plant, saltFlat, store, upgrade } from "@netforge/engine";
 
 export default game({
   template: "idle",

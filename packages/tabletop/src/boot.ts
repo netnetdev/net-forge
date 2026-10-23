@@ -17,13 +17,13 @@
  *   ?library=<url>    asset library base URL (default: VITE_LIBRARY_URL, else ./library)
  *   ?host=netnet, ?coin=, ?title=, ?player=   set by Net Forge (host.ts)
  */
-import type { GameManifest } from "@netnetcapital/engine";
-import type { SimAdapter } from "@netnetcapital/engine/net";
-import type { RulesInput, RulesWorld } from "@netnetcapital/engine/rules";
-import { createRenderer, FeelAudio, FrameStats, pickStyle, SoundPlayer } from "@netnetcapital/engine/runtime";
-import type { LookPreset } from "@netnetcapital/engine/runtime";
-import { soundBank } from "@netnetcapital/asset-library";
-import { LibraryClient } from "@netnetcapital/asset-library/three";
+import type { GameManifest } from "@netforge/engine";
+import type { SimAdapter } from "@netforge/engine/net";
+import type { RulesInput, RulesWorld } from "@netforge/engine/rules";
+import { createRenderer, FeelAudio, FrameStats, pickStyle, SoundPlayer } from "@netforge/engine/runtime";
+import type { LookPreset } from "@netforge/engine/runtime";
+import { soundBank } from "@netforge/asset-library";
+import { LibraryClient } from "@netforge/asset-library/three";
 import { InputClock, joinBoard, roomsEndpoint, type BoardConnection } from "./connect.js";
 import { hostFlags, namedPlayer, onHostPlayer, postReady, type PlayerMode } from "./host.js";
 import { Hud, wireStore, type EarnProgress, type HudLabels, type HudTheme } from "./hud.js";

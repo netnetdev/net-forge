@@ -1,6 +1,6 @@
 /**
  * The engine-sim SimAdapter: the netcode's seam (net/sim-adapter.ts) over
- * @netnetcapital/engine-sim, used identically by the room server
+ * @netforge/engine-sim, used identically by the room server
  * (authority, with a GameRunner) and the browser (prediction of its own
  * character only).
  *
@@ -28,8 +28,8 @@ import {
   EntityKind,
   KEEPER_MASK,
   KEEPER_SHIFT,
-} from "@netnetcapital/engine-sim";
-import type { BeamShot, EntityKindId, EntityState as SimEntityState, InputCommand, SimConfig, SimWorld } from "@netnetcapital/engine-sim";
+} from "@netforge/engine-sim";
+import type { BeamShot, EntityKindId, EntityState as SimEntityState, InputCommand, SimConfig, SimWorld } from "@netforge/engine-sim";
 import type { BitReader, BitWriter } from "../net/bits.js";
 import type { EntitySchema, EntityState } from "../net/schema.js";
 import type { Hitbox, HitscanRequest, PlayerId, PlayerRights, SimAdapter, SimCommand, SimEvent } from "../net/sim-adapter.js";

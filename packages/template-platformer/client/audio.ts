@@ -5,7 +5,7 @@
  * a jump and an air jump are told apart by pitch. Every cue keeps a synth
  * recipe as the fallback when a sample cannot load.
  */
-import type { FeelAudio } from "@netnetcapital/engine/runtime";
+import type { FeelAudio } from "@netforge/engine/runtime";
 
 /** Cue name -> library sound id (soundBank's `cues` overrides). */
 export const PLATFORM_SAMPLES: Readonly<Record<string, string>> = {

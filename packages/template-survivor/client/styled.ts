@@ -5,8 +5,8 @@
  * adds one line there.
  */
 import type { Material, Mesh, MeshStandardMaterial, Object3D, Scene } from "three/webgpu";
-import type { FieldSpec, StyleKit } from "@netnetcapital/engine/runtime";
-import type { ResolvedSimConfig } from "@netnetcapital/engine-sim";
+import type { FieldSpec, StyleKit } from "@netforge/engine/runtime";
+import type { ResolvedSimConfig } from "@netforge/engine-sim";
 
 /** A pillar as the scene fades it. */
 export interface ScenePillar {

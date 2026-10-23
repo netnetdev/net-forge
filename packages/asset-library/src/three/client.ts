@@ -9,9 +9,9 @@
  * Network: one GET per distinct library id, cached for the session. No
  * chain reads.
  */
-import type { AppearanceDef } from "@netnetcapital/engine";
-import { AssetLoader, markSprite, markSpriteMaterial, SPRITE_TEXEL, spriteBillboardNode } from "@netnetcapital/engine/runtime";
-import type { RendererHandle } from "@netnetcapital/engine/runtime";
+import type { AppearanceDef } from "@netforge/engine";
+import { AssetLoader, markSprite, markSpriteMaterial, SPRITE_TEXEL, spriteBillboardNode } from "@netforge/engine/runtime";
+import type { RendererHandle } from "@netforge/engine/runtime";
 import { Color, DoubleSide, Group, Mesh, MeshStandardNodeMaterial, NearestFilter, Object3D, PlaneGeometry, SRGBColorSpace, TextureLoader } from "three/webgpu";
 import { float, texture, uv, vec2, vec3, vec4 } from "three/tsl";
 import { resolveLook, type ResolvedLook } from "../look.js";

@@ -1,13 +1,13 @@
 /**
  * The fallback shapes. Every library id the game
  * references is drawn from the per-style asset library
- * (@netnetcapital/asset-library: real CC0 models, see scene.ts); these
+ * (@netforge/asset-library: real CC0 models, see scene.ts); these
  * primitives are what the scene shows until a model loads, and what it
  * keeps when the library is not built or not reachable, so the game always
  * draws. The keys are the template's original ids, which the library keeps
  * as aliases.
  */
-import { assetById } from "@netnetcapital/asset-library";
+import { assetById } from "@netforge/asset-library";
 import {
   BoxGeometry,
   BufferGeometry,

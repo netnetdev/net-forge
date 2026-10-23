@@ -150,7 +150,7 @@ export async function runHarness(opts: HarnessOptions): Promise<HarnessReport> {
     }
   }
   if (manifest && manifest.weapons.size > 0) return runGame(manifest, opts);
-  const sim = await import("@netnetcapital/engine-sim");
+  const sim = await import("@netforge/engine-sim");
   await sim.initSim();
   const tickRate = opts.tickRate ?? sim.DEFAULT_TICK_RATE;
   const world = sim.createWorld({ tickRate, seed: opts.seed ?? 1, enemies: { target: opts.enemies ?? 500 } });
@@ -174,7 +174,7 @@ export async function runHarness(opts: HarnessOptions): Promise<HarnessReport> {
   const perf = (globalThis as { performance?: { now(): number } }).performance;
   const now = () => (perf ? perf.now() : Date.now());
   for (let t = 0; t < opts.ticks; t++) {
-    const inputs = new Map<number, import("@netnetcapital/engine-sim").InputCommand>();
+    const inputs = new Map<number, import("@netforge/engine-sim").InputCommand>();
     for (let p = 1; p <= bots; p++) {
       yaw[p] = (yaw[p] ?? 0) + (rnd() - 0.5) * 0.4;
       inputs.set(p, {
@@ -222,7 +222,7 @@ export async function runHarness(opts: HarnessOptions): Promise<HarnessReport> {
 }
 
 async function runGame(manifest: import("./registry.js").GameManifest, opts: HarnessOptions): Promise<HarnessReport> {
-  const sim = await import("@netnetcapital/engine-sim");
+  const sim = await import("@netforge/engine-sim");
   const { compileGame } = await import("../game/compile.js");
   const { GameRunner } = await import("../game/runner.js");
   const { botInput, HumanBot } = await import("../game/bot.js");
@@ -323,7 +323,7 @@ async function runGame(manifest: import("./registry.js").GameManifest, opts: Har
         fun.field(runner.info().seconds, elite, bossesAt.length > 0, [...me.values()].map((m) => m.up));
       }
     }
-    const inputs = new Map<number, import("@netnetcapital/engine-sim").InputCommand>();
+    const inputs = new Map<number, import("@netforge/engine-sim").InputCommand>();
     for (let p = 1; p <= bots; p++) {
       if (arena) {
         // Arena: playtest players play like the seat bots (the runner's autopilot).
@@ -420,7 +420,7 @@ async function runGame(manifest: import("./registry.js").GameManifest, opts: Har
   return { ...base, failed };
 }
 
-type SimEventLike = import("@netnetcapital/engine-sim").SimEvent;
+type SimEventLike = import("@netforge/engine-sim").SimEvent;
 
 /** Collects FunMetrics while the harness plays. */
 class FunTracker {

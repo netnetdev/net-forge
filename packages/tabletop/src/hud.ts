@@ -6,8 +6,8 @@
  * and the loading banner. Each template themes it with its own colours and
  * type and adds its own panels. Copy is labels, not sentences.
  */
-import type { GameManifest } from "@netnetcapital/engine";
-import type { RoomConnection } from "@netnetcapital/engine/net";
+import type { GameManifest } from "@netforge/engine";
+import type { RoomConnection } from "@netforge/engine/net";
 import type { KitStoreBridge, SkuPrice } from "./kit.js";
 import { gearOf, wireGear, wireStake } from "./stake.js";
 import { storeNote, type PlayerMode } from "./host.js";

@@ -1,6 +1,6 @@
 // The local play host's authoritative loop: one world, a fixed tick, one
 // input queue per player and per-player delta snapshots, built only from
-// the engine's open netcode (@netnetcapital/engine/net). It is written for
+// the engine's open netcode (@netforge/engine/net). It is written for
 // one computer: no lag compensation history (hitscans resolve against the
 // current hitboxes, which is exact at local latency), no run log, no
 // replay, and nothing that pays anyone.
@@ -23,7 +23,7 @@ import {
   type SimAdapter,
   type SimCommand,
   type SimEvent,
-} from "@netnetcapital/engine/net";
+} from "@netforge/engine/net";
 
 /** What each player is sent: everything within `radius` of them (world units), nearest first, up to the caps. */
 export interface LocalAoi {

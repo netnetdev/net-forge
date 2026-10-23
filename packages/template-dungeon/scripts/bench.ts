@@ -2,8 +2,8 @@
 // game's own director plus a held crowd, several repeats. Prints mean and
 // p99 ms per tick for each repeat.
 //
-//   pnpm --filter @netnetcapital/template-dungeon bench -- --repeats 3 --seconds 30
-import { engine } from "@netnetcapital/engine";
+//   pnpm --filter @netforge/template-dungeon bench -- --repeats 3 --seconds 30
+import { engine } from "@netforge/engine";
 import "../src/manifest.js";
 
 function arg(name: string, dflt: string): string {

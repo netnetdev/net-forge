@@ -1,6 +1,6 @@
 import { beforeAll, beforeEach, describe, expect, it } from "vitest";
-import { addPlayer, captureState, createWorld, decodeTelegraph, destroyWorld, EntityFlag, EntityKind, initSim, step, Telegraph } from "@netnetcapital/engine-sim";
-import type { SimEvent, SimWorld } from "@netnetcapital/engine-sim";
+import { addPlayer, captureState, createWorld, decodeTelegraph, destroyWorld, EntityFlag, EntityKind, initSim, step, Telegraph } from "@netforge/engine-sim";
+import type { SimEvent, SimWorld } from "@netforge/engine-sim";
 import { earn, game, prefab, system, weapon } from "../src/index.js";
 import { GameRunner, collectManifest, compileGame, resetRegistry } from "../src/game/index.js";
 import type { CompiledGame } from "../src/game/index.js";

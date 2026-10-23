@@ -7,7 +7,7 @@
  * another circuit. Seat bots fill the grid so a race always has a field.
  *
  * This file is the whole game as the model writes it: declarations only,
- * against the typed API in @netnetcapital/engine. Everything else (the kart
+ * against the typed API in @netforge/engine. Everything else (the kart
  * physics, netcode, renderer, track streaming, bots, referee) is the
  * template's machinery.
  *
@@ -15,7 +15,7 @@
  * map). points is the closed centreline in driving order; boosts and coins
  * are [lap fraction 0..1, lateral -1..1 of the half width].
  */
-import { earn, game, store, system, upgrade } from "@netnetcapital/engine";
+import { earn, game, store, system, upgrade } from "@netforge/engine";
 
 /** Coins in a row: n coins from lap fraction f, `gap` of a lap apart, at one lateral. */
 const coinRow = (f: number, lateral: number, n: number, gap = 0.006): [number, number][] => Array.from({ length: n }, (_, i) => [f + i * gap, lateral]);

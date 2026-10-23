@@ -1,6 +1,6 @@
 import { beforeAll, beforeEach, describe, expect, it } from "vitest";
-import { BOT_PLAYER_BASE, addPlayer, arenaSpawn, createWorld, destroyWorld, initSim, listPlayers, step } from "@netnetcapital/engine-sim";
-import type { InputCommand } from "@netnetcapital/engine-sim";
+import { BOT_PLAYER_BASE, addPlayer, arenaSpawn, createWorld, destroyWorld, initSim, listPlayers, step } from "@netforge/engine-sim";
+import type { InputCommand } from "@netforge/engine-sim";
 import { GameDefinitionError, earn, game, prefab, store, system, upgrade, weapon } from "../src/index.js";
 import { GameRunner, collectManifest, compileGame, engineSimAdapter, resetRegistry } from "../src/game/index.js";
 import type { RunInfo } from "../src/game/index.js";

@@ -14,8 +14,8 @@ import {
   spawnEnemyScaled,
   spawnPickupAt,
   step,
-} from "@netnetcapital/engine-sim";
-import type { InputCommand, SimWorld } from "@netnetcapital/engine-sim";
+} from "@netforge/engine-sim";
+import type { InputCommand, SimWorld } from "@netforge/engine-sim";
 import { earn, game, prefab, system, weapon } from "../src/index.js";
 import { GameRunner, collectManifest, compileGame, resetRegistry } from "../src/game/index.js";
 import type { CompiledGame } from "../src/game/index.js";

@@ -1,19 +1,19 @@
-# @netnetcapital/asset-library
+# @netforge/asset-library
 
 The per-style asset library of the Net Forge game engine: real CC0
 characters, creatures, vehicles, weapons, props and sprites, addressed by
 library id (`style.lowpoly.truck`), never by URL.
 
 ```sh
-pnpm --filter @netnetcapital/asset-library fetch-packs   # download every pack from its official source into .cache
-pnpm --filter @netnetcapital/asset-library test
-pnpm --filter @netnetcapital/asset-library viewer  # contact sheets at http://localhost:5480/?style=lowpoly
-CHROME_BIN=... pnpm --filter @netnetcapital/asset-library shoot -- thumbs   # gallery thumbnails
+pnpm --filter @netforge/asset-library fetch-packs   # download every pack from its official source into .cache
+pnpm --filter @netforge/asset-library test
+pnpm --filter @netforge/asset-library viewer  # contact sheets at http://localhost:5480/?style=lowpoly
+CHROME_BIN=... pnpm --filter @netforge/asset-library shoot -- thumbs   # gallery thumbnails
 ```
 
 The optimized library (`.glb`/`.png` files, thumbnails and `index.json`) is
 built by the Net Forge asset pipeline, which is not part of this package.
-The built files ship as `@netnetcapital/asset-library-files`; copy its
+The built files ship as `@netforge/asset-library-files`; copy its
 `library/` folder to `packages/asset-library/.library` to use the viewer and
 `shoot` here, or pass that folder as `dir` to the Vite plugin.
 

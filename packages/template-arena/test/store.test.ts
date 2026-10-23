@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { initSim, listPlayers } from "@netnetcapital/engine-sim";
+import { initSim, listPlayers } from "@netforge/engine-sim";
 import { arenaAdapter, arenaGame, COSMETICS } from "../src/manifest.js";
 import { COIN_PRICES, COSMETIC_SKUS, mockKit, UPGRADE_SKUS, VOLT_COIN } from "../src/store.js";
 

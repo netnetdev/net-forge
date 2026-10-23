@@ -5,8 +5,8 @@
 >  1. Game code (src/game.ts) only DECLARES how things look and feel, with
 >     `look` on game() and `feel` on prefab() and weapon(). Templates draw it.
 >  2. Template code (client/ and the sim) uses the runtime APIs below:
->     the physics world in @netnetcapital/engine-sim, and the feel kit and
->     render stack in @netnetcapital/engine/runtime.
+>     the physics world in @netforge/engine-sim, and the feel kit and
+>     render stack in @netforge/engine/runtime.
 > Generated game code never imports the runtime. It cannot reach the
 > renderer, netcode or physics, and it does not need to.
 
@@ -73,11 +73,11 @@ and enemies behind a wall path round it through the doors on a flow
 field). Systems get onScreen(x, z) to bring enemies in where nobody is
 looking. A system's room logic reads CRYPT.rooms and CRYPT.roomAt(x, z).
 
-## 2. Template code: the physics world (@netnetcapital/engine-sim)
+## 2. Template code: the physics world (@netforge/engine-sim)
 
 Deterministic Rapier on client and server. No rendering dependency.
 
-import { initSim, createPhysics, restorePhysics, Layer } from "@netnetcapital/engine-sim";
+import { initSim, createPhysics, restorePhysics, Layer } from "@netforge/engine-sim";
 await initSim();
 const p = createPhysics({ gravity: [0, -20, 0], tickRate: 30 });
 p.addStaticBox([30, 0.5, 30], [0, -0.5, 0], { layer: Layer.Level });
@@ -113,9 +113,9 @@ const { events, characters } = p.step(new Map([[hero, { moveX: 1, moveZ: 0, jump
 - Rapier 0.21 already stops small fast spheres on thin walls; use round
   projectiles (thin spinning planks can still tunnel).
 
-## 3. Template code: game feel (@netnetcapital/engine/runtime)
+## 3. Template code: game feel (@netforge/engine/runtime)
 
-import { FeelKit } from "@netnetcapital/engine/runtime";
+import { FeelKit } from "@netforge/engine/runtime";
 const feel = new FeelKit({ preset: "default" });   // "subtle" | "default" | "heavy"
 feel.camera = rig;  feel.project = (x, y, z) => scene.project(x, y, z);  feel.particles = stack.particles;
 // per frame
@@ -138,7 +138,7 @@ Real sound (SoundPlayer): CC0 samples for the cues and one music loop from
 the asset library's audio section. Samples replace the synth recipes under
 the same cue names (the synth plays until a sample loads, or if it fails).
 
-import { soundBank } from "@netnetcapital/asset-library";
+import { soundBank } from "@netforge/asset-library";
 const sound = new SoundPlayer(feel.audio, { key: "mygame:sound", musicVolume: 0.35 });
 sound.load(soundBank(libraryBase));     // cues: hit impact kill bigKill hurt levelUp gem coin dash step land boss ui pick downed revive shoot
 sound.toggle();                         // the mute (effects and music), remembered; returns true when muted
@@ -155,7 +155,7 @@ they are.
 const hl = new HeroHighlight(character.root, { rim: 0xffd27a, outline: 0x140a02, outlineWidth: 0.05 });
 hl.strength = 0.4;  hl.dispose();
 
-## 4. Template code: rendering (@netnetcapital/engine/runtime)
+## 4. Template code: rendering (@netforge/engine/runtime)
 
 const stack = createRenderStack(handle, scene, rig.camera, { preset: "night", quality: "auto", bloom: true });
 stack.frame(dt, focus);       // instead of renderer.render(scene, camera)

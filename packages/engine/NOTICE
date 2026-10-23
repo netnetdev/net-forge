@@ -1,4 +1,4 @@
-@netnetcapital/engine
+@netforge/engine
 Copyright (c) 2026 NetNet Capital Management
 
 This package depends on, or takes patterns from, the following works.
@@ -14,7 +14,7 @@ Dependencies (unmodified, via npm)
 - zod 4.4.3 (https://github.com/colinhacks/zod), MIT.
 - @colyseus/sdk 0.18.5 (https://github.com/colyseus/colyseus), MIT, Endel Dreyer.
   Used by src/net/room-client.ts.
-- @netnetcapital/engine-sim (this repository); see its NOTICE for bitECS
+- @netforge/engine-sim (this repository); see its NOTICE for bitECS
   (MPL-2.0) and Rapier (Apache-2.0).
 
 Patterns

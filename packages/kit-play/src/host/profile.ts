@@ -3,8 +3,8 @@
 // settings and a display name. Everything is gone when `kit play` stops.
 // Nothing here is a wallet, a balance or a claim.
 
-import { metaPrice, openKeepers, ownedCosmetics, todaysGoals, utcDay, type ProfileSpec } from "@netnetcapital/engine/game";
-import type { GameProfile, ProfileStoreItem } from "@netnetcapital/engine/net";
+import { metaPrice, openKeepers, ownedCosmetics, todaysGoals, utcDay, type ProfileSpec } from "@netforge/engine/game";
+import type { GameProfile, ProfileStoreItem } from "@netforge/engine/net";
 
 interface Saved {
   readonly achievements: Map<string, number>;

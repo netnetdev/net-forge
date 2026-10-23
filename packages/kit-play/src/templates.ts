@@ -34,16 +34,16 @@ const board: LocalAoi = { radius: 60, maxEntities: 400, kindCaps: { [K.enemy]: 2
 const race = (radius: number): LocalAoi => ({ radius, maxEntities: 16, alwaysKinds: [K.player] });
 
 export const TEMPLATES: Readonly<Record<TemplateId, TemplateEntry>> = {
-  survivor: { id: "survivor", label: "survivor-like co-op", pkg: "@netnetcapital/template-survivor", adapter: "survivorAdapter", manifest: { fn: "survivorGame", field: "manifest" }, seats: 4, aoi: crowd(40, 250) },
-  arena: { id: "arena", label: "arena shooter", pkg: "@netnetcapital/template-arena", adapter: "arenaAdapter", manifest: { fn: "arenaGame", field: "manifest" }, seats: 16, aoi: { radius: 34, maxEntities: 260, kindCaps: { [K.projectile]: 140, [K.pickup]: 40, [K.enemy]: 60 }, alwaysKinds: [K.player] } },
-  "tower-defense": { id: "tower-defense", label: "tower defense", pkg: "@netnetcapital/template-tower", adapter: "towerAdapter", manifest: { fn: "towerManifest" }, seats: 4, aoi: board },
-  dungeon: { id: "dungeon", label: "co-op dungeon crawl", pkg: "@netnetcapital/template-dungeon", adapter: "dungeonAdapter", manifest: { fn: "dungeonGame", field: "manifest" }, seats: 4, aoi: crowd(36, 140) },
-  idle: { id: "idle", label: "idle", pkg: "@netnetcapital/template-idle", adapter: "idleAdapter", manifest: { fn: "idleManifest" }, seats: 8, aoi: board },
-  platformer: { id: "platformer", label: "platformer", pkg: "@netnetcapital/template-platformer", adapter: "platformerAdapter", manifest: { fn: "platformerGame", field: "manifest" }, seats: 8, aoi: race(200) },
-  cards: { id: "cards", label: "card battler", pkg: "@netnetcapital/template-cards", adapter: "cardsAdapter", manifest: { fn: "cardsManifest" }, seats: 2, aoi: board },
-  collector: { id: "collector", label: "monster collector", pkg: "@netnetcapital/template-collector", adapter: "collectorAdapter", manifest: { fn: "collectorManifest" }, seats: 8, aoi: board },
-  racer: { id: "racer", label: "kart racer", pkg: "@netnetcapital/template-racer", adapter: "racerAdapter", manifest: { fn: "racerGame", field: "manifest" }, seats: 8, aoi: race(400) },
-  party: { id: "party", label: "party co-op", pkg: "@netnetcapital/template-party", adapter: "partyAdapter", manifest: { fn: "partyGame", field: "manifest" }, seats: 8, aoi: crowd(40, 200) },
+  survivor: { id: "survivor", label: "survivor-like co-op", pkg: "@netforge/template-survivor", adapter: "survivorAdapter", manifest: { fn: "survivorGame", field: "manifest" }, seats: 4, aoi: crowd(40, 250) },
+  arena: { id: "arena", label: "arena shooter", pkg: "@netforge/template-arena", adapter: "arenaAdapter", manifest: { fn: "arenaGame", field: "manifest" }, seats: 16, aoi: { radius: 34, maxEntities: 260, kindCaps: { [K.projectile]: 140, [K.pickup]: 40, [K.enemy]: 60 }, alwaysKinds: [K.player] } },
+  "tower-defense": { id: "tower-defense", label: "tower defense", pkg: "@netforge/template-tower", adapter: "towerAdapter", manifest: { fn: "towerManifest" }, seats: 4, aoi: board },
+  dungeon: { id: "dungeon", label: "co-op dungeon crawl", pkg: "@netforge/template-dungeon", adapter: "dungeonAdapter", manifest: { fn: "dungeonGame", field: "manifest" }, seats: 4, aoi: crowd(36, 140) },
+  idle: { id: "idle", label: "idle", pkg: "@netforge/template-idle", adapter: "idleAdapter", manifest: { fn: "idleManifest" }, seats: 8, aoi: board },
+  platformer: { id: "platformer", label: "platformer", pkg: "@netforge/template-platformer", adapter: "platformerAdapter", manifest: { fn: "platformerGame", field: "manifest" }, seats: 8, aoi: race(200) },
+  cards: { id: "cards", label: "card battler", pkg: "@netforge/template-cards", adapter: "cardsAdapter", manifest: { fn: "cardsManifest" }, seats: 2, aoi: board },
+  collector: { id: "collector", label: "monster collector", pkg: "@netforge/template-collector", adapter: "collectorAdapter", manifest: { fn: "collectorManifest" }, seats: 8, aoi: board },
+  racer: { id: "racer", label: "kart racer", pkg: "@netforge/template-racer", adapter: "racerAdapter", manifest: { fn: "racerGame", field: "manifest" }, seats: 8, aoi: race(400) },
+  party: { id: "party", label: "party co-op", pkg: "@netforge/template-party", adapter: "partyAdapter", manifest: { fn: "partyGame", field: "manifest" }, seats: 8, aoi: crowd(40, 200) },
 };
 
 /** netnet.json's template field (the room template names are accepted too). */

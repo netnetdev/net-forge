@@ -1,5 +1,5 @@
 import { beforeAll, beforeEach, describe, expect, it } from "vitest";
-import { initSim } from "@netnetcapital/engine-sim";
+import { initSim } from "@netforge/engine-sim";
 import { dungeon, earn, game, GameDefinitionError, keeper, prefab, weapon } from "../src/index.js";
 import { collectManifest, compileGame, DUNGEON_VIEWS, resetRegistry, SURVIVOR_VIEWS, viewRadii } from "../src/game/index.js";
 

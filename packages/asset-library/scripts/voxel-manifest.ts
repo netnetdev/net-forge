@@ -6,7 +6,7 @@
  * (voxels tall) is chosen per model so every family reads as chunky voxel
  * art at the in-game camera distance.
  *
- *   pnpm --filter @netnetcapital/asset-library exec tsx scripts/voxel-manifest.ts
+ *   pnpm --filter @netforge/asset-library exec tsx scripts/voxel-manifest.ts
  *
  * Then rebuild the voxel style with the Net Forge asset pipeline.
  */

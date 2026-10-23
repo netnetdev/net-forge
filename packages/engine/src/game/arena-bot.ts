@@ -4,8 +4,8 @@
  * of what it sees, its small memory and the tick, so a room's run replays
  * exactly (run verification) and bots never draw from the sim's PRNG.
  */
-import { Button } from "@netnetcapital/engine-sim";
-import type { InputCommand } from "@netnetcapital/engine-sim";
+import { Button } from "@netforge/engine-sim";
+import type { InputCommand } from "@netforge/engine-sim";
 
 /** One opponent as an arena bot sees it. */
 export interface ArenaBotOpponent {

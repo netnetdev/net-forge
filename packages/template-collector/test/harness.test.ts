@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { engine } from "@netnetcapital/engine";
-import { CollectorAct, effectiveness, rulesAdapter } from "@netnetcapital/engine/rules";
+import { engine } from "@netforge/engine";
+import { CollectorAct, effectiveness, rulesAdapter } from "@netforge/engine/rules";
 import { collectorGame, collectorManifest } from "../src/manifest.js";
 
 const S = 30;

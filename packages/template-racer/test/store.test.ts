@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { initSim, KART_STATS } from "@netnetcapital/engine-sim";
-import { KF } from "@netnetcapital/engine/game";
+import { initSim, KART_STATS } from "@netforge/engine-sim";
+import { KF } from "@netforge/engine/game";
 import { COSMETICS, racerAdapter, racerGame } from "../src/manifest.js";
 import { COIN_PRICES, COSMETIC_SKUS, mockKit, TORQ_COIN, UPGRADE_SKUS } from "../src/store.js";
 

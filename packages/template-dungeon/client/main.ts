@@ -16,16 +16,16 @@
  *   ?library=<url>    asset library base URL (default: VITE_LIBRARY_URL, else ./library)
  *   ?host=netnet, ?coin=, ?title=, ?player=   set by Net Forge (client/host.ts)
  */
-import { initSim, keeperButtons, maxHealthFor, resolveConfig } from "@netnetcapital/engine-sim";
-import type { InputCommand } from "@netnetcapital/engine-sim";
-import { CROWD_UNITS, F, HumanBot, insideView, PLAYER_UNITS } from "@netnetcapital/engine/game";
-import type { EngineRoomWorld, RunInfo } from "@netnetcapital/engine/game";
-import { guestId, joinRoom, ProfileApi, rotateGuestId, savedSession, saveSession, signInWithWallet } from "@netnetcapital/engine/net";
-import type { Eip1193, GameProfile, ProfileAuth, RoomConnection } from "@netnetcapital/engine/net";
-import { createRenderer, DamageNumbers, FeelKit, FrameStats, pickStyle, SoundPlayer } from "@netnetcapital/engine/runtime";
-import type { FeelPresetName, QualityTier } from "@netnetcapital/engine/runtime";
-import { soundBank } from "@netnetcapital/asset-library";
-import { LibraryClient } from "@netnetcapital/asset-library/three";
+import { initSim, keeperButtons, maxHealthFor, resolveConfig } from "@netforge/engine-sim";
+import type { InputCommand } from "@netforge/engine-sim";
+import { CROWD_UNITS, F, HumanBot, insideView, PLAYER_UNITS } from "@netforge/engine/game";
+import type { EngineRoomWorld, RunInfo } from "@netforge/engine/game";
+import { guestId, joinRoom, ProfileApi, rotateGuestId, savedSession, saveSession, signInWithWallet } from "@netforge/engine/net";
+import type { Eip1193, GameProfile, ProfileAuth, RoomConnection } from "@netforge/engine/net";
+import { createRenderer, DamageNumbers, FeelKit, FrameStats, pickStyle, SoundPlayer } from "@netforge/engine/runtime";
+import type { FeelPresetName, QualityTier } from "@netforge/engine/runtime";
+import { soundBank } from "@netforge/asset-library";
+import { LibraryClient } from "@netforge/asset-library/three";
 import { COSMETICS, GAME_VERSION, PLACE, dungeonAdapter, dungeonGame, TEMPLATE } from "../src/manifest.js";
 import { COSMETIC_PRICE, mockKit, REVIVE_PRICE } from "../src/store.js";
 import type { KitStoreBridge, SkuPrice } from "../src/store.js";

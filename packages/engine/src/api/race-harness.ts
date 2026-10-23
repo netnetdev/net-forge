@@ -5,7 +5,7 @@
  * bots on top, and per-course route checks. Same report shape as the other
  * genres (harness.ts), with `fun.genre: "race"`.
  */
-import type { InputCommand } from "@netnetcapital/engine-sim";
+import type { InputCommand } from "@netforge/engine-sim";
 import type { GameManifest } from "./registry.js";
 import type { FunMetrics, HarnessOptions, HarnessReport } from "./harness.js";
 import type { RaceCore } from "../game/race.js";
@@ -44,7 +44,7 @@ async function setup(manifest: GameManifest): Promise<RaceSetup> {
 }
 
 export async function runRaceHarness(manifest: GameManifest, opts: HarnessOptions): Promise<HarnessReport> {
-  const { initSim } = await import("@netnetcapital/engine-sim");
+  const { initSim } = await import("@netforge/engine-sim");
   const { RaceRunner } = await import("../game/race.js");
   await initSim();
   const s = await setup(manifest);

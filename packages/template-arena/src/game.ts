@@ -8,11 +8,11 @@
  * seats so a round always has a fight.
  *
  * This file is the whole game as the model writes it: declarations only,
- * against the typed API in @netnetcapital/engine. Everything else (sim,
+ * against the typed API in @netforge/engine. Everything else (sim,
  * netcode, lag compensation, renderer, bots, referee) is the template's
  * machinery.
  */
-import { earn, game, prefab, store, system, upgrade, weapon } from "@netnetcapital/engine";
+import { earn, game, prefab, store, system, upgrade, weapon } from "@netforge/engine";
 
 export default game({
   template: "arena",

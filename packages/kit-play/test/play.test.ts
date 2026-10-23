@@ -2,11 +2,11 @@ import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { initSim } from "@netnetcapital/engine-sim";
-import { decodeSnapshot, encodeInputPacket, type InputCommand } from "@netnetcapital/engine/net";
-import { profileSpec } from "@netnetcapital/engine/game";
-import { cardsAdapter, cardsManifest } from "@netnetcapital/template-cards";
-import { survivorAdapter } from "@netnetcapital/template-survivor";
+import { initSim } from "@netforge/engine-sim";
+import { decodeSnapshot, encodeInputPacket, type InputCommand } from "@netforge/engine/net";
+import { profileSpec } from "@netforge/engine/game";
+import { cardsAdapter, cardsManifest } from "@netforge/template-cards";
+import { survivorAdapter } from "@netforge/template-survivor";
 import { LocalCore, resolveHitscan } from "../src/host/core.js";
 import { LocalProfiles } from "../src/host/profile.js";
 import { allowedRequest, fileUnder } from "../src/host/server.js";
@@ -28,7 +28,7 @@ describe("the game folder", () => {
     writeFileSync(join(dir, "src", "game.ts"), "export {};");
     writeFileSync(join(dir, "src", "names.json"), JSON.stringify({ title: "Gears", weapons: {}, upgrades: {}, enemies: { rat: "Rat" }, rules: {}, skus: {} }));
     const g = readGameFolder(dir);
-    expect(g.template.pkg).toBe("@netnetcapital/template-tower");
+    expect(g.template.pkg).toBe("@netforge/template-tower");
     expect(g.names?.title).toBe("Gears");
   });
 

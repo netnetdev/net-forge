@@ -60,7 +60,7 @@ describe("kit add + kit doctor on a clean game", () => {
     expect(wiredEntry.split("\n").filter((l) => l.includes("// netnet-kit"))).toHaveLength(2);
     expect(wiredEntry.startsWith("// Comet Sweep")).toBe(true);
     const pkg = JSON.parse(readFileSync(join(dir, "package.json"), "utf8")) as { dependencies: Record<string, string> };
-    expect(pkg.dependencies["@netnetcapital/kit"]).toBe(KIT_VERSION);
+    expect(pkg.dependencies["@netforge/kit"]).toBe(KIT_VERSION);
 
     // After add alone, the only error left is the mandatory earn call.
     const mid = runDoctor(dir);
@@ -194,11 +194,11 @@ describe("the docs carry exactly what the tests above apply", () => {
   const full = readFileSync(join(root, "llms-full.txt"), "utf8");
 
   it("llms.txt alone has the command and the earn edit an agent needs", () => {
-    expect(llms).toContain("npx @netnetcapital/kit add --earn <event_id>");
+    expect(llms).toContain("npx @netforge/kit add --earn <event_id>");
     expect(llms).toContain('import { earn } from "./netnet";');
     expect(llms).toContain('earn("wave_cleared");');
     expect(llms).toContain('window.netnetEarn("wave_cleared");');
-    expect(llms).toContain("npx @netnetcapital/kit doctor");
+    expect(llms).toContain("npx @netforge/kit doctor");
   });
 
   it("every doctor code is documented in llms-full.txt", () => {

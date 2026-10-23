@@ -1,5 +1,5 @@
 {
-  "name": "@netnetcapital/kit",
+  "name": "@netforge/kit",
   "version": "0.1.0",
   "description": "The NetNet Cabinet Kit: add a game token, a store, payments and a mandatory earn mechanism to any browser game on Robinhood Chain. Runtime library, CLI (add, init, doctor) and an MCP server, written for AI coding agents first.",
   "license": "MIT",

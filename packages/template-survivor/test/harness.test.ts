@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { engine } from "@netnetcapital/engine";
+import { engine } from "@netforge/engine";
 import { survivorGame } from "../src/manifest.js";
 
 describe("EMBERWATCH playtest bots (engine.test.run)", () => {

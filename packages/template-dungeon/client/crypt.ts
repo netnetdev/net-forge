@@ -15,7 +15,7 @@
 import { BufferAttribute, BufferGeometry, CanvasTexture, Color, CylinderGeometry, Group, Mesh, MeshBasicMaterial, MeshStandardMaterial, MeshStandardNodeMaterial, PlaneGeometry, RepeatWrapping, SphereGeometry, SRGBColorSpace, Vector3 } from "three/webgpu";
 import { clamp, dot, float, length, positionWorld, select, uniform } from "three/tsl";
 import type { Texture } from "three/webgpu";
-import type { WallBox } from "@netnetcapital/engine-sim";
+import type { WallBox } from "@netforge/engine-sim";
 
 /** Walls are drawn this tall (the sim's are 3 m): low enough that a wall south of you hides less of the room. */
 export const WALL_DRAW_HEIGHT = 2.2;

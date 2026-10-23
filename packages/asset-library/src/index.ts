@@ -1,7 +1,7 @@
 /**
- * @netnetcapital/asset-library: the per-style asset library of the NetNet
+ * @netforge/asset-library: the per-style asset library of the NetNet
  * game runtime. Pure data and lookups here (no
- * three.js); the renderer side is "@netnetcapital/asset-library/three".
+ * three.js); the renderer side is "@netforge/asset-library/three".
  */
 export { assetById, baseAsset, buildLibrary, cueSounds, galleryFor, idsForStyle, library, musicTracks, referenceableIds, search, soundById, stockedStyles } from "./library.js";
 export type { Library, SearchHit } from "./library.js";

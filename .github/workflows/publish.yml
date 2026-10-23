@@ -1,6 +1,6 @@
 # Publishes the Net Forge packages to npm when a tag named engine-v* is
 # pushed. Needs the NPM_TOKEN repository secret: an npm granular access token
-# with publish rights on the @netnetcapital scope.
+# with publish rights on the @netforge scope.
 #
 # Refuses to run while any engine package's LICENSE still says LICENSE
 # PENDING. Skips the Kit, and only the Kit, while its address registry holds

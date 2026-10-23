@@ -1,17 +1,17 @@
-# @netnetcapital/kit
+# @netforge/kit
 
 > The NetNet Cabinet Kit adds a game token, a store, payments in dollars (USDG) and a mandatory earn mechanism to an existing browser game on Robinhood Chain. This file is written for AI coding agents. Follow the steps in order and the integration passes `kit doctor` on the first try. The full reference is llms-full.txt in the same package.
 
 ## The six steps
 
-1. In the game's folder, run `npx @netnetcapital/kit add --earn <event_id>`. Pick an event id for the moment the player earns, in lowercase snake case (for example `wave_cleared`, `level_complete`, `boss_down`). The command detects the framework and writes three things: `netnet.config.json`, a bootstrap module named `netnet.ts` or `netnet.js` next to the game's entry, and two lines at the top of the entry (or one script tag in `index.html` for a static page).
+1. In the game's folder, run `npx @netforge/kit add --earn <event_id>`. Pick an event id for the moment the player earns, in lowercase snake case (for example `wave_cleared`, `level_complete`, `boss_down`). The command detects the framework and writes three things: `netnet.config.json`, a bootstrap module named `netnet.ts` or `netnet.js` next to the game's entry, and two lines at the top of the entry (or one script tag in `index.html` for a static page).
 2. Install dependencies with the project's package manager (`npm install`, `pnpm install`). A static HTML page needs no install, because its bootstrap loads the Kit from a CDN.
 3. Report the earn event at the exact moment the player earns it. This is mandatory. Every game must pay its own token for play, and `kit doctor` fails without it.
    - Bundled projects (Vite, React, Phaser, three.js): add `import { earn } from "./netnet";` to the file, then call `earn("wave_cleared");` where it happens.
    - Static HTML, Godot, Unity and Emscripten exports: call `window.netnetEarn("wave_cleared");`.
 4. Show and spend the game's coins with `kit.coins` (below). Every game has coins: 1 coin = 1 game token, shown under the token's own name, symbol and logo (`kit.coins.name()`, `kit.coins.symbol()`, `kit.coins.logo()`). Never write a generic "COIN" or "tokens" label.
-5. Optional: add store items with `npx @netnetcapital/kit add-item skin_gold --label "Gold skin" --usdg 1.00 --kind permanent`, then use them with `kit.store.owns("skin_gold")` and `await kit.store.buy("skin_gold")`.
-6. Run `npx @netnetcapital/kit doctor` and fix every ERROR line. Each line carries a one-line fix. Repeat until it prints PASS.
+5. Optional: add store items with `npx @netforge/kit add-item skin_gold --label "Gold skin" --usdg 1.00 --kind permanent`, then use them with `kit.store.owns("skin_gold")` and `await kit.store.buy("skin_gold")`.
+6. Run `npx @netforge/kit doctor` and fix every ERROR line. Each line carries a one-line fix. Repeat until it prints PASS.
 
 ## Run with no chain
 
@@ -63,4 +63,4 @@ await kit.profile.buy("unlock_ranger");  // a look or an unlock owned for good, 
 ## Optional
 
 - [Full reference](llms-full.txt): every function's contract, the errors, one example per engine, the MCP server.
-- MCP server: `npx @netnetcapital/kit mcp` (stdio). Tools: get_integration_guide, add_kit, add_store_item, add_earn_event, run_doctor.
+- MCP server: `npx @netforge/kit mcp` (stdio). Tools: get_integration_guide, add_kit, add_store_item, add_earn_event, run_doctor.

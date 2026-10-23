@@ -1,13 +1,13 @@
-# @netnetcapital/kit: full reference
+# @netforge/kit: full reference
 
 > The NetNet Cabinet Kit adds a game token, a store, payments in dollars (USDG) and a mandatory earn mechanism to an existing browser game on Robinhood Chain (chain id 4663). Written for AI coding agents first. Read "Quick start" and "Rules", then the section for the game's engine. Every function below states what it reads, what it costs in chain calls, and what it throws.
 
 ## Quick start
 
-1. Run `npx @netnetcapital/kit add --earn <event_id>` in the game's folder.
+1. Run `npx @netforge/kit add --earn <event_id>` in the game's folder.
 2. Install with the project's package manager. Static pages need no install.
 3. Call `earn("<event_id>")` (bundled) or `window.netnetEarn("<event_id>")` (static page or engine export) at the moment the player earns it.
-4. Run `npx @netnetcapital/kit doctor` until it prints PASS.
+4. Run `npx @netforge/kit doctor` until it prints PASS.
 
 What `kit add` writes:
 
@@ -15,7 +15,7 @@ What `kit add` writes:
 - `netnet.ts` or `netnet.js` next to the entry module: the bootstrap. It exports `startKit()`, `earn(event, n)`, the `kit` object and, between `// <kit:generated>` markers, the slug and the typed ids. `kit sync` rewrites only the generated block, so edit freely outside it.
 - Two lines at the top of the entry (bundled projects): `import { startKit } from "./netnet"; // netnet-kit` and `void startKit(); // netnet-kit`.
 - One script tag in `index.html` (static pages): `<script type="module" src="./netnet.js"></script>`. That bootstrap also sets `window.kit` and `window.netnetEarn` for classic scripts and engine bridges.
-- `@netnetcapital/kit` as an exact-pinned dependency in `package.json` (bundled projects).
+- `@netforge/kit` as an exact-pinned dependency in `package.json` (bundled projects).
 
 Running `kit add` twice changes nothing the second time.
 
@@ -53,7 +53,7 @@ These are the rules the protocol depends on. `kit doctor` checks each one.
 - `store[]`: `id` is lowercase snake case, at most 31 characters; on chain the SKU id is `keccak256(bytes(id))`. `kind` is `consumable` (can be bought again, e.g. revives), `permanent` (owned once, e.g. skins) or `pass` (runs for `duration` seconds; buying again extends it). At least one of `priceUsdg` (dollars) and `priceToken` (game tokens), as decimal strings.
 - `earn[]`: `id` is lowercase snake case, at most 31 characters; `label` is the plain-language rule shown on the game's store page.
 
-Edit the config with the CLI or the MCP tools so the bootstrap stays in sync. After a hand edit, run `npx @netnetcapital/kit sync`.
+Edit the config with the CLI or the MCP tools so the bootstrap stays in sync. After a hand edit, run `npx @netforge/kit sync`.
 
 ## Init
 
@@ -95,7 +95,7 @@ kit.subscribe(listener): () => void
 - `skus`: `{ id, priceUsdg, priceToken, consumable, active, owned }[]`, raw bigints.
 - `storeHalted`, `pendingRewards`, `updatedAt`, `error`.
 
-`subscribe` fires on every change and is shaped for React's `useSyncExternalStore`. In React, use `useKit()` from `@netnetcapital/kit/react`.
+`subscribe` fires on every change and is shaped for React's `useSyncExternalStore`. In React, use `useKit()` from `@netforge/kit/react`.
 
 `kit.refresh(): Promise<KitState>` reads again (one call). Use it only after something outside the game changed the wallet, behind a button the player presses. Never on a timer. Concurrent calls share one read.
 
@@ -366,7 +366,7 @@ The generated `EarnEvent` and `SkuId` types turn a misspelled id into a compile 
 
 ```tsx
 // src/main.tsx gets the two kit lines from kit add.
-import { useKit } from "@netnetcapital/kit/react";
+import { useKit } from "@netforge/kit/react";
 import { earn, kit } from "./netnet";
 
 export function Hud() {
@@ -432,7 +432,7 @@ Run `kit doctor` on the engine's source project too, so it can see the earn call
 
 ## Doctor
 
-`npx @netnetcapital/kit doctor [dir] [--json]` lints offline. Exit code 1 on any error.
+`npx @netforge/kit doctor [dir] [--json]` lints offline. Exit code 1 on any error.
 
 - `CONFIG_MISSING`, `CONFIG_INVALID`: run `kit add` or fix the JSON.
 - `EARN_RULE_MISSING`: add one with `kit add-earn <id> --label "..."`.
@@ -450,14 +450,14 @@ Run `kit doctor` on the engine's source project too, so it can see the earn call
 ## CLI
 
 ```
-npx @netnetcapital/kit add [dir] [--game <slug>] [--earn <id>] [--framework <name>] [--entry <file>] [--json]
-npx @netnetcapital/kit init [dir] [--game <slug>] [--earn <id>]
-npx @netnetcapital/kit doctor [dir] [--json]
-npx @netnetcapital/kit sync [dir]
-npx @netnetcapital/kit add-item <id> --label "..." [--usdg 0.50] [--token 10] [--kind consumable|permanent|pass] [--duration <seconds>] [--dir <dir>]
-npx @netnetcapital/kit add-earn <id> --label "..." [--description "..."] [--dir <dir>]
-npx @netnetcapital/kit guide [topic]
-npx @netnetcapital/kit mcp
+npx @netforge/kit add [dir] [--game <slug>] [--earn <id>] [--framework <name>] [--entry <file>] [--json]
+npx @netforge/kit init [dir] [--game <slug>] [--earn <id>]
+npx @netforge/kit doctor [dir] [--json]
+npx @netforge/kit sync [dir]
+npx @netforge/kit add-item <id> --label "..." [--usdg 0.50] [--token 10] [--kind consumable|permanent|pass] [--duration <seconds>] [--dir <dir>]
+npx @netforge/kit add-earn <id> --label "..." [--description "..."] [--dir <dir>]
+npx @netforge/kit guide [topic]
+npx @netforge/kit mcp
 ```
 
 Frameworks: `plain-html`, `vite`, `react`, `phaser`, `three`, `bundler` (any other bundled project), `godot`, `unity`, `emscripten`.
@@ -467,7 +467,7 @@ Frameworks: `plain-html`, `vite`, `react`, `phaser`, `three`, `bundler` (any oth
 Add it to an agent (Claude Code, Cursor and others that speak MCP over stdio):
 
 ```json
-{ "mcpServers": { "netnet-kit": { "command": "npx", "args": ["-y", "@netnetcapital/kit", "mcp"] } } }
+{ "mcpServers": { "netnet-kit": { "command": "npx", "args": ["-y", "@netforge/kit", "mcp"] } } }
 ```
 
 Tools:

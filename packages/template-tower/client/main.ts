@@ -5,7 +5,7 @@
  * decides every shot, kill, bounty and leak; your tinker is predicted, so
  * the cursor never waits for the server.
  *
- * URL parameters: see @netnetcapital/tabletop boot.ts (?room, ?server,
+ * URL parameters: see @netforge/tabletop boot.ts (?room, ?server,
  * ?style, ?autopilot, ?preview, ?stats, ?shapes, ?webgl, Net Forge flags).
  */
 import {
@@ -28,10 +28,10 @@ import {
   SRGBColorSpace,
   Vector3,
 } from "three/webgpu";
-import type { InterpolatedEntity } from "@netnetcapital/engine/net";
-import { bestTowerTile, CreepFlag, ENTITY_BASE, RF, RulesKind, TILE_M, tileAt, tileCenter, tileKey, TowerAct, UNITS } from "@netnetcapital/engine/rules";
-import type { RulesInput } from "@netnetcapital/engine/rules";
-import { $, bootBoard, cssColor, type BoardView, type Placed } from "@netnetcapital/tabletop";
+import type { InterpolatedEntity } from "@netforge/engine/net";
+import { bestTowerTile, CreepFlag, ENTITY_BASE, RF, RulesKind, TILE_M, tileAt, tileCenter, tileKey, TowerAct, UNITS } from "@netforge/engine/rules";
+import type { RulesInput } from "@netforge/engine/rules";
+import { $, bootBoard, cssColor, type BoardView, type Placed } from "@netforge/tabletop";
 import { COSMETICS, GAME_VERSION, PLACE, TEMPLATE, towerAdapter, towerGame, towerManifest } from "../src/manifest.js";
 import { COGSPIRE_COIN } from "../src/store.js";
 import { GATE_MODEL, ROCK_MODEL, SMALL_DECOR, SPIRE_MODEL, TREE_MODELS } from "./decor.js";

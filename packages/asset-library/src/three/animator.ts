@@ -5,7 +5,7 @@
  * attack, shoot, hit, die) to whatever each pack calls them, so templates
  * never deal in file clip names.
  */
-import { AnimatedCharacter } from "@netnetcapital/engine/runtime";
+import { AnimatedCharacter } from "@netforge/engine/runtime";
 import type { AnimationClip, Object3D } from "three/webgpu";
 import { clipFor, type Clip, type RigDef } from "../rigs.js";
 

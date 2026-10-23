@@ -11,8 +11,8 @@
  * for the variable jump), so a press shorter than a tick still counts: a
  * press is held for at least two ticks.
  */
-import { Button } from "@netnetcapital/engine-sim";
-import type { InputCommand } from "@netnetcapital/engine-sim";
+import { Button } from "@netforge/engine-sim";
+import type { InputCommand } from "@netforge/engine-sim";
 
 export class PlatformInput {
   private readonly keys = new Set<string>();

@@ -2,7 +2,7 @@
  * Player colours and the store's cosmetic finishes. The cosmetic id rides
  * in the player's `type` field (0 default, then COSMETICS in manifest.ts).
  */
-import { BOT_PLAYER_BASE } from "@netnetcapital/engine-sim";
+import { BOT_PLAYER_BASE } from "@netforge/engine-sim";
 import { KEEPER_COLORS } from "./names.js";
 
 /**

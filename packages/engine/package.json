@@ -1,5 +1,5 @@
 {
-  "name": "@netnetcapital/engine",
+  "name": "@netforge/engine",
   "version": "0.1.0",
   "description": "NetNet game runtime client: the typed game API the model writes against, and the three.js runtime (WebGPU with WebGL2 fallback) that plays it.",
   "license": "MIT",
@@ -69,7 +69,7 @@
   },
   "dependencies": {
     "@colyseus/sdk": "0.18.5",
-    "@netnetcapital/engine-sim": "workspace:*",
+    "@netforge/engine-sim": "workspace:*",
     "nipplejs": "1.0.4",
     "three": "0.186.1",
     "zod": "4.4.3"

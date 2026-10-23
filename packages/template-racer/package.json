@@ -1,5 +1,5 @@
 {
-  "name": "@netnetcapital/template-racer",
+  "name": "@netforge/template-racer",
   "version": "0.1.0",
   "description": "TORQUEBAY: a racer template of the NetNet game runtime, kart races on harbour circuits with drift mini-turbos, boost pads, coins and laps at 60 Hz, a streamed track and seat-filling bots. The game module, its browser client and its playtest bots.",
   "license": "MIT",
@@ -38,9 +38,9 @@
     "prepublishOnly": "node ../engine/scripts/license-gate.mjs"
   },
   "dependencies": {
-    "@netnetcapital/asset-library": "workspace:*",
-    "@netnetcapital/engine": "workspace:*",
-    "@netnetcapital/engine-sim": "workspace:*",
+    "@netforge/asset-library": "workspace:*",
+    "@netforge/engine": "workspace:*",
+    "@netforge/engine-sim": "workspace:*",
     "three": "0.186.1"
   },
   "devDependencies": {

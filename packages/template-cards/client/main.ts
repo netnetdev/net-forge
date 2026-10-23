@@ -7,13 +7,13 @@
  * duels you draft one of three new cards. Alone, an AI scribe of the
  * gauntlet takes the other seat. The room decides every draw, hit and win.
  *
- * URL parameters: see @netnetcapital/tabletop boot.ts.
+ * URL parameters: see @netforge/tabletop boot.ts.
  */
 import { BoxGeometry, CanvasTexture, Color, ConeGeometry, CylinderGeometry, Group, Mesh, MeshStandardMaterial, PlaneGeometry, SRGBColorSpace } from "three/webgpu";
-import type { InterpolatedEntity } from "@netnetcapital/engine/net";
-import { CardAct, RF, RulesKind, Target, UNITS } from "@netnetcapital/engine/rules";
-import type { RulesInput } from "@netnetcapital/engine/rules";
-import { bootBoard, cssColor, type BoardView, type Placed } from "@netnetcapital/tabletop";
+import type { InterpolatedEntity } from "@netforge/engine/net";
+import { CardAct, RF, RulesKind, Target, UNITS } from "@netforge/engine/rules";
+import type { RulesInput } from "@netforge/engine/rules";
+import { bootBoard, cssColor, type BoardView, type Placed } from "@netforge/tabletop";
 import { cardsAdapter, cardsGame, cardsManifest, COSMETICS, GAME_VERSION, PLACE, TEMPLATE } from "../src/manifest.js";
 import { INKWRIT_COIN } from "../src/store.js";
 import { LAMP_MODEL, SHELF_MODELS } from "./decor.js";

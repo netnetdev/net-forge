@@ -11,8 +11,8 @@
  *  - Bodies the cap held back become "crowded" multipliers on later spawns.
  *  - Recycles stragglers far off screen to the edge ahead of a moving player.
  */
-import { edgeSpawnPoint, enemyCount, entityHeadroom, listPlayers, recycleEnemies, setEnemySpeed, simRandom, spawnEnemyScaled } from "@netnetcapital/engine-sim";
-import type { SimWorld, SpawnScale } from "@netnetcapital/engine-sim";
+import { edgeSpawnPoint, enemyCount, entityHeadroom, listPlayers, recycleEnemies, setEnemySpeed, simRandom, spawnEnemyScaled } from "@netforge/engine-sim";
+import type { SimWorld, SpawnScale } from "@netforge/engine-sim";
 import type { Curve, DirectorDef } from "../api/schemas.js";
 
 /** Value of a curve at `t` seconds: linear between keyframes, held outside them. */

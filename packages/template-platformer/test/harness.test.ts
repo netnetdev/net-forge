@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { engine } from "@netnetcapital/engine";
-import { planCourse } from "@netnetcapital/engine/game";
+import { engine } from "@netforge/engine";
+import { planCourse } from "@netforge/engine/game";
 import { platformerGame } from "../src/manifest.js";
 
 describe("SKYLEDGE playtest", () => {

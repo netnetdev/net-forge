@@ -9,11 +9,11 @@
  * three new cards into your deck.
  *
  * This file is the whole game as the model writes it: declarations only,
- * against the typed API in @netnetcapital/engine. The duel, the draft, the
+ * against the typed API in @netforge/engine. The duel, the draft, the
  * shuffle, hidden hands, the AI, netcode, renderer and referee are the
  * template's machinery.
  */
-import { card, cardTable, earn, game, store, upgrade } from "@netnetcapital/engine";
+import { card, cardTable, earn, game, store, upgrade } from "@netforge/engine";
 
 export default game({
   template: "cards",

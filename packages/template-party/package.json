@@ -1,5 +1,5 @@
 {
-  "name": "@netnetcapital/template-party",
+  "name": "@netforge/template-party",
   "version": "0.1.0",
   "description": "ROMPHOUSE: a party co-op template on the NetNet game runtime: 2 to 8 friends in one playroom, five quick minigame rounds a show. The game module, its browser client and its playtest bots.",
   "license": "MIT",
@@ -41,9 +41,9 @@
     "prepublishOnly": "node ../engine/scripts/license-gate.mjs"
   },
   "dependencies": {
-    "@netnetcapital/asset-library": "workspace:*",
-    "@netnetcapital/engine": "workspace:*",
-    "@netnetcapital/engine-sim": "workspace:*",
+    "@netforge/asset-library": "workspace:*",
+    "@netforge/engine": "workspace:*",
+    "@netforge/engine-sim": "workspace:*",
     "nipplejs": "1.0.4",
     "three": "0.186.1"
   },

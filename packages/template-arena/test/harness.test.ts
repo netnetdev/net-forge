@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { engine } from "@netnetcapital/engine";
+import { engine } from "@netforge/engine";
 import { arenaGame } from "../src/manifest.js";
 
 const SECONDS = 60;

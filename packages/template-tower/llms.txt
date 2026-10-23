@@ -13,7 +13,7 @@
 
 ## Files
 
-- src/game.ts: THE GAME. Declarations against @netnetcapital/engine:
+- src/game.ts: THE GAME. Declarations against @netforge/engine:
   game(), towerBoard(), tower(), prefab() (the creeps), waves(), upgrade(),
   earn.rule(), earn.stake(), store.sku().
 - src/names.json: the title and every label players read. Towers go in

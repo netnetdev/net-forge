@@ -9,8 +9,8 @@
  *  - Touch: the kart accelerates by itself; left and right buttons steer,
  *    DRIFT and BRAKE buttons.
  */
-import { Button } from "@netnetcapital/engine-sim";
-import type { InputCommand } from "@netnetcapital/engine-sim";
+import { Button } from "@netforge/engine-sim";
+import type { InputCommand } from "@netforge/engine-sim";
 
 export class KartInput {
   private readonly keys = new Set<string>();

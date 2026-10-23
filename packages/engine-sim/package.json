@@ -1,5 +1,5 @@
 {
-  "name": "@netnetcapital/engine-sim",
+  "name": "@netforge/engine-sim",
   "version": "0.1.0",
   "description": "NetNet game runtime shared simulation: ECS, Rapier physics, fixed tick and snapshots. Runs identically in the browser and on the room server.",
   "license": "MIT",

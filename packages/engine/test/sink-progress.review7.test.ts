@@ -8,7 +8,7 @@
 // property; it FAILS while the finding stands.
 
 import { beforeAll, beforeEach, describe, expect, it } from "vitest";
-import { initSim } from "@netnetcapital/engine-sim";
+import { initSim } from "@netforge/engine-sim";
 import { earn, game, prefab, system, weapon } from "../src/index.js";
 import { GameRunner, collectManifest, compileGame, resetRegistry } from "../src/game/index.js";
 
@@ -37,7 +37,7 @@ function declareBossGame(): void {
 async function play(startRunAt: number | null): Promise<{ killTick: number; awards: string[] }> {
   declareBossGame();
   const g = compileGame(collectManifest());
-  const { createWorld, addPlayer, step } = await import("@netnetcapital/engine-sim");
+  const { createWorld, addPlayer, step } = await import("@netforge/engine-sim");
   const w = createWorld({ ...g.sim, seed: 3 });
   addPlayer(w, 1);
   const r = new GameRunner(g, w, { godMode: true });

@@ -1,5 +1,5 @@
 {
-  "name": "@netnetcapital/template-cards",
+  "name": "@netforge/template-cards",
   "version": "0.1.0",
   "description": "INKWRIT: the card battler template of the NetNet game runtime, one against one or against the AI, a gauntlet of duels with a draft between them, server-side shuffle and hidden hands. The game module, its browser client and its playtest bots.",
   "license": "MIT",
@@ -38,10 +38,10 @@
     "prepublishOnly": "node ../engine/scripts/license-gate.mjs"
   },
   "dependencies": {
-    "@netnetcapital/asset-library": "workspace:*",
-    "@netnetcapital/engine": "workspace:*",
-    "@netnetcapital/engine-sim": "workspace:*",
-    "@netnetcapital/tabletop": "workspace:*",
+    "@netforge/asset-library": "workspace:*",
+    "@netforge/engine": "workspace:*",
+    "@netforge/engine-sim": "workspace:*",
+    "@netforge/tabletop": "workspace:*",
     "three": "0.186.1"
   },
   "devDependencies": {

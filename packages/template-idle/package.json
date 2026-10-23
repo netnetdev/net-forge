@@ -1,5 +1,5 @@
 {
-  "name": "@netnetcapital/template-idle",
+  "name": "@netforge/template-idle",
   "version": "0.1.0",
   "description": "BRINEWORKS: the idle template of the NetNet game runtime, a shared salt flat for up to eight: pump brine, boil salt, cut crystals, fill the contract together. The game module, its browser client and its playtest bots.",
   "license": "MIT",
@@ -38,10 +38,10 @@
     "prepublishOnly": "node ../engine/scripts/license-gate.mjs"
   },
   "dependencies": {
-    "@netnetcapital/asset-library": "workspace:*",
-    "@netnetcapital/engine": "workspace:*",
-    "@netnetcapital/engine-sim": "workspace:*",
-    "@netnetcapital/tabletop": "workspace:*",
+    "@netforge/asset-library": "workspace:*",
+    "@netforge/engine": "workspace:*",
+    "@netforge/engine-sim": "workspace:*",
+    "@netforge/tabletop": "workspace:*",
     "three": "0.186.1"
   },
   "devDependencies": {

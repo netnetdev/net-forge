@@ -108,14 +108,14 @@ export function runDoctor(rootIn: string): DoctorReport {
   // 1. Config.
   const loaded = loadConfig(root);
   let config: KitProjectConfig | null = loaded.config;
-  if (!loaded.exists) add({ code: "CONFIG_MISSING", severity: "error", message: `${CONFIG_FILE} not found.`, fix: "Run: npx @netnetcapital/kit add" });
+  if (!loaded.exists) add({ code: "CONFIG_MISSING", severity: "error", message: `${CONFIG_FILE} not found.`, fix: "Run: npx @netforge/kit add" });
   else if (!config) for (const p of loaded.problems) add({ code: "CONFIG_INVALID", severity: "error", file: CONFIG_FILE, message: p, fix: `Correct ${CONFIG_FILE}; see llms.txt "Config".` });
   else passed.push("config");
 
   if (config) {
-    if (config.earn.length === 0) add({ code: "EARN_RULE_MISSING", severity: "error", file: CONFIG_FILE, message: "No earn rule. Every game must pay its own token for play.", fix: "Run: npx @netnetcapital/kit add-earn <id> --label \"...\" (e.g. wave_cleared)." });
+    if (config.earn.length === 0) add({ code: "EARN_RULE_MISSING", severity: "error", file: CONFIG_FILE, message: "No earn rule. Every game must pay its own token for play.", fix: "Run: npx @netforge/kit add-earn <id> --label \"...\" (e.g. wave_cleared)." });
     else passed.push("earn rule present");
-    if (config.store.length === 0) add({ code: "STORE_EMPTY", severity: "warn", file: CONFIG_FILE, message: "No store items.", fix: "Optional: npx @netnetcapital/kit add-item <id> --label \"...\" --usdg 0.50" });
+    if (config.store.length === 0) add({ code: "STORE_EMPTY", severity: "warn", file: CONFIG_FILE, message: "No store items.", fix: "Optional: npx @netforge/kit add-item <id> --label \"...\" --usdg 0.50" });
   }
 
   // 2. Sources.
@@ -127,11 +127,11 @@ export function runDoctor(rootIn: string): DoctorReport {
 
   // 3. Installed and loaded.
   if (HTML_HOSTED.has(project.framework)) {
-    const loads = sources.some((s) => /\.html?$/.test(s.file) && /netnet\.js|@netnetcapital\/kit/.test(s.text));
+    const loads = sources.some((s) => /\.html?$/.test(s.file) && /netnet\.js|@netforge\/kit/.test(s.text));
     if (!loads) add({ code: "KIT_NOT_LOADED", severity: "error", file: project.html ?? "index.html", message: "The page never loads the Kit.", fix: 'Add <script type="module" src="./netnet.js"></script> to the page (kit add does this).' });
     else passed.push("kit loaded");
   } else {
-    if (!hasKitDependency(project.pkg)) add({ code: "KIT_NOT_INSTALLED", severity: "error", file: "package.json", message: "@netnetcapital/kit is not a dependency.", fix: "Run: npx @netnetcapital/kit add (or add the dependency and install)." });
+    if (!hasKitDependency(project.pkg)) add({ code: "KIT_NOT_INSTALLED", severity: "error", file: "package.json", message: "@netforge/kit is not a dependency.", fix: "Run: npx @netforge/kit add (or add the dependency and install)." });
     else passed.push("kit installed");
   }
 
@@ -153,7 +153,7 @@ export function runDoctor(rootIn: string): DoctorReport {
         }
       }
       for (const x of slugs) {
-        if (x.slug !== config.game) add({ code: "INIT_GAME_MISMATCH", severity: "error", file: x.file, line: x.line, message: `The Kit starts for "${x.slug}" but ${CONFIG_FILE} says "${config.game}".`, fix: "Run: npx @netnetcapital/kit sync, and pass GAME from the bootstrap to kit.init." });
+        if (x.slug !== config.game) add({ code: "INIT_GAME_MISMATCH", severity: "error", file: x.file, line: x.line, message: `The Kit starts for "${x.slug}" but ${CONFIG_FILE} says "${config.game}".`, fix: "Run: npx @netforge/kit sync, and pass GAME from the bootstrap to kit.init." });
       }
     }
   }
@@ -176,7 +176,7 @@ export function runDoctor(rootIn: string): DoctorReport {
     if (config) {
       const known = new Set(config.earn.map((e) => e.id));
       for (const [ev, at] of events) {
-        if (!known.has(ev)) add({ code: "EARN_EVENT_UNKNOWN", severity: "error", file: at.file, line: at.line, message: `Earn event "${ev}" is not in ${CONFIG_FILE}.`, fix: `Run: npx @netnetcapital/kit add-earn ${ev} --label "..."` });
+        if (!known.has(ev)) add({ code: "EARN_EVENT_UNKNOWN", severity: "error", file: at.file, line: at.line, message: `Earn event "${ev}" is not in ${CONFIG_FILE}.`, fix: `Run: npx @netforge/kit add-earn ${ev} --label "..."` });
       }
       for (const rule of config.earn) {
         if (!events.has(rule.id)) add({ code: "EARN_RULE_UNUSED", severity: "warn", file: CONFIG_FILE, message: `Earn rule "${rule.id}" is never reported by game code.`, fix: `Call earn("${rule.id}") where it happens, or remove the rule.` });
@@ -189,7 +189,7 @@ export function runDoctor(rootIn: string): DoctorReport {
     const skus = new Set(config.store.map((s) => s.id));
     for (const s of game) {
       for (const m of s.text.matchAll(SKU_CALLS)) {
-        if (m[1] && !skus.has(m[1])) add({ code: "STORE_SKU_UNKNOWN", severity: "error", file: s.file, line: lineOf(s.text, m.index ?? 0), message: `Store item "${m[1]}" is not in ${CONFIG_FILE}.`, fix: `Run: npx @netnetcapital/kit add-item ${m[1]} --label "..." --usdg 0.50` });
+        if (m[1] && !skus.has(m[1])) add({ code: "STORE_SKU_UNKNOWN", severity: "error", file: s.file, line: lineOf(s.text, m.index ?? 0), message: `Store item "${m[1]}" is not in ${CONFIG_FILE}.`, fix: `Run: npx @netforge/kit add-item ${m[1]} --label "..." --usdg 0.50` });
       }
     }
   }

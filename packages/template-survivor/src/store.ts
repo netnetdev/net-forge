@@ -4,7 +4,7 @@
  * symbol and logo. The store sells a revive (spent while downed) and a
  * cosmetic keeper palette (permanent), both priced in coins.
  *
- * `KitStoreBridge` is the slice of @netnetcapital/kit's `Kit` this game
+ * `KitStoreBridge` is the slice of @netforge/kit's `Kit` this game
  * calls, with the Kit's own names (`kit.coins.*`, `kit.store.owns/buy`), so
  * the real Kit drops in unchanged. Until a game's token is live `mockKit()`
  * stands in, in memory. Earned coins are spent first (off chain, no wallet

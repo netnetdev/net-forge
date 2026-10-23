@@ -5,7 +5,7 @@
  * `scripts/fetch.ts` downloads each pack from its official source and the
  * Net Forge asset pipeline optimizes and publishes them.
  */
-import { appearanceSchema } from "@netnetcapital/engine";
+import { appearanceSchema } from "@netforge/engine";
 import { z } from "zod";
 
 /** Styles the library is designed for. Only lowpoly and pixel are stocked today. */

@@ -1,5 +1,5 @@
 /**
- * @netnetcapital/engine/game: runs a declared game on engine-sim. Used by
+ * @netforge/engine/game: runs a declared game on engine-sim. Used by
  * the room server, the headless harness and template clients; generated
  * game code never imports it (it sees only the declarative API).
  *

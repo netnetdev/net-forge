@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { engine } from "@netnetcapital/engine";
+import { engine } from "@netforge/engine";
 import { dungeonGame } from "../src/manifest.js";
 
 describe("CRYPTWICK playtest bots (engine.test.run)", () => {

@@ -1,5 +1,5 @@
 /**
- * Public types of @netnetcapital/engine-sim.
+ * Public types of @netforge/engine-sim.
  *
  * The sim is the one TypeScript module that runs identically in the browser
  * (client prediction) and on the room server (authority).

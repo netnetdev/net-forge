@@ -9,8 +9,8 @@
  * Clients predict their own body and read the rest from snapshots and the
  * broadcast `RaceInfo`.
  */
-import type { InputCommand } from "@netnetcapital/engine-sim";
-import { BOT_PLAYER_BASE, Button } from "@netnetcapital/engine-sim";
+import type { InputCommand } from "@netforge/engine-sim";
+import { BOT_PLAYER_BASE, Button } from "@netforge/engine-sim";
 import { SystemScheduler } from "../api/scheduler.js";
 import type { GameManifest, PlayerView } from "../api/registry.js";
 import { EarnTracker } from "./earn.js";

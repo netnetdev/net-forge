@@ -9,11 +9,11 @@
  * and it must fall before dusk.
  *
  * This file is the whole game as the model writes it: declarations only,
- * against the typed API in @netnetcapital/engine. Walking, encounters,
+ * against the typed API in @netforge/engine. Walking, encounters,
  * battles, catching, levels, netcode, renderer and referee are the
  * template's machinery.
  */
-import { creature, earn, game, marsh, move, store, upgrade } from "@netnetcapital/engine";
+import { creature, earn, game, marsh, move, store, upgrade } from "@netforge/engine";
 
 export default game({
   template: "collector",

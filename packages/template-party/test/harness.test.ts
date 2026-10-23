@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { engine } from "@netnetcapital/engine";
+import { engine } from "@netforge/engine";
 import { partyGame } from "../src/manifest.js";
 
 describe("ROMPHOUSE playtest bots (engine.test.run)", () => {

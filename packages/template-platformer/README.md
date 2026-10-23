@@ -18,7 +18,7 @@ fill empty places, so one person alone still has a race.
 
 ## How it plays on the server
 
-- The sim is `@netnetcapital/engine-sim`'s platform mode (`src/platform.ts`):
+- The sim is `@netforge/engine-sim`'s platform mode (`src/platform.ts`):
   pure TypeScript swept AABB movement on a 1/1024 m grid at 60 Hz, so a
   predicting client replays its own climber bit for bit. Climbers are
   ghosts to each other and coins are per climber, so nothing another player
@@ -26,7 +26,7 @@ fill empty places, so one person alone still has a race.
 - Jump feel: coyote time (0.1 s), a jump buffer (0.13 s), variable jump
   height (releasing Jump while rising cuts the rise), a lighter apex while
   Jump is held, a heavier fall, ceiling corner nudges, an air dash.
-- The race runner (`@netnetcapital/engine/game` `RaceRunner`) owns rounds:
+- The race runner (`@netforge/engine/game` `RaceRunner`) owns rounds:
   countdown, race, results, the next course. It pays `player.finished` (your
   own act), and `race.won` and `race.podium` only with another person in the
   round. Seat bots never earn.
@@ -39,7 +39,7 @@ fill empty places, so one person alone still has a race.
 ## Run it
 
 This template runs on your own computer with play money through
-`kit play` (`@netnetcapital/kit-play`). From the repository root:
+`kit play` (`@netforge/kit-play`). From the repository root:
 
 ```sh
 pnpm install --frozen-lockfile && pnpm build

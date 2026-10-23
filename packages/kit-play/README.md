@@ -1,4 +1,4 @@
-# @netnetcapital/kit-play
+# @netforge/kit-play
 
 `kit play` runs a game you downloaded from Net Forge on your own computer,
 with play money.
@@ -32,7 +32,7 @@ windows for more players.
   and pay nothing.
 
 The local host is built from the engine's open simulation
-(`@netnetcapital/engine`, `@netnetcapital/engine-sim`). The hosted room
+(`@netforge/engine`, `@netforge/engine-sim`). The hosted room
 server and the referee that decides real payouts are not part of it.
 Progress (achievements, looks bought with play money) lives in memory and
 is gone when `kit play` stops.
@@ -41,7 +41,7 @@ kit play is not a sandbox: it runs the game's code (the room host in Node,
 the client in your browser) with your permissions. Play only games whose
 code you trust, as with any program you run.
 
-`src/game.ts` may import only `@netnetcapital/engine`, as in the studio, so
+`src/game.ts` may import only `@netforge/engine`, as in the studio, so
 a game that plays here plays there. Send changes back with `/agent` in the
 studio (see your game's README).
 

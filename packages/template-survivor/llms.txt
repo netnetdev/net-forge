@@ -8,7 +8,7 @@
 
 ## Files
 
-- src/game.ts: THE GAME. Declarations against @netnetcapital/engine:
+- src/game.ts: THE GAME. Declarations against @netforge/engine:
   game(), prefab(), weapon(), upgrade(), director(), system(), earn.rule(),
   store.sku().
 - packages/engine/GAME-DESIGN.md: the design rules the playtest gate scores
@@ -25,7 +25,7 @@
 - Every game declares at least one earn.rule (mandatory earn) and one earn.stake (the buy-in run).
 - A survivor game needs one enemy prefab, one weapon and players.weapon.
 - Drops must be pickup prefabs. At most 15 weapons (evolutions count) and 8 upgrades.
-- Run `pnpm --filter @netnetcapital/template-survivor test` (playtest bots).
+- Run `pnpm --filter @netforge/template-survivor test` (playtest bots).
 
 ## Units
 
@@ -366,4 +366,4 @@ bot: "human" a human-like bot plays (200 ms reactions, kiting, a second per
 card) and report.fun has the fun metrics: first threat, first level,
 level at 1/3/6/9 minutes, downs before 1:00, enemies on screen at 0:30,
 touches in minute 1, spawns on screen, survival. Net Forge's gate scores
-them; `pnpm --filter @netnetcapital/template-survivor fun` prints the table.
+them; `pnpm --filter @netforge/template-survivor fun` prints the table.

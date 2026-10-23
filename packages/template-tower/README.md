@@ -9,7 +9,7 @@ shares the spire's bells. Hold twenty waves to keep the spire.
 A board genre (`packages/engine/src/rules`): the rules run on the room
 server at 30 Hz behind the same SimAdapter seam as the action templates,
 so the netcode, the referee, run verification, the store and the stake
-are the ones every template uses. The client kit is `@netnetcapital/tabletop`.
+are the ones every template uses. The client kit is `@netforge/tabletop`.
 
 | Path | What |
 |---|---|
@@ -37,7 +37,7 @@ are the ones every template uses. The client kit is `@netnetcapital/tabletop`.
 ## Run it
 
 This template runs on your own computer with play money through
-`kit play` (`@netnetcapital/kit-play`). From the repository root:
+`kit play` (`@netforge/kit-play`). From the repository root:
 
 ```sh
 pnpm install --frozen-lockfile && pnpm build

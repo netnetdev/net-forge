@@ -1,10 +1,10 @@
 /**
- * @netnetcapital/engine: the API a game is written against.
+ * @netforge/engine: the API a game is written against.
  *
  * This entry point is all a generated game may import. It is declarative
  * and typed (Zod-validated): game, prefab, system, earn, store, and the
  * headless test harness. Rendering, input, netcode and physics are not
- * reachable from here; they live in "@netnetcapital/engine/runtime", which
+ * reachable from here; they live in "@netforge/engine/runtime", which
  * templates and the Launcher shell use and game code does not.
  */
 export { dungeon, dungeonSchema } from "./api/dungeon.js";

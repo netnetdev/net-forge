@@ -1,6 +1,6 @@
 import { InstancedMesh, Material } from "three/webgpu";
 import type { BufferGeometry } from "three/webgpu";
-import type { RenderView } from "@netnetcapital/engine-sim";
+import type { RenderView } from "@netforge/engine-sim";
 import { lerp, lerpAngle } from "./interpolate.js";
 
 /**

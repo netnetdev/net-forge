@@ -8,8 +8,8 @@
  * -z (screen up). Upgrade picks are held for two ticks so the sim sees the
  * press edge even if a tick is skipped.
  */
-import { Button, keeperButtons } from "@netnetcapital/engine-sim";
-import type { InputCommand } from "@netnetcapital/engine-sim";
+import { Button, keeperButtons } from "@netforge/engine-sim";
+import type { InputCommand } from "@netforge/engine-sim";
 
 export class SurvivorInput {
   private readonly keys = new Set<string>();

@@ -6,7 +6,7 @@ against the gauntlet's AI scribes; a run is four duels with a draft of one
 of three cards after each.
 
 A board genre (`packages/engine/src/rules/cards.ts`) on the room server's
-SimAdapter seam, drawn with `@netnetcapital/tabletop`.
+SimAdapter seam, drawn with `@netforge/tabletop`.
 
 | Path | What |
 |---|---|
@@ -34,7 +34,7 @@ SimAdapter seam, drawn with `@netnetcapital/tabletop`.
 ## Run it
 
 This template runs on your own computer with play money through
-`kit play` (`@netnetcapital/kit-play`). From the repository root:
+`kit play` (`@netforge/kit-play`). From the repository root:
 
 ```sh
 pnpm install --frozen-lockfile && pnpm build

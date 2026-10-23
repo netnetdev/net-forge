@@ -1,5 +1,5 @@
 {
-  "name": "@netnetcapital/asset-library",
+  "name": "@netforge/asset-library",
   "version": "0.1.0",
   "description": "The per-style asset library of the Net Forge game engine: a manifest of CC0 models and sprites addressed by library id, shared rigs and clip sets, the look composer, the example gallery, and the three.js loader the templates draw with.",
   "license": "MIT",
@@ -48,7 +48,7 @@
     "prepublishOnly": "node ../engine/scripts/license-gate.mjs"
   },
   "dependencies": {
-    "@netnetcapital/engine": "workspace:*",
+    "@netforge/engine": "workspace:*",
     "fflate": "0.8.3",
     "three": "0.186.1",
     "zod": "4.4.3"

@@ -38,15 +38,15 @@ import {
   Vector3,
 } from "three/webgpu";
 import type { BufferGeometry } from "three/webgpu";
-import { CameraRig, createRenderStack, fieldBounds, HeroHighlight, styleKit } from "@netnetcapital/engine/runtime";
-import type { FeelKit, FieldSpec, RenderStack, RendererHandle, StyleKit } from "@netnetcapital/engine/runtime";
-import { CROWD_UNITS, F, PLAYER_UNITS } from "@netnetcapital/engine/game";
-import type { CompiledGame } from "@netnetcapital/engine/game";
-import { beamRange, BOT_PLAYER_BASE, EntityFlag, EntityKind, slotWeapon } from "@netnetcapital/engine-sim";
-import type { ResolvedSimConfig, WeaponDef } from "@netnetcapital/engine-sim";
-import type { CharacterAnimator, LibraryClient } from "@netnetcapital/asset-library/three";
-import { placeStatic } from "@netnetcapital/asset-library/three";
-import { assetById, restyleId } from "@netnetcapital/asset-library";
+import { CameraRig, createRenderStack, fieldBounds, HeroHighlight, styleKit } from "@netforge/engine/runtime";
+import type { FeelKit, FieldSpec, RenderStack, RendererHandle, StyleKit } from "@netforge/engine/runtime";
+import { CROWD_UNITS, F, PLAYER_UNITS } from "@netforge/engine/game";
+import type { CompiledGame } from "@netforge/engine/game";
+import { beamRange, BOT_PLAYER_BASE, EntityFlag, EntityKind, slotWeapon } from "@netforge/engine-sim";
+import type { ResolvedSimConfig, WeaponDef } from "@netforge/engine-sim";
+import type { CharacterAnimator, LibraryClient } from "@netforge/asset-library/three";
+import { placeStatic } from "@netforge/asset-library/three";
+import { assetById, restyleId } from "@netforge/asset-library";
 import { BOT_MODEL, HELD_MODEL, PILLAR_MODEL, PLAYER_HEIGHT, YARD_DECOR } from "./decor.js";
 import { fx, merge, resolveAsset } from "./library.js";
 import { finishOf, playerColor } from "./palette.js";

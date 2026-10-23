@@ -43,8 +43,8 @@ import {
   spawnEnemy,
   spawnEnemyScaled,
   spawnRingPoint,
-} from "@netnetcapital/engine-sim";
-import type { HitSource, InputCommand, PlayerSummary, SimEvent, SimWorld } from "@netnetcapital/engine-sim";
+} from "@netforge/engine-sim";
+import type { HitSource, InputCommand, PlayerSummary, SimEvent, SimWorld } from "@netforge/engine-sim";
 import { SystemScheduler } from "../api/scheduler.js";
 import type { PlayerView, SpawnEdgeOptions } from "../api/registry.js";
 import { Director } from "./director.js";

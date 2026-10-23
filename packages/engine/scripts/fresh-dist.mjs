@@ -14,8 +14,8 @@ import { fileURLToPath } from "node:url";
 const packages = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 // Build order: the engine depends on engine-sim.
 const ORDER = [
-  { dir: "engine-sim", name: "@netnetcapital/engine-sim" },
-  { dir: "engine", name: "@netnetcapital/engine" },
+  { dir: "engine-sim", name: "@netforge/engine-sim" },
+  { dir: "engine", name: "@netforge/engine" },
 ];
 
 /** Newest mtime (ms) of the files under `path`, or 0 when it does not exist. */

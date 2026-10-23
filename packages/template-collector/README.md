@@ -9,7 +9,7 @@ before dusk.
 
 A board genre (`packages/engine/src/rules/collector.ts`) on the room
 server at 30 Hz behind the same SimAdapter seam as every template. The
-client kit is `@netnetcapital/tabletop`.
+client kit is `@netforge/tabletop`.
 
 | Path | What |
 |---|---|
@@ -37,7 +37,7 @@ client kit is `@netnetcapital/tabletop`.
 ## Run it
 
 This template runs on your own computer with play money through
-`kit play` (`@netnetcapital/kit-play`). From the repository root:
+`kit play` (`@netforge/kit-play`). From the repository root:
 
 ```sh
 pnpm install --frozen-lockfile && pnpm build

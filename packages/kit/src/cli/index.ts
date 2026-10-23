@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// npx @netnetcapital/kit <command>
+// npx @netforge/kit <command>
 //
 //   add [dir]        wire the Kit into an existing game (config, bootstrap, 2 lines in the entry)
 //   init [dir]       write netnet.config.json only
@@ -9,7 +9,7 @@
 //   add-earn <id>    add or update an earn rule
 //   guide [topic]    print llms-full.txt (or one section)
 //   mcp              run the MCP server on stdio
-//   play [dir]       run a Net Forge game on this computer with play money (@netnetcapital/kit-play)
+//   play [dir]       run a Net Forge game on this computer with play money (@netforge/kit-play)
 
 import { realpathSync } from "node:fs";
 import { createRequire } from "node:module";
@@ -51,9 +51,9 @@ function parse(argv: string[]): Parsed {
 
 const str = (v: string | true | undefined): string | undefined => (typeof v === "string" ? v : undefined);
 
-const HELP = `@netnetcapital/kit ${KIT_VERSION}
+const HELP = `@netforge/kit ${KIT_VERSION}
 
-Usage: npx @netnetcapital/kit <command> [dir] [flags]
+Usage: npx @netforge/kit <command> [dir] [flags]
 
   add [dir]          Wire the Kit into an existing game.
                      --game <slug> --earn <id> --framework <plain-html|vite|react|phaser|three|bundler|godot|unity|emscripten> --entry <file>
@@ -65,7 +65,7 @@ Usage: npx @netnetcapital/kit <command> [dir] [flags]
   guide [topic]      Print the agent guide (llms-full.txt), or one section.
   mcp                Run the MCP server on stdio.
   play [dir]         Run a game downloaded from Net Forge on this computer, with play money
-                     (needs @netnetcapital/kit-play; kit play --help for its flags).
+                     (needs @netforge/kit-play; kit play --help for its flags).
 
 Agents: read llms.txt first. Every game must report at least one earn event.`;
 
@@ -74,7 +74,7 @@ function printChanges(io: CliIo, changes: Change[]): void {
 }
 
 /**
- * `kit play` lives in @netnetcapital/kit-play (the engine, the templates and
+ * `kit play` lives in @netforge/kit-play (the engine, the templates and
  * a local room host are far more than the Kit needs), found from the game
  * folder: a downloaded game's package.json lists it.
  */
@@ -83,14 +83,14 @@ async function runPlay(argv: string[], io: CliIo): Promise<number> {
   let entry: string | null = null;
   for (const base of [dir, io.cwd]) {
     try {
-      entry = createRequire(join(base, "package.json")).resolve("@netnetcapital/kit-play");
+      entry = createRequire(join(base, "package.json")).resolve("@netforge/kit-play");
       break;
     } catch {
       // next
     }
   }
   if (!entry) {
-    io.err("kit play needs @netnetcapital/kit-play. In your game's folder run: npm install (its package.json lists it), or npx @netnetcapital/kit-play");
+    io.err("kit play needs @netforge/kit-play. In your game's folder run: npm install (its package.json lists it), or npx @netforge/kit-play");
     return 1;
   }
   const mod = (await import(pathToFileURL(entry).href)) as { runPlayCli(argv: readonly string[], io: CliIo): Promise<number> };
@@ -141,7 +141,7 @@ export async function runCli(argv: string[], io: CliIo): Promise<number> {
       }
       case "add-item": {
         const id = positional[0];
-        if (!id) throw new CliError("USAGE", "add-item needs an id.", 'npx @netnetcapital/kit add-item revive --label "Revive" --usdg 0.25');
+        if (!id) throw new CliError("USAGE", "add-item needs an id.", 'npx @netforge/kit add-item revive --label "Revive" --usdg 0.25');
         const kind = str(flags["kind"]);
         const r = addStoreItem(resolve(io.cwd, str(flags["dir"]) ?? "."), {
           id,
@@ -157,7 +157,7 @@ export async function runCli(argv: string[], io: CliIo): Promise<number> {
       }
       case "add-earn": {
         const id = positional[0];
-        if (!id) throw new CliError("USAGE", "add-earn needs an id.", 'npx @netnetcapital/kit add-earn wave_cleared --label "Clear a wave"');
+        if (!id) throw new CliError("USAGE", "add-earn needs an id.", 'npx @netforge/kit add-earn wave_cleared --label "Clear a wave"');
         const r = addEarnEvent(resolve(io.cwd, str(flags["dir"]) ?? "."), {
           id,
           label: str(flags["label"]) ?? id,

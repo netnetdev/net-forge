@@ -1,5 +1,5 @@
 /**
- * @netnetcapital/asset-library/three: draw library models with three.js
+ * @netforge/asset-library/three: draw library models with three.js
  * (WebGPU with the WebGL2 fallback, through the engine runtime).
  */
 export { LibraryClient, spriteMultiple } from "./client.js";

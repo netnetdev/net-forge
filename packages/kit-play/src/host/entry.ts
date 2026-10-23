@@ -3,10 +3,10 @@
 // place of the template's), so the sim, the engine and the host share one
 // copy of every module, and imports the bundle.
 
-import { initSim } from "@netnetcapital/engine-sim";
-import { profileSpec } from "@netnetcapital/engine/game";
-import type { GameManifest } from "@netnetcapital/engine";
-import type { SimAdapter } from "@netnetcapital/engine/net";
+import { initSim } from "@netforge/engine-sim";
+import { profileSpec } from "@netforge/engine/game";
+import type { GameManifest } from "@netforge/engine";
+import type { SimAdapter } from "@netforge/engine/net";
 import type { LocalAoi } from "./core.js";
 import { LocalProfiles } from "./profile.js";
 import { startServer, type RunningHost } from "./server.js";

@@ -17,8 +17,8 @@ import {
   SphereGeometry,
   Vector3,
 } from "three/webgpu";
-import { EntityFlag, EntityKind, FixedStepper, addPlayer, createWorld, initSim, renderView, step } from "@netnetcapital/engine-sim";
-import type { SimEvent } from "@netnetcapital/engine-sim";
+import { EntityFlag, EntityKind, FixedStepper, addPlayer, createWorld, initSim, renderView, step } from "@netforge/engine-sim";
+import type { SimEvent } from "@netforge/engine-sim";
 import { CameraRig } from "../src/runtime/camera.js";
 import { InputController } from "../src/runtime/input.js";
 import { lerp, lerpAngle } from "../src/runtime/interpolate.js";

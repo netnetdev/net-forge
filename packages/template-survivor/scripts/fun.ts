@@ -2,9 +2,9 @@
 // human-like bots play the game headless on the server sim, and the
 // harness's fun metrics are summed over several seeds.
 //
-//   pnpm --filter @netnetcapital/template-survivor fun -- --runs 20 --minutes 10 --bots 1 --picks random
-import { engine } from "@netnetcapital/engine";
-import type { FunMetrics, HarnessReport } from "@netnetcapital/engine";
+//   pnpm --filter @netforge/template-survivor fun -- --runs 20 --minutes 10 --bots 1 --picks random
+import { engine } from "@netforge/engine";
+import type { FunMetrics, HarnessReport } from "@netforge/engine";
 import "../src/manifest.js";
 
 function arg(name: string, dflt: string): string {

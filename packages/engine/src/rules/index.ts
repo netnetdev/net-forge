@@ -1,8 +1,8 @@
 /**
- * @netnetcapital/engine/rules: the board genres (tower defense, idle, card
+ * @netforge/engine/rules: the board genres (tower defense, idle, card
  * battler, monster collector) on the room server's SimAdapter seam. Used by
  * the room server, the headless harness and the template clients; game code
- * declares content through @netnetcapital/engine and never imports this.
+ * declares content through @netforge/engine and never imports this.
  */
 export * from "./kit.js";
 export { rulesAdapter } from "./adapter.js";

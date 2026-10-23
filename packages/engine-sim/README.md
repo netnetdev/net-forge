@@ -1,4 +1,4 @@
-# @netnetcapital/engine-sim
+# @netforge/engine-sim
 
 The shared simulation of the Net Forge game engine.
 One TypeScript module that runs the same way in the browser (client
@@ -21,7 +21,7 @@ import {
   captureState, applyState, encodeSnapshot, decodeSnapshot, snapshotBaseTick,
   renderView, playerNetId, lastProcessedSeq, FixedStepper,
   Button, EntityKind, DEFAULT_TICK_RATE,
-} from "@netnetcapital/engine-sim";
+} from "@netforge/engine-sim";
 
 await initSim();                         // once per process (Rapier WASM)
 const world = createWorld({ tickRate: 30, seed: 7, enemies: { target: 2000 } });
@@ -100,9 +100,9 @@ seek when templates need it.
 ## Scripts
 
 ```sh
-pnpm --filter @netnetcapital/engine-sim test
-pnpm --filter @netnetcapital/engine-sim typecheck
-pnpm --filter @netnetcapital/engine-sim bench   # step cost at 2,000 and 4,000 enemies
+pnpm --filter @netforge/engine-sim test
+pnpm --filter @netforge/engine-sim typecheck
+pnpm --filter @netforge/engine-sim bench   # step cost at 2,000 and 4,000 enemies
 ```
 
 ## Content mode (Template 1)
@@ -184,7 +184,7 @@ events come back sorted, so the same calls on two worlds (or on a world
 and its restored snapshot) give bit-identical states.
 
 ```ts
-import { initSim, createPhysics, restorePhysics, Layer, layerMask } from "@netnetcapital/engine-sim";
+import { initSim, createPhysics, restorePhysics, Layer, layerMask } from "@netforge/engine-sim";
 
 await initSim();
 const phys = createPhysics({ tickRate: 30, gravity: [0, -20, 0] });

@@ -4,8 +4,8 @@
  * upgrade whenever one is offered. Used by the headless harness and by the
  * networked load bots (which see only their area of interest).
  */
-import { Button } from "@netnetcapital/engine-sim";
-import type { InputCommand } from "@netnetcapital/engine-sim";
+import { Button } from "@netforge/engine-sim";
+import type { InputCommand } from "@netforge/engine-sim";
 
 export interface BotView {
   readonly x: number;

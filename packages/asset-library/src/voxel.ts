@@ -21,5 +21,5 @@ export {
   surfaceVoxels,
   VoxelGrid,
   voxelizeTriangles,
-} from "@netnetcapital/engine/voxel";
-export type { MeshOptions, TriangleShader, VoxelMesh, VoxelSample } from "@netnetcapital/engine/voxel";
+} from "@netforge/engine/voxel";
+export type { MeshOptions, TriangleShader, VoxelMesh, VoxelSample } from "@netforge/engine/voxel";

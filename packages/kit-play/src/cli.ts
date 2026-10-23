@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // kit-play [dir] [--port 4663] [--host 127.0.0.1] [--players 1] [--no-open] [--library-url <url>]
-// Also reached as `kit play` through @netnetcapital/kit.
+// Also reached as `kit play` through @netforge/kit.
 
 import { realpathSync } from "node:fs";
 import { fileURLToPath } from "node:url";

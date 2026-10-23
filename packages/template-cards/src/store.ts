@@ -4,10 +4,10 @@
  * symbol and logo. INKWRIT sells four run upgrades (a store command named
  * after the upgrade grants one level for the rest of the run), two quill
  * finishes (permanent) and one piece of losable gear, all priced in coins.
- * The Kit bridge and its in-memory stand-in live in @netnetcapital/tabletop.
+ * The Kit bridge and its in-memory stand-in live in @netforge/tabletop.
  */
-export { mockKit } from "@netnetcapital/tabletop";
-export type { KitStoreBridge, MockKit, SkuPrice } from "@netnetcapital/tabletop";
+export { mockKit } from "@netforge/tabletop";
+export type { KitStoreBridge, MockKit, SkuPrice } from "@netforge/tabletop";
 
 /** Coin prices the client is wired to (they match store.sku(...) in game.ts; the generator's gate keeps them). */
 export const COIN_PRICES = { thick_vellum: 40, sharp_nib: 60, quick_ink: 40, spare_page: 50, skin_vermilion: 300, skin_gold_leaf: 500, bound_folio: 120 } as const;

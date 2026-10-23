@@ -1,6 +1,6 @@
 /**
  * Sim cost per tick at the week-2 arena size: 1 player, 2,000 enemies.
- * Run: pnpm --filter @netnetcapital/engine-sim bench
+ * Run: pnpm --filter @netforge/engine-sim bench
  */
 import { bench, describe } from "vitest";
 import { addPlayer, createWorld, initSim, step } from "../src/index.js";

@@ -8,7 +8,7 @@
  * keeps a synth recipe as the fallback when a sample cannot load. Others'
  * cues ("-o") are played quieter. Starts on the first user gesture.
  */
-import type { FeelAudio } from "@netnetcapital/engine/runtime";
+import type { FeelAudio } from "@netforge/engine/runtime";
 
 /** Arena cue name -> library sound id (soundBank's `cues` overrides). */
 export const ARENA_SAMPLES: Readonly<Record<string, string>> = {

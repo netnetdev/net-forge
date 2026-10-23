@@ -1,5 +1,5 @@
 {
-  "name": "@netnetcapital/template-survivor",
+  "name": "@netforge/template-survivor",
   "version": "0.1.0",
   "description": "EMBERWATCH: Template 1 of the NetNet game runtime, a survivor-like co-op for 4 players and 2,000 enemies. The game module, its browser client and its playtest bots.",
   "license": "MIT",
@@ -41,9 +41,9 @@
     "prepublishOnly": "node ../engine/scripts/license-gate.mjs"
   },
   "dependencies": {
-    "@netnetcapital/asset-library": "workspace:*",
-    "@netnetcapital/engine": "workspace:*",
-    "@netnetcapital/engine-sim": "workspace:*",
+    "@netforge/asset-library": "workspace:*",
+    "@netforge/engine": "workspace:*",
+    "@netforge/engine-sim": "workspace:*",
     "nipplejs": "1.0.4",
     "three": "0.186.1"
   },

@@ -23,8 +23,8 @@ import {
   resetPlatformPlayer,
   setPlatformFrozen,
   setPlatformLevel,
-} from "@netnetcapital/engine-sim";
-import type { InputCommand, PlatBox, PlatformLevel, PlatformPlayer, PlatformTuning, PlatformWorld, PlatStat } from "@netnetcapital/engine-sim";
+} from "@netforge/engine-sim";
+import type { InputCommand, PlatBox, PlatformLevel, PlatformPlayer, PlatformTuning, PlatformWorld, PlatStat } from "@netforge/engine-sim";
 import type { GameManifest } from "../api/registry.js";
 import { GameDefinitionError } from "../api/schemas.js";
 import type { BitReader, BitWriter } from "../net/bits.js";

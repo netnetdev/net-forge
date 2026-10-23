@@ -84,7 +84,7 @@ function deps(pkg: Record<string, unknown> | null): Record<string, string> {
 }
 
 export function hasKitDependency(pkg: Record<string, unknown> | null): boolean {
-  return "@netnetcapital/kit" in deps(pkg);
+  return "@netforge/kit" in deps(pkg);
 }
 
 /** The module script an index.html loads, resolved relative to root. */

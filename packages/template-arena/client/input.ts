@@ -13,8 +13,8 @@
  * yaw is the aim (0 aims up the screen). Presses are held two ticks so the
  * sim sees the edge even if a tick is skipped.
  */
-import { Button } from "@netnetcapital/engine-sim";
-import type { InputCommand } from "@netnetcapital/engine-sim";
+import { Button } from "@netforge/engine-sim";
+import type { InputCommand } from "@netforge/engine-sim";
 
 /** Screen point (CSS px) to an aim yaw from our character, or null before the first frame. */
 export type AimFrom = (clientX: number, clientY: number) => number | null;

@@ -1,6 +1,6 @@
 import { beforeAll, beforeEach, describe, expect, it } from "vitest";
-import { addPlayer, createWorld, destroyWorld, enemyCount, initSim, isOnScreen, listPlayers, simPaused, step } from "@netnetcapital/engine-sim";
-import type { InputCommand } from "@netnetcapital/engine-sim";
+import { addPlayer, createWorld, destroyWorld, enemyCount, initSim, isOnScreen, listPlayers, simPaused, step } from "@netforge/engine-sim";
+import type { InputCommand } from "@netforge/engine-sim";
 import { director, earn, engine, game, prefab, system, weapon } from "../src/index.js";
 import { GameRunner, SURVIVOR_VIEWS, collectManifest, compileGame, curveAt, footprint, resetRegistry, viewRadii } from "../src/game/index.js";
 
@@ -79,7 +79,7 @@ describe("ai is honest", () => {
       r.beforeStep();
       r.afterStep(step(w, new Map()).events);
     }
-    const { captureState } = await import("@netnetcapital/engine-sim");
+    const { captureState } = await import("@netforge/engine-sim");
     const es = captureState(w).entities.filter((e) => e.kind === 2);
     const post = es.find((e) => e.type === g.enemyType.get("post"));
     const bat = es.find((e) => e.type === g.enemyType.get("bat"));
@@ -132,7 +132,7 @@ describe("the spawn director", () => {
     addPlayer(w, 1, [50, 1, 50]); // hugging a corner: the old ring clamped spawns to the wall, on screen
     addPlayer(w, 2, [-20, 1, 0]);
     const r = new GameRunner(g, w);
-    const { entityPosition } = await import("@netnetcapital/engine-sim");
+    const { entityPosition } = await import("@netforge/engine-sim");
     let seen = 0;
     let total = 0;
     for (let t = 0; t < 30 * 4; t++) {

@@ -4,11 +4,11 @@
  * Copy is labels, not sentences.
  */
 import { DOT_ICON, STAT_ICONS, WEAPON_ICONS } from "./icons.js";
-import { decodeChoices, EntityFlag, maxHealthFor, slotLevel, slotWeapon, statLevel, xpForLevel } from "@netnetcapital/engine-sim";
-import type { WeaponDef } from "@netnetcapital/engine";
-import type { ResolvedSimConfig } from "@netnetcapital/engine-sim";
-import { F, PLAYER_UNITS, todaysGoals } from "@netnetcapital/engine/game";
-import type { CompiledGame, RunInfo } from "@netnetcapital/engine/game";
+import { decodeChoices, EntityFlag, maxHealthFor, slotLevel, slotWeapon, statLevel, xpForLevel } from "@netforge/engine-sim";
+import type { WeaponDef } from "@netforge/engine";
+import type { ResolvedSimConfig } from "@netforge/engine-sim";
+import { F, PLAYER_UNITS, todaysGoals } from "@netforge/engine/game";
+import type { CompiledGame, RunInfo } from "@netforge/engine/game";
 import type { SceneEntity } from "./scene.js";
 import { ENEMY_NAMES, RULE_NAMES, UPGRADE_NAMES, WEAPON_NAMES } from "./names.js";
 import { KEEPER_COLORS } from "./palette.js";

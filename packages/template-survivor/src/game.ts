@@ -9,11 +9,11 @@
  * revive them.
  *
  * This file is the whole game as the model writes it: declarations only,
- * against the typed API in @netnetcapital/engine. Everything else (sim,
+ * against the typed API in @netforge/engine. Everything else (sim,
  * netcode, renderer, referee) is the template's machinery. Design rules:
  * packages/engine/GAME-DESIGN.md.
  */
-import { achievement, director, earn, game, keeper, mission, prefab, store, system, title, upgrade, weapon } from "@netnetcapital/engine";
+import { achievement, director, earn, game, keeper, mission, prefab, store, system, title, upgrade, weapon } from "@netforge/engine";
 
 export default game({
   template: "survivor",

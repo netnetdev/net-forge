@@ -18,15 +18,15 @@
  *   ?library=<url>    asset library base URL (default: VITE_LIBRARY_URL, else ./library)
  *   ?host=netnet, ?coin=, ?title=, ?player=   set by Net Forge (client/host.ts)
  */
-import { initSim, PLAT_STATS } from "@netnetcapital/engine-sim";
-import type { InputCommand } from "@netnetcapital/engine-sim";
-import { PF, platformAutopilot } from "@netnetcapital/engine/game";
-import type { PlatformRoomWorld, RaceInfo } from "@netnetcapital/engine/game";
-import { guestId, joinRoom, savedSession } from "@netnetcapital/engine/net";
-import type { RoomConnection } from "@netnetcapital/engine/net";
-import { createRenderer, FeelAudio, FeelKit, FrameStats, pickStyle, SoundPlayer } from "@netnetcapital/engine/runtime";
-import { soundBank } from "@netnetcapital/asset-library";
-import { LibraryClient } from "@netnetcapital/asset-library/three";
+import { initSim, PLAT_STATS } from "@netforge/engine-sim";
+import type { InputCommand } from "@netforge/engine-sim";
+import { PF, platformAutopilot } from "@netforge/engine/game";
+import type { PlatformRoomWorld, RaceInfo } from "@netforge/engine/game";
+import { guestId, joinRoom, savedSession } from "@netforge/engine/net";
+import type { RoomConnection } from "@netforge/engine/net";
+import { createRenderer, FeelAudio, FeelKit, FrameStats, pickStyle, SoundPlayer } from "@netforge/engine/runtime";
+import { soundBank } from "@netforge/asset-library";
+import { LibraryClient } from "@netforge/asset-library/three";
 import { COSMETICS, GAME_VERSION, PLACE, platformerAdapter, platformerGame, TEMPLATE } from "../src/manifest.js";
 import { COSMETIC_SKUS, mockKit, UPGRADE_SKUS } from "../src/store.js";
 import type { KitStoreBridge, SkuPrice } from "../src/store.js";

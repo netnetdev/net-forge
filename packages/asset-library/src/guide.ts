@@ -4,7 +4,7 @@
  * model. Stable text (no dates, no per-request data) so it caches in the
  * model's system prefix.
  */
-import { APPEARANCE_PARTS } from "@netnetcapital/engine";
+import { APPEARANCE_PARTS } from "@netforge/engine";
 import { library } from "./library.js";
 import { ASSET_KINDS, type LibraryStyle } from "./schema.js";
 

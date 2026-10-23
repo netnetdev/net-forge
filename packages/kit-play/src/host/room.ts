@@ -1,11 +1,11 @@
 // The local play room: one Colyseus room per place, speaking the engine's
-// room protocol (@netnetcapital/engine/net protocol.ts) so the template
+// room protocol (@netforge/engine/net protocol.ts) so the template
 // clients connect to it exactly as they connect to a hosted room. Play
 // money only: there are no wallets, no sign-in, no stakes, no pots and no
 // claims here, and earn events are shown to the player but pay nothing.
 
 import { Room, type Client } from "@colyseus/core";
-import { packMeta, RESERVED_COMMANDS, type ProfileSpec } from "@netnetcapital/engine/game";
+import { packMeta, RESERVED_COMMANDS, type ProfileSpec } from "@netforge/engine/game";
 import {
   MSG_INPUT,
   MSG_SNAPSHOT,
@@ -22,7 +22,7 @@ import {
   type SimAdapter,
   type StakeMessage,
   type WelcomeMessage,
-} from "@netnetcapital/engine/net";
+} from "@netforge/engine/net";
 import { LocalCore, SNAPSHOT_HZ, type LocalAoi } from "./core.js";
 import { isGuestId, type LocalProfiles } from "./profile.js";
 

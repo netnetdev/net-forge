@@ -1,6 +1,6 @@
 /**
  * The audio section as a sound bank the engine's SoundPlayer loads
- * (`@netnetcapital/engine/runtime`): every cue's sample URL and mix gain,
+ * (`@netforge/engine/runtime`): every cue's sample URL and mix gain,
  * and one music loop. Pure data: the engine does the playing.
  */
 import { cueSounds, musicTracks, soundById } from "./library.js";

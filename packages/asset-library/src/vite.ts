@@ -1,7 +1,7 @@
 /**
  * Vite plugin: serve the built library at ./library in dev and copy it into
  * the build, so a template plays with real models offline once the library
- * is built (or copied from @netnetcapital/asset-library-files). With `ids`, only those assets
+ * is built (or copied from @netforge/asset-library-files). With `ids`, only those assets
  * (and the bases of variants) are copied: a draft build ships what it uses.
  * In production the page reads VITE_LIBRARY_URL (the published CID) instead
  * and nothing needs copying (`copy: false`).
@@ -64,7 +64,7 @@ export function assetLibrary(o: LibraryPluginOptions = {}): Plugin {
         const file = join(dir, rel);
         if (!file.startsWith(dir) || !existsSync(file) || !statSync(file).isFile()) {
           res.statusCode = 404;
-          res.end("not in the built library (see @netnetcapital/asset-library-files)");
+          res.end("not in the built library (see @netforge/asset-library-files)");
           return;
         }
         res.setHeader("content-type", TYPES[rel.split(".").pop() ?? ""] ?? "application/octet-stream");
@@ -75,7 +75,7 @@ export function assetLibrary(o: LibraryPluginOptions = {}): Plugin {
     generateBundle() {
       if (o.copy === false) return;
       if (!existsSync(dir)) {
-        this.warn(`no built asset library at ${dir}; the build draws primitive shapes (pass the library folder as dir; @netnetcapital/asset-library-files has the built library)`);
+        this.warn(`no built asset library at ${dir}; the build draws primitive shapes (pass the library folder as dir; @netforge/asset-library-files has the built library)`);
         return;
       }
       const files = o.ids ? filesFor([...o.ids(), ...(o.audio === false ? [] : library().sounds.keys())]) : allFiles(dir);

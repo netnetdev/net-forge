@@ -30,9 +30,9 @@ import {
   Vector3,
 } from "three/webgpu";
 import type { BufferGeometry, Material } from "three/webgpu";
-import { AnimatedCrowd, createRenderStack, styleKit } from "@netnetcapital/engine/runtime";
-import type { FieldSpec, LookPreset, RenderStack, RendererHandle, StyleKit } from "@netnetcapital/engine/runtime";
-import type { LibraryClient } from "@netnetcapital/asset-library/three";
+import { AnimatedCrowd, createRenderStack, styleKit } from "@netforge/engine/runtime";
+import type { FieldSpec, LookPreset, RenderStack, RendererHandle, StyleKit } from "@netforge/engine/runtime";
+import type { LibraryClient } from "@netforge/asset-library/three";
 
 export interface StageOptions {
   /** The art style drawn (the game's declared style or ?style=). */

@@ -19,7 +19,7 @@ import { namesModule, parseNames, type Names } from "./names.js";
 import { templateFor, type TemplateEntry } from "./templates.js";
 
 /** The only import a game module may make (the studio's rule, kept here so a game that plays locally plays in the studio). */
-export const ALLOWED_IMPORT = "@netnetcapital/engine";
+export const ALLOWED_IMPORT = "@netforge/engine";
 
 export interface PlayOptions {
   readonly dir: string;
@@ -86,10 +86,10 @@ export function templateDir(t: TemplateEntry, from: string): string {
   return packageDir(t.pkg, from, (p) => dirname(dirname(p)));
 }
 
-/** The built asset library shipped in @netnetcapital/asset-library-files, or null when it is not installed. */
+/** The built asset library shipped in @netforge/asset-library-files, or null when it is not installed. */
 export function libraryDir(from: string): string | null {
   try {
-    const dir = packageDir("@netnetcapital/asset-library-files/package.json", from, (p) => dirname(p));
+    const dir = packageDir("@netforge/asset-library-files/package.json", from, (p) => dirname(p));
     const lib = join(dir, "library");
     return existsSync(join(lib, "index.json")) ? lib : null;
   } catch {
@@ -198,7 +198,7 @@ export async function play(o: PlayOptions): Promise<Playing> {
   const work = join(dir, ".netnet", "play");
   const clientOut = join(work, "client");
   const lib = o.libraryUrl ? null : libraryDir(dir);
-  if (!o.libraryUrl && !lib) o.log("No asset library installed (@netnetcapital/asset-library-files): the game draws simple shapes. Pass --library-url <url> to load one from a mirror.");
+  if (!o.libraryUrl && !lib) o.log("No asset library installed (@netforge/asset-library-files): the game draws simple shapes. Pass --library-url <url> to load one from a mirror.");
   o.log(`Building ${g.names?.title ?? "your game"} (${g.template.label})...`);
   await buildClient(g, tplDir, clientOut, join(work, "vite-cache"));
   const bundle = await bundleHost(g, tplDir, join(work, "host.mjs"));

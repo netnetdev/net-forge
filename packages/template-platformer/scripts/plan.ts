@@ -1,5 +1,5 @@
-/** Print the route planner's result for every course: `pnpm --filter @netnetcapital/template-platformer exec tsx scripts/plan.ts`. */
-import { planCourse } from "@netnetcapital/engine/game";
+/** Print the route planner's result for every course: `pnpm --filter @netforge/template-platformer exec tsx scripts/plan.ts`. */
+import { planCourse } from "@netforge/engine/game";
 import { platformerGame } from "../src/manifest.js";
 
 const g = platformerGame();

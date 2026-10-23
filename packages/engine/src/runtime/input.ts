@@ -1,5 +1,5 @@
-import { Button } from "@netnetcapital/engine-sim";
-import type { InputCommand } from "@netnetcapital/engine-sim";
+import { Button } from "@netforge/engine-sim";
+import type { InputCommand } from "@netforge/engine-sim";
 
 export interface InputOptions {
   /** Radians of yaw/pitch per pixel of mouse movement. */

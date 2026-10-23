@@ -125,11 +125,11 @@ function addDependency(root: string, project: Project): Change {
   const pkg = project.pkg;
   if (!pkg) return { file: "package.json", action: "unchanged", note: "no package.json" };
   const deps = (pkg["dependencies"] && typeof pkg["dependencies"] === "object" ? pkg["dependencies"] : {}) as Record<string, string>;
-  if (deps["@netnetcapital/kit"]) return { file: "package.json", action: "unchanged", note: "already depends on the Kit" };
-  pkg["dependencies"] = { ...deps, "@netnetcapital/kit": KIT_VERSION };
+  if (deps["@netforge/kit"]) return { file: "package.json", action: "unchanged", note: "already depends on the Kit" };
+  pkg["dependencies"] = { ...deps, "@netforge/kit": KIT_VERSION };
   const indent = /^(\s+)"/m.exec(readText(root, "package.json"))?.[1] ?? "  ";
   writeText(root, "package.json", `${JSON.stringify(pkg, null, indent)}\n`);
-  return { file: "package.json", action: "updated", note: `adds @netnetcapital/kit ${KIT_VERSION} (exact)` };
+  return { file: "package.json", action: "updated", note: `adds @netforge/kit ${KIT_VERSION} (exact)` };
 }
 
 export interface AddOptions extends InitOptions {
@@ -176,11 +176,11 @@ export function addKit(rootIn: string, opts: AddOptions = {}): AddResult {
     changes.push(addDependency(root, project));
     nextSteps.push(`Install: ${project.packageManager} install`);
     nextSteps.push(`Call earn("${firstEarn}") (import { earn } from "./${BOOTSTRAP_BASENAME}") where the player earns it (mandatory: kit doctor fails without an earn call).`);
-    if (project.framework === "react") nextSteps.push(`Read Kit state in components with: import { useKit } from "@netnetcapital/kit/react"; const state = useKit();`);
+    if (project.framework === "react") nextSteps.push(`Read Kit state in components with: import { useKit } from "@netforge/kit/react"; const state = useKit();`);
   }
-  nextSteps.push("Add store items with `npx @netnetcapital/kit add-item <id> --label \"...\" --usdg 0.50` (optional).");
+  nextSteps.push("Add store items with `npx @netforge/kit add-item <id> --label \"...\" --usdg 0.50` (optional).");
   nextSteps.push("Run in mock mode (no chain): ?kit=mock in the URL, or VITE_NETNET_KIT_MOCK=1 for Vite.");
-  nextSteps.push("Check the integration: npx @netnetcapital/kit doctor");
+  nextSteps.push("Check the integration: npx @netforge/kit doctor");
   return { framework: project.framework, game: config.game, changes, nextSteps };
 }
 

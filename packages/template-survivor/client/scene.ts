@@ -30,15 +30,15 @@ import {
   Vector3,
 } from "three/webgpu";
 import type { BufferGeometry, Texture } from "three/webgpu";
-import { AnimatedCrowd, CameraRig, createRenderStack, fieldBounds, HeroHighlight } from "@netnetcapital/engine/runtime";
-import type { FeelKit, RenderStack, RendererHandle, StyleKit } from "@netnetcapital/engine/runtime";
-import { CROWD_UNITS, F, PLAYER_UNITS, threatOf } from "@netnetcapital/engine/game";
-import type { CompiledGame } from "@netnetcapital/engine/game";
-import type { FeelDef, LookDef } from "@netnetcapital/engine";
-import { EntityFlag, EntityKind, orbitAngle, PICKUP_SPECIAL, scaledWeapon, slotLevel, slotWeapon, weaponModsFor } from "@netnetcapital/engine-sim";
-import type { ResolvedSimConfig } from "@netnetcapital/engine-sim";
-import { assetById, restyleId } from "@netnetcapital/asset-library";
-import { placeStatic, type CharacterAnimator, type LibraryClient } from "@netnetcapital/asset-library/three";
+import { AnimatedCrowd, CameraRig, createRenderStack, fieldBounds, HeroHighlight } from "@netforge/engine/runtime";
+import type { FeelKit, RenderStack, RendererHandle, StyleKit } from "@netforge/engine/runtime";
+import { CROWD_UNITS, F, PLAYER_UNITS, threatOf } from "@netforge/engine/game";
+import type { CompiledGame } from "@netforge/engine/game";
+import type { FeelDef, LookDef } from "@netforge/engine";
+import { EntityFlag, EntityKind, orbitAngle, PICKUP_SPECIAL, scaledWeapon, slotLevel, slotWeapon, weaponModsFor } from "@netforge/engine-sim";
+import type { ResolvedSimConfig } from "@netforge/engine-sim";
+import { assetById, restyleId } from "@netforge/asset-library";
+import { placeStatic, type CharacterAnimator, type LibraryClient } from "@netforge/asset-library/three";
 import { PhysicsDressing } from "./debris.js";
 import { groundAt, styledArena, type StyledArena } from "./styled.js";
 import { DECOR, ENEMY_HEIGHT_PER_RADIUS, KEEPER_HEIGHT } from "./decor.js";

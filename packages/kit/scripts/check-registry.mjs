@@ -1,4 +1,4 @@
-// prepublishOnly guard for @netnetcapital/kit in the public source repo:
+// prepublishOnly guard for @netforge/kit in the public source repo:
 // refuses to publish while src/registry.generated.ts still holds a
 // PLACEHOLDER address. The registry is synced from NetNet's canonical
 // address registry upstream and arrives here with the export; it is never
@@ -13,6 +13,6 @@ const placeholders = readFileSync(file, "utf8")
   .filter((l) => l.includes('status: "PLACEHOLDER"'))
   .map((l) => l.trim().split(":")[0]);
 if (placeholders.length > 0) {
-  console.error(`@netnetcapital/kit: the address registry still has PLACEHOLDER entries (${placeholders.join(", ")}). Publish after they are verified upstream.`);
+  console.error(`@netforge/kit: the address registry still has PLACEHOLDER entries (${placeholders.join(", ")}). Publish after they are verified upstream.`);
   process.exit(1);
 }

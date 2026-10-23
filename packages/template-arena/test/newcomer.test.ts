@@ -10,9 +10,9 @@
  * person in the round).
  */
 import { describe, expect, it } from "vitest";
-import { addPlayer, arenaSpawn, Button, createWorld, destroyWorld, initSim, listPlayers, step, BOT_PLAYER_BASE } from "@netnetcapital/engine-sim";
-import type { InputCommand } from "@netnetcapital/engine-sim";
-import { GameRunner, sightBlocked } from "@netnetcapital/engine/game";
+import { addPlayer, arenaSpawn, Button, createWorld, destroyWorld, initSim, listPlayers, step, BOT_PLAYER_BASE } from "@netforge/engine-sim";
+import type { InputCommand } from "@netforge/engine-sim";
+import { GameRunner, sightBlocked } from "@netforge/engine/game";
 import { arenaGame } from "../src/manifest.js";
 
 interface Outcome {

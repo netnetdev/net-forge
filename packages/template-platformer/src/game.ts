@@ -8,7 +8,7 @@
  * so a round always has a race.
  *
  * This file is the whole game as the model writes it: declarations only,
- * against the typed API in @netnetcapital/engine. Everything else (the
+ * against the typed API in @netforge/engine. Everything else (the
  * motor, netcode, renderer, bots, route planner, referee) is the template's
  * machinery.
  *
@@ -18,7 +18,7 @@
  * [x, y, width, height]; springs are [x, y, power]; coins and checkpoints
  * are [x, y].
  */
-import { earn, game, store, system, upgrade } from "@netnetcapital/engine";
+import { earn, game, store, system, upgrade } from "@netforge/engine";
 
 /** Ground from x0 to x1, its top at y (4 m deep). */
 const ground = (x0: number, x1: number, y = 0): [number, number, number, number] => [x0, y - 4, x1 - x0, 4];

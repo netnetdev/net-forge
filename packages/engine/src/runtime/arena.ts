@@ -27,8 +27,8 @@ import {
   initSim,
   renderView,
   step,
-} from "@netnetcapital/engine-sim";
-import type { RenderView, SimConfig, SimEvent, SimWorld } from "@netnetcapital/engine-sim";
+} from "@netforge/engine-sim";
+import type { RenderView, SimConfig, SimEvent, SimWorld } from "@netforge/engine-sim";
 import { CameraRig } from "./camera.js";
 import { InstancedCrowd } from "./crowd.js";
 import { InputController } from "./input.js";

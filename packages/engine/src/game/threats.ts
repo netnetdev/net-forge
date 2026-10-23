@@ -3,8 +3,8 @@
  * One reader for the client's decals and the playtest bots' dodging, so
  * what players see is exactly what the bots react to.
  */
-import { decodeTelegraph, EntityFlag, EntityKind, ROLE_DEFAULTS, Telegraph } from "@netnetcapital/engine-sim";
-import type { EnemyTypeDef } from "@netnetcapital/engine-sim";
+import { decodeTelegraph, EntityFlag, EntityKind, ROLE_DEFAULTS, Telegraph } from "@netforge/engine-sim";
+import type { EnemyTypeDef } from "@netforge/engine-sim";
 
 /** One warning on the ground. Lanes run from (x, z) along (dx, dz) for `len` m with half width `r`. */
 export interface ThreatShape {

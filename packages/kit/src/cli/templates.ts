@@ -8,8 +8,8 @@ export const GEN_START = "// <kit:generated>";
 export const GEN_END = "// </kit:generated>";
 export const ENTRY_MARKER = "// netnet-kit";
 export const BOOTSTRAP_BASENAME = "netnet";
-export const CDN_URL = `https://cdn.jsdelivr.net/npm/@netnetcapital/kit@${KIT_VERSION}/+esm`;
-export const DOCS_URL = `https://cdn.jsdelivr.net/npm/@netnetcapital/kit@${KIT_VERSION}/llms.txt`;
+export const CDN_URL = `https://cdn.jsdelivr.net/npm/@netforge/kit@${KIT_VERSION}/+esm`;
+export const DOCS_URL = `https://cdn.jsdelivr.net/npm/@netforge/kit@${KIT_VERSION}/llms.txt`;
 
 function union(ids: string[]): string {
   return ids.length === 0 ? "never" : ids.map((i) => JSON.stringify(i)).join(" | ");
@@ -19,7 +19,7 @@ function union(ids: string[]): string {
 export function generatedBlock(config: KitProjectConfig, ts: boolean): string {
   const store = config.store.map((s) => ({ id: s.id, kind: s.kind, ...(s.priceUsdg ? { priceUsdg: s.priceUsdg } : {}), ...(s.priceToken ? { priceToken: s.priceToken } : {}), ...(s.duration ? { duration: s.duration } : {}) }));
   const lines = [
-    `${GEN_START} from netnet.config.json by \`npx @netnetcapital/kit sync\`. Do not edit inside this block.`,
+    `${GEN_START} from netnet.config.json by \`npx @netforge/kit sync\`. Do not edit inside this block.`,
     `export const GAME = ${JSON.stringify(config.game)};`,
     `export const REFEREE = ${config.referee ? JSON.stringify(config.referee) : "undefined"};`,
   ];
@@ -46,9 +46,9 @@ export function replaceGenerated(source: string, block: string): string | null {
 /** Bootstrap for bundler projects (Vite, React, Phaser, three.js). */
 export function bundlerBootstrap(config: KitProjectConfig, ts: boolean): string {
   const t = (typed: string, plain: string) => (ts ? typed : plain);
-  return `// NetNet Kit bootstrap, written by \`npx @netnetcapital/kit add\`.
+  return `// NetNet Kit bootstrap, written by \`npx @netforge/kit add\`.
 // Edit freely outside the generated block. Guide for agents: ${DOCS_URL}
-import { kit } from "@netnetcapital/kit";
+import { kit } from "@netforge/kit";
 
 ${generatedBlock(config, ts)}
 
@@ -83,7 +83,7 @@ export { kit };
 
 /** Bootstrap for a static page (plain HTML, Godot, Unity, Emscripten exports). */
 export function htmlBootstrap(config: KitProjectConfig): string {
-  return `// NetNet Kit bootstrap, written by \`npx @netnetcapital/kit add\`.
+  return `// NetNet Kit bootstrap, written by \`npx @netforge/kit add\`.
 // Edit freely outside the generated block. Guide for agents: ${DOCS_URL}
 import { kit } from "${CDN_URL}";
 
@@ -129,7 +129,7 @@ export const HTML_TAG = `<script type="module" src="./${BOOTSTRAP_BASENAME}.js">
 
 export function defaultConfig(game: string, name: string | undefined, earnId: string, earnLabel: string): KitProjectConfig {
   return {
-    $schema: `https://cdn.jsdelivr.net/npm/@netnetcapital/kit@${KIT_VERSION}/netnet.config.schema.json`,
+    $schema: `https://cdn.jsdelivr.net/npm/@netforge/kit@${KIT_VERSION}/netnet.config.schema.json`,
     game,
     ...(name ? { name } : {}),
     store: [],

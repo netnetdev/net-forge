@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { engine } from "@netnetcapital/engine";
+import { engine } from "@netforge/engine";
 import { towerGame, towerManifest } from "../src/manifest.js";
 
 const S = 30;

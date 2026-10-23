@@ -6,7 +6,7 @@ more plants. A barge on the canal takes crystals for a contract everyone
 fills together. A shift lasts fifteen minutes; then a new one begins.
 
 A board genre (`packages/engine/src/rules/idle.ts`) on the shared runtime;
-client kit `@netnetcapital/tabletop`. Room template `idle` (cap 8).
+client kit `@netforge/tabletop`. Room template `idle` (cap 8).
 
 ## Why it cannot be farmed
 
@@ -28,7 +28,7 @@ client kit `@netnetcapital/tabletop`. Room template `idle` (cap 8).
 ## Run it
 
 This template runs on your own computer with play money through
-`kit play` (`@netnetcapital/kit-play`). From the repository root:
+`kit play` (`@netforge/kit-play`). From the repository root:
 
 ```sh
 pnpm install --frozen-lockfile && pnpm build

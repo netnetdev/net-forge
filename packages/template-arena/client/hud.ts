@@ -3,10 +3,10 @@
  * throttled; bars move every frame with transforms. Copy is labels, not
  * sentences.
  */
-import { BOT_PLAYER_BASE, EntityFlag, maxHealthFor, selectedSlot, slotWeapon } from "@netnetcapital/engine-sim";
-import type { ResolvedSimConfig } from "@netnetcapital/engine-sim";
-import { F, PLAYER_UNITS } from "@netnetcapital/engine/game";
-import type { CompiledGame, RunInfo } from "@netnetcapital/engine/game";
+import { BOT_PLAYER_BASE, EntityFlag, maxHealthFor, selectedSlot, slotWeapon } from "@netforge/engine-sim";
+import type { ResolvedSimConfig } from "@netforge/engine-sim";
+import { F, PLAYER_UNITS } from "@netforge/engine/game";
+import type { CompiledGame, RunInfo } from "@netforge/engine/game";
 import type { SceneEntity } from "./scene.js";
 import { RULE_NAMES, TITLE, UPGRADE_NAMES, WEAPON_NAMES } from "./names.js";
 import { css, playerColor } from "./palette.js";

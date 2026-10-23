@@ -9,13 +9,13 @@
  * starts from the top with nothing carried down.
  *
  * This file is the whole game as the model writes it: declarations only,
- * against the typed API in @netnetcapital/engine. The crypt's floor plan is
+ * against the typed API in @netforge/engine. The crypt's floor plan is
  * dungeon(...) from a seed; the crawl (which rooms wake, what they hold,
  * when the party is safe) is the "crawl" system below. Everything else
  * (sim, pathing, netcode, renderer, referee) is the template's machinery.
  * Design rules: packages/engine/GAME-DESIGN.md.
  */
-import { achievement, dungeon, earn, game, keeper, mission, prefab, store, system, title, upgrade, weapon } from "@netnetcapital/engine";
+import { achievement, dungeon, earn, game, keeper, mission, prefab, store, system, title, upgrade, weapon } from "@netforge/engine";
 
 // The crypt: ten rooms on a 24 m grid, grown from the seed. Change the seed for a new floor plan.
 const CRYPT = dungeon({ seed: 2026, rooms: 10, cell: 24, size: [12, 18], corridor: 6, loops: 2 });

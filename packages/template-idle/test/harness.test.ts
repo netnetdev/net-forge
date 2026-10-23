@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { engine } from "@netnetcapital/engine";
-import { IDLE_MIN_FIRST_EARN, IdleAct } from "@netnetcapital/engine/rules";
+import { engine } from "@netforge/engine";
+import { IDLE_MIN_FIRST_EARN, IdleAct } from "@netforge/engine/rules";
 import { idleAdapter, idleGame, idleManifest } from "../src/manifest.js";
 
 const S = 30;

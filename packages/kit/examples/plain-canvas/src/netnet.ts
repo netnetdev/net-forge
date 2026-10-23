@@ -1,8 +1,8 @@
-// NetNet Kit bootstrap, written by `npx @netnetcapital/kit add`.
-// Edit freely outside the generated block. Guide for agents: https://cdn.jsdelivr.net/npm/@netnetcapital/kit@0.1.0/llms.txt
-import { kit } from "@netnetcapital/kit";
+// NetNet Kit bootstrap, written by `npx @netforge/kit add`.
+// Edit freely outside the generated block. Guide for agents: https://cdn.jsdelivr.net/npm/@netforge/kit@0.1.0/llms.txt
+import { kit } from "@netforge/kit";
 
-// <kit:generated> from netnet.config.json by `npx @netnetcapital/kit sync`. Do not edit inside this block.
+// <kit:generated> from netnet.config.json by `npx @netforge/kit sync`. Do not edit inside this block.
 export const GAME = "comet-sweep";
 export const REFEREE = undefined;
 export type EarnEvent = "wave_cleared" | "wave_flawless";

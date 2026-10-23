@@ -17,7 +17,7 @@ circuit. Seat bots fill the grid, so one person alone still has a field.
 
 ## How it plays on the server
 
-- The sim is `@netnetcapital/engine-sim`'s kart mode (`src/kart.ts`): arcade
+- The sim is `@netforge/engine-sim`'s kart mode (`src/kart.ts`): arcade
   vehicle physics on a 1/1024 grid at 60 Hz. Velocity splits into forward
   and sideways parts each tick: the engine pushes the forward part toward
   top speed, grip bleeds the sideways part (much less while drifting), and
@@ -28,7 +28,7 @@ circuit. Seat bots fill the grid, so one person alone still has a field.
 - The track streams: the client builds the road,
   kerbs, barriers and scenery in chunks of about 40 m within 170 m of the
   camera, two chunks a frame, nearest first, and drops chunks behind.
-- The race runner (`@netnetcapital/engine/game` `RaceRunner`, shared with
+- The race runner (`@netforge/engine/game` `RaceRunner`, shared with
   SKYLEDGE) owns rounds: countdown, race, results. `player.finished` pays
   your own finish; `race.won` and `race.podium` pay only with another
   person in the round. Seat bots never earn.
@@ -38,7 +38,7 @@ circuit. Seat bots fill the grid, so one person alone still has a field.
 ## Run it
 
 This template runs on your own computer with play money through
-`kit play` (`@netnetcapital/kit-play`). From the repository root:
+`kit play` (`@netforge/kit-play`). From the repository root:
 
 ```sh
 pnpm install --frozen-lockfile && pnpm build

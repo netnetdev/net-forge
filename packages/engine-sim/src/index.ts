@@ -1,5 +1,5 @@
 /**
- * @netnetcapital/engine-sim: the shared simulation.
+ * @netforge/engine-sim: the shared simulation.
  * Types and constants are in ./api.ts; see README.md for the contract.
  */
 export * from "./api.js";

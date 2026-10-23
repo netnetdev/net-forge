@@ -5,13 +5,13 @@
  * barge. The room makes every litre, kilo and crystal on its own clock;
  * your foreman (the cursor) is predicted, so pointing never waits.
  *
- * URL parameters: see @netnetcapital/tabletop boot.ts.
+ * URL parameters: see @netforge/tabletop boot.ts.
  */
 import { BoxGeometry, CircleGeometry, Color, ConeGeometry, DoubleSide, Group, Mesh, MeshBasicMaterial, MeshStandardMaterial, PlaneGeometry, RingGeometry } from "three/webgpu";
-import type { InterpolatedEntity } from "@netnetcapital/engine/net";
-import { IdleAct, plantSpot, plotCenter, PLOT, RF, RulesKind, UNITS, IDLE_SEATS } from "@netnetcapital/engine/rules";
-import type { RulesInput } from "@netnetcapital/engine/rules";
-import { bootBoard, cssColor, type Placed } from "@netnetcapital/tabletop";
+import type { InterpolatedEntity } from "@netforge/engine/net";
+import { IdleAct, plantSpot, plotCenter, PLOT, RF, RulesKind, UNITS, IDLE_SEATS } from "@netforge/engine/rules";
+import type { RulesInput } from "@netforge/engine/rules";
+import { bootBoard, cssColor, type Placed } from "@netforge/tabletop";
 import { COSMETICS, GAME_VERSION, idleAdapter, idleGame, idleManifest, PLACE, TEMPLATE } from "../src/manifest.js";
 import { BRINE_COIN } from "../src/store.js";
 import { idleAutopilot, type IdleView } from "../src/autopilot.js";

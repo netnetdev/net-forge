@@ -9,7 +9,7 @@
  */
 import { AnimationMixer, BufferAttribute, BufferGeometry, Color, InstancedBufferAttribute, InstancedBufferGeometry, InstancedMesh, Matrix4, Mesh, MeshStandardNodeMaterial, Quaternion, Vector3 } from "three/webgpu";
 import { float, instancedBufferAttribute, positionGeometry } from "three/tsl";
-import { billboardWorld, isSprite } from "@netnetcapital/engine/runtime";
+import { billboardWorld, isSprite } from "@netforge/engine/runtime";
 import type { MeshStandardMaterial } from "three/webgpu";
 import type { AnimationClip, Material, SkinnedMesh, Texture } from "three/webgpu";
 import type { RigDef } from "../rigs.js";

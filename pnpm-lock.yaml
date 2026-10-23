@@ -10,7 +10,7 @@ importers:
 
   packages/asset-library:
     dependencies:
-      '@netnetcapital/engine':
+      '@netforge/engine':
         specifier: workspace:*
         version: link:../engine
       fflate:
@@ -49,7 +49,7 @@ importers:
       '@colyseus/sdk':
         specifier: 0.18.5
         version: 0.18.5(@colyseus/core@0.18.18)(bufferutil@4.1.0)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@4.4.3)
-      '@netnetcapital/engine-sim':
+      '@netforge/engine-sim':
         specifier: workspace:*
         version: link:../engine-sim
       nipplejs:
@@ -136,49 +136,49 @@ importers:
       '@colyseus/ws-transport':
         specifier: 0.18.4
         version: 0.18.4(@colyseus/core@0.18.18)(bufferutil@4.1.0)(express@5.2.1)(utf-8-validate@5.0.10)
-      '@netnetcapital/asset-library':
+      '@netforge/asset-library':
         specifier: workspace:*
         version: link:../asset-library
-      '@netnetcapital/asset-library-files':
+      '@netforge/asset-library-files':
         specifier: workspace:*
         version: link:../asset-library-files
-      '@netnetcapital/engine':
+      '@netforge/engine':
         specifier: workspace:*
         version: link:../engine
-      '@netnetcapital/engine-sim':
+      '@netforge/engine-sim':
         specifier: workspace:*
         version: link:../engine-sim
-      '@netnetcapital/tabletop':
+      '@netforge/tabletop':
         specifier: workspace:*
         version: link:../tabletop
-      '@netnetcapital/template-arena':
+      '@netforge/template-arena':
         specifier: workspace:*
         version: link:../template-arena
-      '@netnetcapital/template-cards':
+      '@netforge/template-cards':
         specifier: workspace:*
         version: link:../template-cards
-      '@netnetcapital/template-collector':
+      '@netforge/template-collector':
         specifier: workspace:*
         version: link:../template-collector
-      '@netnetcapital/template-dungeon':
+      '@netforge/template-dungeon':
         specifier: workspace:*
         version: link:../template-dungeon
-      '@netnetcapital/template-idle':
+      '@netforge/template-idle':
         specifier: workspace:*
         version: link:../template-idle
-      '@netnetcapital/template-party':
+      '@netforge/template-party':
         specifier: workspace:*
         version: link:../template-party
-      '@netnetcapital/template-platformer':
+      '@netforge/template-platformer':
         specifier: workspace:*
         version: link:../template-platformer
-      '@netnetcapital/template-racer':
+      '@netforge/template-racer':
         specifier: workspace:*
         version: link:../template-racer
-      '@netnetcapital/template-survivor':
+      '@netforge/template-survivor':
         specifier: workspace:*
         version: link:../template-survivor
-      '@netnetcapital/template-tower':
+      '@netforge/template-tower':
         specifier: workspace:*
         version: link:../template-tower
       esbuild:
@@ -200,10 +200,10 @@ importers:
 
   packages/tabletop:
     dependencies:
-      '@netnetcapital/asset-library':
+      '@netforge/asset-library':
         specifier: workspace:*
         version: link:../asset-library
-      '@netnetcapital/engine':
+      '@netforge/engine':
         specifier: workspace:*
         version: link:../engine
       three:
@@ -225,13 +225,13 @@ importers:
 
   packages/template-arena:
     dependencies:
-      '@netnetcapital/asset-library':
+      '@netforge/asset-library':
         specifier: workspace:*
         version: link:../asset-library
-      '@netnetcapital/engine':
+      '@netforge/engine':
         specifier: workspace:*
         version: link:../engine
-      '@netnetcapital/engine-sim':
+      '@netforge/engine-sim':
         specifier: workspace:*
         version: link:../engine-sim
       nipplejs:
@@ -262,16 +262,16 @@ importers:
 
   packages/template-cards:
     dependencies:
-      '@netnetcapital/asset-library':
+      '@netforge/asset-library':
         specifier: workspace:*
         version: link:../asset-library
-      '@netnetcapital/engine':
+      '@netforge/engine':
         specifier: workspace:*
         version: link:../engine
-      '@netnetcapital/engine-sim':
+      '@netforge/engine-sim':
         specifier: workspace:*
         version: link:../engine-sim
-      '@netnetcapital/tabletop':
+      '@netforge/tabletop':
         specifier: workspace:*
         version: link:../tabletop
       three:
@@ -299,16 +299,16 @@ importers:
 
   packages/template-collector:
     dependencies:
-      '@netnetcapital/asset-library':
+      '@netforge/asset-library':
         specifier: workspace:*
         version: link:../asset-library
-      '@netnetcapital/engine':
+      '@netforge/engine':
         specifier: workspace:*
         version: link:../engine
-      '@netnetcapital/engine-sim':
+      '@netforge/engine-sim':
         specifier: workspace:*
         version: link:../engine-sim
-      '@netnetcapital/tabletop':
+      '@netforge/tabletop':
         specifier: workspace:*
         version: link:../tabletop
       three:
@@ -336,13 +336,13 @@ importers:
 
   packages/template-dungeon:
     dependencies:
-      '@netnetcapital/asset-library':
+      '@netforge/asset-library':
         specifier: workspace:*
         version: link:../asset-library
-      '@netnetcapital/engine':
+      '@netforge/engine':
         specifier: workspace:*
         version: link:../engine
-      '@netnetcapital/engine-sim':
+      '@netforge/engine-sim':
         specifier: workspace:*
         version: link:../engine-sim
       nipplejs:
@@ -373,16 +373,16 @@ importers:
 
   packages/template-idle:
     dependencies:
-      '@netnetcapital/asset-library':
+      '@netforge/asset-library':
         specifier: workspace:*
         version: link:../asset-library
-      '@netnetcapital/engine':
+      '@netforge/engine':
         specifier: workspace:*
         version: link:../engine
-      '@netnetcapital/engine-sim':
+      '@netforge/engine-sim':
         specifier: workspace:*
         version: link:../engine-sim
-      '@netnetcapital/tabletop':
+      '@netforge/tabletop':
         specifier: workspace:*
         version: link:../tabletop
       three:
@@ -410,13 +410,13 @@ importers:
 
   packages/template-party:
     dependencies:
-      '@netnetcapital/asset-library':
+      '@netforge/asset-library':
         specifier: workspace:*
         version: link:../asset-library
-      '@netnetcapital/engine':
+      '@netforge/engine':
         specifier: workspace:*
         version: link:../engine
-      '@netnetcapital/engine-sim':
+      '@netforge/engine-sim':
         specifier: workspace:*
         version: link:../engine-sim
       nipplejs:
@@ -447,13 +447,13 @@ importers:
 
   packages/template-platformer:
     dependencies:
-      '@netnetcapital/asset-library':
+      '@netforge/asset-library':
         specifier: workspace:*
         version: link:../asset-library
-      '@netnetcapital/engine':
+      '@netforge/engine':
         specifier: workspace:*
         version: link:../engine
-      '@netnetcapital/engine-sim':
+      '@netforge/engine-sim':
         specifier: workspace:*
         version: link:../engine-sim
       three:
@@ -481,13 +481,13 @@ importers:
 
   packages/template-racer:
     dependencies:
-      '@netnetcapital/asset-library':
+      '@netforge/asset-library':
         specifier: workspace:*
         version: link:../asset-library
-      '@netnetcapital/engine':
+      '@netforge/engine':
         specifier: workspace:*
         version: link:../engine
-      '@netnetcapital/engine-sim':
+      '@netforge/engine-sim':
         specifier: workspace:*
         version: link:../engine-sim
       three:
@@ -515,13 +515,13 @@ importers:
 
   packages/template-survivor:
     dependencies:
-      '@netnetcapital/asset-library':
+      '@netforge/asset-library':
         specifier: workspace:*
         version: link:../asset-library
-      '@netnetcapital/engine':
+      '@netforge/engine':
         specifier: workspace:*
         version: link:../engine
-      '@netnetcapital/engine-sim':
+      '@netforge/engine-sim':
         specifier: workspace:*
         version: link:../engine-sim
       nipplejs:
@@ -552,16 +552,16 @@ importers:
 
   packages/template-tower:
     dependencies:
-      '@netnetcapital/asset-library':
+      '@netforge/asset-library':
         specifier: workspace:*
         version: link:../asset-library
-      '@netnetcapital/engine':
+      '@netforge/engine':
         specifier: workspace:*
         version: link:../engine
-      '@netnetcapital/engine-sim':
+      '@netforge/engine-sim':
         specifier: workspace:*
         version: link:../engine-sim
-      '@netnetcapital/tabletop':
+      '@netforge/tabletop':
         specifier: workspace:*
         version: link:../tabletop
       three:

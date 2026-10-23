@@ -5,14 +5,14 @@
  * everyone else before dusk. Your keeper is predicted, so walking never
  * waits for the server; every roll is the room's.
  *
- * URL parameters: see @netnetcapital/tabletop boot.ts (?room, ?server,
+ * URL parameters: see @netforge/tabletop boot.ts (?room, ?server,
  * ?style, ?autopilot, ?preview, ?stats, ?shapes, ?webgl, Net Forge flags).
  */
 import { AdditiveBlending, CanvasTexture, CylinderGeometry, DoubleSide, Group, Mesh, MeshBasicMaterial, MeshStandardMaterial, NearestFilter, PlaneGeometry, RingGeometry, SRGBColorSpace } from "three/webgpu";
-import type { InterpolatedEntity } from "@netnetcapital/engine/net";
-import { CollectorAct, effectiveness, LogKind, MARSH_TILE, marshCenter, marshRoute, marshTile, RF, RulesKind, UNITS } from "@netnetcapital/engine/rules";
-import type { LogLine, RulesInput } from "@netnetcapital/engine/rules";
-import { bootBoard, cssColor, type BoardView, type Placed } from "@netnetcapital/tabletop";
+import type { InterpolatedEntity } from "@netforge/engine/net";
+import { CollectorAct, effectiveness, LogKind, MARSH_TILE, marshCenter, marshRoute, marshTile, RF, RulesKind, UNITS } from "@netforge/engine/rules";
+import type { LogLine, RulesInput } from "@netforge/engine/rules";
+import { bootBoard, cssColor, type BoardView, type Placed } from "@netforge/tabletop";
 import { collectorAdapter, collectorGame, collectorManifest, COSMETICS, GAME_VERSION, PLACE, TEMPLATE } from "../src/manifest.js";
 import { MOSSBOUND_COIN } from "../src/store.js";
 import { FIRE_MODEL, MOUND_MODEL, REED_MODEL, ROCK_MODEL, SMALL_DECOR, TENT_MODEL, TREE_MODELS } from "./decor.js";

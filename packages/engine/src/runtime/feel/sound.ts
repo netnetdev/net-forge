@@ -3,7 +3,7 @@
  * music loop, with a mute that sticks.
  *
  *   const sound = new SoundPlayer(feel.audio, { key: "emberwatch" });
- *   sound.load(soundBank(libraryBase));   // @netnetcapital/asset-library: cue -> { url, gain }, music
+ *   sound.load(soundBank(libraryBase));   // @netforge/asset-library: cue -> { url, gain }, music
  *   sound.unlockOnGesture();              // browsers start audio on the first press
  *   hudButton.onclick = () => label(sound.toggle());
  *
