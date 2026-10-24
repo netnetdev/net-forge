@@ -214,7 +214,7 @@ describe("PvP pots (earn.pot)", () => {
     expect(() => earn.pot({ entry: 10, recycle: 0 })).toThrow(GameDefinitionError);
   });
 
-  it("are off unless enabled (until a legal review)", () => {
+  it("are off unless enabled (a game opts in)", () => {
     resetRegistry();
     expect(earn.pot({ entry: 10, recycle: 0.05 }).enabled).toBe(false);
     resetRegistry();

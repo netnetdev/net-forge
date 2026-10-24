@@ -213,4 +213,12 @@ export interface RunIdMessage {
 export interface CreateOptions {
   readonly place: string;
   readonly template: string;
+  /**
+   * The game's slug when one room server runs several games of one template
+   * (launched Net Forge games, keyed by slug). Absent: the template's own game.
+   */
+  readonly game?: string;
 }
+
+/** A game slug as the GameFactory and the room server take it. */
+export const GAME_SLUG_RE = /^[a-z0-9][a-z0-9-]{0,63}$/;

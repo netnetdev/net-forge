@@ -1,12 +1,30 @@
 {
   "name": "@netforge/template-platformer",
-  "version": "0.1.0",
-  "description": "SKYLEDGE: a platformer template of the NetNet game runtime, a race to the flag over cliffside courses with coyote time, jump buffering, variable jumps, dashes, springs and moving platforms. The game module, its browser client and its playtest bots.",
+  "version": "0.2.0",
+  "description": "Multiplayer platformer game template for Net Forge: races to the flag with coyote time, jump buffering, dashes, springs and moving platforms (SKYLEDGE).",
+  "keywords": [
+    "game-template",
+    "multiplayer",
+    "browser-game",
+    "html5-game",
+    "threejs",
+    "game-engine",
+    "typescript",
+    "gamedev",
+    "ai-agents",
+    "mcp",
+    "net-forge",
+    "platformer",
+    "physics"
+  ],
   "license": "MIT",
   "type": "module",
   "exports": {
     ".": "./src/manifest.ts",
-    "./store": "./src/store.ts"
+    "./store": "./src/store.ts",
+    "./package.json": "./package.json",
+    "./llms.txt": "./llms.txt",
+    "./llms-full.txt": "./llms-full.txt"
   },
   "files": [
     "src",
@@ -15,17 +33,28 @@
     "llms.txt",
     "README.md",
     "NOTICE",
-    "LICENSE"
+    "LICENSE",
+    "llms-full.txt",
+    "AGENTS.md",
+    "CLAUDE.md"
+  ],
+  "sideEffects": [
+    "./src/game.ts",
+    "./src/manifest.ts",
+    "./client/**"
   ],
   "publishConfig": {
     "access": "public"
+  },
+  "homepage": "https://forge.netnet.capital/docs/templates/platformer",
+  "bugs": {
+    "url": "https://github.com/netnetdev/net-forge/issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/netnetdev/net-forge.git",
     "directory": "packages/template-platformer"
   },
-  "homepage": "https://github.com/netnetdev/net-forge/tree/main/packages/template-platformer#readme",
   "engines": {
     "node": ">=20"
   },
@@ -50,8 +79,5 @@
     "typescript": "5.8.3",
     "vite": "6.4.3",
     "vitest": "3.2.7"
-  },
-  "bugs": {
-    "url": "https://github.com/netnetdev/net-forge/issues"
   }
 }

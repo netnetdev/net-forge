@@ -1,12 +1,30 @@
 {
   "name": "@netforge/template-survivor",
-  "version": "0.1.0",
-  "description": "EMBERWATCH: Template 1 of the NetNet game runtime, a survivor-like co-op for 4 players and 2,000 enemies. The game module, its browser client and its playtest bots.",
+  "version": "0.2.0",
+  "description": "Survivor-like co-op game template for Net Forge: 4 players, 2,000 enemies, authoritative multiplayer (EMBERWATCH).",
+  "keywords": [
+    "game-template",
+    "multiplayer",
+    "browser-game",
+    "html5-game",
+    "threejs",
+    "game-engine",
+    "typescript",
+    "gamedev",
+    "ai-agents",
+    "mcp",
+    "net-forge",
+    "survivor-like",
+    "roguelike"
+  ],
   "license": "MIT",
   "type": "module",
   "exports": {
     ".": "./src/manifest.ts",
-    "./store": "./src/store.ts"
+    "./store": "./src/store.ts",
+    "./package.json": "./package.json",
+    "./llms.txt": "./llms.txt",
+    "./llms-full.txt": "./llms-full.txt"
   },
   "files": [
     "src",
@@ -15,17 +33,28 @@
     "llms.txt",
     "README.md",
     "NOTICE",
-    "LICENSE"
+    "LICENSE",
+    "llms-full.txt",
+    "AGENTS.md",
+    "CLAUDE.md"
+  ],
+  "sideEffects": [
+    "./src/game.ts",
+    "./src/manifest.ts",
+    "./client/**"
   ],
   "publishConfig": {
     "access": "public"
+  },
+  "homepage": "https://forge.netnet.capital/docs/templates/survivor",
+  "bugs": {
+    "url": "https://github.com/netnetdev/net-forge/issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/netnetdev/net-forge.git",
     "directory": "packages/template-survivor"
   },
-  "homepage": "https://github.com/netnetdev/net-forge/tree/main/packages/template-survivor#readme",
   "engines": {
     "node": ">=20"
   },
@@ -54,8 +83,5 @@
     "typescript": "5.8.3",
     "vite": "6.4.3",
     "vitest": "3.2.7"
-  },
-  "bugs": {
-    "url": "https://github.com/netnetdev/net-forge/issues"
   }
 }

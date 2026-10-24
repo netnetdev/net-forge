@@ -164,19 +164,43 @@ async function route(g: LocalGame, o: HostOptions, req: IncomingMessage, res: Se
 
 const LOOPBACK = new Set(["127.0.0.1", "localhost", "::1", "[::1]"]);
 
+/** The host name of a Host header value ("192.168.1.5:4663", "[fe80::1]:4663"), lower case. */
+function hostName(host: string): string {
+  const h = host.trim().toLowerCase();
+  if (h.startsWith("[")) {
+    const end = h.indexOf("]");
+    return end > 0 ? h.slice(0, end + 1) : h;
+  }
+  return h.replace(/:\d+$/, "");
+}
+
+/**
+ * A name a DNS rebinding page cannot put in the Host header: an IP literal,
+ * localhost, or an mDNS .local name (resolved on the network itself, never
+ * by a public DNS server an attacker controls).
+ */
+function directName(name: string): boolean {
+  return LOOPBACK.has(name) || /^\d{1,3}(\.\d{1,3}){3}$/.test(name) || /^\[[0-9a-f:.]+\]$/.test(name) || /^[a-z0-9-]+(\.[a-z0-9-]+)*\.local$/.test(name);
+}
+
 /**
  * On a loopback bind, only requests addressed to this computer by name are
  * answered (a page elsewhere that rebinds its own host name to 127.0.0.1
- * gets 403), and only same-origin or non-browser requests may POST.
+ * gets 403). On any other bind (--host 0.0.0.0 for phones on the network)
+ * the Host must still be an address, not a DNS name, so the same rebinding
+ * trick fails there too. Either way only same-origin or non-browser
+ * requests may POST or open a WebSocket.
  */
 export function allowedRequest(bindHost: string, port: number, host: string | undefined, origin: string | undefined, method: string | undefined): boolean {
-  if (!LOOPBACK.has(bindHost)) return true;
-  const name = (host ?? "").replace(/:\d+$/, "").toLowerCase();
-  if (!LOOPBACK.has(name)) return false;
+  const loopback = LOOPBACK.has(bindHost);
+  const name = hostName(host ?? "");
+  if (loopback ? !LOOPBACK.has(name) : !directName(name)) return false;
   if (method === "GET" || method === "HEAD" || origin === undefined) return true;
   try {
     const o = new URL(origin);
-    return LOOPBACK.has(o.hostname.toLowerCase()) && Number(o.port || 80) === port;
+    const oName = o.hostname.toLowerCase();
+    if (o.protocol !== "http:" || Number(o.port || 80) !== port) return false;
+    return loopback ? LOOPBACK.has(oName) : oName === name || (LOOPBACK.has(oName) && LOOPBACK.has(name));
   } catch {
     return false;
   }

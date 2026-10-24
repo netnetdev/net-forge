@@ -1,0 +1,17 @@
+{
+  "$schema": "https://context7.com/schema/context7.json",
+  "projectTitle": "Net Forge",
+  "description": "MIT TypeScript engine for multiplayer browser games: one ECS and Rapier simulation shared by the browser and an authoritative room server, a three.js WebGPU/WebGL2 renderer, ten finished multiplayer genre templates, and a typed declarative game API with an MCP server for coding agents.",
+  "folders": ["packages", "docs", "skills"],
+  "excludeFolders": ["node_modules", "dist", "packages/asset-library-files/library", "packages/*/test", "packages/*/client", "packages/*/bench", "packages/*/fixtures", ".github"],
+  "excludeFiles": ["NOTICE", "CHANGELOG.md", "pnpm-lock.yaml"],
+  "rules": [
+    "A Net Forge game is one file, src/game.ts, of declarations imported only from @netforge/engine.",
+    "Start a game from a template with npm create netforge@latest or the MCP tool netforge_create_game.",
+    "Never write renderers, netcode or physics in game code; the template provides them.",
+    "Models and sounds are asset library ids such as style.lowpoly.ghost, never URLs or file paths.",
+    "Ids are lower_snake_case, and every game declares at least one earn.rule and one earn.stake.",
+    "Validate with netforge_validate_game and playtest with netforge_run_playtest (engine.test.run) after each change.",
+    "Run a game locally with kit play (npm run play): play money, no wallet or chain."
+  ]
+}

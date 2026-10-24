@@ -1,4 +1,4 @@
-# COGSPIRE: the tower defense template (NetNet game runtime, board genre)
+# Net Forge tower defense template (COGSPIRE)
 
 > A co-op tower defense for up to 4 players on one shared board. Creeps
 > walk a fixed road in waves toward the spire; players build and upgrade

@@ -1,4 +1,4 @@
-# CRYPTWICK: the co-op dungeon template (NetNet game runtime, Template 3)
+# Net Forge co-op dungeon template (CRYPTWICK)
 
 > A co-op dungeon crawl for up to 4 players: a procedural crypt of rooms
 > from a seed, rooms that wake as the party nears them, loot in every

@@ -1,0 +1,17 @@
+# Net Forge
+
+> Net Forge, the open-source multiplayer browser game engine built for AI coding agents. MIT licensed TypeScript: one simulation (ECS, Rapier physics, fixed tick, snapshots) runs in the browser and on an authoritative room server, a three.js renderer draws it, and ten finished multiplayer games ship as templates. Packages are `@netforge` on npm; source at https://github.com/netnetdev/net-forge; docs at https://forge.netnet.capital/docs. Not affiliated with other projects named NetForge.
+
+## Start
+
+- Make a game: `npm create netforge@latest my-game -- --template survivor --yes`, then `cd my-game && npm run play` (http://127.0.0.1:4663, play money). `npm test` compiles the rules and runs playtest bots.
+- The whole game is `src/game.ts`, declarations against `@netforge/engine`. Each new game ships `AGENTS.md` and an MCP entry for `@netforge/mcp`.
+
+## Packages
+
+- [create-netforge](packages/create-netforge/README.md): the starter (`npm create netforge`).
+- [@netforge/kit-play](packages/kit-play/README.md): play, test and start games locally (`kit-play play|test|check|new|templates`).
+- [@netforge/engine](packages/engine/README.md): the typed declarative game API, renderer and netcode.
+- [@netforge/engine-sim](packages/engine-sim/README.md): the shared simulation.
+- [@netforge/mcp](packages/mcp/README.md): the MCP server for coding agents.
+- Templates: `packages/template-*` (survivor, arena, tower, dungeon, idle, platformer, cards, collector, racer, party), each with its own `llms.txt`.

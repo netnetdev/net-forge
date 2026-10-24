@@ -1,0 +1,790 @@
+# Net Forge co-op dungeon template (CRYPTWICK)
+
+> A co-op dungeon crawl for up to 4 players: a procedural crypt of rooms
+> from a seed, rooms that wake as the party nears them, loot in every
+> cleared room, a mini-boss on the way down and a boss in the deepest
+> room. Runs are permadeath: a wipe ends the descent. You change the game
+> by editing src/game.ts only. The template already has the crypt's walls
+> and floors, enemies that path through doors, weapons, XP shards,
+> level-ups, bosses, co-op revive, netcode, rendering, touch controls, earn
+> and the store. Do not write renderers, netcode or physics.
+
+## Files
+
+- src/game.ts: THE GAME. Declarations against @netforge/engine:
+  dungeon(), game(), prefab(), weapon(), upgrade(), system(), earn.rule(),
+  earn.stake(), store.sku(), keeper(), achievement(), mission(), title().
+- packages/engine/GAME-DESIGN.md: the design rules the playtest gate scores
+  (a readable opening, off-screen spawns, i-frames, telegraphs, fast levels).
+- client/names.ts: display names for weapon, upgrade and earn ids (labels).
+- Models come from the asset library (real CC0 models; the full list of ids is in your instructions). client/library.ts holds the fallback shapes drawn until a model loads.
+- Everything else is template machinery.
+
+## Rules the build enforces
+
+- Asset ids look like "style.lowpoly.skeleton", never URLs or paths, and must be in the asset library.
+- game({ style }) is the art style the creator picked: lowpoly, toon, ps1, pixel, voxel or handdrawn. Keep it. The template draws everything in it, and a "style.lowpoly.<name>" id draws as that style's own model of the same name when the style has one.
+- game({ template: "dungeon" }) and game({ field: CRYPT.field }): the crypt comes from dungeon(...).
+- Ids are lower_snake_case.
+- Every game declares at least one earn.rule (mandatory earn) and one earn.stake (the buy-in run).
+- A dungeon game needs one enemy prefab, one weapon and players.weapon (or keepers).
+- Drops must be pickup prefabs. At most 15 weapons (evolutions count) and 8 upgrades.
+- Run `pnpm --filter @netforge/template-dungeon test` (playtest bots).
+
+## Units
+
+Seconds, metres, metres per second, hit points. Tick rate 30 Hz.
+Wickbearers run at 7 m/s; keep chasers at 3-4 m/s and fast ones under 6.
+
+## The crypt: dungeon(...)
+
+const CRYPT = dungeon({ seed: 2026, rooms: 10, cell: 24, size: [12, 18], corridor: 6, loops: 2 });
+game({ template: "dungeon", ..., field: CRYPT.field });
+
+- seed: any whole number; a different seed is a different floor plan.
+- rooms: 3 to 20 (the start room and the boss room included). About 10
+  makes a 6 to 10 minute descent.
+- cell: room spacing in metres (16 to 32); size: [smallest, largest] room
+  side in metres (at most cell - 4); corridor: corridor width in metres
+  (6 lets a boss through; 4 is tight); loops: extra doors that make loops.
+- The start room is centred on [0, 0], where the party spawns. The deepest
+  room (most doors from the start) is CRYPT.boss.
+- CRYPT.rooms: each room's centre (x, z), half sizes (hx, hz), depth (doors
+  from the start) and links (the rooms it has a corridor to).
+  CRYPT.roomAt(x, z) is the room holding a point, or -1 in a corridor.
+- The same spec gives the same crypt on the room server, in every client
+  and in the playtest; nothing is downloaded.
+- Walls stop players, enemies and bolts. Enemies behind a wall walk round
+  through the doors (a flow field), big bodies included.
+
+## The crawl (the "crawl" system in game.ts)
+
+The crawl is a system you can read and change, not hidden machinery:
+
+- Where a wickbearer stands wakes the room (if it still sleeps) and, once
+  that room is cleared, the rooms next to it. Two rooms fight at once at
+  most.
+- A woken room's dead come in inside that room, off every screen (the
+  system tries points in the room until onScreen(x, z) is false, and after
+  3 s takes any point), then come for the party through the doors.
+- ENCOUNTERS lists what a room holds by its depth: [prefab, count] for one
+  player; each extra player adds 35%. Every third room adds an elite; the
+  first room three doors down brings the Marrow Knight (a mini-boss).
+- When nothing of DEAD is left standing, the room is cleared: a reliquary
+  (a chest: pick an upgrade) appears at its centre, room.cleared fires (earn
+  rules count it; the HUD shows ROOM n OF N), and anyone who fell comes
+  back (respawnDead).
+- Quiet for STIR_AFTER seconds, the nearest sleeping room stirs by itself,
+  so a party that waits is still found. A fight that drags past 75 s with 3
+  or fewer left ends: the stragglers slink back into the dark.
+- The deepest room holds the boss; boss.killed ends the run won.
+
+## Permadeath
+
+players: { downed: { seconds: 12, crawl: 0.35, selfRevives: 0, respawn: 0 } }
+A fallen wickbearer bleeds for 12 s and can crawl to a teammate, who
+revives by standing close. There is no free get-up, and once out they stay
+out until the party clears a room. If everyone is down at once, the run is
+lost and the next descent starts from the top with nothing carried down
+(the store's revive is the one way back up). Softer: selfRevives: 1, or a
+respawn time in seconds.
+
+## Common changes
+
+### Make it harder or easier
+Change ENCOUNTERS (counts, or tougher prefabs at shallower depths), the
+boss's health, STIR_AFTER (a shorter quiet), or the per-player 35%.
+Easier also: players.hitIframes (0.7 s), players.magnet (4 m), a revive
+(selfRevives: 1), a longer starting weapon range.
+
+### A bigger or smaller crypt
+dungeon({ seed, rooms: 14, ... }): more rooms is a longer descent (about 40
+s a room). size: [16, 22] with cell: 28 gives bigger rooms; loops: 0 is a
+pure tree, every dead end a dead end.
+
+### Add an enemy
+prefab("ghoul", { model: "style.lowpoly.zombie", health: 30, speed: 3.2, radius: 0.4, damage: 8, ai: "chase", drops: ["wick_small"] });
+then put it in ENCOUNTERS at the depth it should start appearing, and in DEAD
+(so a room with ghouls left is not cleared):
+[["ghoul", 6], ["bone_rattler", 6]],
+ai is the enemy's role. Every big hit is telegraphed on the ground first:
+- "chase" (default), "tank" (a chaser; give it mass), "idle"/"none" (stands still)
+- "runner": aims where you will be. Fast, fragile.
+- "charger": stops inside 6 m, shows a lane 0.55 s, then charges along it.
+- "ranged": keeps its distance, shows an aim line, fires a slow dodgeable shot
+  (only with a clear line: walls and pillars are cover).
+- "bomber": walks up, arms a 1 s fuse circle, explodes (hurts enemies too).
+- "shielder" / "healer": every few seconds shields or heals nearby allies.
+- "summoner": keeps away and calls adds: attack: { summon: "gnat", count: 2 }.
+- "flee", "wander".
+Tune a role with attack: { damage, range, windup, cooldown, speed, radius, summon, count }:
+prefab("bone_archer", { model: "style.lowpoly.skeleton", health: 24, speed: 2.8, ai: "ranged", attack: { damage: 9, range: 10, speed: 7 }, drops: ["wick_small"] });
+A splitter bursts into smaller enemies on death:
+prefab("tomb_slime", { model: "style.lowpoly.slime_horned", health: 44, speed: 2.8, split: { into: "crypt_bat", count: 3 }, drops: ["wick_small"] });
+
+### Add elites
+An elite is x6 health, x1.5 damage, x5 XP and a gold rim, and drops a chest.
+The crawl adds one every third room (add(prefab, 1, true) in wake); change
+`wakes % 3` for more or fewer. From any system: spawn("grave_shambler", [x, 0.5, z], { elite: true }).
+
+### Add a weapon
+weapon("frost_ring", {
+  kind: "nova", damage: 6, cooldown: 0.8, range: 5, knockback: 8,
+  levels: [{ damage: "+30%" }, { range: "+15%" }, { cooldown: "-15%" }, { damage: "+30%" }, { knockback: 3 }],
+});
+kinds:
+- "nova": a burst in range; "aura": a field that burns what is inside, every cooldown
+- "bolt": count projectiles at the nearest enemy (speed, pierce)
+- "orbit": count blades at range metres, speed rad/s
+- "cone": a sweep of spread degrees where the keeper faces (360: all around)
+- "chain": strikes the nearest, then jumps count times, each within speed m
+- "meteor": count circles of blast m land on enemies in range, 0.6 s after showing
+- "boomerang": flies out range m and back, hitting everything both ways
+levels: what each level changes from the one before (5-8 levels). A number
+adds (count: 1, pierce: 2, cooldown: -0.1 s), a percent scales ("+40%").
+Cards show these changes ("+1 projectile, -20% cooldown"). It is offered at
+level-up automatically. Add a label in client/names.ts.
+
+### Add an evolution
+weapon("frost_ring", { ..., evolve: { into: "blizzard", requires: "iron_skin" } });
+weapon("blizzard", { kind: "nova", damage: 20, cooldown: 0.6, range: 9, knockback: 12 });
+At max level, with the passive "iron_skin" taken, the "blizzard" card always
+shows; it replaces frost_ring in its slot. Evolutions are never offered on
+their own. Give them about x1.7 damage and a new shape (360 degrees, double
+radius, more count). Pair each base weapon with a different passive.
+
+### Add a passive
+upgrade("iron_skin", { stat: "armor", step: 1, maxLevel: 4 });
+stats: speed, maxHealth, magnet, might, haste, regen, armor, area (bigger
+novas, auras, cones, meteors and orbits), amount (more projectiles, blades,
+jumps and meteors). Up to 8. maxLevel caps how often it is offered.
+
+### Add pickups and loot
+prefab("tallow", { model: "style.lowpoly.cell_heal", health: 1, speed: 0, kind: "pickup", pickup: { effect: "heal", amount: 0.3 } });
+A boss's hoard: pickup: { effect: "chest", amount: 3, evolve: true }. Bosses
+drop it instead of the plain chest. If the player holds a weapon and already
+has its paired passive, that weapon jumps to max level, so its evolution is
+on the cards.
+effects: heal (amount: fraction of max health, or hit points above 1),
+vacuum (every gem on the floor comes to you), bomb (clears the screen's
+non-boss enemies), chest (amount card picks; a ready evolution shows first).
+Drop them with a chance: drops: ["wick_small", { id: "tallow", chance: 0.03 }].
+Elites always drop the game's chest; bosses drop a heal, a vacuum and a chest.
+Above 300 gems on the floor, new gems merge into the nearest one.
+
+### Add props (breakables)
+prefab("crypt_urn", { model: "style.lowpoly.column_broken", health: 25, speed: 0, radius: 0.5, prop: true, drops: ["wick_mid", { id: "tallow", chance: 0.3 }] });
+then scatter("crypt_urn", 36) from a system (props land on the floors only). Props never move, never hurt
+and never count as enemies.
+
+### Add events and moments
+In the crawl's wake(room) or clearActive(), or a system of your own:
+on("room.cleared", () => { if (random() < 0.2) { announce("A SHRINE GLOWS", { tone: "reward" }); xpBoost(2, 20); } });
+announce tones: info, danger, reward. Off-screen bosses get an edge arrow
+automatically. Game events you can key on (and earn rules too):
+room.cleared, miniboss.killed, boss.killed, player.evolved, heal.collected,
+vacuum.collected, bomb.collected, chest.collected. clear("bone_rattler")
+removes a prefab at once (no kills or drops).
+
+### Cards
+Weighted: an owned weapon's next level 8, a new weapon 10 (while a slot is
+free), a passive 4 (7 once weapon slots are full); a ready evolution always
+shows. players.rerolls (default 1) rerolls per run (R); Skip (X) trades the
+cards for a small heal. When everything is maxed, a level heals and gives
+teammates a little XP.
+
+### Add a boss
+prefab("ossuary_queen", {
+  model: "style.lowpoly.trex", appearance: { tint: "#c2410c", scale: 1.2 }, health: 3000, speed: 2.2, radius: 1.5, damage: 30,
+  boss: { attacks: ["slam", "ring", "dash", "summon"], summon: "bone_rattler", enrageAt: 0.5 },
+  drops: ["wick_large"],
+});
+In the crawl, the boss room's wake adds it: add("ossuary_queen", 1). The
+crawl already ends the run on boss.killed.
+Keep a boss's radius at 1.5 or under with 6 m corridors (radius 1 with 4 m
+ones): it walks the corridors to reach a party that will not come to it.
+Attacks (all telegraphed): slam (circle around it), dash (11 m lane), leap
+(lands on a circle at you), rain (circles near players), ring (14 shots
+outward), fan (7 shots at you), summon (adds). It switches near and far
+modes every 4-9 s; below enrageAt health it is faster and throws more.
+A mini-boss: boss: { attacks: [...], rank: "mini" } raises "miniboss.killed"
+(not "boss.killed", so it never ends the run). Boss health scales with
+players present (players.bossHealthPerPlayer, 0.55); every boss gets a HUD
+bar and drops a burst of gems worth 1-2 levels.
+
+### Change pacing
+A room takes about 30 to 45 s to wake and clear; STIR_AFTER (18 s) is the
+longest quiet. The XP curve is players.xp { base, growth, exponent }: XP to
+go from L to L+1 is base + growth x (L - 1)^exponent. Aim for level 2
+within 10 s and level 5 by the end of the first minute; reliquaries add a
+pick per cleared room.
+
+### Add an earn rule
+earn.rule("five_rooms", { when: "room.cleared", n: 5, pay: 10, oncePer: "run" });
+Events: room.cleared (the crawl emits it), enemy.killed (credits the killer),
+boss.killed (everyone present), player.downed, player.revived (credits the
+reviver), player.levelup, run.won, run.lost, and anything you emit().
+Each rule pays once per run per player, in coins; the room server is the referee.
+
+### The buy-in run (required)
+earn.stake({ min: 20, max: 200, multiple: 2 });
+Every game declares one, on one top-level line; a game without it does not
+build. A player stakes coins at the start of a run (the Kit spends them as
+coins.spend(amount, "stake"), then the client calls conn.stake()). The room
+fixes the stake when the next run starts. A staked run pays its normal earn
+plus a share of stake x multiple: the share is the part of the run's most
+earn the player makes. What it does not win back stays in the reward pool.
+multiple is 1 to 2. "stake" is reserved: never a SKU or meta upgrade id.
+
+### Losable gear (optional)
+store.sku("wick_charm", { coins: 150, grants: { gear: "tallow_oil", loseBelow: 0.25 } });
+Gear is owned in the player's profile and sells for coins only. It brings one
+level of its declared upgrade into every staked run, and is lost when that run
+makes less than loseBelow of its most earn. Its coins stay in the reward pool.
+
+### Coins: earn and the store
+
+Every game has coins: 1 coin = 1 of the game's own token, and players see
+them under the token's own name, symbol and logo (never "coins" or "tokens"
+as a label). Earn rules pay coins (`pay` is whole coins). The recommended
+coin model (the default, no declaration) sells cosmetics, unlocks and
+in-run consumables, never permanent stat power:
+
+store.sku("revive", { coins: 50 });                                   // in-run: used while downed
+store.sku("skin_ossuary", { coins: 300, grants: { cosmetic: 1 } });    // a look, owned for good
+
+Keep them and the wick_charm gear exactly: the client is wired to them (price, look id and gear). Owned
+looks and unlocks are saved on the room server in the player's profile. Players spend
+earned coins first (instantly, no wallet prompt), then their wallet. Before
+the game launches coins are play money; the Kit switches by itself, so
+nothing in game.ts depends on it. Price in coins against what a run pays
+(the four rules here pay up to 80 a run): a revive is under a run, a
+cosmetic a few runs.
+
+### Sell a keeper unlock (a character, a starting loadout, a sidegrade)
+keeper("tinker", { name: "Tinker", text: "Darts and a wide glass.", weapon: "wax_dart", passive: "stained_glass" });   // no unlock
+store.sku("unlock_tinker", { coins: 400, grants: { keeper: "tinker" } });
+A keeper is earned (unlock: an achievement) or bought (a SKU), never both:
+the build refuses a sold keeper that also declares an unlock. Never sell
+the first keeper (everyone's free default). An unlock is a different way to
+play, never more power. Before launch coins are play money and buy only
+in-run items; looks and unlocks open at launch.
+
+### Cosmetics only ("no pay to win")
+economy({ store: "cosmetics" });
+Then every SKU must be a look (grants: { cosmetic: n }); drop revive.
+
+### Permanent upgrades for coins (opt-in meta upgrades)
+economy({ metaUpgrades: true });
+metaUpgrade("hearth", { stat: "maxHealth", step: 0.05, levels: 3, cost: 120, growth: 2 });  // 120, 240, 480 coins
+metaUpgrade("stride", { stat: "speed", step: 0.03, levels: 3, cost: 100, growth: 1.8 });
+Only when the creator asks for permanent upgrades. Stats: speed, maxHealth,
+magnet, might, haste, area. The engine refuses more than +15% to one stat
+or +30% in all, more than 5 levels, or growth under 1.5, and applies a
+player's levels at the start of every run. The store shows each level.
+
+### Add a keeper (a playable character)
+keeper("vesper", { name: "Vesper", text: "Arcs that leap between the dead.", model: "style.lowpoly.mini_female_c", tint: "#7ad7ff", weapon: "vesper_arc", passive: "bellows", unlock: "knight_felled" });
+A keeper starts every run with its weapon and its passive at level 1;
+players pick one before their first level and on the end screen. At most
+15; the first declared keeper is everyone's default, and at least one
+keeper has no unlock (declare a free one first). Keepers unlock with
+achievements, or with coins through a SKU with grants: { keeper }. The room
+server checks every pick against the player's saved unlocks.
+With keepers declared, players.weapon is optional.
+
+### Add achievements, daily goals and end-screen titles
+achievement("evolver", { title: "Evolved", text: "Evolve a weapon.", when: "player.evolved" });
+mission("elite", { text: "Kill an elite", when: "elite.killed" });
+title("butcher", { text: "The Butcher", most: "kills" });
+Achievements and missions count a game event per player in one run (n
+times) and pay nothing (coins come only from earn rules). The room server
+grants them from the run and saves them per player (wallet, or guest until
+sign-in), so they follow the player to every device. The HUD shows
+three missions a day. Titles rank players at the end of a run by most or
+least of: kills, damage, revives, downs, level, pickups. Events to count:
+anything you emit, "<prefab>.killed" ("marrow_knight.killed"),
+"elite.killed", "player.evolved", "player.revived", "chest.collected",
+"miniboss.killed", "boss.killed", "room.cleared".
+
+### Co-op that feels shared
+players: { share: "nearby" }        // default: half of each gem to teammates within 20 m
+players: { share: "all" }           // or "collector", or { mode, fraction, radius }
+players: { reviveBuff: { seconds: 5, damage: 1.3, speed: 1.15 } }  // the reviver burns hotter
+players: { downed: { seconds: 12, crawl: 0.35, selfRevives: 0, respawn: 0 } }  // permadeath (this game): back only when a room is cleared
+players: { lateJoinBehind: 2 }      // a late joiner starts 2 levels under the team, cards waiting
+players: { crit: { chance: 0.08, multiplier: 2 } }  // crits show as gold numbers
+The end screen votes "Play again" (everyone ready starts the next run; it
+starts by itself after 10 s) and shows each keeper's build, damage per
+weapon, what downed them, coins and titles.
+
+### Make co-op 8 players
+players.max: 8. The hosted Net Forge room server seats at most 8 in a
+co-op room (the dungeon room seats 4 today), so 8 is the most a game can
+ask for.
+
+## Models and appearances (the asset library)
+
+Every model is a real CC0 model from the asset library, by id. Enemies are
+drawn about 3.2 hit radii tall, keepers 1.8 m; animated ones walk, run and
+die by themselves. An appearance dresses a model into your own original:
+appearance: { tint: "#rrggbb", accent: "#rrggbb", scale: 0.4 to 3, parts: up to 4 }.
+
+### Make the dead look like slimes
+prefab("bone_rattler", { model: "style.lowpoly.slime_green", ... });
+prefab("grave_shambler", { model: "style.lowpoly.slime_spiky", ... });
+prefab("ossuary_brute", { model: "style.lowpoly.slime_pink", appearance: { scale: 1.3 }, ... });
+
+### A goblin warren instead of a crypt
+prefab("bone_rattler", { model: "style.lowpoly.goblin", ... }); keep the ids or rename
+them everywhere (ENCOUNTERS and DEAD too), and retell it in names.json.
+
+### A hero described by the creator
+players: { prefab: "style.lowpoly.worker", appearance: { tint: "#2e7d32", accent: "#3b2a1a", parts: ["mustache", "hat_cap"] }, ... }
+Name it something new in names.json. A creature the library lacks: the
+nearest base plus parts, e.g. model "style.lowpoly.shiba" with
+appearance { tint: "#5ec8ff", parts: ["antenna", "tail_bolt"] }.
+
+## Look and feel (engine render stack and feel kit)
+
+How the game looks and how hits feel are declarations too. They are
+presentation only (never the simulation), so tune them freely. The full
+reference is packages/engine/llms.txt.
+
+### Change the look
+game({ ..., look: { preset: "dusk", bloom: 1.4, fog: 0.3, tint: "#ffd9a0" } });
+presets: "night" (default), "dusk", "day", "studio". Also shadows (off here unless
+look.shadows is true), outline,
+exposure, saturation, contrast, vignette.
+
+### Make a death or a hit feel bigger
+prefab("brute", { ..., feel: { particles: "burst", decal: "scorch", sound: "boom", shake: 0.5, hitStop: 0.06, color: "#ff4d5e" } });
+Without feel, big enemies (bosses, radius 0.5 m or more) burst, scorch and
+shake, and small ones burst, splat and crunch.
+
+### Make a weapon's impacts feel different
+weapon("frost_ring", { ..., feel: { particles: "magic", decal: "ring", color: "#7ad7ff", shake: 0.1 } });
+Novas use it when they go off; bolts and lances when they hit.
+
+### Heavier or lighter knockback
+weapon knockback (m/s) pushes enemies, divided by their mass. Knocked
+enemies stagger, slide, bounce off walls and pillars and shove the
+enemies behind them. Bolts stop at walls and pillars.
+
+## Systems API
+
+every(seconds, n => ...), after(seconds, fn), onTick(fn), spawn(prefab, [x,y,z], { elite? }),
+spawnPickup(prefab, [x,y,z]), announce(text, { tone }), bossAlive(),
+pauseDirector(seconds), surge(multiplier, seconds), xpBoost(multiplier, seconds),
+scatter(prefab, count), clear(prefab), upcoming(label, seconds) (a HUD countdown:
+upcoming("THE BELL WARDEN", 240)),
+spawnEdge(prefab, { count, around?, side?, spread?, scale? }) (just off screen;
+side: "any" | "ahead" | "behind" | "north" | "south" | "east" | "west"),
+spawnRing(prefab, { count, radius, around? }), alive(prefab?), players(),
+emit(event), on(event, players => ...), respawnDead(), end("won" | "lost"),
+onScreen(x, z) (true when a player who is up can see that ground point),
+random(), tick(), time().
+
+## Test
+
+engine.test.run({ ticks: 30 * 180, bots: 4, assert: [...] }) plays the game
+on the server sim with bots and reports kills, wave, maxLevel, earned by
+rule, deaths, runs won and lost, softlock and ms per tick (wave is
+1 + rooms cleared). With
+bot: "human" a human-like bot plays (200 ms reactions, kiting, a second per
+card) and report.fun has the fun metrics: first threat, first level,
+level at 1/3/6/9 minutes, downs before 1:00, enemies on screen at 0:30,
+touches in minute 1, spawns on screen, survival. Net Forge's gate scores
+them; `pnpm --filter @netforge/template-dungeon fun` prints the table.
+
+## Worked example: src/game.ts
+
+This is the template's complete src/game.ts as it ships. A new game on this
+template starts from this file and changes declarations in place.
+
+```ts
+/**
+ * CRYPTWICK: the co-op dungeon crawl template.
+ *
+ * Four wickbearers go down into a candle-lit crypt, room by room. Rooms
+ * wake as you near them: their dead stir and come for your light through
+ * the doors. Clear a room for its reliquary (pick an upgrade) and to bring
+ * back anyone who fell. Down the deepest stair the Wax Abbot waits. A run
+ * is one descent: if the whole party falls, it is over, and the next one
+ * starts from the top with nothing carried down.
+ *
+ * This file is the whole game as the model writes it: declarations only,
+ * against the typed API in @netforge/engine. The crypt's floor plan is
+ * dungeon(...) from a seed; the crawl (which rooms wake, what they hold,
+ * when the party is safe) is the "crawl" system below. Everything else
+ * (sim, pathing, netcode, renderer, referee) is the template's machinery.
+ * Design rules: packages/engine/GAME-DESIGN.md.
+ */
+import { achievement, dungeon, earn, game, keeper, mission, prefab, store, system, title, upgrade, weapon } from "@netforge/engine";
+
+// The crypt: ten rooms on a 24 m grid, grown from the seed. Change the seed for a new floor plan.
+const CRYPT = dungeon({ seed: 2026, rooms: 10, cell: 24, size: [12, 18], corridor: 6, loops: 2 });
+
+export default game({
+  template: "dungeon",
+  style: "lowpoly",
+  places: { crypt: { chunks: "places/crypt", spawn: [0, 1, 0] } },
+  field: CRYPT.field,
+  look: { preset: "night", bloom: 1.2, fog: 0.5, vignette: 0.5, tint: "#ffd9a0" },
+  players: {
+    prefab: "style.lowpoly.rogue",
+    max: 4,
+    weapon: "candle_burst",
+    xp: { base: 2, growth: 2, exponent: 2.4 },
+    magnet: 4,
+    hitIframes: 0.7,
+    share: "nearby",
+    crit: { chance: 0.08, multiplier: 2 },
+    reviveBuff: { seconds: 5, damage: 1.3, speed: 1.15 },
+    bossHealthPerPlayer: 0.45,
+    // Permadeath runs: a fallen wickbearer bleeds for 12 s (crawl to a friend), with no free get-up.
+    // Out, they stay out until the party clears a room. If everyone falls, the descent is over.
+    downed: { seconds: 12, crawl: 0.35, selfRevives: 0, respawn: 0 },
+  },
+});
+
+// The crypt's dead. Health in hit points, speed in m/s (wickbearers run at 7), damage per touch.
+// Fodder sometimes leaves tallow (heal), a lure stone (pulls every shard) or a chapel bell (clears the room).
+const LUCK = [{ id: "tallow", chance: 0.03 }, { id: "lure_stone", chance: 0.012 }, { id: "chapel_bell", chance: 0.01 }];
+prefab("bone_rattler", { model: "style.lowpoly.skeleton_grunt", health: 22, speed: 3.6, radius: 0.4, damage: 7, ai: "chase", drops: ["wick_small", ...LUCK] });
+prefab("crypt_bat", { model: "style.lowpoly.bat", appearance: { tint: "#6a5a8c" }, health: 9, speed: 5.4, radius: 0.3, damage: 3, ai: "runner", drops: ["wick_small", ...LUCK] });
+prefab("grave_shambler", { model: "style.lowpoly.zombie_grunt", health: 55, speed: 2.4, radius: 0.5, damage: 11, ai: "tank", mass: 3, drops: ["wick_mid"] });
+prefab("bone_archer", { model: "style.lowpoly.skeleton", appearance: { tint: "#d8cfb8" }, health: 24, speed: 2.8, radius: 0.4, damage: 5, ai: "ranged", attack: { damage: 9, range: 10, speed: 7 }, drops: ["wick_small"] });
+prefab("wax_wisp", { model: "style.lowpoly.ghost_skull", appearance: { tint: "#ffcf7a" }, health: 18, speed: 3.4, radius: 0.4, damage: 8, ai: "bomber", attack: { radius: 2.5, damage: 26 }, drops: ["wick_small"] });
+prefab("tomb_slime", { model: "style.lowpoly.slime_horned", health: 44, speed: 2.8, radius: 0.5, damage: 8, ai: "chase", split: { into: "crypt_bat", count: 3 }, drops: ["wick_small"] });
+prefab("hex_imp", { model: "style.lowpoly.imp", health: 45, speed: 2.6, radius: 0.4, damage: 6, ai: "summoner", attack: { summon: "crypt_bat", count: 2 }, drops: ["wick_mid"] });
+prefab("candle_mender", { model: "style.lowpoly.blob_wizard", health: 30, speed: 3, radius: 0.4, damage: 6, ai: "healer", drops: ["wick_mid"] });
+prefab("ossuary_brute", { model: "style.lowpoly.orc_brute", appearance: { tint: "#8a8f7a" }, health: 170, speed: 2.2, radius: 0.8, damage: 18, ai: "tank", mass: 6, drops: ["wick_mid", "wick_mid"] });
+prefab("grave_ram", { model: "style.lowpoly.demon_blue", health: 60, speed: 3, radius: 0.5, damage: 12, ai: "charger", drops: ["wick_mid"] });
+
+// The Marrow Knight guards the middle of the crypt: a mini-boss with two telegraphed attacks and a hoard.
+prefab("marrow_knight", {
+  model: "style.lowpoly.monarch",
+  appearance: { tint: "#cfc6b0", accent: "#ff9a3d", scale: 1.5 },
+  health: 420,
+  speed: 2.6,
+  radius: 1.2,
+  damage: 16,
+  boss: { attacks: ["slam", "dash"], rank: "mini" },
+  drops: ["wick_large"],
+});
+// The Wax Abbot waits in the deepest room: slams, rings of wax, a charge, and the dead called to his side.
+prefab("wax_abbot", {
+  model: "style.lowpoly.demon",
+  appearance: { tint: "#efe2c4", accent: "#ff8a3d" },
+  health: 2800,
+  speed: 2.4,
+  radius: 1.5,
+  damage: 26,
+  boss: { attacks: ["slam", "ring", "dash", "summon"], summon: "bone_rattler", enrageAt: 0.5 },
+  drops: ["wick_large"],
+});
+
+// Props: broken columns and bone heaps to break for shards and luck, scattered over the floors at the start.
+prefab("crypt_urn", { model: "style.lowpoly.column_broken", appearance: { tint: "#8f8578" }, health: 25, speed: 0, radius: 0.5, damage: 0, prop: true, drops: ["wick_small", { id: "tallow", chance: 0.15 }, { id: "lure_stone", chance: 0.04 }] });
+prefab("bone_pile", { model: "style.lowpoly.rock_small", appearance: { tint: "#cdbf9e" }, health: 50, speed: 0, radius: 0.6, damage: 0, prop: true, drops: ["wick_mid", { id: "tallow", chance: 0.25 }, { id: "reliquary", chance: 0.08 }] });
+
+// Special pickups. A cleared room leaves a reliquary at its heart; bosses leave the hoard.
+prefab("tallow", { model: "style.lowpoly.cell_heal", appearance: { tint: "#ffe2a8" }, health: 1, speed: 0, kind: "pickup", pickup: { effect: "heal", amount: 0.3 } });
+prefab("lure_stone", { model: "style.lowpoly.crystal", health: 1, speed: 0, kind: "pickup", pickup: { effect: "vacuum" } });
+prefab("chapel_bell", { model: "style.lowpoly.grenade", health: 1, speed: 0, kind: "pickup", pickup: { effect: "bomb" } });
+prefab("reliquary", { model: "style.lowpoly.chest", health: 1, speed: 0, kind: "pickup", pickup: { effect: "chest", amount: 1 } });
+prefab("abbey_hoard", { model: "style.lowpoly.chest", appearance: { tint: "#ffcf5a", scale: 1.6 }, health: 1, speed: 0, kind: "pickup", pickup: { effect: "chest", amount: 3, evolve: true } });
+
+// Shards (pickups): the XP each is worth.
+prefab("wick_small", { model: "style.lowpoly.gem_small", health: 1, speed: 0, kind: "pickup", value: 1 });
+prefab("wick_mid", { model: "style.lowpoly.gem_mid", health: 1, speed: 0, kind: "pickup", value: 6 });
+prefab("wick_large", { model: "style.lowpoly.gem_large", health: 1, speed: 0, kind: "pickup", value: 60 });
+
+// Weapons fire by themselves. Cooldowns in seconds, ranges in metres. Each pairs with a passive to evolve.
+weapon("candle_burst", {
+  kind: "nova", damage: 13, cooldown: 1.1, range: 3.8, knockback: 2.5,
+  levels: [{ damage: "+30%" }, { range: "+15%" }, { cooldown: "-15%" }, { damage: "+30%" }, { range: "+15%" }, { damage: "+25%", knockback: 3 }],
+  evolve: { into: "chapel_blaze", requires: "bellows" },
+});
+weapon("wax_dart", {
+  kind: "bolt", damage: 14, cooldown: 0.6, range: 13, speed: 24, pierce: 1, knockback: 2,
+  levels: [{ count: 1 }, { damage: "+40%" }, { cooldown: "-20%" }, { pierce: 1 }, { count: 1 }, { damage: "+40%" }],
+  evolve: { into: "wax_volley", requires: "twin_wick" },
+});
+weapon("censer_chain", {
+  kind: "orbit", damage: 8, cooldown: 0.1, range: 2.4, count: 2, speed: 3.6, knockback: 3,
+  levels: [{ count: 1 }, { damage: "+30%" }, { range: "+20%" }, { count: 1 }, { speed: "+25%" }, { damage: "+40%" }],
+  evolve: { into: "thurible_halo", requires: "stained_glass" },
+});
+weapon("bone_spear", {
+  kind: "bolt", damage: 30, cooldown: 1.6, range: 18, speed: 34, pierce: 6, knockback: 4,
+  levels: [{ damage: "+30%" }, { pierce: 3 }, { cooldown: "-20%" }, { count: 1 }, { damage: "+40%" }],
+  evolve: { into: "relic_lance", requires: "tallow_oil" },
+});
+weapon("sexton_scythe", {
+  kind: "cone", damage: 18, cooldown: 1.1, range: 4, spread: 100, knockback: 6,
+  levels: [{ damage: "+30%" }, { spread: 40 }, { range: "+20%" }, { cooldown: "-20%" }, { damage: "+40%" }],
+  evolve: { into: "reaper_wheel", requires: "soft_soles" },
+});
+weapon("vesper_arc", {
+  kind: "chain", damage: 16, cooldown: 1.3, range: 9, count: 2, speed: 4, knockback: 1,
+  levels: [{ count: 1 }, { damage: "+35%" }, { count: 1 }, { cooldown: "-20%" }, { count: 2 }],
+  evolve: { into: "matins_storm", requires: "lodestone" },
+});
+weapon("ember_halo", {
+  kind: "aura", damage: 5, cooldown: 0.5, range: 2.5, knockback: 1,
+  levels: [{ range: "+20%" }, { damage: "+40%" }, { range: "+20%" }, { cooldown: "-20%" }, { damage: "+40%" }],
+  evolve: { into: "pyre", requires: "warded_heart" },
+});
+weapon("falling_wax", {
+  kind: "meteor", damage: 40, cooldown: 2.2, range: 11, count: 1, blast: 1.8, knockback: 6,
+  levels: [{ count: 1 }, { damage: "+40%" }, { cooldown: "-20%" }, { count: 1 }, { damage: "+40%" }],
+});
+
+// Evolutions: about x1.7 damage and a new shape. Never offered on their own.
+weapon("chapel_blaze", { kind: "nova", damage: 40, cooldown: 0.8, range: 8, knockback: 9 });
+weapon("wax_volley", { kind: "bolt", damage: 34, cooldown: 0.4, range: 15, speed: 28, count: 6, pierce: 3, knockback: 3 });
+weapon("thurible_halo", { kind: "orbit", damage: 20, cooldown: 0.1, range: 3.6, count: 6, speed: 4.5, knockback: 4 });
+weapon("relic_lance", { kind: "bolt", damage: 80, cooldown: 1, range: 22, speed: 40, count: 3, pierce: 30, knockback: 6 });
+weapon("reaper_wheel", { kind: "cone", damage: 45, cooldown: 0.8, range: 5.5, spread: 360, knockback: 8 });
+weapon("matins_storm", { kind: "chain", damage: 34, cooldown: 0.9, range: 11, count: 9, speed: 5, knockback: 2 });
+weapon("pyre", { kind: "aura", damage: 12, cooldown: 0.4, range: 4.5, knockback: 2 });
+
+// Passive upgrades offered at level-up next to new weapons and weapon levels. Each evolution pairs with one.
+upgrade("soft_soles", { stat: "speed", step: 0.07, maxLevel: 5 });
+upgrade("warded_heart", { stat: "maxHealth", step: 20, maxLevel: 5 });
+upgrade("lodestone", { stat: "magnet", step: 0.8, maxLevel: 5 });
+upgrade("tallow_oil", { stat: "might", step: 0.1, maxLevel: 5 });
+upgrade("bellows", { stat: "haste", step: 0.06, maxLevel: 5 });
+upgrade("hymnal", { stat: "regen", step: 1, maxLevel: 3 });
+upgrade("stained_glass", { stat: "area", step: 0.1, maxLevel: 5 });
+upgrade("twin_wick", { stat: "amount", step: 1, maxLevel: 2 });
+
+/**
+ * What a woken room holds, by its depth (doors from the start): [prefab, count] for one
+ * wickbearer. Each extra wickbearer adds 35% more. Deeper rooms repeat the last row.
+ */
+const ENCOUNTERS: readonly (readonly (readonly [string, number])[])[] = [
+  [["bone_rattler", 7], ["crypt_bat", 5]],
+  [["bone_rattler", 9], ["bone_archer", 3], ["grave_shambler", 2]],
+  [["grave_shambler", 3], ["crypt_bat", 9], ["wax_wisp", 4], ["bone_archer", 3]],
+  [["tomb_slime", 3], ["hex_imp", 2], ["bone_rattler", 10], ["grave_ram", 2], ["candle_mender", 1]],
+  [["ossuary_brute", 1], ["bone_archer", 5], ["wax_wisp", 5], ["grave_ram", 3], ["candle_mender", 2], ["bone_rattler", 10]],
+];
+/** Everything a room can send: a room is cleared when none of these is left standing. */
+const DEAD = ["bone_rattler", "crypt_bat", "grave_shambler", "bone_archer", "wax_wisp", "tomb_slime", "hex_imp", "candle_mender", "ossuary_brute", "grave_ram", "marrow_knight", "wax_abbot"];
+/** Seconds the crypt stays quiet with no fight before the nearest sleeping room wakes by itself. */
+const STIR_AFTER = 18;
+
+system("crawl", ({ onTick, tick, players, spawn, alive, emit, announce, upcoming, respawnDead, spawnPickup, scatter, random, onScreen, on, end, clear, bossAlive }) => {
+  scatter("crypt_urn", 36);
+  scatter("bone_pile", 14);
+  const woken = new Set<number>([CRYPT.start.id]);
+  const cleared = new Set<number>([CRYPT.start.id]);
+  const active: number[] = [];
+  // Spawns waiting for a spot in their room that nobody is looking at.
+  const queue: { prefab: string; room: number; elite: boolean; since: number }[] = [];
+  let quietSince = tick();
+  let fightSince = 0;
+  let wakes = 0;
+  let knightDone = false;
+
+  const living = () => DEAD.reduce((n, id) => n + alive(id), 0);
+  const pointIn = (room: number, margin: number): [number, number] => {
+    const r = CRYPT.rooms[room] ?? CRYPT.start;
+    return [r.x + (random() * 2 - 1) * (r.hx - margin), r.z + (random() * 2 - 1) * (r.hz - margin)];
+  };
+
+  const wake = (room: number) => {
+    if (woken.has(room)) return;
+    woken.add(room);
+    if (active.length === 0) fightSince = tick();
+    active.push(room);
+    wakes++;
+    const r = CRYPT.rooms[room] ?? CRYPT.start;
+    const party = Math.max(1, players().filter((p) => !p.bot).length);
+    const add = (prefab: string, count: number, elite = false) => {
+      for (let i = 0; i < count; i++) queue.push({ prefab, room, elite, since: tick() });
+    };
+    if (room === CRYPT.boss.id) {
+      announce("THE WAX ABBOT WAKES", { tone: "danger" });
+      add("wax_abbot", 1);
+      add("bone_rattler", 6);
+      return;
+    }
+    const row = ENCOUNTERS[Math.min(r.depth - 1, ENCOUNTERS.length - 1)] ?? ENCOUNTERS[0] ?? [];
+    for (const [prefab, n] of row) add(prefab, Math.max(1, Math.round(n * (1 + 0.35 * (party - 1)))));
+    // Every third room brings an elite; the Marrow Knight guards the first room three doors down.
+    if (wakes % 3 === 0) add("bone_rattler", 1, true);
+    if (!knightDone && r.depth >= 3) {
+      knightDone = true;
+      announce("THE MARROW KNIGHT STIRS", { tone: "danger" });
+      add("marrow_knight", 1);
+    }
+  };
+
+  const clearActive = () => {
+    for (const room of active) {
+      cleared.add(room);
+      const r = CRYPT.rooms[room] ?? CRYPT.start;
+      if (room !== CRYPT.boss.id) spawnPickup("reliquary", [r.x, 0.5, r.z]);
+      emit("room.cleared");
+    }
+    active.length = 0;
+    respawnDead();
+    announce("THE ROOM FALLS SILENT", { tone: "reward" });
+    quietSince = tick();
+  };
+
+  onTick(() => {
+    const t = tick();
+    // Bring in what waits, off every screen, inside its own room (after 3 s, wherever it fits).
+    for (let i = 0; i < queue.length && i < 8; i++) {
+      const q = queue[i];
+      if (!q) continue;
+      const late = t - q.since > 90;
+      for (let k = 0; k < 4; k++) {
+        const [x, z] = pointIn(q.room, 1.5);
+        if (!late && onScreen(x, z)) continue;
+        spawn(q.prefab, [x, 0.5, z], { elite: q.elite });
+        queue.splice(i--, 1);
+        break;
+      }
+    }
+    if (t % 10 !== 0) return;
+    // Where the party stands wakes the rooms around it.
+    for (const p of players()) {
+      if (!p.alive) continue;
+      const here = CRYPT.roomAt(p.position[0], p.position[2]);
+      if (here < 0) continue;
+      if (!woken.has(here) && active.length < 2) wake(here);
+      if (cleared.has(here)) for (const next of CRYPT.rooms[here]?.links ?? []) if (!woken.has(next) && active.length < 2) wake(next);
+    }
+    if (active.length > 0) {
+      // A long fight down to its last few: the stragglers slink back into the dark (never a boss).
+      if (queue.length === 0 && !bossAlive() && t - fightSince > 75 * 30 && living() <= 3) for (const id of DEAD) clear(id);
+      if (queue.length === 0 && living() === 0) clearActive();
+      return;
+    }
+    // Quiet too long: the nearest sleeping room next to a cleared one stirs by itself.
+    if (t - quietSince >= STIR_AFTER * 30) {
+      let pick = -1;
+      for (const r of CRYPT.rooms) {
+        if (woken.has(r.id) || !r.links.some((l) => cleared.has(l))) continue;
+        if (pick < 0 || r.depth < (CRYPT.rooms[pick]?.depth ?? 99)) pick = r.id;
+      }
+      if (pick >= 0) {
+        announce("SOMETHING STIRS IN THE DARK", { tone: "danger" });
+        wake(pick);
+      }
+    } else if (t - quietSince === 30) upcoming("THE CRYPT STIRS", STIR_AFTER - 1);
+  });
+
+  on("miniboss.killed", () => announce("THE KNIGHT FALLS · TAKE THE HOARD", { tone: "reward" }));
+  on("boss.killed", () => end("won"));
+});
+
+// Keepers: pick one before your first level. New keepers unlock with achievements, never with coins.
+keeper("lampwright", { name: "Lampwright", text: "A steady candle burst and a long reach for shards.", weapon: "candle_burst", passive: "lodestone" });
+keeper("sexton", { name: "Sexton", text: "A sweeping scythe and soft soles.", model: "style.lowpoly.hooded_adventurer", tint: "#9fd17a", weapon: "sexton_scythe", passive: "soft_soles", unlock: "three_doors" });
+keeper("vesper", { name: "Vesper", text: "Arcs that leap between the dead; quicker hands.", model: "style.lowpoly.mini_female_c", tint: "#7ad7ff", weapon: "vesper_arc", passive: "bellows", unlock: "knight_felled" });
+keeper("chandler", { name: "Chandler", text: "Calls falling wax; a wider glass.", model: "style.lowpoly.monarch", tint: "#ffcf7a", weapon: "falling_wax", passive: "stained_glass", unlock: "abbot_silenced" });
+
+// Achievements (counted in a run; they unlock keepers and pay nothing).
+achievement("three_doors", { title: "Three Doors Down", text: "Clear three rooms in one descent.", when: "room.cleared", n: 3 });
+achievement("knight_felled", { title: "Marrow and Bone", text: "Fell the Marrow Knight.", when: "miniboss.killed" });
+achievement("abbot_silenced", { title: "The Candle Outlasts", text: "Silence the Wax Abbot.", when: "boss.killed" });
+achievement("evolver", { title: "Rekindled", text: "Evolve a weapon.", when: "player.evolved" });
+
+// Daily goals: the HUD shows three a day. They point at the game's systems and pay nothing.
+mission("rooms", { text: "Clear 4 rooms", when: "room.cleared", n: 4 });
+mission("elite", { text: "Kill an elite", when: "elite.killed" });
+mission("revive", { text: "Revive a wickbearer", when: "player.revived" });
+mission("chest", { text: "Open 3 reliquaries", when: "chest.collected", n: 3 });
+mission("knight", { text: "Fell the Marrow Knight", when: "miniboss.killed" });
+mission("evolve", { text: "Evolve a weapon", when: "player.evolved" });
+
+// End-screen titles: who led the descent at what.
+title("gravedigger", { text: "The Gravedigger", most: "kills" });
+title("pyre", { text: "The Pyre", most: "damage" });
+title("chaplain", { text: "Chaplain", most: "revives" });
+title("unscathed", { text: "Unscathed", least: "downs" });
+title("magpie", { text: "Magpie", most: "pickups" });
+
+// Earn (mandatory). Pays the game's coins (1 coin = 1 token), once per run each.
+// Pay amounts copy EMBERWATCH's (5, 20, 50, 5) until CRYPTWICK's own are set: PLACEHOLDER.
+earn.rule("first_doors", { when: "room.cleared", n: 2, pay: 5, oncePer: "run" });
+earn.rule("deep_delve", { when: "room.cleared", n: 7, pay: 20, oncePer: "run" });
+earn.rule("abbot_breaker", { when: "boss.killed", n: 1, pay: 50, oncePer: "run" });
+earn.rule("bone_breaker", { when: "enemy.killed", n: 60, pay: 5, oncePer: "run" });
+// Buy-in run (the mandatory sink loop): stake coins at run start to earn above free play.
+// A staked run also pays up to stake x multiple, by the share of this run's earn the player makes.
+// What it does not win back stays in the reward pool. Values are PLACEHOLDER.
+earn.stake({ min: 20, max: 200, multiple: 2 });
+
+// Store (the Kit), priced in coins (the default coin model): a revive used while
+// downed, and a cosmetic wickbearer palette owned for good (kept in the profile).
+// Prices copy EMBERWATCH's until CRYPTWICK's own are set: PLACEHOLDER.
+store.sku("revive", { coins: 50 });
+store.sku("skin_ossuary", { coins: 300, grants: { cosmetic: 1 } });
+// Losable gear: owned for good until lost. It brings one level of its upgrade into every staked run,
+// and is lost when that run makes less than loseBelow of its most earn. Values are PLACEHOLDER.
+store.sku("wick_charm", { coins: 150, grants: { gear: "tallow_oil", loseBelow: 0.25 } });
+```
+
+## Validate and playtest
+
+### With the MCP server
+
+Run `npx -y @netforge/mcp` (package @netforge/mcp, bin netforge-mcp) and
+connect it to your coding agent. Its tools are netforge_list_templates, netforge_create_game,
+netforge_explain_api, netforge_search_docs, netforge_validate_game, netforge_run_playtest and netforge_play_locally.
+
+- netforge_validate_game checks src/game.ts against the engine's schemas and this
+  template's rules, and returns one actionable line per problem.
+- netforge_run_playtest plays the game headless with bots and returns the report.
+- netforge_play_locally gives the steps to open the game in a browser with kit play.
+
+### In code
+
+Import the game module first so its declarations register, then run the
+headless harness. This plays 4 players for 3 minutes at 30 Hz.
+
+```ts
+import { engine } from "@netforge/engine";
+import "./src/game.js";
+
+const report = await engine.test.run({
+  ticks: 30 * 180,
+  bots: 4,
+  seed: 1,
+  assert: [
+    { name: "earn fired", check: (r) => r.earnEmitted > 0 },
+    { name: "no softlock", check: (r) => !r.softlock },
+  ],
+});
+if (report.failed.length > 0) throw new Error(report.failed.join("\n"));
+```
+
+The report has kills, wave (1 + rooms cleared), maxLevel, earned by rule, deaths, runs won and lost, softlock and ms per tick; with bot: "human" it also fills report.fun.
+
+The template's own tests (vitest) are the reference checks:
+
+- test/harness.test.ts
+- test/host.test.ts
+- test/store.test.ts
+
+### Play it locally
+
+In a folder with netnet.json and src/game.ts:
+
+```sh
+npm install @netforge/kit-play @netforge/engine @netforge/template-dungeon
+echo '{"template":"dungeon"}' > netnet.json
+npx kit-play        # opens http://127.0.0.1:4663
+```
+
+kit play builds the template client with your src/game.ts and runs a local
+room host with play money. No wallet, no chain and no hosted servers are
+involved. Open the link in more tabs for more players.

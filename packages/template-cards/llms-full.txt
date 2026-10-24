@@ -1,0 +1,243 @@
+# Net Forge card battler template (INKWRIT)
+
+> A one-against-one card battler. Two scribes duel at a desk: heroes with
+> health, ink (mana) that rises each turn, a hand drawn from a shuffled
+> deck, inked creatures on the board, spells. A run is a gauntlet of
+> duels; after each one, every player drafts one of three cards into
+> their deck. Alone, an AI scribe of the gauntlet takes the other seat.
+> You change the game by editing src/game.ts only. The template already has
+> the duel, turns and the turn timer, the shuffle (on the server), hidden
+> hands, guards, rush, the draft, the AI, netcode, rendering, touch,
+> earn and the store. Do not write renderers, netcode or AI.
+
+## Files
+
+- src/game.ts: THE GAME. Declarations against @netforge/engine:
+  game(), cardTable(), card(), upgrade(), earn.rule(), earn.stake(), store.sku().
+- src/names.json: the title and every label players read. Cards go in
+  "weapons" ({ name, line }), plus upgrades, earn rules and store items.
+- Everything else is template machinery.
+
+## Rules the build enforces
+
+- game({ template: "cards", style, places, players: { prefab, max } }), players.max at most 2.
+- Exactly one cardTable(...); 4 to 40 card(...)s. The starter deck (8 to 30
+  cards) names declared cards, holds at least one unit and cards costing 2
+  or less. ai is 1 to 12 tiers { health, smart }.
+- A unit has health 1 or more; a spell has an effect.
+- Effects: kind "damage", "heal", "draw" or "buff"; target "enemy" (the
+  player picks an enemy unit or the hero), "enemy_hero", "all_enemies",
+  "own_hero", "own_unit" (the player picks one of theirs) or "all_own".
+- Upgrades read four stats only: maxHealth (hero health), might (+attack on
+  the buyer's units), haste (+ink in the first turn), amount (+cards in
+  the first hand).
+- No weapon(...). Asset ids look like "style.lowpoly.frog"; keep game({ style }).
+- 2 playtest players must decide duels and fire an earn rule within 4 minutes.
+
+## Units
+
+Health and attack in points, cost in ink (0 to 10), seconds for timers.
+Tick rate 30 Hz.
+
+## The loop
+
+A duel: a coin decides who goes first; the second player draws one extra
+card. Each turn: +1 ink (up to manaMax), draw a card (an empty deck hurts
+more each time), play cards, attack with ready units (a unit is ready the
+turn after it lands, or at once with rush; guard units must be attacked
+first), end the turn (or the timer ends it). A hero at 0 loses; turnCap
+turns is a draw. After each duel but the last, a draft: one of three.
+
+## Common changes
+
+### A new card
+card("mirror_moth", { model: "style.lowpoly.jelly_flyer", kind: "unit", cost: 3, attack: 2, health: 2, effect: { kind: "damage", amount: 1, target: "all_enemies" } });
+Add its label to names.json weapons. The draft offers every card unless cardTable pool lists some.
+
+### Tune the table
+cardTable({ health: 25, duels: 5, turnSeconds: 40, ... }). Lower health
+makes faster duels; more duels make longer runs.
+
+### Harder or easier AI
+ai: [{ health: 14, smart: 0.3 }, ...]: duel n against the AI uses tier n;
+raise health and smart for a harder gauntlet.
+
+### Earn rules
+earn.rule("ink_master", { when: "ai.beaten", n: 3, pay: 15, oncePer: "run" });
+Events: duel.won (a duel won against a person; never against the AI, never
+a forfeit), ai.beaten (a gauntlet AI scribe beaten; a forfeit pays
+nothing), run.won (more duels won than lost in the run). Each rule pays
+once per run per player, in coins; the room server is the referee; the AI
+scribe never earns.
+
+### The buy-in run (required)
+earn.stake({ min: 10, max: 100, multiple: 2 }); one top-level line. "stake" is reserved.
+
+### Coins: earn and the store
+store.sku("thick_vellum", { coins: 40 });                            // one level of the upgrade for the run
+store.sku("skin_gold_leaf", { coins: 500, grants: { cosmetic: 2 } }); // a finish for your quill, owned for good
+store.sku("bound_folio", { coins: 120, grants: { gear: "thick_vellum", loseBelow: 0.25 } }); // losable gear
+Keep the SKUs the client is wired to (thick_vellum, sharp_nib, quick_ink,
+spare_page, skin_vermilion, skin_gold_leaf, bound_folio) at their prices.
+
+## Hidden information
+
+Decks are shuffled on the room server and their order never leaves it; a
+hand and a draft offer are sent only to their owner. Nothing in game.ts
+can change that.
+
+## Test
+
+engine.test.run({ ticks: 30 * 240, bots: 2 }) plays duels between two
+players (bots: 1 plays one person against the AI) and reports duels won
+(kills) and lost (deaths), the duel reached (wave), runs, earned by rule,
+softlock, ms per tick and the genre's checks under rules.checks.
+
+## Worked example: src/game.ts
+
+This is the template's complete src/game.ts as it ships. A new game on this
+template starts from this file and changes declarations in place.
+
+```ts
+/**
+ * INKWRIT: the card battler template (play style:
+ * card battler).
+ *
+ * Scribes duel in a lamplit study. Every card is an inked creature or a
+ * spell written on a page: blot imps, ledger crabs, folio wyrms, a splash
+ * of ink. One against one, a person against a person or against the
+ * gauntlet's AI scribes. A run is four duels; after each, you draft one of
+ * three new cards into your deck.
+ *
+ * This file is the whole game as the model writes it: declarations only,
+ * against the typed API in @netforge/engine. The duel, the draft, the
+ * shuffle, hidden hands, the AI, netcode, renderer and referee are the
+ * template's machinery.
+ */
+import { card, cardTable, earn, game, store, upgrade } from "@netforge/engine";
+
+export default game({
+  template: "cards",
+  style: "lowpoly",
+  places: { study: { chunks: "places/study", spawn: [0, 0, 0] } },
+  players: { prefab: "style.lowpoly.hooded_adventurer", max: 2 },
+});
+
+// The table: hero health, hands, the board, the gauntlet and its AI scribes (tier n plays duel n against the AI).
+cardTable({
+  health: 20,
+  startHand: 3,
+  handMax: 7,
+  boardMax: 5,
+  manaMax: 10,
+  turnSeconds: 30,
+  draftSeconds: 15,
+  duels: 4,
+  starter: ["blot_imp", "blot_imp", "quill_sprite", "quill_sprite", "ink_frog", "ink_frog", "margin_bat", "ledger_crab", "serif_fox", "splash", "splash", "blotting_sand"],
+  ai: [
+    { health: 14, smart: 0.3 },
+    { health: 16, smart: 0.55 },
+    { health: 20, smart: 0.75 },
+    { health: 24, smart: 0.9 },
+  ],
+});
+
+// Units: cost in mana, attack and health. guard units must be attacked first; rush units attack the turn they land.
+card("blot_imp", { model: "style.lowpoly.imp", kind: "unit", cost: 1, attack: 2, health: 1 });
+card("quill_sprite", { model: "style.lowpoly.bee", kind: "unit", cost: 1, attack: 1, health: 2, rush: true });
+card("ink_frog", { model: "style.lowpoly.frog", kind: "unit", cost: 2, attack: 2, health: 3 });
+card("margin_bat", { model: "style.lowpoly.bat", kind: "unit", cost: 2, attack: 3, health: 1, rush: true });
+card("ledger_crab", { model: "style.lowpoly.crab", kind: "unit", cost: 3, attack: 2, health: 5, guard: true });
+card("serif_fox", { model: "style.lowpoly.fox", kind: "unit", cost: 3, attack: 3, health: 3, effect: { kind: "draw", amount: 1 } });
+card("gloss_wolf", { model: "style.lowpoly.wolf", kind: "unit", cost: 4, attack: 4, health: 4 });
+card("stamp_golem", { model: "style.lowpoly.yeti", kind: "unit", cost: 5, attack: 4, health: 7, guard: true });
+card("folio_wyrm", { model: "style.lowpoly.dragon_whelp", kind: "unit", cost: 6, attack: 5, health: 5, effect: { kind: "damage", amount: 2, target: "all_enemies" } });
+card("grand_errata", { model: "style.lowpoly.dragon", kind: "unit", cost: 8, attack: 8, health: 8 });
+// Spells: an effect only. "enemy" lets the player pick an enemy unit or the hero.
+card("splash", { model: "style.lowpoly.crystal", kind: "spell", cost: 1, effect: { kind: "damage", amount: 2, target: "enemy" } });
+card("blotting_sand", { model: "style.lowpoly.gem_mid", kind: "spell", cost: 2, effect: { kind: "heal", amount: 5, target: "own_hero" } });
+card("underline", { model: "style.lowpoly.gem_pink", kind: "spell", cost: 2, effect: { kind: "buff", amount: 2, target: "own_unit" } });
+card("second_draft", { model: "style.lowpoly.chest", kind: "spell", cost: 3, effect: { kind: "draw", amount: 2 } });
+card("ink_storm", { model: "style.lowpoly.meteor", kind: "spell", cost: 4, effect: { kind: "damage", amount: 2, target: "all_enemies" } });
+card("final_word", { model: "style.lowpoly.crystal_rock", kind: "spell", cost: 5, effect: { kind: "damage", amount: 5, target: "enemy" } });
+
+// Store upgrades: one level each, for the rest of the run (hero health, unit attack, first-turn mana, starting hand).
+upgrade("thick_vellum", { stat: "maxHealth", step: 5, maxLevel: 1 });
+upgrade("sharp_nib", { stat: "might", step: 1, maxLevel: 1 });
+upgrade("quick_ink", { stat: "haste", step: 1, maxLevel: 1 });
+upgrade("spare_page", { stat: "amount", step: 1, maxLevel: 1 });
+
+// Earn (mandatory). Pays the game's coins (1 coin = 1 token), once per run each. Values are PLACEHOLDER.
+// duel.won counts duels won against a person (never against the AI, never a forfeit); ai.beaten counts gauntlet AI scribes beaten.
+earn.rule("first_ink", { when: "ai.beaten", n: 1, pay: 5, oncePer: "run" });
+earn.rule("full_gauntlet", { when: "ai.beaten", n: 4, pay: 20, oncePer: "run" });
+earn.rule("inked_duel", { when: "duel.won", n: 1, pay: 12, oncePer: "run" });
+earn.rule("signed_and_sealed", { when: "duel.won", n: 3, pay: 25, oncePer: "run" });
+// Buy-in run (the mandatory sink loop): stake coins at run start to earn above free play. Values are PLACEHOLDER.
+earn.stake({ min: 10, max: 100, multiple: 2 });
+
+// Store (the Kit), priced in coins: four run upgrades and two finishes for your quill, owned for good.
+store.sku("thick_vellum", { coins: 40 });
+store.sku("sharp_nib", { coins: 60 });
+store.sku("quick_ink", { coins: 40 });
+store.sku("spare_page", { coins: 50 });
+store.sku("skin_vermilion", { coins: 300, grants: { cosmetic: 1 } });
+store.sku("skin_gold_leaf", { coins: 500, grants: { cosmetic: 2 } });
+// Losable gear: one level of its upgrade in every staked run, lost when that run makes under loseBelow of its most earn. PLACEHOLDER.
+store.sku("bound_folio", { coins: 120, grants: { gear: "thick_vellum", loseBelow: 0.25 } });
+```
+
+## Validate and playtest
+
+### With the MCP server
+
+Run `npx -y @netforge/mcp` (package @netforge/mcp, bin netforge-mcp) and
+connect it to your coding agent. Its tools are netforge_list_templates, netforge_create_game,
+netforge_explain_api, netforge_search_docs, netforge_validate_game, netforge_run_playtest and netforge_play_locally.
+
+- netforge_validate_game checks src/game.ts against the engine's schemas and this
+  template's rules, and returns one actionable line per problem.
+- netforge_run_playtest plays the game headless with bots and returns the report.
+- netforge_play_locally gives the steps to open the game in a browser with kit play.
+
+### In code
+
+Import the game module first so its declarations register, then run the
+headless harness. This plays two players for 4 minutes at 30 Hz (bots: 1 plays one person against the AI).
+
+```ts
+import { engine } from "@netforge/engine";
+import "./src/game.js";
+
+const report = await engine.test.run({
+  ticks: 30 * 240,
+  bots: 2,
+  seed: 1,
+  assert: [
+    { name: "earn fired", check: (r) => r.earnEmitted > 0 },
+    { name: "no softlock", check: (r) => !r.softlock },
+  ],
+});
+if (report.failed.length > 0) throw new Error(report.failed.join("\n"));
+```
+
+The report has duels won (kills) and lost (deaths), the duel reached (wave), runs, earned by rule, softlock, ms per tick and the genre's checks under rules.checks.
+
+The template's own tests (vitest) are the reference checks:
+
+- test/harness.test.ts
+- test/store.test.ts
+
+### Play it locally
+
+In a folder with netnet.json and src/game.ts:
+
+```sh
+npm install @netforge/kit-play @netforge/engine @netforge/template-cards
+echo '{"template":"cards"}' > netnet.json
+npx kit-play        # opens http://127.0.0.1:4663
+```
+
+kit play builds the template client with your src/game.ts and runs a local
+room host with play money. No wallet, no chain and no hosted servers are
+involved. Open the link in more tabs for more players.

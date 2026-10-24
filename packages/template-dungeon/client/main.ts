@@ -160,7 +160,7 @@ async function main(): Promise<void> {
   const joinMs = performance.now() - joinStart;
   if (friendRoomId && conn.roomId !== friendRoomId) setTimeout(() => hud.toast("That room was full, started a new one"), 500);
   if (conn.welcome.version !== GAME_VERSION) setTimeout(() => hud.toast("A new version is live. Reload to update."), 800);
-  history.replaceState(null, "", `${location.pathname}?room=${conn.roomId}${place !== PLACE ? `&place=${encodeURIComponent(place)}` : ""}${params.has("server") ? `&server=${encodeURIComponent(endpoint)}` : ""}${autopilot ? "&autopilot=1" : ""}${params.has("webgl") ? "&webgl=1" : ""}${params.has("stats") ? "&stats=1" : ""}${params.has("style") ? `&style=${encodeURIComponent(params.get("style") ?? "")}` : ""}`);
+  history.replaceState(null, "", `${location.pathname}?room=${conn.roomId}${place !== PLACE ? `&place=${encodeURIComponent(place)}` : ""}${params.has("server") ? `&server=${encodeURIComponent(endpoint)}` : ""}${params.has("game") ? `&game=${encodeURIComponent(params.get("game") ?? "")}` : ""}${autopilot ? "&autopilot=1" : ""}${params.has("webgl") ? "&webgl=1" : ""}${params.has("stats") ? "&stats=1" : ""}${params.has("style") ? `&style=${encodeURIComponent(params.get("style") ?? "")}` : ""}`);
 
   // The engine's feel kit: hit-stop clock, trauma shake, flash, knockback, numbers, sound, rumble.
   const feelParam = params.get("feel");
@@ -233,7 +233,7 @@ async function main(): Promise<void> {
     revive: () => void paidRevive(),
     getUp: () => input.getUp(),
     invite: () => {
-      const url = `${location.origin}${location.pathname}?room=${conn.roomId}${place !== PLACE ? `&place=${encodeURIComponent(place)}` : ""}${params.has("server") ? `&server=${encodeURIComponent(endpoint)}` : ""}`;
+      const url = `${location.origin}${location.pathname}?room=${conn.roomId}${place !== PLACE ? `&place=${encodeURIComponent(place)}` : ""}${params.has("server") ? `&server=${encodeURIComponent(endpoint)}` : ""}${params.has("game") ? `&game=${encodeURIComponent(params.get("game") ?? "")}` : ""}`;
       void navigator.clipboard?.writeText(url).then(
         () => hud.toast("Invite link copied"),
         () => hud.toast(url),

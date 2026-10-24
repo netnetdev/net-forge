@@ -1,4 +1,4 @@
-# ROMPHOUSE: the party co-op template (NetNet game runtime)
+# Net Forge party co-op template (ROMPHOUSE)
 
 > A party game for 2 to 8 friends in one big playroom: a show of five
 > quick rounds, each a different minigame with one goal for the whole

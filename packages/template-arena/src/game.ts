@@ -102,7 +102,7 @@ earn.rule("top_of_the_yard", { when: "round.top", n: 1, pay: 25, oncePer: "run" 
 earn.stake({ min: 10, max: 100, multiple: 2 });
 // PvP pot: each entrant pays the entry before a round; the round splits the pot by the earn each entrant
 // makes, and the recycle share stays in the reward pool. Values are PLACEHOLDER.
-// Off until a legal review: declared, not enabled, so no room takes an entry.
+// Declared, not enabled: add `enabled: true` to run it (R-16 approved 2026-10-23).
 earn.pot({ entry: 20, recycle: 0.05 });
 
 // Store (the Kit), priced in coins (the default coin model): three round upgrades

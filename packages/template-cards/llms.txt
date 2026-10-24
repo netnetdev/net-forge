@@ -1,4 +1,4 @@
-# INKWRIT: the card battler template (NetNet game runtime, board genre)
+# Net Forge card battler template (INKWRIT)
 
 > A one-against-one card battler. Two scribes duel at a desk: heroes with
 > health, ink (mana) that rises each turn, a hand drawn from a shuffled

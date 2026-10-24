@@ -1,5 +1,5 @@
 {
-  "$schema": "https://cdn.jsdelivr.net/npm/@netforge/kit@0.1.0/netnet.config.schema.json",
+  "$schema": "https://cdn.jsdelivr.net/npm/@netforge/kit@0.2.0/netnet.config.schema.json",
   "game": "comet-sweep",
   "name": "Comet Sweep",
   "store": [

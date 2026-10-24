@@ -1,12 +1,35 @@
 {
   "name": "@netforge/template-arena",
-  "version": "0.1.0",
-  "description": "VOLTYARD: Template 2 of the NetNet game runtime, an arena shooter with lag-compensated beams, loadouts, rounds and seat-filling bots. The game module, its browser client and its playtest bots.",
+  "version": "0.2.0",
+  "description": "Arena shooter game template for Net Forge: up to 16 players, lag-compensated beams, loadouts, rounds and seat-filling bots (VOLTYARD).",
+  "keywords": [
+    "game-template",
+    "multiplayer",
+    "browser-game",
+    "html5-game",
+    "threejs",
+    "game-engine",
+    "typescript",
+    "gamedev",
+    "ai-agents",
+    "mcp",
+    "net-forge",
+    "io-game",
+    "netcode"
+  ],
   "license": "MIT",
   "type": "module",
+  "sideEffects": [
+    "./src/game.ts",
+    "./src/manifest.ts",
+    "./client/**"
+  ],
   "exports": {
     ".": "./src/manifest.ts",
-    "./store": "./src/store.ts"
+    "./store": "./src/store.ts",
+    "./package.json": "./package.json",
+    "./llms.txt": "./llms.txt",
+    "./llms-full.txt": "./llms-full.txt"
   },
   "files": [
     "src",
@@ -15,17 +38,23 @@
     "llms.txt",
     "README.md",
     "NOTICE",
-    "LICENSE"
+    "LICENSE",
+    "llms-full.txt",
+    "AGENTS.md",
+    "CLAUDE.md"
   ],
   "publishConfig": {
     "access": "public"
+  },
+  "homepage": "https://forge.netnet.capital/docs/templates/arena",
+  "bugs": {
+    "url": "https://github.com/netnetdev/net-forge/issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/netnetdev/net-forge.git",
     "directory": "packages/template-arena"
   },
-  "homepage": "https://github.com/netnetdev/net-forge/tree/main/packages/template-arena#readme",
   "engines": {
     "node": ">=20"
   },
@@ -51,8 +80,5 @@
     "typescript": "5.8.3",
     "vite": "6.4.3",
     "vitest": "3.2.7"
-  },
-  "bugs": {
-    "url": "https://github.com/netnetdev/net-forge/issues"
   }
 }

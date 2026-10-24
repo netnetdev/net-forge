@@ -1,12 +1,34 @@
 {
   "name": "@netforge/template-collector",
-  "version": "0.1.0",
-  "description": "MOSSBOUND: the monster collector template of the NetNet game runtime, a shared marsh where keepers catch fen spirits, battle turn by turn with a team of three and bring down the warden before dusk. The game module, its browser client and its playtest bots.",
+  "version": "0.2.0",
+  "description": "Monster collector game template for Net Forge: a shared marsh where players catch creatures and battle turn by turn with a team of three (MOSSBOUND).",
+  "keywords": [
+    "game-template",
+    "multiplayer",
+    "browser-game",
+    "html5-game",
+    "threejs",
+    "game-engine",
+    "typescript",
+    "gamedev",
+    "ai-agents",
+    "mcp",
+    "net-forge",
+    "monster-collector"
+  ],
   "license": "MIT",
   "type": "module",
+  "sideEffects": [
+    "./src/game.ts",
+    "./src/manifest.ts",
+    "./client/**"
+  ],
   "exports": {
     ".": "./src/manifest.ts",
-    "./store": "./src/store.ts"
+    "./store": "./src/store.ts",
+    "./package.json": "./package.json",
+    "./llms.txt": "./llms.txt",
+    "./llms-full.txt": "./llms-full.txt"
   },
   "files": [
     "src",
@@ -15,17 +37,23 @@
     "llms.txt",
     "README.md",
     "NOTICE",
-    "LICENSE"
+    "LICENSE",
+    "llms-full.txt",
+    "AGENTS.md",
+    "CLAUDE.md"
   ],
   "publishConfig": {
     "access": "public"
+  },
+  "homepage": "https://forge.netnet.capital/docs/templates/collector",
+  "bugs": {
+    "url": "https://github.com/netnetdev/net-forge/issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/netnetdev/net-forge.git",
     "directory": "packages/template-collector"
   },
-  "homepage": "https://github.com/netnetdev/net-forge/tree/main/packages/template-collector#readme",
   "engines": {
     "node": ">=20"
   },
@@ -51,8 +79,5 @@
     "typescript": "5.8.3",
     "vite": "6.4.3",
     "vitest": "3.2.7"
-  },
-  "bugs": {
-    "url": "https://github.com/netnetdev/net-forge/issues"
   }
 }

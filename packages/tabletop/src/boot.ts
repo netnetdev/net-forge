@@ -167,7 +167,7 @@ export async function bootBoard<S>(o: BoardBootOptions<S>): Promise<BoardApp<S>>
   if (friendRoomId && conn.roomId !== friendRoomId) setTimeout(() => hud.toast("Room full, new room"), 500);
   if (conn.welcome.version !== o.version) setTimeout(() => hud.toast("Update ready. Reload."), 800);
   const autopilot = params.get("autopilot") === "1";
-  const linkFor = (base: string) => `${base}?room=${conn.roomId}${place !== o.place ? `&place=${encodeURIComponent(place)}` : ""}${params.has("server") ? `&server=${encodeURIComponent(endpoint)}` : ""}`;
+  const linkFor = (base: string) => `${base}?room=${conn.roomId}${place !== o.place ? `&place=${encodeURIComponent(place)}` : ""}${params.has("server") ? `&server=${encodeURIComponent(endpoint)}` : ""}${params.has("game") ? `&game=${encodeURIComponent(params.get("game") ?? "")}` : ""}`;
   const keep = ["autopilot", "webgl", "stats", "style", "preview", "shapes", "host", "coin", "title", "player", "library"].filter((k) => params.has(k)).map((k) => `&${k}=${encodeURIComponent(params.get(k) ?? "")}`).join("");
   history.replaceState(null, "", `${linkFor(location.pathname)}${keep}`);
 

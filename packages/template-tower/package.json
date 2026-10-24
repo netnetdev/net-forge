@@ -1,12 +1,29 @@
 {
   "name": "@netforge/template-tower",
-  "version": "0.1.0",
-  "description": "COGSPIRE: the tower defense template of the NetNet game runtime, a co-op board for up to four with waves, build and upgrade, shared lives. The game module, its browser client and its playtest bots.",
+  "version": "0.2.0",
+  "description": "Co-op tower defense game template for Net Forge: up to 4 players, waves, building and upgrades, shared lives (COGSPIRE).",
+  "keywords": [
+    "game-template",
+    "multiplayer",
+    "browser-game",
+    "html5-game",
+    "threejs",
+    "game-engine",
+    "typescript",
+    "gamedev",
+    "ai-agents",
+    "mcp",
+    "net-forge",
+    "tower-defense"
+  ],
   "license": "MIT",
   "type": "module",
   "exports": {
     ".": "./src/manifest.ts",
-    "./store": "./src/store.ts"
+    "./store": "./src/store.ts",
+    "./package.json": "./package.json",
+    "./llms.txt": "./llms.txt",
+    "./llms-full.txt": "./llms-full.txt"
   },
   "files": [
     "src",
@@ -15,17 +32,28 @@
     "llms.txt",
     "README.md",
     "NOTICE",
-    "LICENSE"
+    "LICENSE",
+    "llms-full.txt",
+    "AGENTS.md",
+    "CLAUDE.md"
+  ],
+  "sideEffects": [
+    "./src/game.ts",
+    "./src/manifest.ts",
+    "./client/**"
   ],
   "publishConfig": {
     "access": "public"
+  },
+  "homepage": "https://forge.netnet.capital/docs/templates/tower",
+  "bugs": {
+    "url": "https://github.com/netnetdev/net-forge/issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/netnetdev/net-forge.git",
     "directory": "packages/template-tower"
   },
-  "homepage": "https://github.com/netnetdev/net-forge/tree/main/packages/template-tower#readme",
   "engines": {
     "node": ">=20"
   },
@@ -51,8 +79,5 @@
     "typescript": "5.8.3",
     "vite": "6.4.3",
     "vitest": "3.2.7"
-  },
-  "bugs": {
-    "url": "https://github.com/netnetdev/net-forge/issues"
   }
 }

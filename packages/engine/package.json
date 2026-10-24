@@ -1,7 +1,25 @@
 {
   "name": "@netforge/engine",
-  "version": "0.1.0",
-  "description": "NetNet game runtime client: the typed game API the model writes against, and the three.js runtime (WebGPU with WebGL2 fallback) that plays it.",
+  "version": "0.2.0",
+  "description": "Net Forge game engine client: a typed declarative game API and a three.js WebGPU/WebGL2 renderer for multiplayer browser games.",
+  "keywords": [
+    "game-engine",
+    "multiplayer",
+    "browser-game",
+    "html5-game",
+    "threejs",
+    "three",
+    "webgpu",
+    "webgl",
+    "netcode",
+    "client-side-prediction",
+    "typescript",
+    "gamedev",
+    "ai-agents",
+    "mcp",
+    "vibe-coding",
+    "net-forge"
+  ],
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -34,7 +52,10 @@
     "./voxel": {
       "types": "./dist/runtime/styles/voxel/core.d.ts",
       "default": "./dist/runtime/styles/voxel/core.js"
-    }
+    },
+    "./package.json": "./package.json",
+    "./llms.txt": "./llms.txt",
+    "./llms-full.txt": "./llms-full.txt"
   },
   "files": [
     "dist",
@@ -42,18 +63,22 @@
     "GAME-DESIGN.md",
     "llms.txt",
     "NOTICE",
-    "LICENSE"
+    "LICENSE",
+    "llms-full.txt"
   ],
   "sideEffects": false,
   "publishConfig": {
     "access": "public"
+  },
+  "homepage": "https://forge.netnet.capital/docs/packages/engine",
+  "bugs": {
+    "url": "https://github.com/netnetdev/net-forge/issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/netnetdev/net-forge.git",
     "directory": "packages/engine"
   },
-  "homepage": "https://github.com/netnetdev/net-forge/tree/main/packages/engine#readme",
   "engines": {
     "node": ">=20"
   },
@@ -80,8 +105,5 @@
     "vite": "6.4.3",
     "vitest": "3.2.7",
     "@types/node": "22.20.1"
-  },
-  "bugs": {
-    "url": "https://github.com/netnetdev/net-forge/issues"
   }
 }

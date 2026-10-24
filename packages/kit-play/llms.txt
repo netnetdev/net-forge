@@ -1,0 +1,41 @@
+# @netforge/kit-play
+
+> kit play runs a Net Forge game on your own computer with play money. Inside a game folder (netnet.json and src/game.ts) it builds the template's browser client with that game module, starts a local room host for the same module, and opens http://127.0.0.1:4663. No wallet, no chain, no Net Forge servers; earn rules fire and pay nothing.
+
+## Run a game
+
+- Install: `npm install @netforge/kit-play @netforge/engine` in the game folder (Node 20 or later).
+- Run: `npx kit-play [dir]`, or `kit play` through @netforge/kit. It exits on Ctrl+C.
+- The folder needs netnet.json with `{"template":"<id>"}` and src/game.ts. src/names.json (title and labels) is optional.
+- Template ids: survivor, arena, tower-defense, dungeon, idle, platformer, cards, collector, racer, party.
+- Start from a template: copy node_modules/@netforge/template-<name>/src/game.ts to src/game.ts (the package names are template-survivor, template-arena, template-tower, template-dungeon, template-idle, template-platformer, template-cards, template-collector, template-racer, template-party).
+- The build lands in .netnet/play/ inside the game folder.
+
+## Flags
+
+- `--port <n>`: the page and the room on one port (default 4663).
+- `--host <addr>`: interface to listen on (default 127.0.0.1; 0.0.0.0 lets devices on your network join).
+- `--players <n>`: browser tabs to open, one per local player (1 to 16, default 1).
+- `--no-open`: print the link instead of opening a browser.
+- `--library-url <url>`: load the asset library from an http(s) mirror instead of the installed @netforge/asset-library-files.
+
+## Programmatic API
+
+- `play({ dir, port, host, open, players, libraryUrl, log })` resolves to `{ url, close() }`.
+- `readGameFolder(dir)` checks a folder and throws `PlayError` with a readable message (no netnet.json, unknown template, missing src/game.ts, bad names.json).
+- `runPlayCli(argv, io)` is the CLI; `HELP` is its help text.
+- `TEMPLATES` and `templateFor(id)` describe the runnable templates.
+- `ALLOWED_IMPORT` is "@netforge/engine", the only import a game module may have.
+
+## Rules for agents
+
+- src/game.ts imports only @netforge/engine, the same rule the Net Forge studio enforces.
+- Do not add renderers, netcode, physics or asset URLs to a game; the template draws and runs everything.
+- kit play runs the game's code with the user's permissions. It is not a sandbox.
+- Validate and playtest before playing: the MCP tools netforge_validate_game and netforge_run_playtest, or engine.test.run from @netforge/engine. netforge_play_locally runs kit play for an agent.
+
+## Docs
+
+- https://forge.netnet.capital/docs/packages/kit-play
+- MCP server: `npx -y @netforge/mcp` (package @netforge/mcp, bin netforge-mcp). Tools: netforge_list_templates, netforge_create_game, netforge_search_docs, netforge_explain_api, netforge_validate_game, netforge_run_playtest, netforge_play_locally.
+- Agent setup in a project: `npx netforge setup agent`.

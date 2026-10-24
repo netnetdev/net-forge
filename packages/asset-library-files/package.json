@@ -1,7 +1,15 @@
 {
   "name": "@netforge/asset-library-files",
-  "version": "0.1.0",
-  "description": "The built NetNet game asset library (optimized models, sprites, textures and sounds, all third-party CC0 art) that kit play serves to a game running on your own computer.",
+  "version": "0.2.0",
+  "description": "Built CC0 game asset files for Net Forge (optimized models, sprites, textures and sounds) that kit play serves to a game running locally.",
+  "keywords": [
+    "game-assets",
+    "cc0",
+    "threejs",
+    "browser-game",
+    "gamedev",
+    "net-forge"
+  ],
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -14,23 +22,24 @@
     "NOTICE",
     "CC0-1.0.txt"
   ],
+  "sideEffects": false,
   "publishConfig": {
     "access": "public"
+  },
+  "homepage": "https://forge.netnet.capital/docs/packages/asset-library-files",
+  "bugs": {
+    "url": "https://github.com/netnetdev/net-forge/issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/netnetdev/net-forge.git",
     "directory": "packages/asset-library-files"
   },
-  "homepage": "https://github.com/netnetdev/net-forge/tree/main/packages/asset-library-files#readme",
   "engines": {
     "node": ">=20"
   },
   "scripts": {
     "prepack": "node scripts/stage.mjs",
     "prepublishOnly": "node ../engine/scripts/license-gate.mjs"
-  },
-  "bugs": {
-    "url": "https://github.com/netnetdev/net-forge/issues"
   }
 }

@@ -6,6 +6,7 @@ import { Client, type Room } from '@colyseus/sdk';
 import { DEFAULT_CLIENT, NetClient } from './client.js';
 import type { SimAdapter } from './sim-adapter.js';
 import {
+  GAME_SLUG_RE,
   MSG_INPUT,
   MSG_SNAPSHOT,
   type CommandMessage,
@@ -24,6 +25,12 @@ export interface JoinParams {
   readonly endpoint: string; // http(s)://host:port
   readonly place: string;
   readonly template: string;
+  /**
+   * The launched game's slug: one room server runs every launched game of a
+   * template side by side. Absent: the page's own ?game= (Net Forge frames a
+   * launched game with it), else the template's own game.
+   */
+  readonly game?: string;
   readonly wallet?: string;
   /** Session token from POST /auth/sign-in. Without it the seat plays as a guest and earns nothing. */
   readonly session?: string;
@@ -79,13 +86,25 @@ interface JoinResponse {
   readonly reservations: readonly Parameters<Client['consumeSeatReservation']>[0][];
 }
 
+/** The page's ?game= slug (set by Net Forge on a launched game's frame), or null outside a browser or without one. */
+export function pageGame(): string | null {
+  try {
+    const g = typeof location === 'undefined' ? null : new URLSearchParams(location.search).get('game');
+    return g && GAME_SLUG_RE.test(g) ? g : null;
+  } catch {
+    return null;
+  }
+}
+
 export async function joinRoom<W, I>(sim: SimAdapter<W, I>, p: JoinParams): Promise<RoomConnection<W, I>> {
+  const game = p.game ?? pageGame();
   const res = await fetch(`${p.endpoint}/world/join`, {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify({
       place: p.place,
       template: p.template,
+      ...(game ? { game } : {}),
       ...(p.wallet ? { wallet: p.wallet } : {}),
       ...(p.session ? { session: p.session } : {}),
       ...(p.guest ? { guest: p.guest } : {}),

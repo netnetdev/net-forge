@@ -1,0 +1,21 @@
+name: Feature request
+description: Suggest an engine feature, a template change or a better agent experience.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: job
+    attributes:
+      label: What are you trying to build?
+      description: The game or the task, in a sentence or two.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would help
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: What you tried instead

@@ -1,4 +1,4 @@
-# SKYLEDGE: the platformer template (NetNet game runtime, play style "platformer")
+# Net Forge platformer template (SKYLEDGE)
 
 > A side-view race to the flag for up to 8 players over cliffside courses,
 > with seat bots filling empty places. A round is one course; the next round

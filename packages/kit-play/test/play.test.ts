@@ -72,6 +72,19 @@ describe("who the host answers", () => {
     expect(allowedRequest("127.0.0.1", 4663, "127.0.0.1:4663", "http://127.0.0.1:9999", "POST")).toBe(false);
     expect(allowedRequest("0.0.0.0", 4663, "192.168.1.5:4663", "http://192.168.1.5:4663", "POST")).toBe(true);
   });
+
+  it("on a network bind: addresses only (no rebinding by DNS name), and same-origin POSTs", () => {
+    expect(allowedRequest("0.0.0.0", 4663, "192.168.1.5:4663", undefined, "GET")).toBe(true);
+    expect(allowedRequest("0.0.0.0", 4663, "localhost:4663", "http://localhost:4663", "POST")).toBe(true);
+    expect(allowedRequest("0.0.0.0", 4663, "my-mac.local:4663", "http://my-mac.local:4663", "POST")).toBe(true);
+    expect(allowedRequest("::", 4663, "[fe80::1]:4663", "http://[fe80::1]:4663", "POST")).toBe(true);
+    expect(allowedRequest("0.0.0.0", 4663, "rebind.evil.example:4663", undefined, "GET")).toBe(false);
+    expect(allowedRequest("0.0.0.0", 4663, undefined, undefined, "GET")).toBe(false);
+    expect(allowedRequest("0.0.0.0", 4663, "192.168.1.5:4663", "https://evil.example", "POST")).toBe(false);
+    expect(allowedRequest("0.0.0.0", 4663, "192.168.1.5:4663", "http://192.168.1.9:4663", "POST")).toBe(false);
+    expect(allowedRequest("0.0.0.0", 4663, "192.168.1.5:4663", "http://192.168.1.5:9999", "POST")).toBe(false);
+    expect(allowedRequest("0.0.0.0", 4663, "192.168.1.5:4663", "null", "POST")).toBe(false);
+  });
 });
 
 describe("the local core", () => {

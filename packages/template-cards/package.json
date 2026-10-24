@@ -1,12 +1,34 @@
 {
   "name": "@netforge/template-cards",
-  "version": "0.1.0",
-  "description": "INKWRIT: the card battler template of the NetNet game runtime, one against one or against the AI, a gauntlet of duels with a draft between them, server-side shuffle and hidden hands. The game module, its browser client and its playtest bots.",
+  "version": "0.2.0",
+  "description": "Card battler game template for Net Forge: one against one or against the AI, a gauntlet of duels with drafts, server-side shuffle and hidden hands (INKWRIT).",
+  "keywords": [
+    "game-template",
+    "multiplayer",
+    "browser-game",
+    "html5-game",
+    "threejs",
+    "game-engine",
+    "typescript",
+    "gamedev",
+    "ai-agents",
+    "mcp",
+    "net-forge",
+    "card-game"
+  ],
   "license": "MIT",
   "type": "module",
+  "sideEffects": [
+    "./src/game.ts",
+    "./src/manifest.ts",
+    "./client/**"
+  ],
   "exports": {
     ".": "./src/manifest.ts",
-    "./store": "./src/store.ts"
+    "./store": "./src/store.ts",
+    "./package.json": "./package.json",
+    "./llms.txt": "./llms.txt",
+    "./llms-full.txt": "./llms-full.txt"
   },
   "files": [
     "src",
@@ -15,17 +37,23 @@
     "llms.txt",
     "README.md",
     "NOTICE",
-    "LICENSE"
+    "LICENSE",
+    "llms-full.txt",
+    "AGENTS.md",
+    "CLAUDE.md"
   ],
   "publishConfig": {
     "access": "public"
+  },
+  "homepage": "https://forge.netnet.capital/docs/templates/cards",
+  "bugs": {
+    "url": "https://github.com/netnetdev/net-forge/issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/netnetdev/net-forge.git",
     "directory": "packages/template-cards"
   },
-  "homepage": "https://github.com/netnetdev/net-forge/tree/main/packages/template-cards#readme",
   "engines": {
     "node": ">=20"
   },
@@ -51,8 +79,5 @@
     "typescript": "5.8.3",
     "vite": "6.4.3",
     "vitest": "3.2.7"
-  },
-  "bugs": {
-    "url": "https://github.com/netnetdev/net-forge/issues"
   }
 }

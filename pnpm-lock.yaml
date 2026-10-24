@@ -44,6 +44,18 @@ importers:
 
   packages/asset-library-files: {}
 
+  packages/create-netforge:
+    devDependencies:
+      '@types/node':
+        specifier: 22.20.1
+        version: 22.20.1
+      typescript:
+        specifier: 5.8.3
+        version: 5.8.3
+      vitest:
+        specifier: 3.2.7
+        version: 3.2.7(@types/debug@4.1.13)(@types/node@22.20.1)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.49.0)(tsx@4.23.0)(yaml@2.9.0)
+
   packages/engine:
     dependencies:
       '@colyseus/sdk':
@@ -181,12 +193,58 @@ importers:
       '@netforge/template-tower':
         specifier: workspace:*
         version: link:../template-tower
+      create-netforge:
+        specifier: workspace:*
+        version: link:../create-netforge
       esbuild:
         specifier: 0.25.12
         version: 0.25.12
       vite:
         specifier: 6.4.3
         version: 6.4.3(@types/node@22.20.1)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.49.0)(tsx@4.23.0)(yaml@2.9.0)
+    devDependencies:
+      '@types/node':
+        specifier: 22.20.1
+        version: 22.20.1
+      typescript:
+        specifier: 5.8.3
+        version: 5.8.3
+      vitest:
+        specifier: 3.2.7
+        version: 3.2.7(@types/debug@4.1.13)(@types/node@22.20.1)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.49.0)(tsx@4.23.0)(yaml@2.9.0)
+
+  packages/mcp:
+    dependencies:
+      '@modelcontextprotocol/sdk':
+        specifier: 1.29.0
+        version: 1.29.0(zod@3.25.76)
+      '@netforge/engine':
+        specifier: workspace:*
+        version: link:../engine
+      '@netforge/engine-sim':
+        specifier: workspace:*
+        version: link:../engine-sim
+      '@netforge/kit-play':
+        specifier: workspace:*
+        version: link:../kit-play
+      esbuild:
+        specifier: 0.25.12
+        version: 0.25.12
+      zod:
+        specifier: 3.25.76
+        version: 3.25.76
+    devDependencies:
+      '@types/node':
+        specifier: 22.20.1
+        version: 22.20.1
+      typescript:
+        specifier: 5.8.3
+        version: 5.8.3
+      vitest:
+        specifier: 3.2.7
+        version: 3.2.7(@types/debug@4.1.13)(@types/node@22.20.1)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.49.0)(tsx@4.23.0)(yaml@2.9.0)
+
+  packages/netforge:
     devDependencies:
       '@types/node':
         specifier: 22.20.1

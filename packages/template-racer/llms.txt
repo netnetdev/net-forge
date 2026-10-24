@@ -1,4 +1,4 @@
-# TORQUEBAY: the racer template (NetNet game runtime, play style "racer")
+# Net Forge racer template (TORQUEBAY)
 
 > Kart races for up to 8 players on harbour circuits, with seat bots filling
 > the grid. A round is one race of a few laps; the next round runs another

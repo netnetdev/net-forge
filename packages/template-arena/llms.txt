@@ -1,4 +1,4 @@
-# VOLTYARD: the arena shooter template (NetNet game runtime, Template 2)
+# Net Forge arena shooter template (VOLTYARD)
 
 > A twin-stick arena shooter for up to 16 players, with bots filling empty
 > seats. Rounds last a few minutes; the top of the board takes the round.

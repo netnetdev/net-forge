@@ -134,7 +134,7 @@ async function main(): Promise<void> {
   if (friendRoomId && conn.roomId !== friendRoomId) setTimeout(() => hud.toast("Room full, new room"), 500);
   if (conn.welcome.version !== GAME_VERSION) setTimeout(() => hud.toast("Update ready. Reload."), 800);
   const linkFor = (base: string) =>
-    `${base}?room=${conn.roomId}${place !== PLACE ? `&place=${encodeURIComponent(place)}` : ""}${params.has("server") ? `&server=${encodeURIComponent(endpoint)}` : ""}`;
+    `${base}?room=${conn.roomId}${place !== PLACE ? `&place=${encodeURIComponent(place)}` : ""}${params.has("server") ? `&server=${encodeURIComponent(endpoint)}` : ""}${params.has("game") ? `&game=${encodeURIComponent(params.get("game") ?? "")}` : ""}`;
   history.replaceState(null, "", `${linkFor(location.pathname)}${autopilot ? `&autopilot=${autopilotMode}` : ""}${params.has("webgl") ? "&webgl=1" : ""}${params.has("stats") ? "&stats=1" : ""}${params.has("style") ? `&style=${encodeURIComponent(params.get("style") ?? "")}` : ""}${params.has("preview") ? "&preview=1" : ""}`);
 
   const libraryBase = params.get("library") ?? env.VITE_LIBRARY_URL ?? "./library";

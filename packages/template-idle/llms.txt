@@ -1,4 +1,4 @@
-# BRINEWORKS: the idle template (NetNet game runtime, board genre)
+# Net Forge idle template (BRINEWORKS)
 
 > A shared salt flat for up to 8 players. Each player runs a works on a
 > plot: pumps draw brine, pans boil it into salt, kilns cut salt into

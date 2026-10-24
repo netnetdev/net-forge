@@ -1,0 +1,277 @@
+# Net Forge monster collector template (MOSSBOUND)
+
+> A shared marsh for up to 8 keepers. Each picks one of the starters at
+> camp, walks the marsh, meets wild creatures in tall grass and battles them
+> turn by turn with a team of three, snaring the ones worth keeping. Every
+> keeper in the marsh wears down the same warden; it must fall before dusk.
+> You change the game by editing src/game.ts only. The template already has
+> walking and collision, encounters, turn order, damage, the element cycle,
+> snaring, team swaps, XP and levels, the camp, the warden fight, dusk,
+> netcode, rendering, touch controls, earn and the store. Do not write
+> renderers, netcode or battle AI.
+
+## Files
+
+- src/game.ts: THE GAME. Declarations against @netforge/engine:
+  game(), marsh(), creature(), move(), upgrade(), earn.rule(), earn.stake(), store.sku().
+- src/names.json: the title and every label players read. Creatures go in
+  "weapons" ({ name, line }), the warden in "enemies", plus upgrades, earn
+  rules and store items. Moves are shown from their ids ("leaf_lash" reads
+  "Leaf Lash"), so name moves the way players should read them.
+- Everything else is template machinery.
+
+## Rules the build enforces
+
+- game({ template: "collector", style, places, players: { prefab, max } }).
+- Exactly one marsh(...); 1 to 24 creature(...)s; at most 48 move(...)s.
+- Every creature's moves are declared moves (1 to 4 each).
+- marsh starters and grass pools name declared creatures that are not
+  bosses; the warden names a creature with boss: true.
+- The camp and the warden stand inside the marsh on tiles that are not
+  blocked; grass and blocked rects stay inside the marsh.
+- Elements are "root", "tide", "spark", "stone": a cycle where each beats
+  the next (root soaks tide, tide shorts spark, spark cracks stone, stone
+  crushes root). Strong hits deal 1.5x, weak ones 0.67x.
+- Upgrades read five stats only: might (team attack), maxHealth (team
+  health, a fraction: 0.15 is +15%), armor (team defence), amount (extra
+  snares) and regen (share of max health healed each second out of battle).
+- No weapon(...): a collector game declares creature(...) and move(...).
+- Asset ids look like "style.lowpoly.frog", never URLs or paths, and must be
+  in the asset library. game({ style }) is the art style the creator picked
+  (lowpoly, toon, ps1, pixel, voxel or handdrawn); keep it.
+- 4 playtest keepers must win battles, catch creatures and fire an earn rule
+  in 4 minutes, and must not lose their whole team more than twice each.
+
+## Units
+
+A tile is 2 m; marsh rects are [x, y, width, height] in tiles. Stats are
+base values at level 1 and grow 12% a level. power 40 is a plain hit.
+Walking speed is metres a second. Tick rate 30 Hz.
+
+## The loop
+
+A keeper picks a starter at camp (starterLevel). Every step into a new tile
+of tall grass rolls the zone's rate; a hit starts a battle with a creature
+from the zone's pool at a level in its range. A turn: you pick a move, a
+swap, a snare or flee; the faster creature acts first; the foe answers
+with its best move. A beaten foe gives XP (the active creature full, the
+rest half). A snare's chance is catchRate x (0.25 + 0.75 x the foe's
+missing health); a caught creature joins the team (three at most; more go
+into the lantern). Wild creatures hit at 80%. If your whole team faints you
+are sent to camp with half health; standing at camp heals. Near the
+warden, Challenge starts the warden fight: its health is one pool for the
+whole marsh, it hits at full strength, and when it falls everyone who hurt
+it shares the win. At dusk the run is lost.
+
+## Common changes
+
+### A new creature
+creature("thistlehog", { model: "style.lowpoly.fox", element: "root", hp: 50, atk: 52, def: 48, spd: 46, moves: ["leaf_lash", "thorn_curl"], catchRate: 0.7 });
+move("thorn_curl", { element: "root", power: 0, effect: "guard" });
+Then put it in a grass pool, and its label in names.json weapons.
+
+### Moves
+move("tide_crash", { element: "tide", power: 70, accuracy: 0.8 });
+effect "drain" heals half the damage dealt; "heal" (power 0) restores
+amount of max health; "guard" halves the next hit taken.
+
+### The map
+marsh({ size: [30, 20], camp: [2, 10], water: [[11, 0, 2, 6]], blocked: [[19, 0, 1, 8]],
+  grass: [{ at: [4, 2, 6, 5], rate: 0.22, pool: [{ creature: "sporecap", weight: 3, level: [2, 3] }] }], ... });
+Put weak creatures near camp and stronger ones toward the warden. Leave a
+walkable way from camp to every grass zone and to the warden.
+
+### Harder or easier
+Raise pool levels, the warden's level or hp, or lower snares and grass
+rates. "Longer": a later dusk. "More catching": higher catchRate and snares.
+
+### Add an earn rule
+earn.rule("ten_wins", { when: "creature.defeated", n: 10, pay: 15, oncePer: "run" });
+Events: creature.caught, creature.defeated, creature.levelup, level.five
+and level.ten (each credits the keeper), warden.defeated (everyone who hurt
+it), run.won (everyone in the marsh). Each rule pays once per run per player,
+in coins; the room server is the referee.
+
+### The buy-in run (required)
+earn.stake({ min: 20, max: 200, multiple: 2 });
+One top-level line; a game without it does not build. "stake" is reserved.
+
+### Coins: earn and the store
+Every game has coins: 1 coin = 1 of the game's own token, shown under the
+token's own name, symbol and logo.
+store.sku("thornbark", { coins: 40 });                                  // one level of the "thornbark" upgrade for the run
+store.sku("skin_amber", { coins: 500, grants: { cosmetic: 2 } });       // a keeper's cloak, owned for good
+store.sku("lucky_reed", { coins: 150, grants: { gear: "thornbark", loseBelow: 0.25 } }); // losable gear
+Keep the SKUs the client is wired to (thornbark, mossmail, spare_snares,
+fen_tonic, skin_lichen, skin_amber, lucky_reed) at their prices.
+
+## Test
+
+engine.test.run({ ticks: 30 * 240, bots: 4 }) plays the marsh with 4
+keepers and reports battles won plus catches (kills), 1 + catches (wave),
+the highest level, team wipes (deaths), earned by rule, softlock, ms per
+tick, and the genre's own checks under rules.checks.
+
+## Worked example: src/game.ts
+
+This is the template's complete src/game.ts as it ships. A new game on this
+template starts from this file and changes declarations in place.
+
+```ts
+/**
+ * MOSSBOUND: the monster collector template (play style: monster-collector RPG).
+ *
+ * Fen spirits live in the tall grass of a flooded marsh. Each keeper picks
+ * one of three starters at camp, walks the reeds, meets wild spirits in the
+ * grass and battles them turn by turn with a team of three, snaring the
+ * ones worth keeping in a reed lantern. At the far end of the marsh the
+ * Fenwarden waits: every keeper in the marsh wears down the same warden,
+ * and it must fall before dusk.
+ *
+ * This file is the whole game as the model writes it: declarations only,
+ * against the typed API in @netforge/engine. Walking, encounters,
+ * battles, catching, levels, netcode, renderer and referee are the
+ * template's machinery.
+ */
+import { creature, earn, game, marsh, move, store, upgrade } from "@netforge/engine";
+
+export default game({
+  template: "collector",
+  style: "lowpoly",
+  places: { fen: { chunks: "places/fen", spawn: [0, 0, 0] } },
+  players: { prefab: "style.lowpoly.hooded_adventurer", max: 8 },
+});
+
+// The marsh: 30 x 20 tiles of 2 m. Camp in the west, the warden's mound in the east, water and rocks between.
+marsh({
+  size: [30, 20],
+  camp: [2, 10],
+  starters: ["mossling", "cindertail", "puddlewump"],
+  starterLevel: 4,
+  water: [
+    [11, 0, 2, 6],
+    [11, 14, 2, 6],
+    [24, 0, 3, 3],
+  ],
+  blocked: [
+    [19, 0, 1, 8],
+    [19, 12, 1, 8],
+    [8, 9, 1, 2],
+    [15, 2, 1, 1],
+    [16, 16, 1, 1],
+  ],
+  grass: [
+    { at: [4, 2, 6, 5], rate: 0.22, pool: [{ creature: "sporecap", weight: 3, level: [2, 3] }, { creature: "voltmoth", weight: 2, level: [2, 3] }, { creature: "reedcrab", weight: 1, level: [2, 4] }] },
+    { at: [4, 13, 6, 5], rate: 0.22, pool: [{ creature: "reedcrab", weight: 2, level: [2, 4] }, { creature: "sporecap", weight: 1, level: [3, 4] }, { creature: "pebblewing", weight: 1, level: [3, 4] }] },
+    { at: [14, 7, 4, 6], rate: 0.2, pool: [{ creature: "pebblewing", weight: 2, level: [4, 6] }, { creature: "voltmoth", weight: 2, level: [4, 6] }, { creature: "bogling", weight: 1, level: [5, 6] }] },
+    { at: [21, 4, 4, 12], rate: 0.18, pool: [{ creature: "bogling", weight: 2, level: [6, 8] }, { creature: "pebblewing", weight: 1, level: [6, 8] }, { creature: "reedcrab", weight: 1, level: [6, 8] }] },
+  ],
+  warden: { creature: "fenwarden", at: [27, 10], level: 9, hp: 700 },
+  dusk: 600,
+  snares: 6,
+});
+
+// Creatures. Base stats at level 1 (each grows 12% a level); catchRate scales every snare.
+creature("mossling", { model: "style.lowpoly.frog", element: "root", hp: 46, atk: 48, def: 50, spd: 44, moves: ["leaf_lash", "sap_drink"] });
+creature("cindertail", { model: "style.lowpoly.fox", element: "spark", hp: 40, atk: 54, def: 42, spd: 58, moves: ["ember_nip", "static_dash"] });
+creature("puddlewump", { model: "style.lowpoly.slime_drop", element: "tide", hp: 52, atk: 44, def: 52, spd: 40, moves: ["splash_jab", "bubble_ward"] });
+creature("sporecap", { model: "style.lowpoly.mushroom_imp", element: "root", hp: 42, atk: 46, def: 46, spd: 38, moves: ["spore_puff", "leaf_lash"], catchRate: 0.9 });
+creature("voltmoth", { model: "style.lowpoly.bee", element: "spark", hp: 36, atk: 50, def: 38, spd: 64, moves: ["static_dash", "ember_nip"], catchRate: 0.85 });
+creature("reedcrab", { model: "style.lowpoly.crab", element: "tide", hp: 48, atk: 50, def: 60, spd: 36, moves: ["splash_jab", "shell_up"], catchRate: 0.8 });
+creature("pebblewing", { model: "style.lowpoly.pebble_flyer", element: "stone", hp: 44, atk: 48, def: 56, spd: 50, moves: ["gravel_toss", "shell_up"], catchRate: 0.7 });
+creature("bogling", { model: "style.lowpoly.blob_orc", element: "stone", hp: 60, atk: 52, def: 54, spd: 30, moves: ["gravel_toss", "mire_slam"], catchRate: 0.6, size: 1.3 });
+creature("fenwarden", { model: "style.lowpoly.mushroom_king", element: "stone", hp: 120, atk: 66, def: 64, spd: 40, moves: ["mire_slam", "gravel_toss", "sap_drink"], boss: true, size: 3.4 });
+
+// Moves. power 40 is a plain hit; drain heals half the damage, heal restores a share of max health, guard halves the next hit.
+move("leaf_lash", { element: "root", power: 40 });
+move("sap_drink", { element: "root", power: 30, effect: "drain" });
+move("spore_puff", { element: "root", power: 45, accuracy: 0.9 });
+move("ember_nip", { element: "spark", power: 40 });
+move("static_dash", { element: "spark", power: 55, accuracy: 0.85 });
+move("splash_jab", { element: "tide", power: 40 });
+move("bubble_ward", { element: "tide", power: 0, effect: "heal", amount: 0.3 });
+move("gravel_toss", { element: "stone", power: 40 });
+move("shell_up", { element: "stone", power: 0, effect: "guard" });
+move("mire_slam", { element: "stone", power: 70, accuracy: 0.8 });
+
+// Store upgrades: one level each, for the rest of the run, on the buyer's own team.
+upgrade("thornbark", { stat: "might", step: 0.15, maxLevel: 1 });
+upgrade("mossmail", { stat: "armor", step: 0.15, maxLevel: 1 });
+upgrade("spare_snares", { stat: "amount", step: 3, maxLevel: 1 });
+upgrade("fen_tonic", { stat: "regen", step: 0.03, maxLevel: 1 });
+
+// Earn (mandatory). Pays the game's coins (1 coin = 1 token), once per run each. Values are PLACEHOLDER.
+earn.rule("first_snare", { when: "creature.caught", n: 1, pay: 5, oncePer: "run" });
+earn.rule("full_lantern", { when: "creature.caught", n: 3, pay: 20, oncePer: "run" });
+earn.rule("warden_breaker", { when: "warden.defeated", n: 1, pay: 50, oncePer: "run" });
+earn.rule("seasoned", { when: "level.five", n: 1, pay: 5, oncePer: "run" });
+// Buy-in run (the mandatory sink loop): stake coins at run start to earn above free play.
+// A staked run also pays up to stake x multiple, by the share of this run's earn the player makes. Values are PLACEHOLDER.
+earn.stake({ min: 20, max: 200, multiple: 2 });
+
+// Store (the Kit), priced in coins: four run upgrades and two keeper finishes owned for good (kept in the profile).
+store.sku("thornbark", { coins: 40 });
+store.sku("mossmail", { coins: 40 });
+store.sku("spare_snares", { coins: 60 });
+store.sku("fen_tonic", { coins: 50 });
+store.sku("skin_lichen", { coins: 300, grants: { cosmetic: 1 } });
+store.sku("skin_amber", { coins: 500, grants: { cosmetic: 2 } });
+// Losable gear: owned for good until lost. It brings one level of its upgrade into every staked run,
+// and is lost when that run makes less than loseBelow of its most earn. Values are PLACEHOLDER.
+store.sku("lucky_reed", { coins: 150, grants: { gear: "thornbark", loseBelow: 0.25 } });
+```
+
+## Validate and playtest
+
+### With the MCP server
+
+Run `npx -y @netforge/mcp` (package @netforge/mcp, bin netforge-mcp) and
+connect it to your coding agent. Its tools are netforge_list_templates, netforge_create_game,
+netforge_explain_api, netforge_search_docs, netforge_validate_game, netforge_run_playtest and netforge_play_locally.
+
+- netforge_validate_game checks src/game.ts against the engine's schemas and this
+  template's rules, and returns one actionable line per problem.
+- netforge_run_playtest plays the game headless with bots and returns the report.
+- netforge_play_locally gives the steps to open the game in a browser with kit play.
+
+### In code
+
+Import the game module first so its declarations register, then run the
+headless harness. This plays 4 keepers for 4 minutes at 30 Hz.
+
+```ts
+import { engine } from "@netforge/engine";
+import "./src/game.js";
+
+const report = await engine.test.run({
+  ticks: 30 * 240,
+  bots: 4,
+  seed: 1,
+  assert: [
+    { name: "earn fired", check: (r) => r.earnEmitted > 0 },
+    { name: "no softlock", check: (r) => !r.softlock },
+  ],
+});
+if (report.failed.length > 0) throw new Error(report.failed.join("\n"));
+```
+
+The report has battles won plus catches (kills), team wipes (deaths), earned by rule, softlock, ms per tick and the genre's checks under rules.checks.
+
+The template's own tests (vitest) are the reference checks:
+
+- test/harness.test.ts
+- test/store.test.ts
+
+### Play it locally
+
+In a folder with netnet.json and src/game.ts:
+
+```sh
+npm install @netforge/kit-play @netforge/engine @netforge/template-collector
+echo '{"template":"collector"}' > netnet.json
+npx kit-play        # opens http://127.0.0.1:4663
+```
+
+kit play builds the template client with your src/game.ts and runs a local
+room host with play money. No wallet, no chain and no hosted servers are
+involved. Open the link in more tabs for more players.

@@ -146,7 +146,7 @@ async function main(): Promise<void> {
   if (friendRoomId && conn.roomId !== friendRoomId) setTimeout(() => hud.toast("Room full, new room"), 500);
   if (conn.welcome.version !== GAME_VERSION) setTimeout(() => hud.toast("Update ready. Reload."), 800);
   const linkFor = (base: string) =>
-    `${base}?room=${conn.roomId}${place !== PLACE ? `&place=${encodeURIComponent(place)}` : ""}${params.has("server") ? `&server=${encodeURIComponent(endpoint)}` : ""}`;
+    `${base}?room=${conn.roomId}${place !== PLACE ? `&place=${encodeURIComponent(place)}` : ""}${params.has("server") ? `&server=${encodeURIComponent(endpoint)}` : ""}${params.has("game") ? `&game=${encodeURIComponent(params.get("game") ?? "")}` : ""}`;
   history.replaceState(null, "", `${linkFor(location.pathname)}${autopilot ? `&autopilot=${autopilotMode}` : ""}${params.has("webgl") ? "&webgl=1" : ""}${params.has("stats") ? "&stats=1" : ""}${params.has("style") ? `&style=${encodeURIComponent(params.get("style") ?? "")}` : ""}`);
 
   // The asset library: real models by library id (./library next to the page, or the published CID). ?shapes=1 draws the fallback shapes only.

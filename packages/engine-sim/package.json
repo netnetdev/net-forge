@@ -1,7 +1,22 @@
 {
   "name": "@netforge/engine-sim",
-  "version": "0.1.0",
-  "description": "NetNet game runtime shared simulation: ECS, Rapier physics, fixed tick and snapshots. Runs identically in the browser and on the room server.",
+  "version": "0.2.0",
+  "description": "Deterministic game simulation shared by browser client and server for Net Forge: ECS, Rapier physics, a fixed tick, input commands and delta snapshots.",
+  "keywords": [
+    "game-engine",
+    "multiplayer",
+    "ecs",
+    "entity-component-system",
+    "rapier",
+    "physics",
+    "netcode",
+    "client-side-prediction",
+    "authoritative-server",
+    "game-server",
+    "typescript",
+    "gamedev",
+    "net-forge"
+  ],
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -10,24 +25,32 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
-    }
+    },
+    "./package.json": "./package.json",
+    "./llms.txt": "./llms.txt",
+    "./llms-full.txt": "./llms-full.txt"
   },
   "files": [
     "dist",
     "README.md",
     "NOTICE",
-    "LICENSE"
+    "LICENSE",
+    "llms.txt",
+    "llms-full.txt"
   ],
   "sideEffects": false,
   "publishConfig": {
     "access": "public"
+  },
+  "homepage": "https://forge.netnet.capital/docs/packages/engine-sim",
+  "bugs": {
+    "url": "https://github.com/netnetdev/net-forge/issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/netnetdev/net-forge.git",
     "directory": "packages/engine-sim"
   },
-  "homepage": "https://github.com/netnetdev/net-forge/tree/main/packages/engine-sim#readme",
   "engines": {
     "node": ">=20"
   },
@@ -47,8 +70,5 @@
     "@types/node": "22.20.1",
     "typescript": "5.8.3",
     "vitest": "3.2.7"
-  },
-  "bugs": {
-    "url": "https://github.com/netnetdev/net-forge/issues"
   }
 }

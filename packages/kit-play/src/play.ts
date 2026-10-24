@@ -15,6 +15,7 @@ import { createRequire } from "node:module";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { spawn } from "node:child_process";
+import { networkInterfaces } from "node:os";
 import { namesModule, parseNames, type Names } from "./names.js";
 import { templateFor, type TemplateEntry } from "./templates.js";
 
@@ -97,6 +98,30 @@ export function libraryDir(from: string): string | null {
   }
 }
 
+/**
+ * The page link for a host base URL. The template clients connect to the
+ * room named by ?server= (without it they fall back to their dev port), so
+ * every link carries the server it was served from.
+ */
+export function playLink(base: string, libraryUrl: string | null): string {
+  const params = new URLSearchParams({ server: base });
+  if (libraryUrl) params.set("library", libraryUrl);
+  return `${base}/?${params.toString()}`;
+}
+
+/** Links other devices can open when the host listens on every interface: one per IPv4 network address. */
+export function lanLinks(host: string, port: number, interfaces: ReturnType<typeof networkInterfaces>, libraryUrl: string | null): string[] {
+  const wildcard = host === "0.0.0.0" || host === "::";
+  const addrs = wildcard
+    ? Object.values(interfaces).flatMap((list) =>
+        (list ?? []).flatMap(({ family, internal, address }) => (family === "IPv4" && !internal ? [address] : [])),
+      )
+    : host !== "127.0.0.1" && host !== "localhost" && host !== "::1" && /^\d+\.\d+\.\d+\.\d+$/.test(host)
+      ? [host]
+      : [];
+  return [...new Set(addrs)].map((a) => playLink(`http://${a}:${port}`, libraryUrl));
+}
+
 /** Builds the template client with the game module and labels swapped in. */
 export async function buildClient(g: GameFolder, tplDir: string, outDir: string, cacheDir: string): Promise<void> {
   const vite = await import("vite");
@@ -139,6 +164,21 @@ export async function buildClient(g: GameFolder, tplDir: string, outDir: string,
   });
 }
 
+/** The esbuild plugin that puts the game folder's src/game.ts in place of the template's and holds it to ALLOWED_IMPORT. */
+export function gameSwap(manifest: string, gameFile: string, tplDir: string): import("esbuild").Plugin {
+  return {
+    name: "kit-play-swap",
+    setup(b) {
+      b.onResolve({ filter: /^\.\/game\.(js|ts)$/ }, (args) => (args.importer === manifest ? { path: gameFile } : undefined));
+      b.onResolve({ filter: /.*/ }, async (args) => {
+        if (args.importer !== gameFile) return undefined;
+        if (args.path === ALLOWED_IMPORT) return b.resolve(args.path, { resolveDir: join(tplDir, "src"), kind: args.kind });
+        return { errors: [{ text: `src/game.ts may import only "${ALLOWED_IMPORT}", not "${args.path}"` }] };
+      });
+    },
+  };
+}
+
 /** Bundles the local host with the game module (one copy of the engine and the sim). Returns the bundle path. */
 export async function bundleHost(g: GameFolder, tplDir: string, outFile: string): Promise<string> {
   const esbuild = await import("esbuild");
@@ -146,17 +186,7 @@ export async function bundleHost(g: GameFolder, tplDir: string, outFile: string)
   const gameFile = realpathSync(g.gameFile);
   const here = dirname(fileURLToPath(import.meta.url));
   const entryFile = existsSync(join(here, "host", "entry.js")) ? join(here, "host", "entry.js") : join(here, "host", "entry.ts");
-  const swap: import("esbuild").Plugin = {
-    name: "kit-play-swap",
-    setup(b) {
-      b.onResolve({ filter: /^\.\/game\.(js|ts)$/ }, (args) => (args.importer === manifest ? { path: gameFile } : undefined));
-      b.onResolve({ filter: /.*/ }, async (args) => {
-        if (args.importer !== gameFile) return undefined;
-        if (args.path === ALLOWED_IMPORT) return b.resolve(args.path, { resolveDir: join(tplDir, "src"), kind: args.kind });
-        return { errors: [{ text: `src/game.ts may import only "${ALLOWED_IMPORT}"` }] };
-      });
-    },
-  };
+  const swap = gameSwap(manifest, gameFile, tplDir);
   const contents = [`export { startHost } from ${JSON.stringify(entryFile)};`, `export * as template from ${JSON.stringify(manifest)};`].join("\n");
   const out = await esbuild.build({
     stdin: { contents, resolveDir: here, sourcefile: "kit-play-host.js", loader: "js" },
@@ -188,6 +218,8 @@ function openBrowser(url: string): void {
 
 export interface Playing {
   readonly url: string;
+  /** Links for other devices on the network (with --host 0.0.0.0), each carrying its own ?server=. */
+  readonly lan: readonly string[];
   close(): Promise<void>;
 }
 
@@ -216,12 +248,13 @@ export async function play(o: PlayOptions): Promise<Playing> {
     clientDir: clientOut,
     libraryDir: lib,
   });
-  const params = new URLSearchParams({ server: running.url });
-  if (o.libraryUrl) params.set("library", o.libraryUrl);
-  const url = `${running.url}/?${params.toString()}`;
+  const url = playLink(running.url, o.libraryUrl);
+  const lan = lanLinks(o.host, o.port, networkInterfaces(), o.libraryUrl);
   o.log(`Playing locally with play money at ${url}`);
+  for (const l of lan) o.log(`On your network (phones, other computers): ${l}`);
+  if (lan.length === 0 && o.host !== "127.0.0.1" && o.host !== "localhost" && o.host !== "::1") o.log(`Listening on ${o.host}: share a link of the form http://<this computer's address>:${o.port}/?server=http://<this computer's address>:${o.port}`);
   o.log("Open the link in more tabs or windows for more players. Ctrl+C stops.");
   o.log("kit play runs the game's code on this computer with your permissions: play only games whose code you trust.");
   if (o.open) for (let i = 0; i < Math.max(1, o.players); i++) openBrowser(url);
-  return { url, close: running.close };
+  return { url, lan, close: running.close };
 }

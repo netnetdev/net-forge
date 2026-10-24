@@ -713,8 +713,8 @@ export const earnPotSchema = z
     /** Share of every pot that stays in the reward pool (0.01 to 0.5). */
     recycle: z.number().min(0.01).max(0.5),
     /**
-     * Pots are OFF by default until a legal review clears
-     * them. A declared pot runs only with `enabled: true`; without it the
+     * Pots are off by default; the R-16 legal review approved them
+     * (2026-10-23), so a game opts in with `enabled: true`. Without it the
      * terms are kept for later and no room takes an entry.
      */
     enabled: z.boolean().default(false),

@@ -1,4 +1,4 @@
-# NetNet game engine: physics, game feel and rendering (llms.txt)
+# Net Forge game engine: physics, game feel and rendering (llms.txt)
 
 > The engine every Net Forge game runs on. Two
 > layers matter here:

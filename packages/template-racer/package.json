@@ -1,12 +1,31 @@
 {
   "name": "@netforge/template-racer",
-  "version": "0.1.0",
-  "description": "TORQUEBAY: a racer template of the NetNet game runtime, kart races on harbour circuits with drift mini-turbos, boost pads, coins and laps at 60 Hz, a streamed track and seat-filling bots. The game module, its browser client and its playtest bots.",
+  "version": "0.2.0",
+  "description": "Kart racer game template for Net Forge: harbour circuits with drift mini-turbos, boost pads, coins and laps at 60 Hz, with seat-filling bots (TORQUEBAY).",
+  "keywords": [
+    "game-template",
+    "multiplayer",
+    "browser-game",
+    "html5-game",
+    "threejs",
+    "game-engine",
+    "typescript",
+    "gamedev",
+    "ai-agents",
+    "mcp",
+    "net-forge",
+    "kart-racer",
+    "racing",
+    "physics"
+  ],
   "license": "MIT",
   "type": "module",
   "exports": {
     ".": "./src/manifest.ts",
-    "./store": "./src/store.ts"
+    "./store": "./src/store.ts",
+    "./package.json": "./package.json",
+    "./llms.txt": "./llms.txt",
+    "./llms-full.txt": "./llms-full.txt"
   },
   "files": [
     "src",
@@ -15,17 +34,28 @@
     "llms.txt",
     "README.md",
     "NOTICE",
-    "LICENSE"
+    "LICENSE",
+    "llms-full.txt",
+    "AGENTS.md",
+    "CLAUDE.md"
+  ],
+  "sideEffects": [
+    "./src/game.ts",
+    "./src/manifest.ts",
+    "./client/**"
   ],
   "publishConfig": {
     "access": "public"
+  },
+  "homepage": "https://forge.netnet.capital/docs/templates/racer",
+  "bugs": {
+    "url": "https://github.com/netnetdev/net-forge/issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/netnetdev/net-forge.git",
     "directory": "packages/template-racer"
   },
-  "homepage": "https://github.com/netnetdev/net-forge/tree/main/packages/template-racer#readme",
   "engines": {
     "node": ">=20"
   },
@@ -50,8 +80,5 @@
     "typescript": "5.8.3",
     "vite": "6.4.3",
     "vitest": "3.2.7"
-  },
-  "bugs": {
-    "url": "https://github.com/netnetdev/net-forge/issues"
   }
 }

@@ -5,7 +5,9 @@
 # Refuses to run while any engine package's LICENSE still says LICENSE
 # PENDING. Skips the Kit, and only the Kit, while its address registry holds
 # a PLACEHOLDER; no other package depends on it. Packages go out in
-# dependency order, so none is ever on npm before what it needs, each with an
+# dependency order, so none is ever on npm before what it needs (kit-play
+# depends on create-netforge for `kit-play new`, so create-netforge goes
+# just before it), each with an
 # npm provenance attestation tying it to this repository and commit. A
 # version that is already on npm is skipped, so a failed run can be re-run.
 name: publish
@@ -25,7 +27,7 @@ jobs:
         engine-sim engine asset-library asset-library-files tabletop
         template-arena template-cards template-collector template-dungeon template-idle
         template-party template-platformer template-racer template-survivor template-tower
-        kit-play kit
+        create-netforge kit-play mcp netforge kit
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4

@@ -425,7 +425,7 @@ export interface SourceEarnPot {
   readonly entry: number;
   /** Share of every pot that stays in the reward pool. */
   readonly recycle: number;
-  /** Pots are off by default until a legal review: true only when the line says `enabled: true`. */
+  /** A pot runs only when the line says `enabled: true` (off by default; R-16 approved 2026-10-23). */
   readonly enabled?: boolean;
 }
 

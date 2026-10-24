@@ -1,0 +1,460 @@
+# @netforge/engine (llms-full.txt)
+
+> Everything an agent needs to write and change a Net Forge game in one file. A game is one module, src/game.ts, that imports only @netforge/engine and declares the game with game(), prefab(), weapon(), upgrade(), system(), earn.rule(), earn.stake() and store.sku(). Templates draw it, run it on the server simulation and handle netcode, physics and rendering. Part 1 is llms.txt (look, feel, physics and rendering), Part 2 is GAME-DESIGN.md (the design rules the playtest gate measures, and the coin model), Part 3 is the API reference.
+
+## Contents
+
+- Part 1: llms.txt
+- Part 2: GAME-DESIGN.md
+- Part 3: API reference
+
+## Part 1: llms.txt
+
+## Net Forge game engine: physics, game feel and rendering (llms.txt)
+
+> The engine every Net Forge game runs on. Two
+> layers matter here:
+>  1. Game code (src/game.ts) only DECLARES how things look and feel, with
+>     `look` on game() and `feel` on prefab() and weapon(). Templates draw it.
+>  2. Template code (client/ and the sim) uses the runtime APIs below:
+>     the physics world in @netforge/engine-sim, and the feel kit and
+>     render stack in @netforge/engine/runtime.
+> Generated game code never imports the runtime. It cannot reach the
+> renderer, netcode or physics, and it does not need to.
+
+### 1. Game code: look and feel declarations
+
+Everything here is presentation. It never changes the simulation, so it
+is always safe to tune. Unknown values fail the build with a message.
+
+#### The look of the whole game (game({ look }))
+
+game({
+  template: "survivor", style: "lowpoly", places: { ... }, players: { ... },
+  look: { preset: "dusk", bloom: 1.3, fog: 0.4, vignette: 0.4, tint: "#ffd9a0" },
+});
+
+- preset: "night" | "dusk" | "day" | "studio". Sets the sun, sky, fog and
+  colour grade together. Default "night".
+- bloom: glow on bright and emissive things, 0 (off) to 3. Default 1.
+- shadows: sun shadows on or off (on by default above the low quality tier).
+- outline: a toon outline around shapes (true or false).
+- fog: 0 (clear) to 1 (thick).
+- exposure (0.2 to 3), saturation (0 to 2), contrast (0.5 to 1.5),
+  vignette (0 to 1), tint ("#rrggbb", a grading colour over the frame).
+
+Slow devices drop shadows, post and resolution by themselves (quality
+tiers and dynamic resolution), so turning things on never breaks 60 fps.
+
+#### How a prefab dies and takes hits (prefab({ feel }))
+
+prefab("brute", { model: "style.lowpoly.brute", health: 160, speed: 2.2, radius: 0.8, mass: 6,
+  feel: { particles: "burst", decal: "scorch", sound: "boom", shake: 0.5, hitStop: 0.06, color: "#ff4d5e" } });
+
+#### How a weapon's impacts look (weapon({ feel }))
+
+weapon("frost_ring", { kind: "nova", damage: 6, cooldown: 0.8, range: 5, knockback: 8,
+  feel: { particles: "magic", decal: "ring", color: "#7ad7ff", shake: 0.1 } });
+
+feel fields, all optional:
+- shake: screen shake added, 0 to 1 (0.2 a bump, 0.6 a big hit).
+- hitStop: seconds the picture freezes on impact (0.03 to 0.08 feels good, 0.2 max).
+- particles: "sparks" | "burst" | "embers" | "smoke" | "hitSpark" | "dust" | "magic".
+- decal: "none" | "scorch" | "splat" | "ring" (left on the ground, fades).
+- sound: "none" | "hit" | "crunch" | "boom" | "zap" | "chime" | "thud".
+- color: "#rrggbb" for particles, decals and flashes.
+- flash: false turns off the white hit flash.
+
+#### Knockback is physics
+
+weapon knockback is metres per second pushed into each enemy, divided by
+the enemy's mass. Enemies knocked hard stagger, slide, bounce off pillars
+and shove the enemies behind them. mass 1 is light, 6 is a brute, 20 a
+boss (light hits barely move it).
+
+#### Dungeon levels (game({ field }) with walls and floors)
+
+const CRYPT = dungeon({ seed: 2026, rooms: 10, cell: 24, size: [12, 18], corridor: 6, loops: 2 });
+game({ template: "dungeon", ..., field: CRYPT.field });
+
+dungeon(...) grows a floor plan from a seed: rooms on a grid, joined by
+corridors, the start room centred on [0, 0] and the deepest room as
+CRYPT.boss. field.walls are boxes [x, z, halfX, halfZ] that stop players,
+enemies and bolts; field.floors are the only ground (spawns land on them,
+and enemies behind a wall path round it through the doors on a flow
+field). Systems get onScreen(x, z) to bring enemies in where nobody is
+looking. A system's room logic reads CRYPT.rooms and CRYPT.roomAt(x, z).
+
+### 2. Template code: the physics world (@netforge/engine-sim)
+
+Deterministic Rapier on client and server. No rendering dependency.
+
+import { initSim, createPhysics, restorePhysics, Layer } from "@netforge/engine-sim";
+await initSim();
+const p = createPhysics({ gravity: [0, -20, 0], tickRate: 30 });
+p.addStaticBox([30, 0.5, 30], [0, -0.5, 0], { layer: Layer.Level });
+const crate = p.addBody({ type: "dynamic", shape: { box: [0.4, 0.4, 0.4] }, position: [0, 2, 0],
+  mass: 20, friction: 0.7, restitution: 0.2, layer: Layer.Prop });
+const bolt = p.addBody({ type: "dynamic", shape: { sphere: 0.1 }, ccd: true, gravityScale: 0,
+  linearVelocity: [80, 0, 0], layer: Layer.Projectile, mask: Layer.Level | Layer.Enemy });
+const zone = p.addTrigger({ box: [2, 2, 2] }, [5, 1, 0]);
+const hero = p.addCharacter({ position: [0, 1, 0], maxSpeed: 7, jumpVelocity: 8, coyoteTicks: 5,
+  jumpBufferTicks: 5, airAccel: 18, dashTicks: 6, dashSpeed: 22, dashCooldownTicks: 30 });
+const { events, characters } = p.step(new Map([[hero, { moveX: 1, moveZ: 0, jump: true, dash: false }]]));
+
+- Bodies: dynamic, kinematic (setKinematicTarget) or static; box, sphere,
+  capsule, cylinder; mass or density, friction, restitution, damping,
+  gravityScale, lockRotations, sensor, ccd, userData (a NetId).
+- Layers: Layer.Level, Player, Enemy, Projectile, Pickup, Prop, Trigger,
+  Debris, User1..8. A pair collides only when each mask holds the other.
+- Events from step(): contact.start, contact.end, trigger.enter,
+  trigger.exit, sorted, with a < b.
+- Forces: applyImpulse, applyForce (one step), applyKnockback(id, from,
+  strength, { lift, byMass }). Knockback works on characters too.
+- Queries: raycast(origin, dir, maxDist, { mask, exclude, includeSensors })
+  for line of sight and hitscan; raycastAll; shapeCast; overlap.
+- Joints: addJoint({ kind: "fixed" | "ball" | "hinge" | "slider", a, b }).
+- Character motor: slopes (climb and slide), steps, ground snapping, coyote
+  time, jump buffering, variable jump height, ground and air acceleration,
+  terminal velocity, dash with buffer, cooldown and invulnerability,
+  pushing dynamic bodies. Per-step reports: grounded, landed, jumped,
+  dashed, hitCeiling, groundNormal. characterState / setCharacterState for
+  reconcile.
+- Netcode: snapshot() and restorePhysics(bytes) restore bit-exact;
+  stateHash() hashes every pose, velocity and motor state.
+- Rapier 0.21 already stops small fast spheres on thin walls; use round
+  projectiles (thin spinning planks can still tunnel).
+
+### 3. Template code: game feel (@netforge/engine/runtime)
+
+import { FeelKit } from "@netforge/engine/runtime";
+const feel = new FeelKit({ preset: "default" });   // "subtle" | "default" | "heavy"
+feel.camera = rig;  feel.project = (x, y, z) => scene.project(x, y, z);  feel.particles = stack.particles;
+// per frame
+const { now, dt, realDt } = feel.tick(performance.now());   // hit-stop aware render clock
+feel.hit({ id, x, y, z, amount, big, dirX, dirZ });          // flash, knockback, number, sound, shake
+feel.kill({ x, y, z, big, color });                           // particles, shake, hit-stop when big
+feel.hurt(damage, maxHealth);                                 // shake, stop, rumble, hurtPulse
+feel.levelUp(); feel.dash(); feel.land(0.6); feel.footstep(speed);
+feel.update(dt, realDt);
+
+Parts, each usable alone: Trauma (seeded trauma shake), FeelClock (hit-stop,
+slow motion, smooth catch-up), HitFlash, KnockbackOffsets (spring offsets
+and squash), Spring and Spring3, DamageNumbers (pooled, merges rapid hits),
+Tweens and Ease with pop / shakeEl / countUp for UI, FeelAudio (procedural
+cues, throttles, voice limits, pan, distance) and Footsteps, Rumble
+(Gamepad dual-rumble, navigator.vibrate fallback). CameraRig adds
+addTrauma, punch (FOV kick), a smoothed and clamped lead and a dead zone.
+
+Real sound (SoundPlayer): CC0 samples for the cues and one music loop from
+the asset library's audio section. Samples replace the synth recipes under
+the same cue names (the synth plays until a sample loads, or if it fails).
+
+import { soundBank } from "@netforge/asset-library";
+const sound = new SoundPlayer(feel.audio, { key: "mygame:sound", musicVolume: 0.35 });
+sound.load(soundBank(libraryBase));     // cues: hit impact kill bigKill hurt levelUp gem coin dash step land boss ui pick downed revive shoot
+sound.toggle();                         // the mute (effects and music), remembered; returns true when muted
+feel.audio.play("boss");                // any cue by name
+
+Camera bounds: never show the void past the field.
+rig.setBounds(fieldBounds(half, 16));   // the field plus 16 m of dressed outside ground
+The clamp moves the camera by the overshoot of what it sees (groundFootprint,
+boundsShift); dress that outside strip (ground, trees, fog).
+
+Hero highlight: an outline and a rim on one character (the local hero), as
+extra draws that share its geometry and skeleton; its materials stay as
+they are.
+const hl = new HeroHighlight(character.root, { rim: 0xffd27a, outline: 0x140a02, outlineWidth: 0.05 });
+hl.strength = 0.4;  hl.dispose();
+
+### 4. Template code: rendering (@netforge/engine/runtime)
+
+const stack = createRenderStack(handle, scene, rig.camera, { preset: "night", quality: "auto", bloom: true });
+stack.frame(dt, focus);       // instead of renderer.render(scene, camera)
+stack.particles.burst("bigKill", x, y, z, { color: 0xffc070 });
+stack.decals.add("scorch", x, z, { size: 3 });
+stack.rings.fire(x, z, 6, { color: 0xffb347 });
+stack.post.hurt.value = feel.hurtPulse;
+
+- LightingRig: hemisphere, sun shadow following the focus with texel
+  snapping, presets.
+- PostFX: bloom, grade (contrast, saturation, split tone, vignette, hurt
+  pulse), tone mapping once, FXAA, optional depth outline.
+- Atmosphere: fog (linear or exp2, height fog) and sky gradient. A high
+  top-down camera should set heightFog 0.
+- QualityManager / DynamicResolution: tiers low, medium and high
+  (auto-detected), pixel ratio held to the frame budget.
+- GpuParticles: one draw for every preset; motion runs on the GPU.
+- GroundDecals and GroundRings: pooled, one draw each.
+- AnimatedCrowd: procedural vertex animation for instanced crowds (bob,
+  waddle, lean, hit squash, flash). VatCrowd with bakeVertexAnimation:
+  skinned clips baked to a texture, thousands of instances in one draw.
+  AnimatedCharacter: skinned glTF with locomotion blending.
+- WebGPU pipelines build on first use. Draw one of everything out of sight
+  at load (EMBERWATCH's SurvivorScene.warmup) so the first kill does not
+  hitch.
+
+## Part 2: GAME-DESIGN.md
+
+## Game design playbook
+
+Rules every game on this engine follows. They come from measured play: the
+first survivor build killed every player in 12 seconds, and a fun one kept
+the same bot alive for minutes. The playtest gate measures most of them, and
+a game that breaks them scores low.
+
+### Every genre
+
+1. **A readable opening, with real danger by 0:30.** The first threats
+   reach the player by about 0:20, and health moves by 0:30 to 0:45. The
+   first elite comes at about 0:45 and a mini-boss by 1:30 to 2:00. Nobody
+   dies in the first minute. (The first cut's playtest found no danger for
+   three minutes and scored 4/10. A quiet opening is not an empty one.)
+2. **Reward fast.** The first reward (a level, a kill, a pickup) comes within
+   about 10 seconds, then every 6 to 10 seconds for the first minute.
+3. **Never spawn on screen.** Enemies arrive from just off screen:
+   `director(...)` or `spawnEdge(prefab, { count })`, never `spawn()` or
+   `spawnRing()` at short radii. Pressure follows a moving player, because
+   stragglers far behind are recycled ahead of them.
+4. **Hits are survivable.** Contact damage gives i-frames
+   (`players.hitIframes`, 0.5 s). Twenty enemies touching you means one hit,
+   not twenty.
+5. **Slower than the player unless telegraphed.** Players run at 7 m/s.
+   Fodder moves at 45 to 60% of that, and fast runners up to 85% but fragile.
+   Anything faster or harder-hitting shows a telegraph first.
+6. **Telegraph every big hit.** Charges, slams, blasts and boss patterns
+   show a ground marker for 0.5 to 1 s, using shape and fill and not only
+   red. Over half of late deaths should be telegraphed ones, which means the
+   player misread the threat rather than the game being unfair.
+7. **Death is not a waiting room.** A downed player bleeds for about 10 s
+   and can crawl toward help. Each player gets one free self-revive per run.
+   A player who is out comes back beside a teammate within seconds
+   (`players.downed`), never "out until the next wave".
+8. **A run has a timeline.** It plays like a story with moments: new enemy
+   roles join one at a time, then elites, a mini-boss, an event, a flood, and
+   a final boss. Announce each moment so players always know what just
+   happened and where to go.
+9. **Bosses are moments.** A boss has a silhouette no mob shares and one or
+   two telegraphed attacks to learn. The first fight is short (about 45 s
+   solo), and the reward pops: a hoard chest that brings an evolution onto
+   the cards (`pickup: { effect: "chest", evolve: true }`).
+10. **Tougher, not more.** Past the crowd cap, the director makes new enemies
+   tougher instead of adding bodies. A boss alive halves the spawn rate, and
+   bosses scale with players present.
+11. **Builds have a goal.** Upgrades have numbers players can read ("+1 bolt",
+   "-20% cooldown"). Each weapon pairs with a passive toward an evolution.
+   Solo cards pause the game. Co-op cards do not pause, but they shove
+   enemies back.
+12. **Measure fun with bots.** The gate's human-like bot reacts 200 ms late,
+    kites, and reads cards for a second. Fix what it reports before
+    shipping.
+
+### Horde (survivor-like) targets
+
+| Metric | Target |
+|---|---|
+| First level | 4-10 s |
+| First damage taken | 15-45 s |
+| First elite / first mini-boss | ~0:45 / 1:30-2:00 |
+| First mini-boss fight, solo | ~45 s |
+| Level at 1:00 / 3:00 / 6:00 | ~5 / ~10 / ~15 |
+| Deaths before 1:00 | 0 |
+| Enemies on screen at 0:30 | 30-50 (wave-3 density in minute 1) |
+| Touches taken in minute 1 | 1-3 |
+| Spawns on screen | 0% |
+| Time spent downed or out | under 10% |
+| Solo survival, random picks | 4-7 min |
+
+A good curve is `director({ alive: [[0, 20], [30, 55], [60, 100], [180, 220], [300, 560], [540, 1900]], rate: [[0, 2], [30, 4], [60, 5], [180, 8], [300, 16], [540, 64]], speed: [[0, 1], [240, 1], [600, 1.6]], elites: { from: 45, every: [40, 55] } })`.
+Health and damage curves grow roughly ×1.35 per minute early and flatten
+later. Early gems are worth a little less (`xp` 0.7 at first), so the dense
+first minute does not run the levels hot. Late `speed` keeps endless
+kiting from working. The 2,000-enemy crowd is a late-run payoff, not an
+opening wall.
+
+### Arena shooter
+
+1. **First kill or pickup within about 20 s.** Spawns should be close enough
+   to find a fight, and pickups worth walking to.
+2. **Spawn safety.** No damage in the first 2 s after spawning, and under a
+   quarter of deaths within 3 s of spawning. Spawn points sit out of sight
+   lines, away from the middle.
+3. **Contest the map.** Heals, power weapons and high ground make places
+   worth fighting over. Put them in the open between spawns.
+4. **Readable hits.** Hits flash, kills pop, the feed names who killed whom,
+   and your own shot shows instantly on your screen, before the server
+   agrees.
+5. **Moments.** Announce streaks, put a bounty on the leader, and run a
+   late-round event, so the lead changes hands. When one player has 3x the
+   average kills, a weapon or a position dominates.
+6. **Bots that ramp.** Seat bots fill rooms, play below a new player's level
+   at first and get sharper as people win. They never stomp a newcomer.
+   They never earn, and they are never a coin source: killing a bot scores
+   but pays no earn rule, and "round.top" pays only with another person in
+   the round. Earn comes from beating people.
+
+### How a change request maps to the API
+
+- **"Harder"**: raise the director's `alive`, `rate`, `health` or `damage`
+  keyframes late in the run, never at 0 s.
+- **"Easier"**: lower them, raise `players.hitIframes` or `magnet`, or give
+  the starting weapon more range.
+- **"More enemy types"**: add a prefab and a pool entry with `from: <seconds>`,
+  one new idea at a time. Use `group: [8, 12]` for streams.
+- **"Add a boss"**: add a prefab with `boss: { attacks: [...], rank }` and
+  spawn it with `spawnEdge(id, { count: 1 })` from `after(seconds, ...)`.
+  Give mini-bosses 3 attacks and the final boss 4. Its health scales with
+  players present.
+- **"Smarter" or "trickier enemies"**: give prefabs roles (`ai: "charger"`,
+  `"ranged"`, `"bomber"`, `"shielder"`, `"summoner"`), or add elites.
+- **"Add events" or "waves"**: use `every` or `after` in a system, with
+  `spawnEdge(id, { count, side: "north" })` for a tide from one side,
+  `xpBoost`, `surge` or a fleeing carrier with a chest. `announce` each one,
+  never repeat the same event twice in a row, and skip events while
+  `bossAlive()`.
+- **"More loot" or "a map worth exploring"**: special pickups (heal,
+  vacuum, bomb, chest) as rare drops, props to `scatter`, and a bigger `field`.
+- **"Longer or shorter run"**: move the boss's `after(...)` and stretch the
+  curves' keyframe times.
+- **"More weapons" or "better builds"**: declare 5-8 `levels` per weapon
+  (each a readable change), pair weapons with passives through `evolve`, and
+  give evolutions a new shape. Keep weapons + evolutions within 15.
+- **"Add a character" or "more heroes"**: `keeper(id, { weapon, passive,
+  unlock })`, unlocked by an `achievement`, or declared without an unlock
+  and sold (`store.sku(id, { coins, grants: { keeper: id } })`): earned or
+  bought, never both. A keeper is a different way to play, never a stronger
+  one, and the first keeper is always free.
+- **"Reasons to come back"**: `achievement`s that unlock keepers,
+  `mission`s for daily goals, `title`s for the end screen. None pay coins;
+  coin rewards are earn rules, which are an economy decision. The room
+  server grants them from the run and saves them per player, so they follow
+  the player to every device.
+- **"Sell character unlocks"**: a SKU per keeper with `grants: { keeper }`,
+  on keepers declared without an `unlock`.
+- **"Cosmetics only" or "no pay to win"**: `economy({ store: "cosmetics" })`
+  and only SKUs with `grants: { cosmetic: n }`.
+- **"Let players buy permanent upgrades with coins"**:
+  `economy({ metaUpgrades: true })` and a few `metaUpgrade(...)`s (below).
+- **"Better co-op"**: `players.share` ("nearby" is the default), a
+  `reviveBuff`, `lateJoinBehind`, and `upcoming(...)` countdowns everyone
+  sees.
+
+### The recommended coin model, and why
+
+Every game has coins (1 coin = 1 of the game's own token). How they are
+spent decides whether the game stays fair to the player who never pays, and
+whether a token holder can buy a win. The engine ships one recommended
+model and makes the alternatives declarations, so a
+change request is a one-line change, never new code.
+
+**The default (no declaration; every template uses it).** Coins buy:
+
+- **Cosmetics**: a look owned for good,
+  `store.sku("skin_aurora", { coins: 300, grants: { cosmetic: 1 } })`.
+- **Unlocks**: a keeper (a character, a starting loadout, a sidegrade)
+  declared without an `unlock`,
+  `store.sku("unlock_tinker", { coins: 400, grants: { keeper: "tinker" } })`.
+  An unlock is a different way to play at the same power as the keepers
+  anyone can earn by playing. A keeper is earned (by an achievement) or
+  bought, never both, so a sold keeper cannot be opened another way.
+- **In-run consumables**: used once, inside one run,
+  `store.sku("revive", { coins: 50 })` (no `grants`).
+
+Coins never buy permanent stat power by default. A run is decided by how it
+was played, and a newcomer next to a long-time holder plays the same game.
+
+**Cosmetics only (opt-in):** `economy({ store: "cosmetics" })`. The build
+refuses any SKU that is not a look.
+
+**Meta upgrades (opt-in, never the default):** permanent stat upgrades
+bought with coins, the way many survivor-likes do between runs.
+
+```ts
+economy({ metaUpgrades: true });
+metaUpgrade("hearth", { stat: "maxHealth", step: 0.05, levels: 3, cost: 120, growth: 2 });  // +5% a level: 120, 240, 480
+metaUpgrade("stride", { stat: "speed", step: 0.03, levels: 3, cost: 100, growth: 1.8 });
+```
+
+The engine enforces hard caps that no game can raise: +15% to any one stat
+from meta upgrades, +30% across all of them, at most 5 levels each and 8 per
+game, and geometric costs (each level at least 1.5 times the last). The
+room server applies a player's levels at the start of every run, capped
+again, and the store shows each level's bonus and price. Use them only when
+the creator asks for permanent upgrades, and keep steps small (3-5%).
+
+**Before launch** coins are play money, and play money buys only in-run
+items. Looks, unlocks and meta levels need real coins, so they open at
+launch; nothing bought with play money persists or carries over.
+
+**Where it is enforced.** Prices come from the manifest, never the client.
+A purchase is a coin spend (earned coins first, then the wallet) that the
+room server checks against that price before the item is owned, and the
+item is saved in the player's profile on the server. Spent coins recycle
+to the reward pool for other players, as every coin spend does.
+
+## Part 3: API reference (the package root, `@netforge/engine`)
+
+Game code imports only from the package root. Every declaration validates its input with Zod at import time and throws `GameDefinitionError` with one actionable line per problem. Ids are lower_snake_case (`/^[a-z][a-z0-9_]{0,47}$/`). Asset references are library ids such as `"style.lowpoly.ghost"`, never URLs or file paths.
+
+### Declarations
+
+- `game(def: GameInput): GameDef`: the game itself, declared once and exported as the module's default. `template` is one of `TEMPLATES` (`survivor`, `arena`, `dungeon`, `racer`, `platformer`, `tower-defense`, `party`, `idle`, `cards`, `collector`); `style` is one of `STYLES` (`pixel`, `lowpoly`, `toon`, `voxel`, `ps1`, `handdrawn`). Other fields depend on the template: `places`, `players`, `field`, `arena`, `round`, `look`, `tickRate`.
+- `prefab(id, def: PrefabInput): PrefabDef`: an enemy, boss, pickup or prop. `model`, `appearance`, `health`, `speed`, `radius`, `damage`, `mass`, `ai` (one of `AI_BEHAVIOURS`), `drops`, `kind`, `value`, `boss`, `feel`.
+- `weapon(id, def: WeaponInput): WeaponDef`: `kind` is one of `WEAPON_KINDS` (`nova`, `bolt`, `orbit`, `blaster`, `beam`, `cone`, `chain`, `aura`, `meteor`, `boomerang`); `damage`, `cooldown`, `range`, `speed`, `count`, `spread`, `pierce`, `knockback`, `levels`, `feel`. The build checks which kinds each template accepts (the arena takes `blaster`, `beam` and `nova`).
+- `upgrade(id, def: UpgradeInput): UpgradeDef`: a passive or run upgrade on one of `STAT_KINDS`, with `step` and `maxLevel`.
+- `director(def: DirectorInput): DirectorDef`: the spawn director for horde games, with keyframed curves (`alive`, `rate`, `health`, `damage`) and an enemy pool.
+- `system(name, setup: (ctx: SystemContext) => void): void`: game logic on the tick clock (below).
+- `keeper(id, def)`, `achievement(id, def)`, `mission(id, def)`, `title(id, def)`: characters, unlocks, daily goals and end-screen titles. None of these pay coins.
+- `economy(def?)`: the coin model. The default needs no declaration. `economy({ store: "cosmetics" })` sells looks only; `economy({ metaUpgrades: true })` opts in to `metaUpgrade(...)`.
+- `metaUpgrade(id, { stat, step, levels, cost, growth })`: permanent stat upgrades, capped by the engine at `META_MAX_PER_STAT` per stat and `META_MAX_TOTAL` across all, at most `META_MAX_LEVELS` levels each and `META_MAX_UPGRADES` per game, with costs growing by at least `META_MIN_GROWTH`.
+- `dungeon(spec: DungeonSpec): DungeonLayout`: a seeded floor plan (`seed`, `rooms`, `cell`, `size`, `corridor`, `loops`) whose `.field` goes into `game({ field })`; `.rooms`, `.roomAt(x, z)` and `.boss` feed systems.
+- Board genres: `towerBoard`, `tower`, `waves` (tower defense); `saltFlat`, `plant` (idle); `marsh`, `creature`, `move` (monster collector); `cardTable`, `card` (card battler). Each template's `llms.txt` documents its own fields.
+
+### Earn and the store
+
+- `earn.rule(id, { when, n?, pay, oncePer })`: pays `pay` whole coins when the event `when` (a dotted name such as `"wave.cleared"`) reaches its `n`th count; `oncePer` is `"run"`, `"day"` or `"lifetime"`. Every game declares at least one.
+- `earn.stake({ min, max, multiple })`: the buy-in run, declared exactly once by every game. A staked run pays its normal earn plus a share of `stake x multiple` (multiple 1 to `STAKE_MAX_MULTIPLE`), by the share of the run's most earn the player makes.
+- `earn.pot({ entry, recycle, enabled? })`: an optional PvP pot for arena games. Off unless `enabled: true`.
+- `store.sku(id, { coins?, usdg?, grants? })`: a store item priced in coins (1 coin is 1 of the game's own token). No `grants` is an in-run consumable or a run upgrade named after a declared `upgrade`; `{ cosmetic: n }` is a look owned for good; `{ keeper: id }` unlocks a keeper; `{ gear: upgradeId, loseBelow }` is losable gear.
+- `STAKE_REASON` (`"stake"`) and `POT_REASON` (`"pot"`) are reserved and never SKU ids.
+
+### The system context
+
+`system(name, (ctx) => { ... })` receives a deliberately small, deterministic context. Systems run only on the authoritative side (the room host and the headless playtest); clients see the results in snapshots.
+
+- Clock: `tick()`, `time()`, `every(seconds, n => ...)`, `after(seconds, fn)`, `onTick(fn)`.
+- Players: `players()` returns each player's `id`, `position`, `health`, `alive`, `kills`, `deaths` and `bot`.
+- Events: `on(event, ids => ...)` for the sim's own events (`enemy.killed`, `boss.killed`, `player.downed`, `player.revived`, `player.levelup`, `player.died`; arena: `opponent.killed`, `round.top`, `round.finished`; and `run.started`) and any you emit; `emit(event, ids?)` credits those players, or everyone present.
+- Spawning: `spawnEdge(prefab, { count, around?, side?, spread?, scale?, elite? })` brings enemies in just off screen (prefer it); `spawn(prefab, [x, y, z], { elite? })`, `spawnRing(prefab, { count, radius, around? })`, `spawnPickup(prefab, [x, y, z])`, `scatter(prefab, count)`, `clear(prefab)`, `alive(prefab?)`, `onScreen(x, z)`.
+- Pacing: `announce(text, { tone? })`, `upcoming(label, seconds)`, `bossAlive()`, `pauseDirector(seconds)`, `surge(multiplier, seconds)`, `xpBoost(multiplier, seconds)`.
+- Run control: `respawnDead()`, `end("won" | "lost")`, and `random()` (the sim's seeded PRNG; never `Math.random`).
+
+### Playtest
+
+`engine.test.run(opts: HarnessOptions): Promise<HarnessReport>` plays the declared game on the server simulation.
+
+- Options: `ticks`, `bots`, and optionally `seed`, `tickRate`, `enemies` (stress), `enemyMix`, `bot` (`"basic"` or `"human"`), `picks` (`"random"` or `"greedy"`), and `assert`: a list of `{ name, check: (report) => boolean }`.
+- Report: `kills`, `deaths`, `wave`, `runs` (`won`, `lost`), `maxLevel`, `peakEnemies`, `topScore`, `scorers`, `earned` (by rule id), `earnEmitted`, `msPerTick`, `p99MsPerTick`, `softlock`, `fun` (fun metrics, horde and arena games) and `rules` (the board genres' own checks).
+
+```ts
+import { engine } from "@netforge/engine";
+const r = await engine.test.run({ ticks: 30 * 180, bots: 4, seed: 3, assert: [{ name: "kills", check: (x) => x.kills > 500 }] });
+```
+
+### Constants and schemas
+
+`GameDefinitionError`, `TEMPLATES`, `STYLES`, `AI_BEHAVIOURS`, `WEAPON_KINDS`, `STAT_KINDS`, `LOOK_PRESETS`, `PARTICLE_PRESETS`, `DECAL_PRESETS`, `SOUND_CUES`, `TITLE_STATS`, `META_STATS`, the `META_*` caps, `STAKE_MAX_MULTIPLE`, `STAKE_MAX_COINS`, `TOWER_KINDS`, `TOWER_STATS`, `PLANT_KINDS`, `IDLE_STATS`, `ELEMENTS`, `MOVE_EFFECTS`, `COLLECTOR_STATS`, `CARD_STATS`, `EFFECT_KINDS`, `EFFECT_TARGETS`, `APPEARANCE_PARTS`, `appearanceSchema` and `dungeonSchema`. Every input and definition type (`GameInput`, `PrefabInput`, `WeaponInput`, `EarnRuleInput`, `SkuInput` and the rest) is exported for TypeScript.
+
+### Other entry points (template code only)
+
+- `@netforge/engine/runtime`: `createRenderer`, `createRenderStack`, `CameraRig`, `fieldBounds`, `InputController`, `AssetLoader`, `FeelKit`, `SoundPlayer`, `InstancedCrowd`, `ArenaClient`, `SystemScheduler`, `collectManifest`, `createStyledView`, `createPixelStyle`.
+- `@netforge/engine/game`: `compileGame`, `collectManifest`, `GameRunner`, `EarnTracker`, `engineSimAdapter`, `engineSchema`, `botInput`, `HumanBot`, `Director`.
+- `@netforge/engine/net`: the client netcode (prediction, reconciliation, interpolation, delta snapshots, the room client).
+- `@netforge/engine/rules`: `rulesAdapter`, `playRules` and the board genres' rules modules.
+- `@netforge/engine/voxel` and `@netforge/engine/earn-source`.
+
+### Tools for agents
+
+The Net Forge MCP server runs with `npx -y @netforge/mcp` (package `@netforge/mcp`, bin `netforge-mcp`). Its tools are `netforge_list_templates`, `netforge_create_game`, `netforge_explain_api`, `netforge_search_docs`, `netforge_validate_game`, `netforge_run_playtest` and `netforge_play_locally`. `@netforge/kit-play` runs a game folder (`netnet.json` and `src/game.ts`) locally with play money: `npx kit-play`.
+
+Docs: https://forge.netnet.capital/docs/packages/engine

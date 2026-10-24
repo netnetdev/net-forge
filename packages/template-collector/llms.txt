@@ -1,4 +1,4 @@
-# MOSSBOUND: the monster collector template (NetNet game runtime, board genre)
+# Net Forge monster collector template (MOSSBOUND)
 
 > A shared marsh for up to 8 keepers. Each picks one of the starters at
 > camp, walks the marsh, meets wild creatures in tall grass and battles them

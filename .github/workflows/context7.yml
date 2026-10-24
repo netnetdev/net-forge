@@ -1,0 +1,22 @@
+# Asks Context7 to re-index this repository after every push to main, so
+# coding agents that use Context7 get the current docs. Needs the
+# CONTEXT7_API_KEY repository secret; without it the step is skipped.
+name: Refresh Context7 docs
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Context7 refresh
+        env:
+          CONTEXT7_API_KEY: ${{ secrets.CONTEXT7_API_KEY }}
+        run: |
+          if [ -z "$CONTEXT7_API_KEY" ]; then echo "CONTEXT7_API_KEY is not set; skipping"; exit 0; fi
+          curl -sf -X POST https://context7.com/api/v1/refresh \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $CONTEXT7_API_KEY" \
+            -d '{"libraryName": "/${{ github.repository }}"}'

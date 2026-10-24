@@ -1,0 +1,47 @@
+# @netforge/engine-sim
+
+> The deterministic shared simulation of the Net Forge game engine. One TypeScript module runs the same way in the browser (client prediction) and on a room server (authority): a bitECS world, deterministic Rapier physics, a fixed tick, a kinematic character controller, quantized input commands and delta snapshots. No DOM, no timers, no network. Game code never imports this package: a game is declared against @netforge/engine, which compiles it into this simulation. Use this package to build a template, a room host or a test harness.
+
+## Install
+
+- `npm install @netforge/engine-sim` (Node 20 or later, or a modern browser)
+- Call `await initSim()` once per process before anything else (it loads the Rapier WASM).
+
+## Core loop
+
+- `createWorld(config)` builds a world (`tickRate`, `seed`, `enemies`, `content`, ...); `destroyWorld(world)` frees it.
+- `addPlayer(world, id)` and `removePlayer(world, id)`.
+- `step(world, inputs)` advances one fixed tick. `inputs` is a `Map<PlayerId, InputCommand>`; `InputCommand` is `{ seq, tick, moveX, moveZ, yaw, buttons }` with `Button` bits. It returns `{ tick, events }` and never reads a clock.
+- `FixedStepper` converts wall-clock time into ticks plus a render `alpha`.
+- `quantizeInput`, `encodeInput` (15 bytes), `decodeInput`, `encodeInputs`, `decodeInputs`.
+- `captureState(world, include?)`, `applyState(world, state)`, `encodeSnapshot(state, baseline?)`, `decodeSnapshot(bytes, baseline)`, `snapshotBaseTick(bytes)`.
+- `renderView(world)`: typed arrays of current and previous-tick poses for interpolation.
+- `playerNetId`, `lastProcessedSeq` (the ack that client reconciliation keys on).
+
+## Modes
+
+- Content mode (horde games): `content.weapons`, `content.enemyTypes`, `content.stats`; `spawnEnemy`, `resetRun`, `respawnDead`, `revivePlayer`, `listPlayers`, `enemyCount`, `grantUpgrade`, `setCosmetic`, `simRandom`.
+- Arena mode (`content.arena.enabled`): twin-stick, loadouts, PvP, respawns; lag compensation through `beamShot`, `arenaHitboxes`, `applyBeamHit`.
+- Platform mode: `createPlatformWorld`, `platformStep`, `capturePlatformPlayer`, `applyPlatformPlayer`.
+- Kart mode: `createKartWorld`, `kartStep`, `captureKart`, `applyKart`.
+
+## Physics
+
+- `createPhysics({ tickRate, gravity })` returns a `PhysicsWorld`; `restorePhysics(bytes)` rebuilds one from `snapshot()`.
+- Bodies: `addBody`, `addStaticBox`, `addTrigger`, `addCharacter`, `addJoint`, `removeBody`, `setKinematicTarget`, `applyImpulse`, `applyForce`, `applyKnockback`.
+- Layers: `Layer`, `layerMask`, `ALL_LAYERS`. Two bodies touch only when each mask holds the other's layer.
+- Queries: `raycast`, `raycastAll`, `shapeCast`, `overlap`.
+- `step(inputs)` returns `{ tick, events, characters }`; events are `contact.start`, `contact.end`, `trigger.enter`, `trigger.exit`, sorted.
+- `stateHash()` and `snapshotHash()` for determinism checks; `destroy()` frees the WASM memory.
+
+## Rules
+
+- Never read clocks or `Math.random` inside the simulation; use the world seed and `simRandom`.
+- Quantize inputs on both sides (`step` does it on entry).
+- The server is authoritative; clients predict their own player and reconcile from snapshots.
+
+## Docs
+
+- llms-full.txt in this package: the full reference with every public type and its doc comments.
+- https://forge.netnet.capital/docs/packages/engine-sim
+- Related packages: @netforge/engine (the game API and runtime), @netforge/kit-play (run a game locally).

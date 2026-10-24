@@ -1,7 +1,18 @@
 {
   "name": "@netforge/asset-library",
-  "version": "0.1.0",
-  "description": "The per-style asset library of the Net Forge game engine: a manifest of CC0 models and sprites addressed by library id, shared rigs and clip sets, the look composer, the example gallery, and the three.js loader the templates draw with.",
+  "version": "0.2.0",
+  "description": "CC0 game asset library for Net Forge: a manifest of models, sprites and sounds addressed by library id, shared rigs, the look composer and a three.js loader.",
+  "keywords": [
+    "game-assets",
+    "cc0",
+    "threejs",
+    "three",
+    "game-engine",
+    "browser-game",
+    "gamedev",
+    "typescript",
+    "net-forge"
+  ],
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -9,7 +20,8 @@
     "./three": "./src/three/index.ts",
     "./vite": "./src/vite.ts",
     "./fetch": "./scripts/fetch.ts",
-    "./gallery": "./manifest/gallery.ts"
+    "./gallery": "./manifest/gallery.ts",
+    "./package.json": "./package.json"
   },
   "files": [
     "src",
@@ -21,21 +33,26 @@
     "LICENSES",
     "LICENSE"
   ],
+  "sideEffects": false,
   "publishConfig": {
     "access": "public",
     "exports": {
       ".": "./src/index.ts",
       "./three": "./src/three/index.ts",
       "./vite": "./src/vite.ts",
-      "./gallery": "./manifest/gallery.ts"
+      "./gallery": "./manifest/gallery.ts",
+      "./package.json": "./package.json"
     }
+  },
+  "homepage": "https://forge.netnet.capital/docs/packages/asset-library",
+  "bugs": {
+    "url": "https://github.com/netnetdev/net-forge/issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/netnetdev/net-forge.git",
     "directory": "packages/asset-library"
   },
-  "homepage": "https://github.com/netnetdev/net-forge/tree/main/packages/asset-library#readme",
   "engines": {
     "node": ">=20"
   },
@@ -60,8 +77,5 @@
     "typescript": "5.8.3",
     "vite": "6.4.3",
     "vitest": "3.2.7"
-  },
-  "bugs": {
-    "url": "https://github.com/netnetdev/net-forge/issues"
   }
 }

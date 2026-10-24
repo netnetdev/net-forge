@@ -1,7 +1,16 @@
 {
   "name": "@netforge/kit",
-  "version": "0.1.0",
-  "description": "The NetNet Cabinet Kit: add a game token, a store, payments and a mandatory earn mechanism to any browser game on Robinhood Chain. Runtime library, CLI (add, init, doctor) and an MCP server, written for AI coding agents first.",
+  "version": "0.2.0",
+  "description": "Optional on-chain add-on for browser games: a game token, a store, payments and a mandatory earn mechanism, with a runtime library, a CLI and an MCP server (Net Forge Cabinet Kit).",
+  "keywords": [
+    "browser-game",
+    "html5-game",
+    "gamedev",
+    "ai-agents",
+    "mcp",
+    "typescript",
+    "net-forge"
+  ],
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -25,7 +34,8 @@
     },
     "./llms.txt": "./llms.txt",
     "./llms-full.txt": "./llms-full.txt",
-    "./netnet.config.schema.json": "./netnet.config.schema.json"
+    "./netnet.config.schema.json": "./netnet.config.schema.json",
+    "./package.json": "./package.json"
   },
   "bin": {
     "kit": "./dist/cli/index.js",
@@ -43,22 +53,15 @@
   "publishConfig": {
     "access": "public"
   },
+  "homepage": "https://forge.netnet.capital/docs/packages/kit",
+  "bugs": {
+    "url": "https://github.com/netnetdev/net-forge/issues"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/netnetdev/net-forge.git",
     "directory": "packages/kit"
   },
-  "homepage": "https://github.com/netnetdev/net-forge/tree/main/packages/kit#readme",
-  "keywords": [
-    "robinhood-chain",
-    "netnet",
-    "game",
-    "game-token",
-    "web3-games",
-    "mcp",
-    "llms-txt",
-    "viem"
-  ],
   "engines": {
     "node": ">=20"
   },
@@ -89,8 +92,5 @@
     "typescript": "5.8.3",
     "vite": "6.4.3",
     "vitest": "3.2.7"
-  },
-  "bugs": {
-    "url": "https://github.com/netnetdev/net-forge/issues"
   }
 }

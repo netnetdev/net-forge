@@ -1,4 +1,4 @@
-# EMBERWATCH: the survivor template (NetNet game runtime, Template 1)
+# Net Forge survivor template (EMBERWATCH)
 
 > A co-op survivor-like for 4 players and up to 2,000 enemies. You change
 > the game by editing src/game.ts only. The template already has waves,

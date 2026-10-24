@@ -1,7 +1,22 @@
 {
   "name": "@netforge/kit-play",
-  "version": "0.1.0",
-  "description": "kit play: run a game downloaded from Net Forge on your own computer with play money. Builds the template client with your game module and runs a local room host from the engine's open simulation. No wallet, no chain, no Net Forge servers.",
+  "version": "0.2.0",
+  "description": "Make, test and run Net Forge games on your own computer with play money: start a game from a template, run playtest bots, and play it in the browser with a local room host, with no wallet, chain or servers.",
+  "keywords": [
+    "game-engine",
+    "multiplayer",
+    "browser-game",
+    "game-server",
+    "websocket",
+    "game-template",
+    "threejs",
+    "typescript",
+    "gamedev",
+    "ai-agents",
+    "mcp",
+    "vibe-coding",
+    "net-forge"
+  ],
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -11,7 +26,8 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./llms.txt": "./llms.txt"
   },
   "bin": {
     "kit-play": "./dist/cli.js"
@@ -20,24 +36,22 @@
     "dist",
     "README.md",
     "LICENSE",
-    "NOTICE"
+    "NOTICE",
+    "llms.txt"
   ],
+  "sideEffects": false,
   "publishConfig": {
     "access": "public"
+  },
+  "homepage": "https://forge.netnet.capital/docs/packages/kit-play",
+  "bugs": {
+    "url": "https://github.com/netnetdev/net-forge/issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/netnetdev/net-forge.git",
     "directory": "packages/kit-play"
   },
-  "homepage": "https://github.com/netnetdev/net-forge/tree/main/packages/kit-play#readme",
-  "keywords": [
-    "netnet",
-    "net-forge",
-    "game",
-    "local",
-    "three.js"
-  ],
   "engines": {
     "node": ">=20"
   },
@@ -66,6 +80,7 @@
     "@netforge/template-racer": "workspace:*",
     "@netforge/template-survivor": "workspace:*",
     "@netforge/template-tower": "workspace:*",
+    "create-netforge": "workspace:*",
     "esbuild": "0.25.12",
     "vite": "6.4.3"
   },
@@ -73,8 +88,5 @@
     "@types/node": "22.20.1",
     "typescript": "5.8.3",
     "vitest": "3.2.7"
-  },
-  "bugs": {
-    "url": "https://github.com/netnetdev/net-forge/issues"
   }
 }

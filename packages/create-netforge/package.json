@@ -1,0 +1,62 @@
+{
+  "name": "create-netforge",
+  "version": "0.2.0",
+  "description": "Start a game with Net Forge, the open-source multiplayer browser game engine built for AI coding agents: npm create netforge@latest my-game. Ten templates, play money, AGENTS.md and MCP config included.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "create-netforge": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "starters",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/netnetdev/net-forge.git",
+    "directory": "packages/create-netforge"
+  },
+  "homepage": "https://github.com/netnetdev/net-forge/tree/main/packages/create-netforge#readme",
+  "keywords": [
+    "netnet",
+    "net-forge",
+    "game",
+    "create",
+    "starter",
+    "template",
+    "three.js"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node scripts/clean.mjs && tsc -p tsconfig.json && node scripts/stage-starters.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.test.json",
+    "test": "vitest run",
+    "test:e2e": "vitest run --config vitest.e2e.config.ts",
+    "prepack": "pnpm build",
+    "prepublishOnly": "node ../engine/scripts/license-gate.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.1",
+    "typescript": "5.8.3",
+    "vitest": "3.2.7"
+  },
+  "bugs": {
+    "url": "https://github.com/netnetdev/net-forge/issues"
+  }
+}

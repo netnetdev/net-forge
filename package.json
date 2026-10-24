@@ -1,13 +1,13 @@
 {
   "name": "net-forge",
   "private": true,
-  "description": "Net Forge: the open game engine, templates and local play tools behind NetNet games.",
+  "description": "Net Forge: an MIT TypeScript engine for multiplayer browser games, with ten finished game templates and tools for coding agents.",
   "packageManager": "pnpm@10.33.2",
   "engines": {
     "node": ">=22"
   },
   "scripts": {
-    "build": "pnpm --filter @netforge/engine-sim --filter @netforge/engine --filter @netforge/kit-play --filter @netforge/kit run build",
+    "build": "pnpm --filter @netforge/engine-sim --filter @netforge/engine --filter create-netforge --filter @netforge/kit-play --filter @netforge/mcp --filter netforge --filter @netforge/kit run build",
     "typecheck": "pnpm -r run typecheck",
     "test": "pnpm -r --workspace-concurrency=1 run test"
   }

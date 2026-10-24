@@ -1,0 +1,66 @@
+{
+  "name": "netforge",
+  "version": "0.2.0",
+  "description": "Net Forge command line for coding agents: `npx netforge setup agent` writes AGENTS.md, CLAUDE.md, Cursor rules and MCP configs into a game project, and ships Agent Skills for building Net Forge games.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "netforge": "./dist/cli.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "skills",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/netnetdev/net-forge.git",
+    "directory": "packages/netforge"
+  },
+  "bugs": {
+    "url": "https://github.com/netnetdev/net-forge/issues"
+  },
+  "homepage": "https://forge.netnet.capital/docs/agents",
+  "keywords": [
+    "net-forge",
+    "game-engine",
+    "ai-agents",
+    "agent-skills",
+    "agents-md",
+    "mcp",
+    "cli",
+    "vibe-coding",
+    "browser-game",
+    "multiplayer",
+    "gamedev"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.test.json",
+    "test": "vitest run",
+    "prepack": "pnpm build",
+    "prepublishOnly": "node ../engine/scripts/license-gate.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.1",
+    "typescript": "5.8.3",
+    "vitest": "3.2.7"
+  }
+}

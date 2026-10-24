@@ -1,12 +1,29 @@
 {
   "name": "@netforge/template-party",
-  "version": "0.1.0",
-  "description": "ROMPHOUSE: a party co-op template on the NetNet game runtime: 2 to 8 friends in one playroom, five quick minigame rounds a show. The game module, its browser client and its playtest bots.",
+  "version": "0.2.0",
+  "description": "Party game template for Net Forge: 2 to 8 friends in one playroom, five quick minigame rounds a show (ROMPHOUSE).",
+  "keywords": [
+    "game-template",
+    "multiplayer",
+    "browser-game",
+    "html5-game",
+    "threejs",
+    "game-engine",
+    "typescript",
+    "gamedev",
+    "ai-agents",
+    "mcp",
+    "net-forge",
+    "party-game"
+  ],
   "license": "MIT",
   "type": "module",
   "exports": {
     ".": "./src/manifest.ts",
-    "./store": "./src/store.ts"
+    "./store": "./src/store.ts",
+    "./package.json": "./package.json",
+    "./llms.txt": "./llms.txt",
+    "./llms-full.txt": "./llms-full.txt"
   },
   "files": [
     "src",
@@ -15,17 +32,28 @@
     "llms.txt",
     "README.md",
     "NOTICE",
-    "LICENSE"
+    "LICENSE",
+    "llms-full.txt",
+    "AGENTS.md",
+    "CLAUDE.md"
+  ],
+  "sideEffects": [
+    "./src/game.ts",
+    "./src/manifest.ts",
+    "./client/**"
   ],
   "publishConfig": {
     "access": "public"
+  },
+  "homepage": "https://forge.netnet.capital/docs/templates/party",
+  "bugs": {
+    "url": "https://github.com/netnetdev/net-forge/issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/netnetdev/net-forge.git",
     "directory": "packages/template-party"
   },
-  "homepage": "https://github.com/netnetdev/net-forge/tree/main/packages/template-party#readme",
   "engines": {
     "node": ">=20"
   },
@@ -54,8 +82,5 @@
     "typescript": "5.8.3",
     "vite": "6.4.3",
     "vitest": "3.2.7"
-  },
-  "bugs": {
-    "url": "https://github.com/netnetdev/net-forge/issues"
   }
 }

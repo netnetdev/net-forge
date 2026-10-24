@@ -1,0 +1,209 @@
+# Net Forge idle template (BRINEWORKS)
+
+> A shared salt flat for up to 8 players. Each player runs a works on a
+> plot: pumps draw brine, pans boil it into salt, kilns cut salt into
+> crystals, and salt buys and levels more plants. Players rake by hand for
+> salt, and everyone ships crystals to one contract barge. A shift has a
+> fixed length; then a new shift starts from nothing.
+> You change the game by editing src/game.ts only. The template already has
+> the works, the production chain, buying and levelling, raking, tending,
+> the contract, the shift clock, netcode, rendering, earn and the store.
+
+## Files
+
+- src/game.ts: THE GAME. game(), saltFlat(), plant(), upgrade(),
+  earn.rule(), earn.stake(), store.sku().
+- src/names.json: the title and every label. Plants go in "weapons"
+  ({ name, line }); "enemies" stays empty.
+
+## Rules the build enforces (the anti-farm rules)
+
+- game({ template: "idle", style, places, players: { prefab, max } }), max at most 8.
+- Exactly one saltFlat(...); 1 to 8 plant(...)s with at least one "pump",
+  one "pan" and one "kiln" (the chain).
+- A shift is 600 to 3600 seconds. Every earn rule is oncePer: "run" (a run
+  is a shift, or a player's time in it).
+- tend is at most 300 seconds: a works nobody tends stops, so an idle tab
+  makes nothing. Production happens only on the room's clock while the
+  player is in the room; nothing is earned offline and a player who leaves
+  and comes back starts a fresh works.
+- No earn rule may pay sooner than 180 seconds into a fresh works, even
+  with perfect play or raking as fast as the cooldown allows. The gate
+  measures it; if a draft pays sooner it fails with the number. Raise
+  packEvery or the rule's n, or slow raking.
+- Upgrades read three stats: might (plant output), haste (raking speed),
+  amount (salt a rake). No weapon() or prefab().
+- An earn rule must fire within about 4 minutes of 4-player play.
+
+## Units
+
+Seconds, litres of brine, kg of salt, whole crystals. A plant's rate is a
+second, a level. Costs are kg of salt; each level costs growth times the last.
+
+## Common changes
+
+### Faster or slower progress
+plant("hand_pump", { model: "style.lowpoly.barrel", kind: "pump", cost: 15, growth: 1.15, rate: 3 });
+Lower growth makes levels cheap for longer; a higher rate makes each level count more.
+Keep the first payout at least 180 s away (the gate checks).
+
+### A new plant
+plant("deep_bore", { model: "style.lowpoly.generator_large", kind: "pump", cost: 5000, growth: 1.2, rate: 200 });
+Add its label to names.json weapons. The bar shows plants in order (keys 1-8).
+
+### Longer or shorter shifts
+saltFlat({ shift: 1200, ... }) (600 to 3600 s). A bigger contract: contract: { crystals: 120 }.
+
+### Earn rules
+earn.rule("first_crate", { when: "salt.packed", n: 30, pay: 5, oncePer: "run" });
+Events: salt.packed (one each packEvery kg a player makes), crystal.cut,
+crystal.shipped, plant.built, plant.upgraded (each credits the player),
+contract.filled (the players who shipped to it; world progress, so never a
+player whose run started after the shift began). Pays coins once a run.
+
+### The buy-in run (required)
+earn.stake({ min: 20, max: 200, multiple: 2 }); one top-level line. "stake" is reserved.
+
+### Coins: earn and the store
+store.sku("bellows", { coins: 40 });                               // one level of "bellows" for the shift
+store.sku("skin_rust", { coins: 500, grants: { cosmetic: 2 } });   // a finish for your foreman
+store.sku("brass_bellows", { coins: 150, grants: { gear: "bellows", loseBelow: 0.25 } }); // losable gear
+Keep the SKUs the client is wired to (bellows, long_rake, quick_hands,
+skin_saltwhite, skin_rust, brass_bellows) at their prices.
+
+## Test
+
+engine.test.run({ ticks: 30 * 240, bots: 4 }) plays the flat and reports
+crates packed (as kills), earned by rule, softlock, ms per tick and the
+genre's checks (the farming bounds) under rules.checks.
+
+## Worked example: src/game.ts
+
+This is the template's complete src/game.ts as it ships. A new game on this
+template starts from this file and changes declarations in place.
+
+```ts
+/**
+ * BRINEWORKS: the idle template (play style: idle).
+ *
+ * A white salt flat under a hot sky. Up to eight players each run a works on
+ * the flat: pumps draw brine, pans boil it into salt, kilns cut salt into
+ * crystals, and salt buys and levels more plants. A barge on the canal
+ * takes crystals for a contract everyone fills together. A shift lasts
+ * fifteen minutes; then the flat is raked clean and a new shift begins.
+ *
+ * Works run only while their player is on the flat and has tended them in
+ * the last two minutes (a rake, a purchase, a shipment): no offline
+ * production, nothing for an idle tab.
+ *
+ * This file is the whole game as the model writes it: declarations only,
+ * against the typed API in @netforge/engine.
+ */
+import { earn, game, plant, saltFlat, store, upgrade } from "@netforge/engine";
+
+export default game({
+  template: "idle",
+  style: "lowpoly",
+  places: { flat: { chunks: "places/flat", spawn: [0, 0, 0] } },
+  players: { prefab: "style.lowpoly.worker", max: 8 },
+});
+
+// The flat: a fifteen-minute shift, works that stall two minutes after the last tend,
+// a rake every 0.4 s for 3 kg, 3 L of brine to a kg of salt, 25 kg of salt to a crystal, a crate every 150 kg.
+saltFlat({
+  shift: 900,
+  tend: 120,
+  start: 20,
+  rake: { salt: 3, cooldown: 0.4 },
+  brinePerSalt: 3,
+  saltPerCrystal: 25,
+  packEvery: 150,
+  contract: { crystals: 60 },
+});
+
+// Plants. cost is kg of salt for the first level, growth the price rise a level; rate is a second, a level
+// (pumps: litres of brine; pans: kg of salt boiled; kilns: crystals cut).
+plant("hand_pump", { model: "style.lowpoly.barrel", kind: "pump", cost: 15, growth: 1.15, rate: 3 });
+plant("boil_pan", { model: "style.lowpoly.crate", kind: "pan", cost: 25, growth: 1.15, rate: 1 });
+plant("steam_pump", { model: "style.lowpoly.generator", kind: "pump", cost: 400, growth: 1.18, rate: 30 });
+plant("sun_pan", { model: "style.lowpoly.barrels", kind: "pan", cost: 600, growth: 1.18, rate: 10 });
+plant("crystal_kiln", { model: "style.lowpoly.generator_large", kind: "kiln", cost: 900, growth: 1.25, rate: 0.05 });
+
+// Store upgrades: one level each, for the rest of the shift, on the buyer's own works.
+upgrade("bellows", { stat: "might", step: 0.15, maxLevel: 1 });
+upgrade("long_rake", { stat: "amount", step: 0.3, maxLevel: 1 });
+upgrade("quick_hands", { stat: "haste", step: 0.25, maxLevel: 1 });
+
+// Earn (mandatory). Pays the game's coins (1 coin = 1 token), once a shift each. Values are PLACEHOLDER.
+earn.rule("first_crate", { when: "salt.packed", n: 30, pay: 5, oncePer: "run" });
+earn.rule("long_haul", { when: "salt.packed", n: 300, pay: 20, oncePer: "run" });
+earn.rule("full_hold", { when: "contract.filled", n: 1, pay: 50, oncePer: "run" });
+earn.rule("cutter", { when: "crystal.cut", n: 30, pay: 5, oncePer: "run" });
+// Buy-in run (the mandatory sink loop): stake coins at shift start to earn above free play. Values are PLACEHOLDER.
+earn.stake({ min: 20, max: 200, multiple: 2 });
+
+// Store (the Kit), priced in coins: three shift upgrades, two finishes owned for good, one piece of losable gear.
+store.sku("bellows", { coins: 40 });
+store.sku("long_rake", { coins: 40 });
+store.sku("quick_hands", { coins: 60 });
+store.sku("skin_saltwhite", { coins: 300, grants: { cosmetic: 1 } });
+store.sku("skin_rust", { coins: 500, grants: { cosmetic: 2 } });
+// Losable gear: owned for good until lost. It brings one level of its upgrade into every staked shift,
+// and is lost when that shift makes less than loseBelow of its most earn. Values are PLACEHOLDER.
+store.sku("brass_bellows", { coins: 150, grants: { gear: "bellows", loseBelow: 0.25 } });
+```
+
+## Validate and playtest
+
+### With the MCP server
+
+Run `npx -y @netforge/mcp` (package @netforge/mcp, bin netforge-mcp) and
+connect it to your coding agent. Its tools are netforge_list_templates, netforge_create_game,
+netforge_explain_api, netforge_search_docs, netforge_validate_game, netforge_run_playtest and netforge_play_locally.
+
+- netforge_validate_game checks src/game.ts against the engine's schemas and this
+  template's rules, and returns one actionable line per problem.
+- netforge_run_playtest plays the game headless with bots and returns the report.
+- netforge_play_locally gives the steps to open the game in a browser with kit play.
+
+### In code
+
+Import the game module first so its declarations register, then run the
+headless harness. This plays 4 players for 4 minutes at 30 Hz.
+
+```ts
+import { engine } from "@netforge/engine";
+import "./src/game.js";
+
+const report = await engine.test.run({
+  ticks: 30 * 240,
+  bots: 4,
+  seed: 1,
+  assert: [
+    { name: "earn fired", check: (r) => r.earnEmitted > 0 },
+    { name: "no softlock", check: (r) => !r.softlock },
+  ],
+});
+if (report.failed.length > 0) throw new Error(report.failed.join("\n"));
+```
+
+The report has crates packed (as kills), earned by rule, softlock, ms per tick and the genre's checks (the farming bounds) under rules.checks.
+
+The template's own tests (vitest) are the reference checks:
+
+- test/harness.test.ts
+- test/store.test.ts
+
+### Play it locally
+
+In a folder with netnet.json and src/game.ts:
+
+```sh
+npm install @netforge/kit-play @netforge/engine @netforge/template-idle
+echo '{"template":"idle"}' > netnet.json
+npx kit-play        # opens http://127.0.0.1:4663
+```
+
+kit play builds the template client with your src/game.ts and runs a local
+room host with play money. No wallet, no chain and no hosted servers are
+involved. Open the link in more tabs for more players.

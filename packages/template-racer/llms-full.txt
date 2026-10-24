@@ -1,0 +1,236 @@
+# Net Forge racer template (TORQUEBAY)
+
+> Kart races for up to 8 players on harbour circuits, with seat bots filling
+> the grid. A round is one race of a few laps; the next round runs another
+> circuit. You change the game by editing src/game.ts only. The template
+> already has the kart physics (throttle, brakes, steering, grip, drift
+> mini-turbos in three tiers, boost pads, coins that raise top speed, grass,
+> barriers, kart bumps), laps through ordered checkpoints, the race clock and
+> places, bots that drive the racing line, netcode with client prediction at
+> 60 Hz, a streamed track (only the road near you is built), rendering in
+> every art style, keyboard, gamepad and touch controls, earn and the store.
+> Do not write renderers, netcode, physics or bot AI.
+
+## Files
+
+- src/game.ts: THE GAME. Declarations against @netforge/engine:
+  game(), upgrade(), system(), earn.rule(), earn.stake(), store.sku().
+- src/names.json: the title and every label players read.
+- Everything else is template machinery.
+
+## Rules the build enforces
+
+- game({ template: "racer", style: "lowpoly", tracks: [...] }) with 1 to 8 tracks.
+- No weapon(), director(), keeper() or enemy prefabs.
+- A track has 4 to 64 control points at least 6 m apart and is at least 200 m round.
+- Asset ids look like "style.lowpoly.kart_a", never URLs or paths, and must be in the asset library.
+- game({ style }) is the art style the creator picked: lowpoly, toon, ps1, pixel, voxel or handdrawn. Keep it.
+- Ids are lower_snake_case. Every game declares at least one earn.rule and one earn.stake (the buy-in run).
+- Upgrades raise one of: speed (top speed), haste (drift charge rate), might
+  (boost length), armor (grass and wall losses), magnet (coin reach, m).
+- 4 players plus seat bots must all finish a race, and an earn rule must
+  fire, in a 4-minute playtest.
+
+## Units
+
+Seconds, metres, metres per second. The ground plane: x and z in metres.
+Tick rate 60 Hz. Default top speed 26 m/s; a kart is about 1.8 m long.
+
+## The loop
+
+Everyone lines up on a staggered grid behind the line. A 3 s countdown, then
+the race: W/Up accelerate, S/Down brake, A/D steer, hold Space or Shift
+while steering through a bend to drift (sparks turn blue, orange, then
+purple as the mini-turbo charges; release for a 0.5, 0.9 or 1.4 s boost).
+Boost pads boost; each coin held adds 1% top speed, up to 10. Grass slows,
+barriers bounce. Laps count through four quarter checkpoints in order. The
+round closes 25 s after the first person finishes (or at round.seconds);
+the results show, then the next circuit.
+
+## Building a track
+
+tracks: [{
+  name: "Harbour Loop",
+  laps: 3,
+  width: 14,                                 // asphalt, m (8 to 30)
+  points: [[0, 0], [90, 0], [150, 15], ...], // the closed centreline in driving order; a smooth curve runs through them
+  boosts: [[0.12, 0], [0.47, -0.4]],         // [lap fraction 0..1, lateral -1 (left) .. 1 (right)]
+  coins: [[0.04, 0.5], [0.046, 0.5]],        // same coordinates; each kart collects its own (at most 62)
+  verge: 4,                                  // optional grass before the barrier, m
+}]
+Rules of thumb: 500 to 900 m a lap at 14 m wide runs 25 to 40 s a lap; keep
+neighbouring points 20 m or more apart for smooth bends; a hairpin needs
+about 25 m of radius; put boosts on the exits of bends and coin rows on the
+racing line or slightly off it (a choice). Two to four laps a race.
+
+## Common changes
+
+### A new circuit
+Add a track to tracks. Circuits come one a round (the room draws one per round).
+
+### Tune the handling
+kart: { topSpeed: 30, turn: 2.6, grip: 10, driftGrip: 1.5 } (topSpeed 10-45,
+accel 8-80, turn 1-4, grip 3-20, driftGrip 0.5-6, grass 0.2-1, boostSpeed 1-1.8).
+
+### Round length and bots
+round: { seconds: 240 } (60 to 600). players.bots: 6 fills the grid up to 6
+with seat bots (0 turns them off). Bots drive the racing line, shaded by
+skill, never earn, and a win over a field of bots pays nothing extra.
+
+### Add an earn rule
+earn.rule("lap_leader", { when: "lap.completed", n: 2, pay: 3, oncePer: "run" });
+Events: player.finished (you finished the race), race.won (first, paid only
+with another person in the round), race.podium (top three, same),
+lap.completed, coin.collected, drift.boosted (a mini-turbo fired),
+drift.ultra (a full-charge one), kart.bumped (a hard wall hit),
+round.finished, run.started (unpaid), and anything you emit(). Each rule
+pays once per race per player, in coins; the room server is the referee.
+
+### Track something with a system
+system("clean_line", ({ on, emit }) => {
+  const scrapes = new Map<number, number>();
+  on("kart.bumped", (ids) => { for (const id of ids) scrapes.set(id, (scrapes.get(id) ?? 0) + 1); });
+  on("player.finished", (ids) => { const clean = ids.filter((id) => !scrapes.get(id)); if (clean.length) emit("race.clean", clean); });
+  on("run.started", (ids) => { for (const id of ids) scrapes.delete(id); });
+});
+Systems also have every, after, onTick, players(), random(), announce(text),
+upcoming(label, seconds) and end(). spawn and enemies are not part of this template.
+
+### The buy-in run (required)
+earn.stake({ min: 10, max: 100, multiple: 2 }); one top-level line. "stake" is reserved.
+
+### Losable gear (optional)
+store.sku("bumper_kit", { coins: 120, grants: { gear: "bumpers", loseBelow: 0.25 } });
+Owned in the profile, coins only; one level of its upgrade in every staked
+race; lost when that race makes less than loseBelow of its most earn.
+
+### Coins: earn and the store
+store.sku("turbo", { coins: 40 });                               // one level of the "turbo" upgrade for the race
+store.sku("skin_flame", { coins: 300, grants: { cosmetic: 1 } }); // a paint job, owned for good
+Keep the five SKUs the client is wired to (turbo, tuned_engine, soft_tyres,
+skin_flame, skin_chrome) at their prices, with the paints' grants (flame 1,
+chrome 2). PvP pots are not part of this template.
+
+### Change the karts (the asset library)
+players: { prefab: "style.lowpoly.race_car", ... } (any vehicle: kart_a..e,
+race_car, race_car_future, buggy-like speeder_a..c). Seat bots drive
+kart_b..e; the pixel style draws its own kart sprites.
+
+## Test
+
+engine.test.run({ ticks: 60 * 240, bots: 4, assert: [...] }) runs races on
+the server sim with 4 playtest drivers plus seat bots and reports rounds
+(wave), runs.won (races every playtest driver finished), scorers (drivers
+that finished at least once), deaths (hard wall hits), earned by rule,
+softlock and ms per tick.
+
+## Worked example: src/game.ts
+
+The whole game as the template ships it. Every change starts from this file.
+
+```ts
+/**
+ * TORQUEBAY: the racer template (play style "racer").
+ * Up to eight karts race laps around harbour circuits: hold the throttle,
+ * drift through the bends to charge a mini-turbo (release for the boost),
+ * hit the boost pads, collect coins (every coin you hold adds 1% top speed,
+ * up to ten) and keep off the grass. A round is one race; the next round runs
+ * another circuit. Seat bots fill the grid so a race always has a field.
+ *
+ * This file is the whole game as the model writes it: declarations only,
+ * against the typed API in @netforge/engine. Everything else (the kart
+ * physics, netcode, renderer, track streaming, bots, referee) is the
+ * template's machinery.
+ *
+ * Track coordinates are metres on the ground (x right, z down the screen's
+ * map). points is the closed centreline in driving order; boosts and coins
+ * are [lap fraction 0..1, lateral -1..1 of the half width].
+ */
+import { earn, game, store, system, upgrade } from "@netforge/engine";
+
+/** Coins in a row: n coins from lap fraction f, `gap` of a lap apart, at one lateral. */
+const coinRow = (f: number, lateral: number, n: number, gap = 0.006): [number, number][] => Array.from({ length: n }, (_, i) => [f + i * gap, lateral]);
+
+export default game({
+  template: "racer",
+  style: "lowpoly",
+  tickRate: 60,
+  places: { harbour: { chunks: "places/harbour", spawn: [0, 0, 0] } },
+  players: { prefab: "style.lowpoly.kart_a", max: 8, bots: 6 },
+  round: { seconds: 240 },
+  tracks: [
+    {
+      name: "Harbour Loop",
+      laps: 3,
+      width: 14,
+      points: [[0, 0], [90, 0], [150, 15], [175, 65], [150, 120], [90, 135], [50, 175], [-20, 190], [-85, 160], [-110, 100], [-90, 35]],
+      boosts: [[0.12, 0], [0.47, -0.4], [0.78, 0.4]],
+      coins: [...coinRow(0.04, 0.5, 5), ...coinRow(0.3, -0.5, 5), ...coinRow(0.6, 0, 5), ...coinRow(0.88, -0.3, 5)],
+    },
+    {
+      name: "Crane Yard",
+      laps: 3,
+      width: 13,
+      points: [[0, 0], [70, -10], [120, 10], [130, 60], [95, 85], [60, 70], [30, 95], [45, 140], [5, 175], [-55, 160], [-75, 105], [-50, 60], [-75, 20]],
+      boosts: [[0.08, 0], [0.38, 0.3], [0.7, -0.3]],
+      coins: [...coinRow(0.15, 0, 5), ...coinRow(0.45, 0.4, 5), ...coinRow(0.62, -0.4, 5), ...coinRow(0.85, 0, 5)],
+    },
+    {
+      name: "Lighthouse Run",
+      laps: 2,
+      width: 15,
+      points: [[0, 0], [120, -15], [200, 10], [235, 70], [210, 140], [140, 170], [80, 150], [40, 190], [-30, 210], [-95, 175], [-115, 105], [-80, 40]],
+      boosts: [[0.05, 0], [0.25, 0.35], [0.5, -0.35], [0.8, 0]],
+      coins: [...coinRow(0.1, -0.4, 6), ...coinRow(0.35, 0.4, 6), ...coinRow(0.66, 0, 6), ...coinRow(0.9, 0.3, 6)],
+    },
+  ],
+});
+
+// Round upgrades sold in the store (one level each, for the race). Racer upgrades raise speed
+// (top speed), haste (drift charge), might (boost length), armor (grass and wall losses) or magnet (coin reach).
+upgrade("turbo", { stat: "might", step: 0.25, maxLevel: 1 });
+upgrade("tuned_engine", { stat: "speed", step: 0.05, maxLevel: 1 });
+upgrade("soft_tyres", { stat: "haste", step: 0.3, maxLevel: 1 });
+upgrade("bumpers", { stat: "armor", step: 0.3, maxLevel: 1 });
+
+// A clean race: finish without scraping a wall hard.
+system("clean_line", ({ on, emit }) => {
+  const scrapes = new Map<number, number>();
+  on("kart.bumped", (ids) => {
+    for (const id of ids) scrapes.set(id, (scrapes.get(id) ?? 0) + 1);
+  });
+  on("player.finished", (ids) => {
+    const clean = ids.filter((id) => (scrapes.get(id) ?? 0) === 0);
+    if (clean.length > 0) emit("race.clean", clean);
+  });
+  on("run.started", (ids) => {
+    for (const id of ids) scrapes.delete(id);
+  });
+});
+
+// Earn (mandatory). Pays the game's coins (1 coin = 1 token), once per race each.
+// Seat bots never earn, and winning a field of bots pays nothing extra. Values are PLACEHOLDER.
+earn.rule("hot_lap", { when: "drift.boosted", n: 3, pay: 4, oncePer: "run" });
+earn.rule("chequered", { when: "player.finished", n: 1, pay: 10, oncePer: "run" });
+earn.rule("clean_line", { when: "race.clean", n: 1, pay: 12, oncePer: "run" });
+earn.rule("pole_to_flag", { when: "race.won", n: 1, pay: 25, oncePer: "run" });
+// Buy-in run (the mandatory sink loop). PLACEHOLDER.
+earn.stake({ min: 10, max: 100, multiple: 2 });
+
+// Store (the Kit), priced in coins: round upgrades and two paint jobs owned for good.
+store.sku("turbo", { coins: 40 });
+store.sku("tuned_engine", { coins: 40 });
+store.sku("soft_tyres", { coins: 60 });
+store.sku("skin_flame", { coins: 300, grants: { cosmetic: 1 } });
+store.sku("skin_chrome", { coins: 500, grants: { cosmetic: 2 } });
+// Losable gear: bumpers in every staked race, lost when that race makes less than loseBelow of its most earn. PLACEHOLDER.
+store.sku("bumper_kit", { coins: 120, grants: { gear: "bumpers", loseBelow: 0.25 } });
+```
+
+## Validate and playtest
+
+- Validate: the MCP tool `netforge_validate_game` builds `src/game.ts` and returns one actionable line per problem (an unknown asset id, a missing earn.stake, a bad id). The same checks throw `GameDefinitionError` when the module is imported.
+- Playtest: the MCP tool `netforge_run_playtest`, or in code `engine.test.run({ ticks: 60 * 240, bots: 4, assert: [] })`. It reports rounds (wave), runs.won (races every playtest driver finished), scorers, deaths (hard wall hits), earned by rule, softlock and ms per tick.
+- Template tests: test/harness.test.ts, test/host.test.ts, test/race.test.ts, test/store.test.ts, run with `npx vitest run` in this package.
+- Play locally: put `src/game.ts` and a `netnet.json` of `{"template":"racer"}` in a folder, install `@netforge/kit-play` and `@netforge/engine`, and run `npx kit-play` (or the MCP tool `netforge_play_locally`). It opens http://127.0.0.1:4663 with play money.
+- Docs: https://forge.netnet.capital/docs/templates/racer

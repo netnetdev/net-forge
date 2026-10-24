@@ -1,0 +1,321 @@
+# Net Forge platformer template (SKYLEDGE)
+
+> A side-view race to the flag for up to 8 players over cliffside courses,
+> with seat bots filling empty places. A round is one course; the next round
+> runs the next course. You change the game by editing src/game.ts only. The
+> template already has the run and jump motor (coyote time, jump buffering,
+> variable jump height, air dash, springs, one-way ledges, moving platforms),
+> checkpoints and falls, per-player coins, the race clock and places, bots
+> that run planned routes, netcode with client prediction, rendering in every
+> art style, keyboard, gamepad and touch controls, earn and the store. Do not
+> write renderers, netcode, physics or bot AI.
+
+## Files
+
+- src/game.ts: THE GAME. Declarations against @netforge/engine:
+  game(), upgrade(), system(), earn.rule(), earn.stake(), store.sku().
+- src/names.json: the title and every label players read (upgrades, earn
+  rules, store items).
+- Everything else is template machinery.
+
+## Rules the build enforces
+
+- game({ template: "platformer", style: "lowpoly", levels: [...] }) with 1 to 8 levels.
+- No weapon(), director(), keeper() or enemy prefabs: the challenge is the course.
+- Every course must be finishable: the gate runs a route planner from the start
+  to the flag on every level, and a level with no route fails the build.
+- Asset ids look like "style.lowpoly.rogue", never URLs or paths, and must be in the asset library.
+- game({ style }) is the art style the creator picked: lowpoly, toon, ps1, pixel, voxel or handdrawn. Keep it.
+- Ids are lower_snake_case. Every game declares at least one earn.rule and one earn.stake (the buy-in run).
+- Upgrades raise one of: speed (run speed), amount (extra air jumps),
+  magnet (coin reach, m), maxHealth (shield hits per life), haste (dash cooldown).
+- 4 players plus seat bots must all reach the flag, and an earn rule must
+  fire, in a 4-minute playtest.
+
+## Units
+
+Seconds, metres, metres per second. Side view: x runs right from the start
+to the flag, y runs up. Tick rate 60 Hz. A climber's body is 0.68 m wide and
+1.4 m tall; feet are at its y.
+
+## The loop
+
+Everyone starts at the level's start. A 3 s countdown, then the race: run
+(A/D, arrows, stick), jump (Space/W/Up, A on a pad; hold for a full jump, tap
+for a hop), dash (Shift, X on a pad; once in the air, refilled on landing),
+Down + Jump drops through a ledge. Thorns and the drop send you back to the
+last checkpoint you touched. Touch the flag to finish; your place is the
+order of finishing. The round closes a few seconds after every person has
+finished, or at round.seconds. The results show, then the next course.
+
+Numbers that make the default feel: run 7.5 m/s, a full jump 3.3 m high in
+0.36 s, a tap jump about 1.4 m, coyote 0.1 s, jump buffer 0.13 s, fall
+gravity x1.75, dash 16 m/s for 0.16 s. A full running jump clears a gap of
+about 6 m; with the dash about 8.5 m.
+
+## Building a course
+
+Coordinates are metres. Helpers you can write in game.ts:
+const ground = (x0, x1, y = 0) => [x0, y - 4, x1 - x0, 4];   // ground from x0 to x1, top at y
+levels: [{
+  name: "Mossy Steps",
+  start: [0, 0],                 // feet of every climber at the start
+  flag: [128, 4.5],              // the flag's foot: stand it on a block top
+  blocks: [ground(-8, 24), [14, 0, 3, 1.2], ...],   // [x, y, width, height] from the bottom-left corner
+  ledges: [[40, 2.6, 4]],        // [x, top y, width]: one-way, jump up through, Down + Jump drops
+  hazards: [[35, 0, 2, 0.5]],    // [x, y, width, height]: thorns
+  springs: [[59, 0, 21]],        // [x, y, launch speed m/s]: 21 is about 4.5 m up
+  movers: [{ at: [81, 0, 3], to: [5, 0], seconds: 4 }],   // a 3 m platform at x 81, swinging 5 m right and back every 4 s
+  coins: [[4, 1], [5.2, 1]],     // centres; each climber collects their own (at most 62)
+  checkpoints: [[31, 0], [92, 0]], // feet, in course order
+}]
+Rules of thumb: steps up of 1 to 2.5 m, gaps of 2 to 5 m (6 with a running
+jump, 8 with the dash), a checkpoint every 30 to 50 m, coins along the line a
+good run takes and a few on a harder high road. A course of 120 to 180 m runs
+in 16 to 25 s for a good climber. killY (optional) is the fall line; default
+8 m under the lowest block.
+
+## Common changes
+
+### A new course
+Add a level object to levels. Courses rotate one per round in order.
+
+### Tune the feel
+motor: { runSpeed: 8, jumpHeight: 3.6, airJumps: 1 } (runSpeed 3-14, jumpHeight 1-8,
+timeToApex 0.2-0.7, fallGravity 1-3, jumpCut 0.2-1, coyoteSeconds and
+bufferSeconds 0-0.25, airJumps 0-2, dashSpeed 6-30). Change a few at a
+time; the planner re-checks every course with the new numbers.
+
+### Round length and bots
+round: { seconds: 180 } (60 to 600). players.bots: 3 fills a room up to 3
+players with seat bots (0 turns them off). Bots run planned routes and start
+a little after the signal (looser bots later), never earn, and a win over a
+field of bots pays nothing extra.
+
+### Add an earn rule
+earn.rule("speedy", { when: "player.finished", n: 1, pay: 6, oncePer: "run" });
+Events: player.finished (you reached the flag), race.won (first to the flag,
+paid only with another person in the round), race.podium (top three, same),
+coin.collected (credits the collector), checkpoint.reached, player.fell,
+spring.bounced, round.finished (everyone present), run.started (unpaid: a
+player's earning run started over), and anything you emit(). A run is a
+round; each rule pays once per round per player, in coins; the room server
+is the referee; bots never earn.
+
+### Track something with a system
+system("clean_climb", ({ on, emit }) => {
+  const falls = new Map<number, number>();
+  on("player.fell", (ids) => { for (const id of ids) falls.set(id, (falls.get(id) ?? 0) + 1); });
+  on("player.finished", (ids) => { const clean = ids.filter((id) => !falls.get(id)); if (clean.length) emit("climb.clean", clean); });
+  on("run.started", (ids) => { for (const id of ids) falls.delete(id); });
+});
+Systems also have every(seconds, fn), after, onTick, players(), random(),
+announce(text), upcoming(label, seconds) and end() (closes the round now).
+spawn and enemies are not part of this template.
+
+### The buy-in run (required)
+earn.stake({ min: 10, max: 100, multiple: 2 });
+Every game declares one, on one top-level line. A player stakes coins at the
+start of a run; a staked run pays its normal earn plus a share of
+stake x multiple (the share is the part of the run's most earn the player
+makes). What it does not win back stays in the reward pool. multiple is 1
+to 2. "stake" is reserved: never a SKU id.
+
+### Losable gear (optional)
+store.sku("shield_charm", { coins: 120, grants: { gear: "shield", loseBelow: 0.25 } });
+Owned in the player's profile, coins only. It brings one level of its upgrade
+into every staked run and is lost when that run makes less than loseBelow of
+its most earn.
+
+### Coins: earn and the store
+Every game has coins: 1 coin = 1 of the game's own token, shown under the
+token's own name, symbol and logo. The default coin model sells round
+consumables and looks, never permanent stat power:
+store.sku("feather", { coins: 40 });                               // one level of the "feather" upgrade for the round
+store.sku("skin_sunset", { coins: 300, grants: { cosmetic: 1 } }); // an outfit, owned for good
+Keep the five SKUs the client is wired to (feather, sprint, shield,
+skin_sunset, skin_frost) at their prices, with the outfits' grants (sunset 1,
+frost 2). "Cosmetics only": economy({ store: "cosmetics" }). PvP pots are not
+part of this template.
+
+### Change who the climbers are (the asset library)
+players: { prefab: "style.lowpoly.astronaut", ... } (the template's own is style.lowpoly.rogue) (any character; it plays
+run, idle and jump). Coins draw style.lowpoly.coin, seat bots
+style.lowpoly.mini_female_c, and the cliffs carry trees, rocks and bushes.
+
+## Test
+
+engine.test.run({ ticks: 60 * 240, bots: 4, assert: [...] }) runs the race
+on the server sim with 4 playtest climbers plus seat bots and reports rounds
+(wave), runs.won (rounds every playtest climber finished), scorers (climbers
+that finished at least once), deaths (falls), earned by rule, softlock, ms per
+tick, and fun.routes (the planner's route per course).
+
+## Worked example: src/game.ts
+
+The whole game as the template ships it. Every change starts from this file.
+
+```ts
+/**
+ * SKYLEDGE: the platformer template (play style
+ * "platformer"). Up to eight climbers race along cliffside courses to the
+ * flag: run, jump (hold for height, tap for a hop), dash across gaps, ride
+ * moving platforms, bounce off springs and stay off the thorns. Coins hang
+ * along every route; each climber collects their own. A round is one
+ * course; the next round runs the next course. Seat bots fill empty places
+ * so a round always has a race.
+ *
+ * This file is the whole game as the model writes it: declarations only,
+ * against the typed API in @netforge/engine. Everything else (the
+ * motor, netcode, renderer, bots, route planner, referee) is the template's
+ * machinery.
+ *
+ * Course coordinates are metres, side view: x runs right from the start to
+ * the flag, y runs up. blocks are [x, y, width, height] from the bottom-left
+ * corner; ledges are [x, y, width] one-way platforms; hazards are
+ * [x, y, width, height]; springs are [x, y, power]; coins and checkpoints
+ * are [x, y].
+ */
+import { earn, game, store, system, upgrade } from "@netforge/engine";
+
+/** Ground from x0 to x1, its top at y (4 m deep). */
+const ground = (x0: number, x1: number, y = 0): [number, number, number, number] => [x0, y - 4, x1 - x0, 4];
+/** A row of n coins from x, `gap` metres apart, at height y. */
+const coins = (x: number, y: number, n: number, gap = 1.2): [number, number][] => Array.from({ length: n }, (_, i) => [x + i * gap, y]);
+
+export default game({
+  template: "platformer",
+  style: "lowpoly",
+  tickRate: 60,
+  places: { cliffs: { chunks: "places/cliffs", spawn: [0, 0, 0] } },
+  players: { prefab: "style.lowpoly.rogue", max: 8, bots: 3 },
+  // A course has three minutes; the round closes a few seconds after every person has finished.
+  round: { seconds: 180 },
+  levels: [
+    {
+      name: "Mossy Steps",
+      start: [0, 0],
+      flag: [128, 4.5],
+      blocks: [
+        ground(-8, 24),
+        [14, 0, 3, 1.2],
+        [17, 0, 3, 2.4],
+        ground(28, 50),
+        ground(55, 80),
+        [62, 5, 7, 0.8],
+        ground(90, 100),
+        [100, -4, 4, 5.5],
+        [104, -4, 4, 7],
+        [108, -4, 30, 8.5],
+      ],
+      ledges: [[40, 2.6, 4]],
+      hazards: [[35, 0, 2, 0.5], [72, 0, 2, 0.5]],
+      springs: [[59, 0, 21]],
+      movers: [{ at: [81, 0, 3], to: [5, 0], seconds: 4 }],
+      coins: [...coins(4, 1, 5), ...coins(14.8, 2.4, 1), ...coins(18, 3.6, 2), ...coins(41, 3.6, 3), ...coins(63, 6.4, 5), ...coins(84, 1.4, 3), ...coins(112, 5.4, 4)],
+      checkpoints: [[31, 0], [92, 0]],
+    },
+    {
+      name: "Windmill Gap",
+      start: [0, 0],
+      flag: [150, 6],
+      blocks: [
+        ground(-8, 18),
+        [12, 0, 6, 2],
+        ground(24, 34, 2),
+        [38, -2, 6, 4],
+        ground(52, 70, 1),
+        [58, 1, 2, 2.2],
+        ground(84, 96, 3),
+        [96, -1, 8, 4],
+        ground(118, 160, 6),
+        [126, 6, 3, 2],
+      ],
+      ledges: [[46, 3.6, 3], [74, 3.4, 3], [104, 4.8, 3], [110, 6.2, 3]],
+      hazards: [[64, 1, 3, 0.5], [88, 3, 2, 0.5], [136, 6, 2, 0.5]],
+      springs: [],
+      movers: [
+        { at: [74, 1, 3], to: [0, 4], seconds: 3.5 },
+        { at: [112, 2, 3], to: [0, 3], seconds: 3, phase: 0.5 },
+      ],
+      coins: [...coins(13, 3, 4), ...coins(26, 3.2, 5), ...coins(47, 4.8, 2), ...coins(58.3, 4, 1), ...coins(85, 4.4, 3), ...coins(105, 6, 2), ...coins(130, 7.4, 6)],
+      checkpoints: [[54, 1], [120, 6]],
+    },
+    {
+      name: "Summit Run",
+      start: [0, 0],
+      flag: [168, 14],
+      blocks: [
+        ground(-8, 20),
+        [20, -4, 6, 5],
+        [30, -4, 6, 7],
+        ground(42, 60, 3),
+        [48, 3, 3, 1],
+        ground(66, 82, 5),
+        [74, 5, 2, 3],
+        [88, 4, 6, 1],
+        ground(98, 120, 8),
+        [124, 9, 6, 1],
+        [134, 10, 6, 1],
+        ground(146, 176, 14),
+      ],
+      ledges: [[60, 6.5, 4], [113, 11, 4]],
+      hazards: [[54, 3, 3, 0.5], [102, 8, 2, 0.5], [110, 8, 2, 0.5], [156, 14, 2, 0.5]],
+      springs: [[16, 0, 22], [80, 5, 22], [118, 8, 21]],
+      movers: [{ at: [138, 11, 3], to: [5, 2], seconds: 3.2 }],
+      coins: [...coins(8, 1.2, 4), ...coins(16, 6, 3), ...coins(43, 4.4, 4), ...coins(61, 8, 3), ...coins(89, 6.2, 4), ...coins(125, 11, 3), ...coins(150, 15.4, 5)],
+      checkpoints: [[44, 3], [100, 8], [148, 14]],
+    },
+  ],
+});
+
+// Run upgrades, sold in the store for the rest of the round (one level each).
+// Platformer upgrades raise speed (run speed), amount (extra air jumps), magnet (coin reach),
+// maxHealth (shield hits per life) or haste (dash cooldown).
+upgrade("feather", { stat: "amount", step: 1, maxLevel: 1 });
+upgrade("sprint", { stat: "speed", step: 0.1, maxLevel: 1 });
+upgrade("shield", { stat: "maxHealth", step: 1, maxLevel: 1 });
+
+// A clean climb: reach the flag without a fall.
+system("clean_climb", ({ on, emit }) => {
+  const falls = new Map<number, number>();
+  on("player.fell", (ids) => {
+    for (const id of ids) falls.set(id, (falls.get(id) ?? 0) + 1);
+  });
+  on("player.finished", (ids) => {
+    const clean = ids.filter((id) => (falls.get(id) ?? 0) === 0);
+    if (clean.length > 0) emit("climb.clean", clean);
+  });
+  // A player's earning run started over (signed in, or staked): their count does too.
+  on("run.started", (ids) => {
+    for (const id of ids) falls.delete(id);
+  });
+});
+
+// Earn (mandatory). Pays the game's coins (1 coin = 1 token), once per round each.
+// Seat bots never earn, and winning a field of bots pays nothing extra. Values are PLACEHOLDER.
+earn.rule("pocketful", { when: "coin.collected", n: 12, pay: 4, oncePer: "run" });
+earn.rule("summit", { when: "player.finished", n: 1, pay: 10, oncePer: "run" });
+earn.rule("clean_climb", { when: "climb.clean", n: 1, pay: 12, oncePer: "run" });
+earn.rule("first_flag", { when: "race.won", n: 1, pay: 25, oncePer: "run" });
+// Buy-in run (the mandatory sink loop): stake coins at run start to earn above free play.
+// A staked run also pays up to stake x multiple, by the share of this run's earn the player makes. PLACEHOLDER.
+earn.stake({ min: 10, max: 100, multiple: 2 });
+
+// Store (the Kit), priced in coins: three round upgrades and two cosmetic outfits owned for good.
+store.sku("feather", { coins: 40 });
+store.sku("sprint", { coins: 40 });
+store.sku("shield", { coins: 60 });
+store.sku("skin_sunset", { coins: 300, grants: { cosmetic: 1 } });
+store.sku("skin_frost", { coins: 500, grants: { cosmetic: 2 } });
+// Losable gear: one shield into every staked run, lost when that run makes less than loseBelow of its most earn. PLACEHOLDER.
+store.sku("shield_charm", { coins: 120, grants: { gear: "shield", loseBelow: 0.25 } });
+```
+
+## Validate and playtest
+
+- Validate: the MCP tool `netforge_validate_game` builds `src/game.ts` and returns one actionable line per problem (an unknown asset id, a missing earn.stake, a bad id). The same checks throw `GameDefinitionError` when the module is imported.
+- Playtest: the MCP tool `netforge_run_playtest`, or in code `engine.test.run({ ticks: 60 * 240, bots: 4, assert: [] })`. It reports rounds (wave), runs.won (rounds every playtest climber finished), scorers, deaths (falls), earned by rule, softlock, ms per tick and fun.routes (the planner's route per course).
+- Template tests: test/harness.test.ts, test/host.test.ts, test/race.test.ts, test/store.test.ts, run with `npx vitest run` in this package.
+- Play locally: put `src/game.ts` and a `netnet.json` of `{"template":"platformer"}` in a folder, install `@netforge/kit-play` and `@netforge/engine`, and run `npx kit-play` (or the MCP tool `netforge_play_locally`). It opens http://127.0.0.1:4663 with play money.
+- Docs: https://forge.netnet.capital/docs/templates/platformer
