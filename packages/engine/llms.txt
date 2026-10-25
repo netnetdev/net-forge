@@ -36,7 +36,7 @@ tiers and dynamic resolution), so turning things on never breaks 60 fps.
 
 ### How a prefab dies and takes hits (prefab({ feel }))
 
-prefab("brute", { model: "style.lowpoly.brute", health: 160, speed: 2.2, radius: 0.8, mass: 6,
+prefab("brute", { model: "style.lowpoly.orc_brute", health: 160, speed: 2.2, radius: 0.8, mass: 6,
   feel: { particles: "burst", decal: "scorch", sound: "boom", shake: 0.5, hitStop: 0.06, color: "#ff4d5e" } });
 
 ### How a weapon's impacts look (weapon({ feel }))
