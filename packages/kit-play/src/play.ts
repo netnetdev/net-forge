@@ -122,17 +122,20 @@ export function lanLinks(host: string, port: number, interfaces: ReturnType<type
   return [...new Set(addrs)].map((a) => playLink(`http://${a}:${port}`, libraryUrl));
 }
 
-/** Builds the template client with the game module and labels swapped in. */
-export async function buildClient(g: GameFolder, tplDir: string, outDir: string, cacheDir: string): Promise<void> {
-  const vite = await import("vite");
+/**
+ * The Vite plugin that builds a template client with a game folder's
+ * src/game.ts in place of the template's (held to ALLOWED_IMPORT) and its
+ * names.json in place of the template's labels.
+ */
+export function gameClientPlugin(g: GameFolder, tplDir: string, normalizePath: (p: string) => string): import("vite").Plugin {
   // Vite hands plugins real, forward-slash paths: compare in that form (Windows, symlinked folders).
-  const norm = (p: string) => vite.normalizePath(realpathSync(p));
+  const norm = (p: string) => normalizePath(realpathSync(p));
   const manifest = norm(join(tplDir, "src", "manifest.ts"));
   const clientDir = norm(join(tplDir, "client"));
   const templateNames = norm(join(tplDir, "client", "names.ts"));
   const gameFile = norm(g.gameFile);
   const NAMES_ID = "\0kit-play-names.js";
-  const plugin: import("vite").Plugin = {
+  return {
     name: "kit-play-game",
     enforce: "pre",
     async resolveId(source, importer) {
@@ -149,6 +152,13 @@ export async function buildClient(g: GameFolder, tplDir: string, outDir: string,
       return id === NAMES_ID && g.names ? namesModule(g.names, templateNames) : null;
     },
   };
+}
+
+/** Builds the template client with the game module and labels swapped in. */
+export async function buildClient(g: GameFolder, tplDir: string, outDir: string, cacheDir: string): Promise<void> {
+  const vite = await import("vite");
+  const clientDir = vite.normalizePath(realpathSync(join(tplDir, "client")));
+  const plugin = gameClientPlugin(g, tplDir, vite.normalizePath);
   await vite.build({
     configFile: false,
     root: clientDir,

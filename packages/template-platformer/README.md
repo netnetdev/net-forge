@@ -65,6 +65,10 @@ Agents can also drive this template through the Net Forge MCP server: run `npx -
 
 To set up a coding agent in a game project, run `npx netforge setup agent`. It writes AGENTS.md, CLAUDE.md, Cursor rules and `.mcp.json` into the project. In Claude Code you can also add the server directly with `claude mcp add netforge -- npx -y @netforge/mcp`.
 
+## Play the demo
+
+Skyledge, this template as a free single-player browser demo: https://netnetcap.itch.io/platformer-demo
+
 ## Docs
 
 - https://forge.netnet.capital/docs/templates/platformer

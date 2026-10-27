@@ -132,6 +132,8 @@ export const KART_COIN_CAP = 10;
 export const KART_COIN_SPEED = 0.01;
 /** Kart body radius for bumps, m. */
 export const KART_RADIUS = 0.9;
+/** Karts slower than this (parked on the grid, reading the controls, stuck nose-in) are passed through, never bumped. m/s. */
+export const KART_BUMP_SPEED = 3;
 
 export interface Kart {
   readonly id: number;
@@ -259,11 +261,15 @@ export function buildKartTrack(def: KartTrackDef): KartTrack {
     const p = at(f, l);
     return [p.x, p.z] as const;
   });
-  // A staggered grid behind the line: two columns, 4 m apart in each column.
+  // A staggered grid behind the line: two columns, 4 m apart in each column. Each slot faces
+  // down its own lane past the line (the first straight), not along the bend the grid sits on,
+  // so a kart that just holds the throttle off the line stays on the road.
   const grid = Array.from({ length: 12 }, (_, slot) => {
     const row = Math.floor(slot / 2);
-    const p = at(-(4 + row * 4) / len, slot % 2 === 0 ? -0.35 : 0.35);
-    return [p.x, p.z, Math.atan2(p.tz, p.tx)] as const;
+    const lateral = slot % 2 === 0 ? -0.35 : 0.35;
+    const p = at(-(4 + row * 4) / len, lateral);
+    const aim = at(20 / len, lateral);
+    return [p.x, p.z, Math.atan2(aim.z - p.z, aim.x - p.x)] as const;
   });
   return { def, x, z, tx, tz, dist, length: len, count, half, wall, pads, coinAt, grid };
 }
@@ -536,12 +542,18 @@ function driveKart(w: KartWorld, k: Kart, cmd: InputCommand | null, next: number
     k.x -= nx * push;
     k.z -= nz * push;
     const into = k.vx * nx + k.vz * nz;
-    if (into > 0) {
-      // Reflect the part going into the wall, damped; scrape a little speed.
+    if (into > 3) {
+      // A hit: reflect the part going into the wall, damped; scrape a little speed.
       const loss = 0.82 + 0.1 * armor;
       k.vx = (k.vx - nx * into * 1.4) * loss;
       k.vz = (k.vz - nz * into * 1.4) * loss;
-      if (into > 3) events.push({ type: "wall", kart: k.id, speed: into });
+      events.push({ type: "wall", kart: k.id, speed: into });
+      k.flags |= KartFlag.Bumped;
+    } else if (into > 0) {
+      // A shallow scrape slides along the wall: only the part going into it is lost, so a kart
+      // throttling at a slight angle to the wall keeps rolling instead of grinding to a crawl.
+      k.vx -= nx * into;
+      k.vz -= nz * into;
       k.flags |= KartFlag.Bumped;
     }
   }
@@ -605,9 +617,13 @@ function bumpKarts(w: KartWorld, karts: Kart[], events: KartEvent[]): void {
   for (let i = 0; i < karts.length; i++) {
     const a = karts[i] as Kart;
     if (a.flags & KartFlag.Frozen) continue;
+    const aMoving = Math.hypot(a.vx, a.vz) >= KART_BUMP_SPEED;
     for (let j = i + 1; j < karts.length; j++) {
       const b = karts[j] as Kart;
       if (b.flags & KartFlag.Frozen) continue;
+      // A parked kart is passed through: the field pulling away from the grid never launches
+      // someone still sitting on it (or stuck nose-in at a wall) across the grass.
+      if (!aMoving || Math.hypot(b.vx, b.vz) < KART_BUMP_SPEED) continue;
       const dx = b.x - a.x;
       const dz = b.z - a.z;
       const d2 = dx * dx + dz * dz;

@@ -19,6 +19,12 @@
 - `--no-open`: print the link instead of opening a browser.
 - `--library-url <url>`: load the asset library from an http(s) mirror instead of the installed @netforge/asset-library-files.
 
+## Solo demo for the web
+
+- `npx kit-play build-demo --out <dir>` in a game folder, or `--template <id> --out <dir>` for a template as it ships: a static folder (index.html at the root, relative paths) that plays alone in the browser with play money. The room host runs in a Web Worker; no server, no wallet, no requests outside the folder.
+- `--library <dir>`: the built asset library (default ASSET_LIBRARY_DIR, else the installed @netforge/asset-library-files). Only the files the game uses are copied.
+- Zip the folder's contents for an itch.io HTML5 upload. `buildDemo({ template, dir, out, library, log })` is the same from code.
+
 ## Programmatic API
 
 - `play({ dir, port, host, open, players, libraryUrl, log })` resolves to `{ url, close() }`.

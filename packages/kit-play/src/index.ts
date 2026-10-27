@@ -1,4 +1,5 @@
-export { COMMANDS_HELP, HELP, runKitPlayCli, runPlayCli, runTestCli, TEST_HELP, type PlayCliIo } from "./cli.js";
+export { COMMANDS_HELP, DEMO_HELP, HELP, runDemoCli, runKitPlayCli, runPlayCli, runTestCli, TEST_HELP, type PlayCliIo } from "./cli.js";
+export { buildDemo, SOLO_ENDPOINT, type DemoOptions, type DemoReport } from "./demo.js";
 export { check, summary, type CheckOptions, type CheckReport, type CheckResult } from "./check.js";
 export { ALLOWED_IMPORT, play, PlayError, readGameFolder, type GameFolder, type PlayOptions, type Playing } from "./play.js";
 export { TEMPLATES, templateFor, type TemplateEntry, type TemplateId } from "./templates.js";

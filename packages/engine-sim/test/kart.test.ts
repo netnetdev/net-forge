@@ -125,18 +125,68 @@ describe("kart physics", () => {
     expect(wall).toBe(true);
   });
 
-  it("karts bump apart on the authority and pass through on a predicting client", () => {
+  it("moving karts bump apart on the authority and pass through on a predicting client", () => {
     for (const authority of [true, false]) {
       const w = world(authority);
       const a = addKart(w, 1, { slot: 0 });
       const b = addKart(w, 2, { slot: 1 });
       b.x = a.x + 0.5;
       b.z = a.z;
+      a.vx = b.vx = 8;
       kartStep(w, new Map());
       const d = Math.hypot(b.x - a.x, b.z - a.z);
       if (authority) expect(d).toBeGreaterThanOrEqual(1.79);
       else expect(d).toBeLessThan(1);
     }
+  });
+
+  it("every grid slot faces down the first straight: throttle alone off the line stays on the asphalt", () => {
+    for (let slot = 0; slot < 12; slot++) {
+      const w = world();
+      const k = addKart(w, 1, { slot });
+      for (let i = 0; i < 60 * 3; i++) {
+        kartStep(w, new Map([[1, cmd(0, 1)]]));
+        expect(Math.abs(lateralOffset(w.track, k.seg, k.x, k.z)), `slot ${slot} tick ${i}`).toBeLessThanOrEqual(w.track.half);
+      }
+      expect(w.track.dist[k.seg] ?? 0).toBeGreaterThan(15);
+    }
+  });
+
+  it("a parked kart is passed through, never launched: the field leaving the grid does not shove someone still on it", () => {
+    const w = world();
+    const parked = addKart(w, 1, { slot: 0 });
+    const x0 = parked.x;
+    const z0 = parked.z;
+    for (let slot = 1; slot <= 5; slot++) addKart(w, 10 + slot, { slot, bot: true });
+    for (let i = 0; i < 60 * 4; i++) {
+      const inputs = new Map<number, InputCommand>();
+      for (const id of w.karts.keys()) if (id !== 1) inputs.set(id, driver(w, id));
+      kartStep(w, inputs);
+    }
+    expect(Math.hypot(parked.vx, parked.vz)).toBe(0);
+    expect(Math.hypot(parked.x - x0, parked.z - z0)).toBeLessThan(0.01);
+    // The bots went past it and on round the track.
+    for (const [id, k] of w.karts) if (id !== 1) expect(w.track.dist[k.seg] ?? 0).toBeGreaterThan(40);
+  });
+
+  it("a shallow scrape slides along the wall instead of grinding to a crawl; a square hit still holds the kart", () => {
+    const w = world();
+    const k = addKart(w, 1, { slot: 0 });
+    // On the first straight (along +x, the right wall at z = wall), just inside the wall and facing a little into it.
+    k.x = 20;
+    k.z = w.track.wall - 0.6;
+    k.yaw = 0.12;
+    k.seg = nearestSample(w.track, k.x, k.z);
+    for (let i = 0; i < 60 * 4; i++) {
+      kartStep(w, new Map([[1, cmd(0, 1)]]));
+      expect(Math.abs(lateralOffset(w.track, k.seg, k.x, k.z))).toBeLessThanOrEqual(w.track.wall + 0.01);
+    }
+    expect(Math.hypot(k.vx, k.vz)).toBeGreaterThan(8);
+    expect(k.x).toBeGreaterThan(50);
+    // Square on, the wall holds it.
+    k.yaw = Math.PI / 2;
+    for (let i = 0; i < 60 * 2; i++) kartStep(w, new Map([[1, cmd(0, 1)]]));
+    expect(Math.hypot(k.vx, k.vz)).toBeLessThan(3);
   });
 
   it("upgrades raise top speed", () => {

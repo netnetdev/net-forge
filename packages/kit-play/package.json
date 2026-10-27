@@ -34,6 +34,9 @@
   },
   "files": [
     "dist",
+    "solo",
+    "src/host/core.ts",
+    "src/host/profile.ts",
     "README.md",
     "LICENSE",
     "NOTICE",
@@ -57,7 +60,7 @@
   },
   "scripts": {
     "build": "node ../engine/scripts/fresh-dist.mjs && tsc -p tsconfig.json",
-    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.test.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.test.json && tsc -p tsconfig.solo.json",
     "test": "vitest run",
     "prepack": "pnpm build",
     "prepublishOnly": "node ../engine/scripts/license-gate.mjs"

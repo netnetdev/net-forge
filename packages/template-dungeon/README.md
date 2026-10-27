@@ -75,6 +75,10 @@ The package is `@netforge/mcp` and its bin is `netforge-mcp`. Its tools are `net
 
 To set up a coding agent in a game project, run `npx netforge setup agent`. It writes AGENTS.md, CLAUDE.md, Cursor rules and `.mcp.json` into the project. In Claude Code you can also add the server directly with `claude mcp add netforge -- npx -y @netforge/mcp`.
 
+## Play the demo
+
+Cryptwick, this template as a free single-player browser demo: https://netnetcap.itch.io/dungeon-crawler-demo
+
 ## Docs
 
 - https://forge.netnet.capital/docs/templates/dungeon

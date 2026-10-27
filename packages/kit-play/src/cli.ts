@@ -4,13 +4,16 @@
 // kit-play check [dir] ...                          (test --json)
 // kit-play new [folder] [--template <id>] ...      (create-netforge)
 // kit-play templates [--json]
+// kit-play build-demo --template <id> --out <dir> [--library <dir>]   (or [dir] for a game folder)
 // `kit play` through @netforge/kit reaches runPlayCli directly.
 
 import { realpathSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { listTemplates, nodeIo, runCreate } from "create-netforge";
 import { check, summary } from "./check.js";
+import { buildDemo } from "./demo.js";
 import { play, PlayError } from "./play.js";
+import { templateFor } from "./templates.js";
 
 export const HELP = `kit play: run a Net Forge game on this computer with play money.
 
@@ -35,6 +38,7 @@ Usage:
   kit-play check [dir] [flags]      The same, with the report as JSON on stdout.
   kit-play new [folder] [flags]     Start a new game from a template (the same as npm create netforge).
   kit-play templates [--json]       List the templates.
+  kit-play build-demo [flags]       Build a solo demo that plays in the browser alone (static files, play money).
 
 kit-play [dir] without a command plays, as before.`;
 
@@ -48,6 +52,49 @@ Usage: kit-play test [dir] [flags]
   --json          Print the result as JSON on stdout.
 
 Exits 0 when the game compiles and every playtest check passes, 1 otherwise.`;
+
+export const DEMO_HELP = `kit-play build-demo: build a single-player demo that plays entirely in the browser.
+
+Usage: kit-play build-demo --template <id> --out <dir> [--library <dir>]
+       kit-play build-demo [dir] --out <dir>         (a game folder: netnet.json, src/game.ts)
+
+  --template <id>   The template to build (kit-play templates lists them).
+  --out <dir>       Where the static folder goes (index.html at its root). Emptied first.
+  --library <dir>   The built asset library (index.json and the style folders). Default:
+                    ASSET_LIBRARY_DIR, else the installed @netforge/asset-library-files.
+
+The room host runs in a Web Worker in the page: no server, no wallet, no network
+requests outside the folder's own files. Coins are play money. Upload the folder
+(zipped, index.html at the root) to any static host.`;
+
+export async function runDemoCli(argv: readonly string[], io: PlayCliIo): Promise<number> {
+  const { flags, positional } = split(argv, new Set(["help"]));
+  if (flags.has("help")) {
+    io.out(DEMO_HELP);
+    return 0;
+  }
+  const known = new Set(["help", "template", "out", "library"]);
+  try {
+    for (const k of flags.keys()) if (!known.has(k)) throw new PlayError(`unknown flag --${k} (kit-play build-demo --help lists the flags)`);
+    const out = flags.get("out");
+    if (typeof out !== "string" || out.length === 0) throw new PlayError("--out <dir> is required");
+    const t = flags.get("template");
+    if (t !== undefined && (typeof t !== "string" || !templateFor(t))) throw new PlayError(`--template must be a template id (kit-play templates lists them)`);
+    const lib = flags.get("library");
+    if (lib !== undefined && typeof lib !== "string") throw new PlayError("--library <dir> needs a folder");
+    await buildDemo({
+      template: typeof t === "string" ? (templateFor(t)?.id ?? null) : null,
+      dir: positional[0] ?? io.cwd,
+      out,
+      library: typeof lib === "string" ? lib : null,
+      log: io.out,
+    });
+    return 0;
+  } catch (e) {
+    io.err(e instanceof PlayError ? e.message : e instanceof Error ? (e.stack ?? e.message) : String(e));
+    return 1;
+  }
+}
 
 export interface PlayCliIo {
   out(s: string): void;
@@ -182,6 +229,8 @@ export async function runKitPlayCli(argv: readonly string[], io: PlayCliIo): Pro
     case "new":
     case "create":
       return runCreate(rest, { ...nodeIo("kit-play new"), out: io.out, err: io.err, cwd: io.cwd });
+    case "build-demo":
+      return runDemoCli(rest, io);
     case "templates":
       if (rest.includes("--help") || rest.includes("-h")) {
         io.out("kit-play templates [--json]: list the templates a new game can start from.");

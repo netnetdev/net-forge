@@ -57,6 +57,17 @@ Template ids for `netnet.json`: `survivor`, `arena`, `tower-defense`, `dungeon`,
 
 From code: `import { play } from "@netforge/kit-play"` takes `{ dir, port, host, open, players, libraryUrl, log }` and resolves to `{ url, close() }`. `readGameFolder(dir)` checks a folder without running it, and `TEMPLATES` lists the templates it can run.
 
+## A solo demo for the web
+
+`kit-play build-demo` builds a single-player copy that plays entirely in the browser: a static folder with `index.html` at its root, relative paths and no server. The same room host `kit play` runs in Node runs in a Web Worker in the page (or in the page itself when a worker cannot start), so the game and the client are the ones you play locally. Seat bots fill empty places in the templates that have them.
+
+```sh
+npx kit-play build-demo --out demo                      # the game in this folder
+npx kit-play build-demo --template arena --out demo     # a template as it ships
+```
+
+`--library <dir>` points at the built asset library (default: `ASSET_LIBRARY_DIR`, else the installed `@netforge/asset-library-files`); only the models and sounds the game uses are copied. Zip the folder's contents for an itch.io HTML5 upload, or put it on any static host. The page makes no request outside its own files, needs no SharedArrayBuffer, and works in a sandboxed iframe and from a subpath. Coins are play money, progress lasts for the visit, and the start screen links to Net Forge.
+
 ## What it does not do
 
 - No wallet, no chain, no real tokens. Coins are play money in the page.
