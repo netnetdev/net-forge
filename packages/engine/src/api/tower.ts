@@ -56,12 +56,23 @@ const towerLevelSchema = z
   })
   .strict();
 
+/** One upgrade branch: a named line of tiers a tower can be taken down. */
+const towerBranchSchema = z
+  .object({
+    /** The branch's name (shown on the upgrade panel). */
+    name: z.string().min(1).max(40),
+    /** The tiers, cheapest first; each one's cost and what it changes. */
+    tiers: z.array(towerLevelSchema).min(1).max(4),
+  })
+  .strict();
+
 /**
  * A tower. kind "bolt" hits one creep; "splash" hits every creep within
  * `radius` tiles of its target; "frost" hits and slows (`slow` 0..0.9 for
  * `slowSeconds`); "chain" jumps to `chains` creeps in a row, 30% weaker a
  * jump. Damage per hit, rate in shots a second, range and radius in tiles.
- * `levels` are the upgrades, each one's cost and what it changes.
+ * `levels` are a single upgrade line; `branches` offers 2-3 lines and the
+ * player commits to one (Kingdom Rush style). Give one or the other.
  */
 export const towerSchema = z
   .object({
@@ -76,9 +87,14 @@ export const towerSchema = z
     slowSeconds: z.number().min(0.2).max(10).default(1.5),
     chains: z.number().int().min(1).max(8).default(3),
     levels: z.array(towerLevelSchema).max(4).default([]),
+    /** Branching upgrades (2-3 lines); the player picks one line and follows it. Use this OR `levels`. */
+    branches: z.array(towerBranchSchema).min(2).max(3).optional(),
     feel: feelSchema.optional(),
   })
-  .strict();
+  .strict()
+  .superRefine((d, ctx) => {
+    if (d.branches && d.levels.length > 0) ctx.addIssue({ code: z.ZodIssueCode.custom, message: "a tower uses either `levels` (one line) or `branches` (several), not both" });
+  });
 
 const waveGroupSchema = z
   .object({
