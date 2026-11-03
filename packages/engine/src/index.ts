@@ -80,12 +80,12 @@ export type {
   WeaponInput,
 } from "./api/schemas.js";
 // Board genres (rules/): each template's own declarations.
-export { towerBoard, tower, waves, TOWER_KINDS, TOWER_STATS } from "./api/tower.js";
+export { towerBoard, tower, waves, power, TOWER_KINDS, TOWER_STATS } from "./api/tower.js";
 export { saltFlat, plant, PLANT_KINDS, IDLE_STATS, IDLE_MIN_SHIFT, IDLE_MAX_TEND } from "./api/idle.js";
 export type { SaltFlatDef, SaltFlatInput, PlantDef, PlantInput } from "./api/idle.js";
 export { marsh, creature, move, ELEMENTS, MOVE_EFFECTS, COLLECTOR_STATS } from "./api/collector.js";
 export type { MarshDef, MarshInput, CreatureDef, CreatureInput, MoveDef, MoveInput, Element } from "./api/collector.js";
-export type { TowerBoardDef, TowerBoardInput, TowerDef, TowerInput, WavesDef, WavesInput } from "./api/tower.js";
+export type { PowerDef, PowerInput, TowerBoardDef, TowerBoardInput, TowerDef, TowerInput, WavesDef, WavesInput } from "./api/tower.js";
 export { card, cardTable, CARD_STATS, EFFECT_KINDS, EFFECT_TARGETS } from "./api/cards.js";
 export type { CardDef, CardInput, CardTableDef, CardTableInput } from "./api/cards.js";
 // Asset library: model appearances.
