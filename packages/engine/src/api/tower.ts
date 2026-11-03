@@ -140,6 +140,51 @@ export function waves(def: WavesInput): WavesDef {
   return parsed;
 }
 
+/** What an activated power does when fired. */
+export const powerEffectSchema = z.discriminatedUnion("kind", [
+  /** A blast at the aimed point: damage every creep within `radius` tiles. */
+  z.object({ kind: z.literal("burst"), damage: z.number().min(1).max(1_000_000), radius: z.number().min(0.5).max(8) }).strict(),
+  /** Slow every creep on the board by `slow` (0..0.95) for `seconds`. */
+  z.object({ kind: z.literal("slow"), slow: z.number().min(0.1).max(0.95), seconds: z.number().min(0.5).max(20) }).strict(),
+]);
+
+/**
+ * A player-activated power on a cooldown (an airstrike, a freeze). The cooldown
+ * is shared by the team. `target: "point"` aims at a tile (burst); "none" hits
+ * the whole board (slow).
+ */
+export const powerSchema = z
+  .object({
+    /** Seconds before it can be used again (team-shared). */
+    cooldown: z.number().min(1).max(600),
+    target: z.enum(["point", "none"]).default("none"),
+    effect: powerEffectSchema,
+  })
+  .strict();
+
+export type PowerInput = z.input<typeof powerSchema>;
+export type PowerDef = z.output<typeof powerSchema>;
+
+/** A player-activated power (at most 4). */
+export function power(id: string, def: PowerInput): PowerDef {
+  parseOrThrow(idSchema, id, "power id");
+  const parsed = parseOrThrow(powerSchema, def, `power("${id}")`);
+  declareContent("power", id, parsed);
+  return parsed;
+}
+
+/** The powers a game declared, cross-checked. */
+export function towerPowers(m: GameManifest): [string, PowerDef][] {
+  const powers = contentOf<PowerDef>(m, "power");
+  const issues: string[] = [];
+  if (powers.length > 4) issues.push("at most 4 powers per game");
+  for (const [id, p] of powers) {
+    if (p.effect.kind === "burst" && p.target !== "point") issues.push(`power("${id}") is a burst; it needs target: "point" to aim it`);
+  }
+  if (issues.length > 0) throw new GameDefinitionError("tower defense", issues);
+  return powers;
+}
+
 /** Store upgrade stats a tower defense game reads: tower damage, fire rate, range, and team lives. */
 export const TOWER_STATS = ["might", "haste", "area", "maxHealth"] as const;
 

@@ -10,7 +10,7 @@
  * exactly from its inputs.
  */
 import type { GameManifest } from "../api/registry.js";
-import { towerContent, type TowerDef } from "../api/tower.js";
+import { towerContent, towerPowers, type PowerDef, type TowerDef } from "../api/tower.js";
 import type { GameEvent } from "../game/earn.js";
 import type { EntityState } from "../net/schema.js";
 import { entity, RulesKind, UNITS } from "./kit.js";
@@ -22,7 +22,7 @@ export const Q = 256;
 export const TILE_M = 2;
 
 /** Actions (RulesInput.act). */
-export const TowerAct = { Build: 1, Upgrade: 2, Sell: 3, Ready: 4 } as const;
+export const TowerAct = { Build: 1, Upgrade: 2, Sell: 3, Ready: 4, Power: 5 } as const;
 
 /** Creep flags on the wire. */
 export const CreepFlag = { Slowed: 1, Boss: 2, Dead: 4, Leaked: 8 } as const;
@@ -100,6 +100,8 @@ export interface TowerState {
   won: boolean;
   /** Bumped whenever anything happens (softlock detector). */
   activity: number;
+  /** Ticks left on each declared power's team-shared cooldown. */
+  powerCd: number[];
 }
 
 interface TowerStats {
@@ -215,6 +217,7 @@ export interface CompiledTowerGame {
   readonly totalWaves: number;
   readonly healthGrowth: number;
   readonly groups: readonly { type: number; from: number; until: number; every: number; count: number; grow: number; gap: number; delay: number }[];
+  readonly powers: readonly { id: string; cooldownTicks: number; target: "point" | "none"; effect: PowerDef["effect"] }[];
 }
 
 export function compileTowerGame(m: GameManifest): CompiledTowerGame {
@@ -244,6 +247,7 @@ export function compileTowerGame(m: GameManifest): CompiledTowerGame {
     totalWaves: c.waves.total,
     healthGrowth: c.waves.health,
     groups: c.waves.groups.map((g) => ({ type: creepIds.indexOf(g.prefab), from: g.from, until: g.until ?? c.waves.total, every: g.every, count: g.count, grow: g.grow, gap: g.gap, delay: g.delay })),
+    powers: towerPowers(m).map(([id, p]) => ({ id, cooldownTicks: Math.round(p.cooldown * TICK), target: p.target, effect: p.effect })),
   };
 }
 
@@ -479,6 +483,7 @@ export function towerGenre(m: GameManifest): RulesGenre<TowerState> & { readonly
         peak: 0,
         won: false,
         activity: 0,
+        powerCd: g.powers.map(() => 0),
       };
     },
 
@@ -541,6 +546,32 @@ export function towerGenre(m: GameManifest): RulesGenre<TowerState> & { readonly
         emit({ name: "tower.built", players: [player], own: true });
         return;
       }
+      if (i.act === TowerAct.Power) {
+        const pi = i.a | 0;
+        const pw = g.powers[pi];
+        if (!pw || (s.powerCd[pi] ?? 0) > 0) return;
+        const eff = pw.effect;
+        if (eff.kind === "burst") {
+          const px = tx * Q + Q / 2;
+          const py = ty * Q + Q / 2;
+          const rr = Math.round(eff.radius * Q);
+          for (const c of s.creeps) {
+            if (!alive(c)) continue;
+            const q = creepQ(c);
+            if ((q.qx - px) ** 2 + (q.qy - py) ** 2 <= rr * rr) hit(s, c, eff.damage, player, emit);
+          }
+        } else {
+          const ticks = Math.round(eff.seconds * tickRate);
+          for (const c of s.creeps) {
+            if (!alive(c)) continue;
+            c.slow = Math.max(c.slow, eff.slow);
+            c.slowTicks = Math.max(c.slowTicks, ticks);
+          }
+        }
+        s.powerCd[pi] = pw.cooldownTicks;
+        s.activity++;
+        return;
+      }
       const t = s.towers.find((x) => x.tx === tx && x.ty === ty);
       if (!t) return;
       if (i.act === TowerAct.Upgrade) {
@@ -563,6 +594,7 @@ export function towerGenre(m: GameManifest): RulesGenre<TowerState> & { readonly
 
     step(s, emit) {
       s.tick++;
+      for (let i = 0; i < s.powerCd.length; i++) if (s.powerCd[i]! > 0) s.powerCd[i]!--;
       // Team lives bought in the store (maxHealth upgrades): each player's bonus counts once.
       for (const p of s.players.keys()) {
         const want = Math.floor(s.ctx.bonus(p, "maxHealth"));
