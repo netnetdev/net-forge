@@ -32,6 +32,8 @@ interface Creep {
   type: number;
   hp: number;
   maxHp: number;
+  /** Which road (index into board.roads) this creep walks. */
+  path: number;
   /** Progress along the road, Q units. */
   d: number;
   /** Q units a tick at full speed. */
@@ -75,6 +77,8 @@ interface TowerPlayer {
 interface Spawn {
   tick: number;
   type: number;
+  /** Which road (index into board.roads) the creep enters on. */
+  path: number;
 }
 
 export interface TowerState {
@@ -121,14 +125,25 @@ export interface CompiledTower {
   readonly upgradeCost: readonly number[];
 }
 
+/** One creep road: its waypoints, the cumulative Q length at each, and its total length. */
+export interface Road {
+  readonly path: readonly (readonly [number, number])[];
+  readonly cum: readonly number[];
+  readonly length: number;
+}
+
 export interface CompiledBoard {
   readonly w: number;
   readonly h: number;
-  /** Waypoints, tile coords. */
+  /** Every creep road (1..4). Creeps each walk one of these. */
+  readonly roads: readonly Road[];
+  /** The first road's waypoints (back-compat alias of roads[0].path). */
   readonly path: readonly (readonly [number, number])[];
-  /** Cumulative road length at each waypoint, Q units. */
+  /** The first road's cumulative length (back-compat alias of roads[0].cum). */
   readonly cum: readonly number[];
+  /** The first road's length (back-compat alias of roads[0].length). */
   readonly length: number;
+  /** Every tile any road covers (nothing builds here). */
   readonly road: ReadonlySet<number>;
   readonly blocked: ReadonlySet<number>;
 }
@@ -148,34 +163,45 @@ export function tileAt(b: Pick<CompiledBoard, "w" | "h">, x: number, z: number):
   return tx >= 0 && ty >= 0 && tx < b.w && ty < b.h ? { tx, ty } : null;
 }
 
-export function compileBoard(def: { size: readonly [number, number]; path: readonly (readonly [number, number])[]; blocked: readonly (readonly [number, number])[] }): CompiledBoard {
-  const [w, h] = def.size;
-  const road = new Set<number>();
-  const cum: number[] = [0];
-  for (let i = 1; i < def.path.length; i++) {
-    const a = def.path[i - 1] as readonly [number, number];
-    const b = def.path[i] as readonly [number, number];
-    const len = Math.abs(b[0] - a[0]) + Math.abs(b[1] - a[1]);
-    cum.push((cum[i - 1] ?? 0) + len * Q);
-    const sx = Math.sign(b[0] - a[0]);
-    const sy = Math.sign(b[1] - a[1]);
-    for (let k = 0; k <= len; k++) road.add(tileKey(a[0] + sx * k, a[1] + sy * k));
-  }
-  if (def.path.length === 1) {
-    const p = def.path[0] as readonly [number, number];
-    road.add(tileKey(p[0], p[1]));
-  }
-  const blocked = new Set(def.blocked.map(([x, y]) => tileKey(x, y)));
-  return { w, h, path: def.path, cum, length: cum[cum.length - 1] ?? 0, road, blocked };
+/** The roads a board declares: `paths` (one or more) if given, else the single `path`. */
+export function boardRoads(def: { path?: readonly (readonly [number, number])[]; paths?: readonly (readonly (readonly [number, number])[])[] }): readonly (readonly (readonly [number, number])[])[] {
+  if (def.paths && def.paths.length > 0) return def.paths;
+  return def.path ? [def.path] : [];
 }
 
-/** Position on the road at progress `d` (Q units), in Q units with the board's corner at 0, and the heading (u16 turn). */
-export function roadPoint(b: CompiledBoard, d: number): { qx: number; qy: number; yaw: number } {
+export function compileBoard(def: { size: readonly [number, number]; path?: readonly (readonly [number, number])[]; paths?: readonly (readonly (readonly [number, number])[])[]; blocked: readonly (readonly [number, number])[] }): CompiledBoard {
+  const [w, h] = def.size;
+  const road = new Set<number>();
+  const roads: Road[] = boardRoads(def).map((path) => {
+    const cum: number[] = [0];
+    for (let i = 1; i < path.length; i++) {
+      const a = path[i - 1] as readonly [number, number];
+      const b = path[i] as readonly [number, number];
+      const len = Math.abs(b[0] - a[0]) + Math.abs(b[1] - a[1]);
+      cum.push((cum[i - 1] ?? 0) + len * Q);
+      const sx = Math.sign(b[0] - a[0]);
+      const sy = Math.sign(b[1] - a[1]);
+      for (let k = 0; k <= len; k++) road.add(tileKey(a[0] + sx * k, a[1] + sy * k));
+    }
+    if (path.length === 1) {
+      const p = path[0] as readonly [number, number];
+      road.add(tileKey(p[0], p[1]));
+    }
+    return { path, cum, length: cum[cum.length - 1] ?? 0 };
+  });
+  const first: Road = roads[0] ?? { path: [], cum: [0], length: 0 };
+  const blocked = new Set(def.blocked.map(([x, y]) => tileKey(x, y)));
+  return { w, h, roads, path: first.path, cum: first.cum, length: first.length, road, blocked };
+}
+
+/** Position on road `pathIndex` at progress `d` (Q units), in Q units with the board's corner at 0, and the heading (u16 turn). */
+export function roadPoint(b: CompiledBoard, d: number, pathIndex = 0): { qx: number; qy: number; yaw: number } {
+  const r: Road = b.roads[pathIndex] ?? b.roads[0] ?? { path: b.path, cum: b.cum, length: b.length };
   let i = 1;
-  while (i < b.cum.length - 1 && d > (b.cum[i] ?? 0)) i++;
-  const a = b.path[i - 1] as readonly [number, number];
-  const c = b.path[i] ?? a;
-  const t = Math.max(0, d - (b.cum[i - 1] ?? 0));
+  while (i < r.cum.length - 1 && d > (r.cum[i] ?? 0)) i++;
+  const a = r.path[i - 1] as readonly [number, number];
+  const c = r.path[i] ?? a;
+  const t = Math.max(0, d - (r.cum[i - 1] ?? 0));
   const sx = Math.sign(c[0] - a[0]);
   const sy = Math.sign(c[1] - a[1]);
   const qx = a[0] * Q + Q / 2 + sx * t;
@@ -214,7 +240,7 @@ export interface CompiledTowerGame {
   readonly refund: number;
   readonly totalWaves: number;
   readonly healthGrowth: number;
-  readonly groups: readonly { type: number; from: number; until: number; every: number; count: number; grow: number; gap: number; delay: number }[];
+  readonly groups: readonly { type: number; from: number; until: number; every: number; count: number; grow: number; gap: number; delay: number; lane: number }[];
 }
 
 export function compileTowerGame(m: GameManifest): CompiledTowerGame {
@@ -225,8 +251,10 @@ export function compileTowerGame(m: GameManifest): CompiledTowerGame {
     if (!p) throw new Error(id);
     return { id, model: p.model, health: p.health, speed: p.speed, value: p.value ?? 1, damage: p.damage ?? 1, boss: p.boss !== undefined && p.boss !== false };
   });
+  const board = compileBoard(c.board);
+  const laneCount = board.roads.length;
   return {
-    board: compileBoard(c.board),
+    board,
     towers: c.towers.map(([id, def]) => ({
       id,
       def,
@@ -243,7 +271,7 @@ export function compileTowerGame(m: GameManifest): CompiledTowerGame {
     refund: c.board.refund,
     totalWaves: c.waves.total,
     healthGrowth: c.waves.health,
-    groups: c.waves.groups.map((g) => ({ type: creepIds.indexOf(g.prefab), from: g.from, until: g.until ?? c.waves.total, every: g.every, count: g.count, grow: g.grow, gap: g.gap, delay: g.delay })),
+    groups: c.waves.groups.map((g) => ({ type: creepIds.indexOf(g.prefab), from: g.from, until: g.until ?? c.waves.total, every: g.every, count: g.count, grow: g.grow, gap: g.gap, delay: g.delay, lane: Math.min(Math.max(0, g.lane ?? 0), Math.max(0, laneCount - 1)) })),
   };
 }
 
@@ -254,10 +282,10 @@ export function waveSpawns(g: CompiledTowerGame, n: number, tickRate: number): S
     if (n < grp.from || n > grp.until || (n - grp.from) % grp.every !== 0) return;
     const k = (n - grp.from) / grp.every;
     const count = Math.max(1, Math.floor(grp.count + grp.grow * k));
-    for (let i = 0; i < count; i++) out.push({ tick: Math.round((grp.delay + i * grp.gap) * tickRate), type: grp.type, order: gi * 10000 + i });
+    for (let i = 0; i < count; i++) out.push({ tick: Math.round((grp.delay + i * grp.gap) * tickRate), type: grp.type, path: grp.lane, order: gi * 10000 + i });
   });
   out.sort((a, b) => a.tick - b.tick || a.order - b.order);
-  return out.map(({ tick, type }) => ({ tick, type }));
+  return out.map(({ tick, type, path }) => ({ tick, type, path }));
 }
 
 /** What the next wave brings, by creep type (the HUD's preview). */
@@ -379,7 +407,7 @@ export function towerGenre(m: GameManifest): RulesGenre<TowerState> & { readonly
     if (c.hp <= 0) kill(s, c, owner, emit);
   };
 
-  const creepQ = (c: Creep) => roadPoint(b, c.d);
+  const creepQ = (c: Creep) => roadPoint(b, c.d, c.path);
 
   const fire = (s: TowerState, t: Tower, emit: (e: GameEvent) => void): void => {
     const st = effective(s, t);
@@ -599,6 +627,7 @@ export function towerGenre(m: GameManifest): RulesGenre<TowerState> & { readonly
             type: sp.type,
             hp,
             maxHp: hp,
+            path: sp.path,
             d: 0,
             speed: Math.max(1, Math.round(((ct.speed / TILE_M) * Q) / tickRate)),
             slowTicks: 0,
@@ -625,8 +654,9 @@ export function towerGenre(m: GameManifest): RulesGenre<TowerState> & { readonly
         c.flags = slowed ? c.flags | CreepFlag.Slowed : c.flags & ~CreepFlag.Slowed;
         c.d += slowed ? Math.max(1, Math.round(c.speed * (1 - c.slow))) : c.speed;
         if (!slowed) c.slow = 0;
-        if (c.d >= b.length) {
-          c.d = b.length;
+        const roadLen = b.roads[c.path]?.length ?? b.length;
+        if (c.d >= roadLen) {
+          c.d = roadLen;
           c.gone = 3;
           c.flags |= CreepFlag.Leaked;
           s.lives = Math.max(0, s.lives - c.dmg);
@@ -685,7 +715,7 @@ export function towerGenre(m: GameManifest): RulesGenre<TowerState> & { readonly
       const ox = (b.w * Q) / 2;
       const oy = (b.h * Q) / 2;
       for (const c of s.creeps) {
-        const p = roadPoint(b, c.d);
+        const p = roadPoint(b, c.d, c.path);
         out.push(entity(c.id, RulesKind.Unit, c.by, toUnits(p.qx - ox), toUnits(p.qy - oy), p.yaw, c.type, Math.max(0, c.hp), c.flags, Math.min(0xffff, Math.round((c.hp / Math.max(1, c.maxHp)) * 1000)), Math.min(0xffff, c.maxHp)));
       }
       for (const t of s.towers) {

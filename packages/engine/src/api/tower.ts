@@ -21,8 +21,10 @@ export const towerBoardSchema = z
   .object({
     /** Tiles across and down. Each tile is 2 m. */
     size: z.tuple([z.number().int().min(8).max(32), z.number().int().min(6).max(24)]),
-    /** The creeps' road: tile waypoints joined by straight runs (each step changes x or y, not both). Starts and ends on the board's edge. */
-    path: z.array(cell).min(2).max(24),
+    /** The creeps' road: tile waypoints joined by straight runs (each step changes x or y, not both). Starts and ends on the board's edge. Give this OR `paths`. */
+    path: z.array(cell).min(2).max(24).optional(),
+    /** Several creep roads (1..4), each like `path`. Give this OR `path`. A wave group picks a road with `lane` (default 0). */
+    paths: z.array(z.array(cell).min(2).max(24)).min(1).max(4).optional(),
     /** Tiles nobody can build on (rocks, ruins). */
     blocked: z.array(cell).max(96).default([]),
     /** Leaks the team can take before the run is lost. */
@@ -40,7 +42,11 @@ export const towerBoardSchema = z
     /** Fraction of a tower's cost a sale returns. */
     refund: z.number().min(0).max(1).default(0.6),
   })
-  .strict();
+  .strict()
+  .superRefine((d, ctx) => {
+    const given = (d.path ? 1 : 0) + (d.paths ? 1 : 0);
+    if (given !== 1) ctx.addIssue({ code: z.ZodIssueCode.custom, message: "towerBoard needs either path (one road) or paths (1 to 4 roads), not both and not neither" });
+  });
 
 export const TOWER_KINDS = ["bolt", "splash", "frost", "chain"] as const;
 
@@ -98,6 +104,8 @@ const waveGroupSchema = z
     gap: z.number().min(0.05).max(10).default(0.8),
     /** Seconds into the wave the group starts. */
     delay: z.number().min(0).max(60).default(0),
+    /** Which road the group enters on (index into towerBoard `paths`, 0-based). Default 0. */
+    lane: z.number().int().min(0).max(3).optional(),
   })
   .strict();
 
@@ -155,21 +163,25 @@ export function towerContent(m: GameManifest): { board: TowerBoardDef; towers: [
   if (towers.length > 8) issues.push("at most 8 towers per game");
   if (m.weapons.size > 0) issues.push("weapon(...) is for the survivor and arena templates; a tower defense game declares tower(...)");
   for (const [id, u] of m.upgrades) if (!(TOWER_STATS as readonly string[]).includes(u.stat)) issues.push(`upgrade("${id}") raises ${u.stat}; tower defense reads ${TOWER_STATS.join(", ")} (tower damage, fire rate, range, team lives)`);
+  const roads = board ? (board.paths ?? (board.path ? [board.path] : [])) : [];
   if (board) {
     const [w, h] = board.size;
     const inside = ([x, y]: readonly [number, number]) => x >= 0 && y >= 0 && x < w && y < h;
-    for (const p of board.path) if (!inside(p)) issues.push(`towerBoard path point [${p[0]}, ${p[1]}] is off the ${w} x ${h} board`);
-    for (let i = 1; i < board.path.length; i++) {
-      const a = board.path[i - 1] as [number, number];
-      const b = board.path[i] as [number, number];
-      if (a[0] !== b[0] && a[1] !== b[1]) issues.push(`towerBoard path steps from [${a[0]}, ${a[1]}] to [${b[0]}, ${b[1]}] diagonally; each step changes x or y, not both`);
-      if (a[0] === b[0] && a[1] === b[1]) issues.push(`towerBoard path repeats [${a[0]}, ${a[1]}]`);
-    }
     const edge = ([x, y]: readonly [number, number]) => x === 0 || y === 0 || x === w - 1 || y === h - 1;
-    const first = board.path[0];
-    const last = board.path[board.path.length - 1];
-    if (first && !edge(first)) issues.push("the path starts on the board's edge (where creeps come in)");
-    if (last && !edge(last)) issues.push("the path ends on the board's edge (the spire stands there)");
+    const label = roads.length > 1 ? (ri: number) => `road ${ri} ` : () => "";
+    roads.forEach((path, ri) => {
+      for (const p of path) if (!inside(p)) issues.push(`towerBoard ${label(ri)}point [${p[0]}, ${p[1]}] is off the ${w} x ${h} board`);
+      for (let i = 1; i < path.length; i++) {
+        const a = path[i - 1] as [number, number];
+        const b = path[i] as [number, number];
+        if (a[0] !== b[0] && a[1] !== b[1]) issues.push(`towerBoard ${label(ri)}steps from [${a[0]}, ${a[1]}] to [${b[0]}, ${b[1]}] diagonally; each step changes x or y, not both`);
+        if (a[0] === b[0] && a[1] === b[1]) issues.push(`towerBoard ${label(ri)}repeats [${a[0]}, ${a[1]}]`);
+      }
+      const first = path[0];
+      const last = path[path.length - 1];
+      if (first && !edge(first)) issues.push(`the ${label(ri) || "path "}starts on the board's edge (where creeps come in)`);
+      if (last && !edge(last)) issues.push(`the ${label(ri) || "path "}ends on the board's edge (the spire stands there)`);
+    });
   }
   if (wv) {
     for (const g of wv.groups) {
@@ -178,6 +190,7 @@ export function towerContent(m: GameManifest): { board: TowerBoardDef; towers: [
       else if (p.kind === "pickup") issues.push(`waves group "${g.prefab}" is a pickup, not a creep`);
       if (g.until !== undefined && g.until < g.from) issues.push(`waves group "${g.prefab}": until must not be before from`);
       if (g.from > wv.total) issues.push(`waves group "${g.prefab}" starts at wave ${g.from}, after the last wave (${wv.total})`);
+      if (g.lane !== undefined && g.lane >= roads.length) issues.push(`waves group "${g.prefab}" uses lane ${g.lane}, but the board has ${roads.length} road(s) (lanes 0..${Math.max(0, roads.length - 1)})`);
     }
   }
   if (issues.length > 0 || !board || !wv) throw new GameDefinitionError("tower defense", issues);

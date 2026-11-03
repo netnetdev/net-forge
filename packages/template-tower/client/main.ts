@@ -139,47 +139,61 @@ async function main(): Promise<void> {
   board.receiveShadow = true;
   stage.add(board);
   const railMat = new MeshStandardMaterial({ color: 0x8a7a66, roughness: 0.4, metalness: 0.8 });
-  for (let i = 1; i < b.path.length; i++) {
-    const a = b.path[i - 1] as readonly [number, number];
-    const c = b.path[i] as readonly [number, number];
-    const pa = tileCenter(b, a[0], a[1]);
-    const pc = tileCenter(b, c[0], c[1]);
-    const len = Math.hypot(pc.x - pa.x, pc.z - pa.z) + 0.3;
-    for (const off of [-0.45, 0.45]) {
-      const rail = new Mesh(new BoxGeometry(0.09, 0.08, len), railMat);
-      const horiz = a[1] === c[1];
-      rail.position.set((pa.x + pc.x) / 2 + (horiz ? 0 : off), board.position.y + 0.05, (pa.z + pc.z) / 2 + (horiz ? off : 0));
-      if (horiz) rail.rotation.y = Math.PI / 2;
-      stage.add(rail);
+  // Rails along every road.
+  for (const road of b.roads) {
+    for (let i = 1; i < road.path.length; i++) {
+      const a = road.path[i - 1] as readonly [number, number];
+      const c = road.path[i] as readonly [number, number];
+      const pa = tileCenter(b, a[0], a[1]);
+      const pc = tileCenter(b, c[0], c[1]);
+      const len = Math.hypot(pc.x - pa.x, pc.z - pa.z) + 0.3;
+      for (const off of [-0.45, 0.45]) {
+        const rail = new Mesh(new BoxGeometry(0.09, 0.08, len), railMat);
+        const horiz = a[1] === c[1];
+        rail.position.set((pa.x + pc.x) / 2 + (horiz ? 0 : off), board.position.y + 0.05, (pa.z + pc.z) / 2 + (horiz ? off : 0));
+        if (horiz) rail.rotation.y = Math.PI / 2;
+        stage.add(rail);
+      }
     }
   }
-  const last = b.path[b.path.length - 1] as readonly [number, number];
-  const prev = b.path[b.path.length - 2] ?? last;
-  const first = b.path[0] as readonly [number, number];
-  const endC = tileCenter(b, last[0], last[1]);
-  const dirX = Math.sign(last[0] - prev[0]);
-  const dirZ = Math.sign(last[1] - prev[1]);
-  const spireAt = { x: endC.x + dirX * TILE_M * 1.2, z: endC.z + dirZ * TILE_M * 1.2 };
-  const spire = stage.model(SPIRE_MODEL, 6, 0xc9a15a);
-  spire.root.position.set(spireAt.x, stage.groundAt(spireAt.x, spireAt.z), spireAt.z);
-  stage.add(spire.root);
-  const bellGlow = new Mesh(new CylinderGeometry(0.6, 0.6, 0.05, 24), new MeshBasicMaterial({ color: 0xffd76a, transparent: true, opacity: 0.55, blending: AdditiveBlending, depthWrite: false }));
-  bellGlow.position.set(spireAt.x, 0.08, spireAt.z);
-  bellGlow.scale.setScalar(2.4);
-  stage.add(bellGlow);
-  const startC = tileCenter(b, first[0], first[1]);
-  // Frame the board with the spire and the gate in view.
-  const minX = Math.min(-W / 2, spireAt.x - 3, startC.x - 3);
-  const maxX = Math.max(W / 2, spireAt.x + 3, startC.x + 3);
-  const minZ = Math.min(-H / 2, spireAt.z - 3);
-  const maxZ = Math.max(H / 2, spireAt.z + 3);
-  stage.frameRect((minX + maxX) / 2, (minZ + maxZ) / 2, maxX - minX, maxZ - minZ);
-  for (const side of [-1, 1]) {
-    const gate = stage.model(GATE_MODEL, 2.2, 0x8f8676);
-    const horiz = first[0] === 0 || first[0] === b.w - 1;
-    gate.root.position.set(startC.x + (horiz ? -TILE_M * 0.9 : side * 1.4), 0, startC.z + (horiz ? side * 1.4 : -TILE_M * 0.9));
-    stage.add(gate.root);
+  // A spire where each road leaks, a gate where each road enters.
+  const spireEnds: { x: number; z: number }[] = [];
+  const startCs: { x: number; z: number }[] = [];
+  const bellGlows: Mesh[] = [];
+  for (const road of b.roads) {
+    const path = road.path;
+    if (path.length === 0) continue;
+    const last = path[path.length - 1] as readonly [number, number];
+    const prev = path[path.length - 2] ?? last;
+    const first = path[0] as readonly [number, number];
+    const endC = tileCenter(b, last[0], last[1]);
+    const dirX = Math.sign(last[0] - prev[0]);
+    const dirZ = Math.sign(last[1] - prev[1]);
+    const spireAt = { x: endC.x + dirX * TILE_M * 1.2, z: endC.z + dirZ * TILE_M * 1.2 };
+    spireEnds.push(spireAt);
+    const spire = stage.model(SPIRE_MODEL, 6, 0xc9a15a);
+    spire.root.position.set(spireAt.x, stage.groundAt(spireAt.x, spireAt.z), spireAt.z);
+    stage.add(spire.root);
+    const bellGlow = new Mesh(new CylinderGeometry(0.6, 0.6, 0.05, 24), new MeshBasicMaterial({ color: 0xffd76a, transparent: true, opacity: 0.55, blending: AdditiveBlending, depthWrite: false }));
+    bellGlow.position.set(spireAt.x, 0.08, spireAt.z);
+    bellGlow.scale.setScalar(2.4);
+    stage.add(bellGlow);
+    bellGlows.push(bellGlow);
+    const startC = tileCenter(b, first[0], first[1]);
+    startCs.push(startC);
+    for (const side of [-1, 1]) {
+      const gate = stage.model(GATE_MODEL, 2.2, 0x8f8676);
+      const horiz = first[0] === 0 || first[0] === b.w - 1;
+      gate.root.position.set(startC.x + (horiz ? -TILE_M * 0.9 : side * 1.4), 0, startC.z + (horiz ? side * 1.4 : -TILE_M * 0.9));
+      stage.add(gate.root);
+    }
   }
+  // Frame the board so every spire and gate is in view.
+  const minX = Math.min(-W / 2, ...spireEnds.map((s) => s.x - 3), ...startCs.map((s) => s.x - 3));
+  const maxX = Math.max(W / 2, ...spireEnds.map((s) => s.x + 3), ...startCs.map((s) => s.x + 3));
+  const minZ = Math.min(-H / 2, ...spireEnds.map((s) => s.z - 3));
+  const maxZ = Math.max(H / 2, ...spireEnds.map((s) => s.z + 3));
+  stage.frameRect((minX + maxX) / 2, (minZ + maxZ) / 2, maxX - minX, maxZ - minZ);
   for (const k of b.blocked) {
     const c = tileCenter(b, k % 64, Math.floor(k / 64));
     const rock = stage.model(ROCK_MODEL, 1.1, 0x7c7468, TILE_M * 0.95);
@@ -203,7 +217,7 @@ async function main(): Promise<void> {
         const out = 1.5 + rnd() * ring;
         const x = side < 1 ? -W / 2 - out : side < 2 ? W / 2 + out : t * (W / 2 + ring);
         const z = side < 1 || side < 2 ? t * (H / 2 + ring) : side < 3 ? -H / 2 - out : H / 2 + out;
-        if (Math.abs(x - spireAt.x) < 3 && Math.abs(z - spireAt.z) < 3) continue;
+        if (spireEnds.some((s) => Math.abs(x - s.x) < 3 && Math.abs(z - s.z) < 3)) continue;
         at.push({ x, z, yaw: rnd() * 6.28, s: 0.75 + rnd() * 0.5 });
       }
       scatter.push({ crowd: stage.crowd(id, h, at.length, 0x557a3a), at });
@@ -516,8 +530,9 @@ async function main(): Promise<void> {
         } else sfx.play("kill", { gain: e.owner === app.self ? 1 : 0.35 });
       }
       if ((flags & CreepFlag.Leaked) !== 0 && (!known || (known.flags & CreepFlag.Leaked) === 0)) {
-        stage.ring(spireAt.x, spireAt.z, 4, 0xff5a3c);
-        stage.burst("sparks", spireAt.x, 3, spireAt.z, 0xff8a5c, 24);
+        // The creep leaks at the end of its own lane — burst where it reached.
+        stage.ring(x, z, 4, 0xff5a3c);
+        stage.burst("sparks", x, 3, z, 0xff8a5c, 24);
         stage.kick(0.5);
         sfx.play("bell");
       }
@@ -590,7 +605,7 @@ async function main(): Promise<void> {
       rangeRing.scale.setScalar(r);
       ghostBody.visible = canBuild(hover.tx, hover.ty);
     }
-    bellGlow.scale.setScalar(2.4 + Math.sin(t * 2) * 0.15);
+    for (const bg of bellGlows) bg.scale.setScalar(2.4 + Math.sin(t * 2) * 0.15);
 
     // HUD.
     if (v) {
@@ -717,19 +732,21 @@ async function main(): Promise<void> {
           }
         }
       }
-    // Sleepers across the road.
+    // Sleepers across each road.
     ctx.fillStyle = "rgba(60, 40, 22, 0.75)";
-    for (let i = 1; i < b.path.length; i++) {
-      const a = b.path[i - 1] as readonly [number, number];
-      const d = b.path[i] as readonly [number, number];
-      const n = Math.abs(d[0] - a[0]) + Math.abs(d[1] - a[1]);
-      const sx = Math.sign(d[0] - a[0]);
-      const sy = Math.sign(d[1] - a[1]);
-      for (let j = 0; j <= n * 2; j++) {
-        const cx = (a[0] + 0.5 + (sx * j) / 2) * px;
-        const cy = (a[1] + 0.5 + (sy * j) / 2) * px;
-        if (sx !== 0) ctx.fillRect(cx - 2, cy - px * 0.42, 4, px * 0.84);
-        else ctx.fillRect(cx - px * 0.42, cy - 2, px * 0.84, 4);
+    for (const road of b.roads) {
+      for (let i = 1; i < road.path.length; i++) {
+        const a = road.path[i - 1] as readonly [number, number];
+        const d = road.path[i] as readonly [number, number];
+        const n = Math.abs(d[0] - a[0]) + Math.abs(d[1] - a[1]);
+        const sx = Math.sign(d[0] - a[0]);
+        const sy = Math.sign(d[1] - a[1]);
+        for (let j = 0; j <= n * 2; j++) {
+          const cx = (a[0] + 0.5 + (sx * j) / 2) * px;
+          const cy = (a[1] + 0.5 + (sy * j) / 2) * px;
+          if (sx !== 0) ctx.fillRect(cx - 2, cy - px * 0.42, 4, px * 0.84);
+          else ctx.fillRect(cx - px * 0.42, cy - 2, px * 0.84, 4);
+        }
       }
     }
     const t = new CanvasTexture(c);
