@@ -118,11 +118,99 @@ export type TowerDef = z.output<typeof towerSchema>;
 export type WavesInput = z.input<typeof wavesSchema>;
 export type WavesDef = z.output<typeof wavesSchema>;
 
-/** The board: its size, the creeps' road, lives and starting gold (one per game). */
-export function towerBoard(def: TowerBoardInput): TowerBoardDef {
-  const parsed = parseOrThrow(towerBoardSchema, def, "towerBoard()");
-  declareContent("towerBoard", "board", parsed);
+/**
+ * A board: its size, the creeps' road, lives and starting gold. One per game,
+ * or several named ones (`towerBoard("harbour", { ... })`) with a `campaign(...)`
+ * to order them into a map roster. The run plays the first board.
+ */
+export function towerBoard(def: TowerBoardInput): TowerBoardDef;
+export function towerBoard(id: string, def: TowerBoardInput): TowerBoardDef;
+export function towerBoard(idOrDef: string | TowerBoardInput, maybeDef?: TowerBoardInput): TowerBoardDef {
+  const named = typeof idOrDef === "string";
+  const id = named ? idOrDef : "main";
+  const def = named ? maybeDef : idOrDef;
+  if (named) parseOrThrow(idSchema, id, "towerBoard id");
+  if (!def) throw new GameDefinitionError("towerBoard()", ["towerBoard(id, def) needs the board definition as its second argument"]);
+  const parsed = parseOrThrow(towerBoardSchema, def, named ? `towerBoard("${id}")` : "towerBoard()");
+  declareContent("towerBoard", id, parsed);
   return parsed;
+}
+
+/** One difficulty mode for a campaign (scales lives and/or creep health). */
+export const campaignModeSchema = z
+  .object({
+    id: idSchema,
+    name: z.string().min(1).max(40).optional(),
+    /** Starting lives for this mode (overrides the board's). */
+    lives: z.number().int().min(1).max(200).optional(),
+    /** Creep health growth for this mode (overrides waves' `health`). */
+    health: z.number().min(0).max(2).optional(),
+  })
+  .strict();
+
+/** The map roster and difficulty modes (optional; a game may just declare one board). */
+export const campaignSchema = z
+  .object({
+    /** Board ids in the order they are played. Defaults to the order declared. */
+    order: z.array(idSchema).min(1).max(12).optional(),
+    /** Difficulty modes (the first is the default). */
+    modes: z.array(campaignModeSchema).min(1).max(5).optional(),
+  })
+  .strict();
+
+export type CampaignInput = z.input<typeof campaignSchema>;
+export type CampaignDef = z.output<typeof campaignSchema>;
+
+/** The map roster + difficulty modes (one per game). */
+export function campaign(def: CampaignInput): CampaignDef {
+  const parsed = parseOrThrow(campaignSchema, def, "campaign()");
+  declareContent("campaign", "campaign", parsed);
+  return parsed;
+}
+
+/** The game's campaign declaration, if any. */
+export function towerCampaign(m: GameManifest): CampaignDef | undefined {
+  return contentOf<CampaignDef>(m, "campaign")[0]?.[1];
+}
+
+/** Geometry checks for one board's road: on the board, orthogonal steps, start and end on an edge. */
+export function boardGeometryIssues(board: TowerBoardDef, label = ""): string[] {
+  const issues: string[] = [];
+  const [w, h] = board.size;
+  const inside = ([x, y]: readonly [number, number]) => x >= 0 && y >= 0 && x < w && y < h;
+  for (const p of board.path) if (!inside(p)) issues.push(`${label}path point [${p[0]}, ${p[1]}] is off the ${w} x ${h} board`);
+  for (let i = 1; i < board.path.length; i++) {
+    const a = board.path[i - 1] as [number, number];
+    const b = board.path[i] as [number, number];
+    if (a[0] !== b[0] && a[1] !== b[1]) issues.push(`${label}path steps from [${a[0]}, ${a[1]}] to [${b[0]}, ${b[1]}] diagonally; each step changes x or y, not both`);
+    if (a[0] === b[0] && a[1] === b[1]) issues.push(`${label}path repeats [${a[0]}, ${a[1]}]`);
+  }
+  const edge = ([x, y]: readonly [number, number]) => x === 0 || y === 0 || x === w - 1 || y === h - 1;
+  const first = board.path[0];
+  const last = board.path[board.path.length - 1];
+  if (first && !edge(first)) issues.push(`${label}path must start on the board's edge (where creeps come in)`);
+  if (last && !edge(last)) issues.push(`${label}path must end on the board's edge (the spire stands there)`);
+  return issues;
+}
+
+/** The game's boards in play order (the `campaign` order if given, else declared order). */
+export function towerMaps(m: GameManifest): [string, TowerBoardDef][] {
+  const boards = contentOf<TowerBoardDef>(m, "towerBoard");
+  const camp = contentOf<CampaignDef>(m, "campaign")[0]?.[1];
+  const issues: string[] = [];
+  if (boards.length > 12) issues.push("at most 12 boards per game");
+  const byId = new Map(boards);
+  if (camp?.order) {
+    for (const id of camp.order) if (!byId.has(id)) issues.push(`campaign order names board "${id}", which is not declared`);
+  }
+  // Every board's road must be well-formed (not just the one that plays).
+  for (const [id, def] of boards) issues.push(...boardGeometryIssues(def, boards.length > 1 ? `board "${id}" ` : ""));
+  if (issues.length > 0) throw new GameDefinitionError("tower defense", issues);
+  if (!camp?.order) return boards;
+  // Ordered by the campaign, with any un-listed boards kept after, in declared order.
+  const listed = camp.order.map((id) => [id, byId.get(id)!] as [string, TowerBoardDef]);
+  const rest = boards.filter(([id]) => !camp.order!.includes(id));
+  return [...listed, ...rest];
 }
 
 /** A tower players build (at most 8). */
@@ -146,7 +234,7 @@ export const TOWER_STATS = ["might", "haste", "area", "maxHealth"] as const;
 /** The tower defense content of a manifest, cross-checked (one line per issue). */
 export function towerContent(m: GameManifest): { board: TowerBoardDef; towers: [string, TowerDef][]; waves: WavesDef } {
   const issues: string[] = [];
-  const board = contentOf<TowerBoardDef>(m, "towerBoard")[0]?.[1];
+  const board = towerMaps(m)[0]?.[1];
   const towers = contentOf<TowerDef>(m, "tower");
   const wv = contentOf<WavesDef>(m, "waves")[0]?.[1];
   if (!board) issues.push("declare the board: towerBoard({ size, path, lives, gold })");
@@ -155,22 +243,7 @@ export function towerContent(m: GameManifest): { board: TowerBoardDef; towers: [
   if (towers.length > 8) issues.push("at most 8 towers per game");
   if (m.weapons.size > 0) issues.push("weapon(...) is for the survivor and arena templates; a tower defense game declares tower(...)");
   for (const [id, u] of m.upgrades) if (!(TOWER_STATS as readonly string[]).includes(u.stat)) issues.push(`upgrade("${id}") raises ${u.stat}; tower defense reads ${TOWER_STATS.join(", ")} (tower damage, fire rate, range, team lives)`);
-  if (board) {
-    const [w, h] = board.size;
-    const inside = ([x, y]: readonly [number, number]) => x >= 0 && y >= 0 && x < w && y < h;
-    for (const p of board.path) if (!inside(p)) issues.push(`towerBoard path point [${p[0]}, ${p[1]}] is off the ${w} x ${h} board`);
-    for (let i = 1; i < board.path.length; i++) {
-      const a = board.path[i - 1] as [number, number];
-      const b = board.path[i] as [number, number];
-      if (a[0] !== b[0] && a[1] !== b[1]) issues.push(`towerBoard path steps from [${a[0]}, ${a[1]}] to [${b[0]}, ${b[1]}] diagonally; each step changes x or y, not both`);
-      if (a[0] === b[0] && a[1] === b[1]) issues.push(`towerBoard path repeats [${a[0]}, ${a[1]}]`);
-    }
-    const edge = ([x, y]: readonly [number, number]) => x === 0 || y === 0 || x === w - 1 || y === h - 1;
-    const first = board.path[0];
-    const last = board.path[board.path.length - 1];
-    if (first && !edge(first)) issues.push("the path starts on the board's edge (where creeps come in)");
-    if (last && !edge(last)) issues.push("the path ends on the board's edge (the spire stands there)");
-  }
+  // Board geometry is validated for every board by towerMaps(m) above.
   if (wv) {
     for (const g of wv.groups) {
       const p = m.prefabs.get(g.prefab);

@@ -10,7 +10,7 @@
  * exactly from its inputs.
  */
 import type { GameManifest } from "../api/registry.js";
-import { towerContent, type TowerDef } from "../api/tower.js";
+import { towerCampaign, towerContent, towerMaps, type TowerDef } from "../api/tower.js";
 import type { GameEvent } from "../game/earn.js";
 import type { EntityState } from "../net/schema.js";
 import { entity, RulesKind, UNITS } from "./kit.js";
@@ -215,6 +215,10 @@ export interface CompiledTowerGame {
   readonly totalWaves: number;
   readonly healthGrowth: number;
   readonly groups: readonly { type: number; from: number; until: number; every: number; count: number; grow: number; gap: number; delay: number }[];
+  /** Every board in play order (the first is `board`, the one a run plays today). */
+  readonly roster: readonly { id: string; board: CompiledBoard }[];
+  /** Difficulty modes, the first the default (empty when none declared). */
+  readonly modes: readonly { id: string; name?: string; lives?: number; health?: number }[];
 }
 
 export function compileTowerGame(m: GameManifest): CompiledTowerGame {
@@ -244,6 +248,8 @@ export function compileTowerGame(m: GameManifest): CompiledTowerGame {
     totalWaves: c.waves.total,
     healthGrowth: c.waves.health,
     groups: c.waves.groups.map((g) => ({ type: creepIds.indexOf(g.prefab), from: g.from, until: g.until ?? c.waves.total, every: g.every, count: g.count, grow: g.grow, gap: g.gap, delay: g.delay })),
+    roster: towerMaps(m).map(([id, def]) => ({ id, board: compileBoard(def) })),
+    modes: towerCampaign(m)?.modes ?? [],
   };
 }
 
