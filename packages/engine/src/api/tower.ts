@@ -75,6 +75,12 @@ export const towerSchema = z
     slow: z.number().min(0).max(0.9).default(0),
     slowSeconds: z.number().min(0.2).max(10).default(1.5),
     chains: z.number().int().min(1).max(8).default(3),
+    /** Can target flying creeps. Off by default (a ground tower ignores air). */
+    air: z.boolean().default(false),
+    /** Reveals and targets camo creeps in range. */
+    detect: z.boolean().default(false),
+    /** Damage school, matched against a creep's `resist`. */
+    school: z.enum(["physical", "magic"]).default("physical"),
     levels: z.array(towerLevelSchema).max(4).default([]),
     feel: feelSchema.optional(),
   })

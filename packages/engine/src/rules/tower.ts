@@ -25,7 +25,7 @@ export const TILE_M = 2;
 export const TowerAct = { Build: 1, Upgrade: 2, Sell: 3, Ready: 4 } as const;
 
 /** Creep flags on the wire. */
-export const CreepFlag = { Slowed: 1, Boss: 2, Dead: 4, Leaked: 8 } as const;
+export const CreepFlag = { Slowed: 1, Boss: 2, Dead: 4, Leaked: 8, Flying: 16, Camo: 32, Shielded: 64 } as const;
 
 interface Creep {
   id: number;
@@ -41,6 +41,23 @@ interface Creep {
   value: number;
   dmg: number;
   boss: boolean;
+  /** Only air towers may target it. */
+  flying: boolean;
+  /** Flat damage removed from each hit (hit floors at 1). */
+  armor: number;
+  /** Fractional resist to physical / magic damage (0..0.95). */
+  resPhys: number;
+  resMag: number;
+  /** Invisible unless a detector covers it. */
+  camo: boolean;
+  /** Hit points healed a tick while alive (fractional; accumulated). */
+  regen: number;
+  regenAcc: number;
+  /** Absorb pool taken before hp. */
+  shield: number;
+  /** On death, spawn `splitCount` creeps of type `splitType` (−1 = none). */
+  splitType: number;
+  splitCount: number;
   /** Ticks left as a corpse (dead or leaked); 0 while alive. */
   gone: number;
   flags: number;
@@ -100,6 +117,8 @@ export interface TowerState {
   won: boolean;
   /** Bumped whenever anything happens (softlock detector). */
   activity: number;
+  /** Creeps born this tick (splits), flushed in after towers fire. */
+  born: Creep[];
 }
 
 interface TowerStats {
@@ -200,11 +219,56 @@ function statsAt(def: TowerDef, level: number): TowerStats {
   return s;
 }
 
+/**
+ * One hit against a creep's defenses: a tower's `school` damage is cut by the
+ * matching `resist`, then `armor` is removed flat (a hit always lands at least
+ * 1 before armor), then the `shield` absorbs what it can. Returns the hit
+ * points to subtract and the shield left. Pure and deterministic.
+ */
+export function creepDefense(dmg: number, c: { resPhys: number; resMag: number; armor: number; shield: number }, school: "physical" | "magic"): { hp: number; shield: number } {
+  const resist = school === "magic" ? c.resMag : c.resPhys;
+  let net = Math.max(1, Math.round(dmg * (1 - resist)) - c.armor);
+  let shield = c.shield;
+  if (shield > 0) {
+    const absorbed = Math.min(shield, net);
+    shield -= absorbed;
+    net -= absorbed;
+  }
+  return { hp: Math.max(0, net), shield };
+}
+
+/** One tick of regeneration: fractional healing accrues in `acc` and applies as whole hit points, capped at `maxHp`. Pure. */
+export function regenHeal(hp: number, maxHp: number, perTick: number, acc: number): { hp: number; acc: number } {
+  if (perTick <= 0 || hp >= maxHp) return { hp, acc };
+  const next = acc + perTick;
+  const heal = Math.floor(next);
+  if (heal <= 0) return { hp, acc: next };
+  return { hp: Math.min(maxHp, hp + heal), acc: next - heal };
+}
+
 /** Everything a tower defense game declared, compiled (shared by the room, the harness and the client). */
 export interface CompiledTowerGame {
   readonly board: CompiledBoard;
   readonly towers: readonly CompiledTower[];
-  readonly creeps: readonly { id: string; model: string; health: number; speed: number; value: number; damage: number; boss: boolean }[];
+  readonly creeps: readonly {
+    id: string;
+    model: string;
+    health: number;
+    speed: number;
+    value: number;
+    damage: number;
+    boss: boolean;
+    flying: boolean;
+    armor: number;
+    resPhys: number;
+    resMag: number;
+    camo: boolean;
+    regenPerSec: number;
+    shield: number;
+    /** Index of the creep spawned on death (−1 = none) and how many. */
+    splitType: number;
+    splitCount: number;
+  }[];
   readonly lives: number;
   readonly gold: number;
   readonly prep: number;
@@ -223,7 +287,24 @@ export function compileTowerGame(m: GameManifest): CompiledTowerGame {
   const creeps = creepIds.map((id) => {
     const p = m.prefabs.get(id);
     if (!p) throw new Error(id);
-    return { id, model: p.model, health: p.health, speed: p.speed, value: p.value ?? 1, damage: p.damage ?? 1, boss: p.boss !== undefined && p.boss !== false };
+    return {
+      id,
+      model: p.model,
+      health: p.health,
+      speed: p.speed,
+      value: p.value ?? 1,
+      damage: p.damage ?? 1,
+      boss: p.boss !== undefined && p.boss !== false,
+      flying: p.flying === true,
+      armor: p.armor ?? 0,
+      resPhys: p.resist?.physical ?? 0,
+      resMag: p.resist?.magic ?? 0,
+      camo: p.camo === true,
+      regenPerSec: p.regen ?? 0,
+      shield: p.shield ?? 0,
+      splitType: p.split ? creepIds.indexOf(p.split.into) : -1,
+      splitCount: p.split?.count ?? 0,
+    };
   });
   return {
     board: compileBoard(c.board),
@@ -354,6 +435,45 @@ export function towerGenre(m: GameManifest): RulesGenre<TowerState> & { readonly
     s.activity++;
   };
 
+  /** A fresh creep of `type` at progress `d`, with this wave's health scaling. */
+  const makeCreep = (s: TowerState, type: number, d: number): Creep | null => {
+    const ct = g.creeps[type];
+    if (!ct) return null;
+    const team = 1 + 0.3 * Math.max(0, humans(s).length - 1);
+    const hp = Math.max(1, Math.round(ct.health * (1 + g.healthGrowth * (s.wave - 1)) * team));
+    let flags = 0;
+    if (ct.boss) flags |= CreepFlag.Boss;
+    if (ct.flying) flags |= CreepFlag.Flying;
+    if (ct.camo) flags |= CreepFlag.Camo;
+    if (ct.shield > 0) flags |= CreepFlag.Shielded;
+    return {
+      id: s.nextId++,
+      type,
+      hp,
+      maxHp: hp,
+      d,
+      speed: Math.max(1, Math.round(((ct.speed / TILE_M) * Q) / tickRate)),
+      slowTicks: 0,
+      slow: 0,
+      value: ct.value,
+      dmg: ct.damage,
+      boss: ct.boss,
+      flying: ct.flying,
+      armor: ct.armor,
+      resPhys: ct.resPhys,
+      resMag: ct.resMag,
+      camo: ct.camo,
+      regen: ct.regenPerSec / tickRate,
+      regenAcc: 0,
+      shield: ct.shield,
+      splitType: ct.splitType,
+      splitCount: ct.splitCount,
+      gone: 0,
+      flags,
+      by: 0,
+    };
+  };
+
   const kill = (s: TowerState, c: Creep, owner: number, emit: (e: GameEvent) => void): void => {
     c.hp = 0;
     c.gone = 8;
@@ -371,11 +491,24 @@ export function towerGenre(m: GameManifest): RulesGenre<TowerState> & { readonly
     const share = Math.floor(pay * g.share);
     if (share > 0) for (const [p, pl] of s.players) if (p !== owner) pl.gold += share;
     if (c.boss) emit({ name: "boss.killed", players: humans(s) });
+    // Split: fresh creeps of `splitType` burst out where it fell (buffered until after towers fire).
+    if (c.splitType >= 0 && c.splitCount > 0) {
+      for (let i = 0; i < c.splitCount; i++) {
+        const baby = makeCreep(s, c.splitType, c.d);
+        if (baby) s.born.push(baby);
+      }
+    }
   };
 
-  const hit = (s: TowerState, c: Creep, dmg: number, owner: number, emit: (e: GameEvent) => void): void => {
+  /** Apply a hit after the creep's resist (by the tower's school), armor and shield. */
+  const hit = (s: TowerState, c: Creep, dmg: number, owner: number, emit: (e: GameEvent) => void, school: "physical" | "magic" = "physical"): void => {
     if (!alive(c)) return;
-    c.hp -= Math.max(1, Math.round(dmg));
+    const had = c.shield;
+    const { hp: net, shield } = creepDefense(dmg, c, school);
+    c.shield = shield;
+    if (had > 0 && shield <= 0) c.flags &= ~CreepFlag.Shielded;
+    if (net <= 0) return;
+    c.hp -= net;
     if (c.hp <= 0) kill(s, c, owner, emit);
   };
 
@@ -391,9 +524,13 @@ export function towerGenre(m: GameManifest): RulesGenre<TowerState> & { readonly
     const cy = t.ty * Q + Q / 2;
     const r = Math.round(st.range * Q);
     const r2 = r * r;
+    const td = g.towers[t.type]?.def;
+    const school = td?.school ?? "physical";
+    // A ground tower can't hit fliers; a non-detector can't see camo.
+    const canHit = (c: Creep) => (!c.flying || td?.air === true) && (!c.camo || td?.detect === true);
     let best: Creep | null = null;
     for (const c of s.creeps) {
-      if (!alive(c)) continue;
+      if (!alive(c) || !canHit(c)) continue;
       const p = creepQ(c);
       const dx = p.qx - cx;
       const dy = p.qy - cy;
@@ -412,11 +549,11 @@ export function towerGenre(m: GameManifest): RulesGenre<TowerState> & { readonly
     if (kind === "splash") {
       const rr = Math.round(st.radius * Q);
       for (const c of s.creeps) {
-        if (!alive(c)) continue;
+        if (!alive(c) || !canHit(c)) continue;
         const q = creepQ(c);
         const dx = q.qx - p.qx;
         const dy = q.qy - p.qy;
-        if (dx * dx + dy * dy <= rr * rr) hit(s, c, st.damage, t.owner, emit);
+        if (dx * dx + dy * dy <= rr * rr) hit(s, c, st.damage, t.owner, emit, school);
       }
     } else if (kind === "chain") {
       let at: Creep | null = best;
@@ -424,13 +561,13 @@ export function towerGenre(m: GameManifest): RulesGenre<TowerState> & { readonly
       let dmg = st.damage;
       for (let j = 0; j < st.chains && at; j++) {
         hitIds.add(at.id);
-        hit(s, at, dmg, t.owner, emit);
+        hit(s, at, dmg, t.owner, emit, school);
         dmg *= 0.7;
         const from = creepQ(at);
         let next: Creep | null = null;
         let nd = (Q * 1.6) ** 2;
         for (const c of s.creeps) {
-          if (!alive(c) || hitIds.has(c.id)) continue;
+          if (!alive(c) || hitIds.has(c.id) || !canHit(c)) continue;
           const q = creepQ(c);
           const d2 = (q.qx - from.qx) ** 2 + (q.qy - from.qy) ** 2;
           if (d2 < nd) {
@@ -441,7 +578,7 @@ export function towerGenre(m: GameManifest): RulesGenre<TowerState> & { readonly
         at = next;
       }
     } else {
-      hit(s, best, st.damage, t.owner, emit);
+      hit(s, best, st.damage, t.owner, emit, school);
       if (kind === "frost" && alive(best) && st.slow > 0) {
         best.slow = Math.max(best.slow, st.slow);
         best.slowTicks = Math.round(st.slowSeconds * tickRate);
@@ -479,6 +616,7 @@ export function towerGenre(m: GameManifest): RulesGenre<TowerState> & { readonly
         peak: 0,
         won: false,
         activity: 0,
+        born: [],
       };
     },
 
@@ -589,27 +727,10 @@ export function towerGenre(m: GameManifest): RulesGenre<TowerState> & { readonly
         // Spawns due this tick.
         while (s.queue.length > 0 && (s.queue[0]?.tick ?? 0) <= s.waveTick) {
           const sp = s.queue.shift() as Spawn;
-          const ct = g.creeps[sp.type];
-          if (!ct) continue;
-          // Creeps toughen each wave, and with every extra builder on the board (more towers): +30% a player past the first.
-          const team = 1 + 0.3 * Math.max(0, humans(s).length - 1);
-          const hp = Math.max(1, Math.round(ct.health * (1 + g.healthGrowth * (s.wave - 1)) * team));
-          s.creeps.push({
-            id: s.nextId++,
-            type: sp.type,
-            hp,
-            maxHp: hp,
-            d: 0,
-            speed: Math.max(1, Math.round(((ct.speed / TILE_M) * Q) / tickRate)),
-            slowTicks: 0,
-            slow: 0,
-            value: ct.value,
-            dmg: ct.damage,
-            boss: ct.boss,
-            gone: 0,
-            flags: ct.boss ? CreepFlag.Boss : 0,
-            by: 0,
-          });
+          // Creeps toughen each wave, and with every extra builder (more towers): +30% a player past the first.
+          const baby = makeCreep(s, sp.type, 0);
+          if (!baby) continue;
+          s.creeps.push(baby);
           s.activity++;
         }
         s.waveTick++;
@@ -620,6 +741,9 @@ export function towerGenre(m: GameManifest): RulesGenre<TowerState> & { readonly
           c.gone--;
           continue;
         }
+        const rg = regenHeal(c.hp, c.maxHp, c.regen, c.regenAcc);
+        c.hp = rg.hp;
+        c.regenAcc = rg.acc;
         const slowed = c.slowTicks > 0;
         if (slowed) c.slowTicks--;
         c.flags = slowed ? c.flags | CreepFlag.Slowed : c.flags & ~CreepFlag.Slowed;
@@ -638,6 +762,11 @@ export function towerGenre(m: GameManifest): RulesGenre<TowerState> & { readonly
       s.creeps = s.creeps.filter((c) => c.gone > 0 || alive(c));
       // Towers fire, in build order.
       for (const t of s.towers) fire(s, t, emit);
+      // Splits born from kills this tick join now, so a split isn't mistaken for a cleared wave.
+      if (s.born.length > 0) {
+        s.creeps.push(...s.born);
+        s.born.length = 0;
+      }
       const living = s.creeps.filter(alive).length;
       s.peak = Math.max(s.peak, living);
       if (s.lives <= 0) return;

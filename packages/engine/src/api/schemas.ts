@@ -440,6 +440,18 @@ export const prefabSchema = z
     attack: attackSchema.optional(),
     /** On death, `count` (1-4) enemies of prefab `into` burst out where it fell. */
     split: z.object({ into: idSchema, count: z.number().int().min(1).max(4) }).strict().optional(),
+    /** Tower defense: only towers that can hit air (`air: true`) may target this creep. */
+    flying: z.boolean().optional(),
+    /** Tower defense: flat damage removed from every hit (a hit always deals at least 1). */
+    armor: z.number().int().min(0).max(100_000).optional(),
+    /** Tower defense: fractional damage resisted by a tower's damage school (0..0.95). */
+    resist: z.object({ physical: z.number().min(0).max(0.95).optional(), magic: z.number().min(0).max(0.95).optional() }).strict().optional(),
+    /** Tower defense: invisible to towers unless a detector (`detect: true`) covers it. */
+    camo: z.boolean().optional(),
+    /** Tower defense: hit points healed per second while alive. */
+    regen: z.number().min(0).max(100_000).optional(),
+    /** Tower defense: an absorb pool taken before hit points (regenerates nothing). */
+    shield: z.number().int().min(0).max(1_000_000).optional(),
     radius: z.number().min(0.05).max(20).optional(),
     damage: z.number().int().min(0).max(1_000_000).optional(),
     /**
