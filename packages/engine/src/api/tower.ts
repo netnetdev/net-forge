@@ -76,6 +76,8 @@ export const towerSchema = z
     slowSeconds: z.number().min(0.2).max(10).default(1.5),
     chains: z.number().int().min(1).max(8).default(3),
     levels: z.array(towerLevelSchema).max(4).default([]),
+    /** Which creep this tower shoots: "first" (furthest along, the default), "last" (least far along), "strong" (most current health), "close" (nearest to the tower). Ties break to the lower creep id, so a run still replays bit-for-bit. */
+    target: z.enum(["first", "last", "strong", "close"]).default("first"),
     feel: feelSchema.optional(),
   })
   .strict();

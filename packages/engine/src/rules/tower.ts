@@ -324,6 +324,53 @@ export function bestTowerTile(g: CompiledTowerGame, occupied: ReadonlySet<number
   return best > 8 ? { tx: bx, ty: by } : null;
 }
 
+/** A tower's targeting mode: which creep in range it shoots. See towerSchema.target. */
+export type TowerTarget = "first" | "last" | "strong" | "close";
+
+/**
+ * Pick the creep a tower fires at, from the creeps in range. "first" is the one
+ * furthest along the road (the default and the historical behaviour), "last" the
+ * least far along, "strong" the one with the most current health, "close" the
+ * nearest to the tower. Every tie breaks to the lower creep id, so a run replays
+ * bit-for-bit whatever the mode. Exported so the sim and its tests share one
+ * definition.
+ */
+export function pickTarget<T extends { id: number; d: number; hp: number }>(
+  mode: TowerTarget,
+  creeps: Iterable<T>,
+  isAlive: (c: T) => boolean,
+  pos: (c: T) => { qx: number; qy: number },
+  cx: number,
+  cy: number,
+  r2: number,
+): T | null {
+  let best: T | null = null;
+  let bestD2 = 0;
+  for (const c of creeps) {
+    if (!isAlive(c)) continue;
+    const p = pos(c);
+    const dx = p.qx - cx;
+    const dy = p.qy - cy;
+    const d2 = dx * dx + dy * dy;
+    if (d2 > r2) continue;
+    if (!best) {
+      best = c;
+      bestD2 = d2;
+      continue;
+    }
+    let take: boolean;
+    if (mode === "last") take = c.d < best.d || (c.d === best.d && c.id < best.id);
+    else if (mode === "strong") take = c.hp > best.hp || (c.hp === best.hp && c.id < best.id);
+    else if (mode === "close") take = d2 < bestD2 || (d2 === bestD2 && c.id < best.id);
+    else take = c.d > best.d; // "first": furthest along — the default
+    if (take) {
+      best = c;
+      bestD2 = d2;
+    }
+  }
+  return best;
+}
+
 export function towerGenre(m: GameManifest): RulesGenre<TowerState> & { readonly game: CompiledTowerGame } {
   const g = compileTowerGame(m);
   const b = g.board;
@@ -391,15 +438,8 @@ export function towerGenre(m: GameManifest): RulesGenre<TowerState> & { readonly
     const cy = t.ty * Q + Q / 2;
     const r = Math.round(st.range * Q);
     const r2 = r * r;
-    let best: Creep | null = null;
-    for (const c of s.creeps) {
-      if (!alive(c)) continue;
-      const p = creepQ(c);
-      const dx = p.qx - cx;
-      const dy = p.qy - cy;
-      if (dx * dx + dy * dy > r2) continue;
-      if (!best || c.d > best.d) best = c;
-    }
+    const mode = g.towers[t.type]?.def.target ?? "first";
+    const best = pickTarget(mode, s.creeps, alive, creepQ, cx, cy, r2);
     if (!best) return;
     const kind = g.towers[t.type]?.def.kind ?? "bolt";
     const p = creepQ(best);
