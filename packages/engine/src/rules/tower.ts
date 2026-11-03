@@ -55,6 +55,8 @@ interface Tower {
   tx: number;
   ty: number;
   level: number;
+  /** The upgrade branch this tower committed to (−1 until the first upgrade). */
+  branch: number;
   cd: number;
   spent: number;
   /** Shots fired (u16 wrap): the client draws a tracer when it changes. */
@@ -102,7 +104,7 @@ export interface TowerState {
   activity: number;
 }
 
-interface TowerStats {
+export interface TowerStats {
   damage: number;
   rate: number;
   range: number;
@@ -112,13 +114,54 @@ interface TowerStats {
   chains: number;
 }
 
+/** A tier's stat overrides (one step of an upgrade line). */
+export type TowerTier = TowerDef["levels"][number];
+
+/** One compiled upgrade line: its stats at each tier (0 = built) and each tier's cost. */
+export interface CompiledBranch {
+  readonly name: string;
+  /** Stats after k tiers (index 0 = base, before any upgrade). */
+  readonly cumStats: readonly TowerStats[];
+  /** Cost of each tier (index 0 buys tier 1). */
+  readonly cost: readonly number[];
+}
+
 export interface CompiledTower {
   readonly id: string;
   readonly def: TowerDef;
-  /** Stats at each level (0 = built). */
+  /** The branches a player may take it down (one, for a plain `levels` tower). */
+  readonly branches: readonly CompiledBranch[];
+  /** Branch 0's stats at each level (back-compat alias for a single-line tower). */
   readonly levels: readonly TowerStats[];
-  /** Cost of each upgrade (index 0 buys level 1). */
+  /** Branch 0's tier costs (back-compat alias). */
   readonly upgradeCost: readonly number[];
+}
+
+/** Base stats + the first `count` tiers of a line, applied in order (set-if-defined). Pure. */
+export function applyTiers(base: TowerStats, tiers: readonly TowerTier[], count: number): TowerStats {
+  const s: TowerStats = { ...base };
+  for (let i = 0; i < count && i < tiers.length; i++) {
+    const l = tiers[i];
+    if (!l) continue;
+    if (l.damage !== undefined) s.damage = l.damage;
+    if (l.rate !== undefined) s.rate = l.rate;
+    if (l.range !== undefined) s.range = l.range;
+    if (l.radius !== undefined) s.radius = l.radius;
+    if (l.slow !== undefined) s.slow = l.slow;
+    if (l.chains !== undefined) s.chains = l.chains;
+  }
+  return s;
+}
+
+/**
+ * May a tower buy the next tier of branch `want`? Kingdom-Rush rule: once a
+ * tower has started one branch it is locked to it, and a branch runs out at
+ * its last tier. Pure.
+ */
+export function branchAllowed(branchCount: number, committed: number, want: number, level: number, tierCount: number): boolean {
+  if (want < 0 || want >= branchCount) return false;
+  if (committed >= 0 && want !== committed) return false;
+  return level < tierCount;
 }
 
 export interface CompiledBoard {
@@ -185,19 +228,19 @@ export function roadPoint(b: CompiledBoard, d: number): { qx: number; qy: number
   return { qx, qy, yaw };
 }
 
-function statsAt(def: TowerDef, level: number): TowerStats {
-  const s: TowerStats = { damage: def.damage, rate: def.rate, range: def.range, radius: def.radius, slow: def.slow, slowSeconds: def.slowSeconds, chains: def.chains };
-  for (let i = 0; i < level && i < def.levels.length; i++) {
-    const l = def.levels[i];
-    if (!l) continue;
-    if (l.damage !== undefined) s.damage = l.damage;
-    if (l.rate !== undefined) s.rate = l.rate;
-    if (l.range !== undefined) s.range = l.range;
-    if (l.radius !== undefined) s.radius = l.radius;
-    if (l.slow !== undefined) s.slow = l.slow;
-    if (l.chains !== undefined) s.chains = l.chains;
-  }
-  return s;
+function baseStats(def: TowerDef): TowerStats {
+  return { damage: def.damage, rate: def.rate, range: def.range, radius: def.radius, slow: def.slow, slowSeconds: def.slowSeconds, chains: def.chains };
+}
+
+/** The branches a tower offers: its `branches` if declared, else one line from `levels`. */
+export function compileBranches(def: TowerDef): CompiledBranch[] {
+  const base = baseStats(def);
+  const raw = def.branches ?? [{ name: "", tiers: def.levels }];
+  return raw.map((br) => {
+    const cumStats: TowerStats[] = [base];
+    for (let k = 1; k <= br.tiers.length; k++) cumStats.push(applyTiers(base, br.tiers, k));
+    return { name: br.name, cumStats, cost: br.tiers.map((t) => t.cost) };
+  });
 }
 
 /** Everything a tower defense game declared, compiled (shared by the room, the harness and the client). */
@@ -227,12 +270,11 @@ export function compileTowerGame(m: GameManifest): CompiledTowerGame {
   });
   return {
     board: compileBoard(c.board),
-    towers: c.towers.map(([id, def]) => ({
-      id,
-      def,
-      levels: Array.from({ length: def.levels.length + 1 }, (_, i) => statsAt(def, i)),
-      upgradeCost: def.levels.map((l) => l.cost),
-    })),
+    towers: c.towers.map(([id, def]) => {
+      const branches = compileBranches(def);
+      const first = branches[0] ?? { name: "", cumStats: [baseStats(def)], cost: [] };
+      return { id, def, branches, levels: first.cumStats, upgradeCost: first.cost };
+    }),
     creeps,
     lives: c.board.lives,
     gold: c.board.gold,
@@ -338,7 +380,9 @@ export function towerGenre(m: GameManifest): RulesGenre<TowerState> & { readonly
     tx >= 0 && ty >= 0 && tx < b.w && ty < b.h && !b.road.has(tileKey(tx, ty)) && !b.blocked.has(tileKey(tx, ty)) && !s.towers.some((t) => t.tx === tx && t.ty === ty);
 
   const effective = (s: TowerState, t: Tower): TowerStats => {
-    const base = g.towers[t.type]?.levels[t.level] ?? g.towers[0]!.levels[0]!;
+    const ct = g.towers[t.type] ?? g.towers[0]!;
+    const br = ct.branches[t.branch >= 0 ? t.branch : 0] ?? ct.branches[0]!;
+    const base = br.cumStats[t.level] ?? br.cumStats[br.cumStats.length - 1] ?? ct.levels[0]!;
     const might = s.ctx.bonus(t.owner, "might");
     const haste = s.ctx.bonus(t.owner, "haste");
     const area = s.ctx.bonus(t.owner, "area");
@@ -536,7 +580,7 @@ export function towerGenre(m: GameManifest): RulesGenre<TowerState> & { readonly
         if (!tt || !buildable(s, tx, ty) || pl.gold < tt.def.cost) return;
         pl.gold -= tt.def.cost;
         pl.built++;
-        s.towers.push({ id: s.nextId++, type: i.a, owner: player, tx, ty, level: 0, cd: 0, spent: tt.def.cost, shots: 0, target: 0, yaw: 0, kills: 0 });
+        s.towers.push({ id: s.nextId++, type: i.a, owner: player, tx, ty, level: 0, branch: -1, cd: 0, spent: tt.def.cost, shots: 0, target: 0, yaw: 0, kills: 0 });
         s.activity++;
         emit({ name: "tower.built", players: [player], own: true });
         return;
@@ -544,10 +588,17 @@ export function towerGenre(m: GameManifest): RulesGenre<TowerState> & { readonly
       const t = s.towers.find((x) => x.tx === tx && x.ty === ty);
       if (!t) return;
       if (i.act === TowerAct.Upgrade) {
-        const cost = g.towers[t.type]?.upgradeCost[t.level];
+        const ct = g.towers[t.type];
+        if (!ct) return;
+        // `i.a` names the branch (0-based); default 0. A tower locks to its first branch.
+        const want = t.branch >= 0 ? t.branch : Math.max(0, i.a | 0);
+        const br = ct.branches[want];
+        if (!br || !branchAllowed(ct.branches.length, t.branch, want, t.level, br.cost.length)) return;
+        const cost = br.cost[t.level];
         if (cost === undefined || pl.gold < cost) return;
         pl.gold -= cost;
         t.level++;
+        t.branch = want;
         if (t.owner === player) t.spent += cost;
         s.activity++;
         emit({ name: "tower.upgraded", players: [player], own: true });
