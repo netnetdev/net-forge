@@ -7,6 +7,21 @@
  */
 export const TITLE = "Cogspire";
 
+/** Fixed HUD readouts, rendered in upper case. A game renames any of these in names.json "hud". */
+export const HUD: {
+  readonly lives: string;
+  readonly enemies: string;
+  readonly gold: string;
+  readonly wave: string;
+  readonly nextWave: string;
+} = {
+  lives: "Bells",
+  enemies: "Creeps",
+  gold: "Gold",
+  wave: "Wave",
+  nextWave: "Next Wave",
+};
+
 export const WEAPON_NAMES: Readonly<Record<string, { name: string; line: string }>> = {
   bolt_post: { name: "Bolt Post", line: "Fast single shots" },
   tar_mortar: { name: "Tar Mortar", line: "Slow, hits a crowd" },

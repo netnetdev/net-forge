@@ -35,7 +35,7 @@ import { $, bootBoard, cssColor, type BoardView, type Placed } from "@netforge/t
 import { COSMETICS, GAME_VERSION, PLACE, TEMPLATE, towerAdapter, towerGame, towerManifest } from "../src/manifest.js";
 import { COGSPIRE_COIN } from "../src/store.js";
 import { GATE_MODEL, ROCK_MODEL, SMALL_DECOR, SPIRE_MODEL, TREE_MODELS } from "./decor.js";
-import { ENEMY_NAMES, KEEPER_COLORS, RULE_NAMES, SKU_NAMES, TITLE, UPGRADE_NAMES, WEAPON_NAMES } from "./names.js";
+import { ENEMY_NAMES, HUD, KEEPER_COLORS, RULE_NAMES, SKU_NAMES, TITLE, UPGRADE_NAMES, WEAPON_NAMES } from "./names.js";
 
 interface TowerView extends BoardView {
   readonly wave: number;
@@ -596,10 +596,10 @@ async function main(): Promise<void> {
     if (v) {
       const me = v.players.find((p) => p.id === app.self);
       hud.status([
-        ["WAVE", `${Math.max(1, v.wave)} / ${v.waves}`],
-        ["BELLS", `${v.lives}`],
-        ["GOLD", `${v.gold ?? me?.gold ?? 0}`],
-        v.stage === "build" ? ["NEXT WAVE", `${v.countdown}s`] : ["CREEPS", `${v.left}`],
+        [HUD.wave.toUpperCase(), `${Math.max(1, v.wave)} / ${v.waves}`],
+        [HUD.lives.toUpperCase(), `${v.lives}`],
+        [HUD.gold.toUpperCase(), `${v.gold ?? me?.gold ?? 0}`],
+        v.stage === "build" ? [HUD.nextWave.toUpperCase(), `${v.countdown}s`] : [HUD.enemies.toUpperCase(), `${v.left}`],
       ]);
       cards.forEach((c, i) => c.classList.toggle("poor", (v.gold ?? 0) < (g.towers[i]?.def.cost ?? 0)));
       const readyN = v.players.filter((p) => p.ready).length;

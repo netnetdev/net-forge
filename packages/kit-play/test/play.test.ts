@@ -49,6 +49,18 @@ describe("names.json", () => {
     expect(() => parseNames("{")).toThrow(/not valid JSON/);
     expect(() => parseNames(JSON.stringify({ title: "T", enemies: { "Bad Id": "x" } }))).toThrow(/ids are lower case/);
   });
+
+  it("renames HUD readouts over the template's, keeps the rest, and rejects stray or oversized labels", () => {
+    const n = parseNames(JSON.stringify({ title: "T", hud: { lives: "Reserves", enemies: "Threats" } }));
+    expect(n.hud).toEqual({ lives: "Reserves", enemies: "Threats" });
+    const mod = namesModule(n, "/t/client/names.ts");
+    // The game's labels merge over the template's defaults, so unset ones (wave, gold) keep theirs.
+    expect(mod).toContain(`export const HUD = { ...HUD_BASE, ...${JSON.stringify(n.hud)} };`);
+    expect(mod).toContain('import { HUD as HUD_BASE } from "/t/client/names.ts";');
+    expect(() => parseNames(JSON.stringify({ title: "T", hud: { score: "Nope" } }))).toThrow(/unknown HUD label/);
+    expect(() => parseNames(JSON.stringify({ title: "T", hud: { lives: "x".repeat(41) } }))).toThrow(/1 to 40 characters/);
+    expect(() => parseNames(JSON.stringify({ title: "T", hud: [] }))).toThrow(/hud must be an object/);
+  });
 });
 
 describe("the static files", () => {
